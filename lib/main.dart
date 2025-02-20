@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
+import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
+import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -61,7 +63,10 @@ class MyApp extends StatelessWidget {
             initialRoute: '/',
             routes: {
 
-              '/': (context) => const HomeScreen()
+              '/': (context) => const SplashScreen(),
+              '/${RouteName.onboardingScreen}': (context) => const OnboardingScreen(),
+              // '/${RouteName.onboardingScreenTwo}': (context) => const OnboardingScreenTwo(),
+              // '/${RouteName.onboardingScreenThree}': (context) => const OnboardingScreenThree()
 
 
             },
