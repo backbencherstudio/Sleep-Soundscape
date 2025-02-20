@@ -42,21 +42,21 @@ void settingModalSheet(BuildContext context){
               children: [
                 SizedBox(height: 8.h,),
 
+
                 SizedBox(
                     width: 115,
-                    child: Divider(thickness: 6)),
+                    child: Divider(thickness: 6,)),
                 SizedBox(height: 16.h,),
                 AppBar(
                   backgroundColor: Color(0xFF0F0F13) ,
-                  leading: Container(
-                    padding: EdgeInsets.all(7.r),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color.fromRGBO(255, 255, 255, 0.02),
-                      border: Border.all(color: Color.fromRGBO(255, 255, 255, 0.08))
-                    ),
-                    child: Icon(Icons.arrow_back_ios,color: Colors.white,size: 18,),
-                  ),
+                  leadingWidth: 75,
+                  leading: Image.asset("assets/icons/back.png",width: 32.w,height: 32.h,fit: BoxFit.contain,),
+                  centerTitle: true,
+                  title: Text("Settings",style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500
+                  ),),
                 )
               ],
             ),
