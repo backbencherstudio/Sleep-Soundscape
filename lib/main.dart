@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
+import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -61,7 +62,8 @@ class MyApp extends StatelessWidget {
             initialRoute: '/',
             routes: {
 
-              '/': (context) => const HomeScreen()
+              '/': (context) => const SettingsScreen(),
+
 
 
             },
