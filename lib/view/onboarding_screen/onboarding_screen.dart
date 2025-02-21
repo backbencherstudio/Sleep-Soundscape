@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/view/parent_screen/screen/parent_screen.dart';
 import '../../global_widget/custom_button.dart';
 import '../home_screen/screen/home_screen.dart'; // Import Home Screen
 
@@ -14,6 +15,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      precacheImage(AssetImage('assets/images/home_screen_img.png'), context);
+
+    });
+  }
   final List<Map<String, dynamic>> onboardingData = [
     {
       "image": "assets/images/onboarding_one.png",
@@ -45,7 +56,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const ParentScreens(),
         ),
       );
     }
