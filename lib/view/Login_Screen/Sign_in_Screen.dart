@@ -1,20 +1,18 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/BottomSheet.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.only(left: 24, right: 24),
             child: Column(
               children: [
-                SizedBox(height: 70),
                 RichText(
                   text: TextSpan(
                     text: "Sign ",
@@ -38,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     children: <TextSpan>[
                       TextSpan(
-                        text: "up",
+                        text: "In",
                         style: Theme.of(
                           context,
                         ).textTheme.headlineMedium?.copyWith(
@@ -50,30 +47,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 26),
-                GestureDetector(
-                  onTap: () {},
-                  child: GestureDetector(
-                    onTap: () {
-                      showbottomSheet(context: context);
-                    },
-                    child: Image.asset(
-                      "assets/icons/up.png",
-                      height: 84.h,
-                      width: 84.w,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                Text(
-                  "Choose Your Image",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFFFFFFFF),
-                  ),
-                ),
-                SizedBox(height: 32.h),
+                SizedBox(height: 56.h),
+
                 TextFormField(
                   decoration: inputDecoration(
                     context,
@@ -86,19 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     null,
                   ),
                 ),
-                SizedBox(height: 16.h),
-                TextFormField(
-                  decoration: inputDecoration(
-                    context,
-                    Image.asset(
-                      "assets/icons/2.png",
-                      height: 18.h,
-                      width: 18.w,
-                    ),
-                    "Enter your email",
-                    null,
-                  ),
-                ),
+
                 SizedBox(height: 16.h),
                 TextFormField(
                   decoration: inputDecoration(
@@ -118,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 79.h),
 
                 Mybutton(
-                  text: "Sign up",
+                  text: "Sign in",
                   color: Color(0xffFAD051),
                   ontap: () {
                     Navigator.push(
@@ -197,16 +160,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.w300,
                           color: Color(0xFFFAD051),
                         ),
-                        recognizer:
-                            TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SignInScreen(),
-                                  ),
-                                );
-                              },
                       ),
                     ],
                   ),
