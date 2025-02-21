@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
+import 'package:sleep_soundscape/view/parent_screen/screen/parent_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
+import 'model_view/parent_screen_provider.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -25,6 +27,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<HomeScreenProvider>(
           create: (_) => HomeScreenProvider(),
+        ),
+        ChangeNotifierProvider<ParentScreensProvider>(
+          create: (_) => ParentScreensProvider(),
         ),
       ],
       child: ScreenUtilInit(
@@ -65,6 +70,7 @@ class MyApp extends StatelessWidget {
 
               '/': (context) => const SplashScreen(),
               '/${RouteName.onboardingScreen}': (context) => const OnboardingScreen(),
+              '/${RouteName.parentScreens}': (context) => const ParentScreens(),
               // '/${RouteName.onboardingScreenTwo}': (context) => const OnboardingScreenTwo(),
               // '/${RouteName.onboardingScreenThree}': (context) => const OnboardingScreenThree()
 
