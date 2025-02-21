@@ -11,26 +11,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _isRadioSelected = false; // Boolean for radio button state
+  bool _isRadioSelected = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack( // ✅ Use Stack to make sure the background covers the full screen
+      body: Stack(
         fit: StackFit.expand,
         children: [
-          /// **Background Image (Full Screen)**
-          Image.asset(
-            "assets/images/home_screen_img.png",
-            fit: BoxFit.cover,
+          /// **Background Image (Now Covers Full Screen)**
+          Positioned.fill(
+            child: Image.asset(
+              "assets/images/home_screen_img.png",
+              fit: BoxFit.cover,
+            ),
           ),
 
           /// **Main Content**
           Padding(
-            padding: EdgeInsets.all(10.r),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
             child: Column(
               children: [
-                SizedBox(height: 20.h),
                 /// **User Info**
                 ListTile(
                   leading: ClipOval(
@@ -48,18 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                       color: const Color(0xff121221),
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 1.0,
-                      ),
+                      border: Border.all(color: Colors.grey, width: 1.0),
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(9.r),
-                      child: Image.asset(
-                        "assets/icons/save.png",
-                        height: 10.h,
-                        width: 10.w,
-                      ),
+                      child: Image.asset("assets/icons/save.png", height: 10.h, width: 10.w),
                     ),
                   ),
                 ),
@@ -94,15 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 TimePickerSpinner(
                   is24HourMode: false,
                   normalTextStyle: TextStyle(fontSize: 30, color: Colors.white),
-                  highlightedTextStyle: TextStyle(
-                    fontSize: 40,
-                    color: Colors.yellow,
-                  ),
+                  highlightedTextStyle: TextStyle(fontSize: 40, color: Colors.yellow),
                   spacing: 50,
                   itemHeight: 50,
-                  onTimeChange: (time) {
-                    // Handle time change
-                  },
+                  onTimeChange: (time) {},
                 ),
                 SizedBox(height: 102.h),
 
@@ -113,10 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Image.asset("assets/icons/start_img.png", width: 50, height: 50),
                       SizedBox(height: 16.h),
-                      Text(
-                        "Start",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
+                      Text("Start", style: TextStyle(color: Colors.white, fontSize: 16)),
                     ],
                   ),
                 ),
@@ -128,107 +114,57 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  /// **Bottom Sheet with Full-Screen Background**
+  /// **Bottom Sheet**
   void _showBottomSheet() {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true, // ✅ Allows bottom sheet to take full height
-      backgroundColor: Colors.transparent, // ✅ Makes sure our Container color is applied
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (BuildContext context) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.95, // ✅ Covers 95% of screen
+          height: MediaQuery.of(context).size.height * 0.95,
           decoration: BoxDecoration(
             color: Color(0xff212121),
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           ),
           child: Padding(
             padding: EdgeInsets.all(16),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  /// **Ready to Sleep Text**
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Ready to ",
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20.sp,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "Sleep?",
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Color(0xffFAD051),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 24.h),
-
-                  /// **Phone Image**
-                  Center(
-                    child: Image.asset("assets/images/phone.png", width: 130.w, height: 133.h),
-                  ),
-                  SizedBox(height: 35.h),
-
-                  /// **Instruction Text**
-                  Text(
-                    "Keep the charger connected\nScreen down your phone on the bed",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white.withOpacity(0.6),
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  SizedBox(height: 24),
-
-                  /// **Back to Login Button**
-                  CustomButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    text: 'Back to Login',
-                  ),
-                  SizedBox(height: 10.h),
-
-                  /// **Radio Button (Don’t Remind Me)**
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RichText(
+                  text: TextSpan(
                     children: [
-                      Radio<bool>(
-                        value: true,
-                        groupValue: _isRadioSelected ? true : null,
-                        onChanged: (bool? newValue) {
-                          setState(() {
-                            _isRadioSelected = !_isRadioSelected;
-                          });
-                        },
-                        activeColor: Colors.yellow,
+                      TextSpan(
+                        text: "Ready to ",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp,
+                        ),
                       ),
-                      Text(
-                        "Don’t remind me",
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white.withOpacity(0.6),
-                          fontSize: 12.sp,
+                      TextSpan(
+                        text: "Sleep?",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Color(0xffFAD051),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp,
                         ),
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(height: 24.h),
+                Center(child: Image.asset("assets/images/phone.png", width: 130.w, height: 133.h)),
+                SizedBox(height: 35.h),
+                CustomButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  text: 'Back to Login',
+                ),
+              ],
             ),
           ),
         );
