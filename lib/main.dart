@@ -16,8 +16,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final double deviceWidth = 1440.0;
-  static const double deviceHeight = 1383.0;
+  // final double deviceWidth = 1440.0;
+  // static const double deviceHeight = 1383.0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: ScreenUtilInit(
-        designSize: Size(deviceWidth, deviceHeight),
+      //  designSize: Size(deviceWidth, deviceHeight),
         minTextAdapt: true,
         builder: (context, child) {
           return MaterialApp(
@@ -76,16 +76,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// echo "# sleep-soundscape" >> README.md
-// git init
-// git add README.md
-// git commit -m "first commit"
-// git branch -M main
-// git remote add origin https://github.com/backbencherstudio/sleep-soundscape.git
-// git push -u origin main
-//
-//
-//
-// git remote add origin https://github.com/backbencherstudio/sleep-soundscape.git
-// git branch -M main
-// git push -u origin main
