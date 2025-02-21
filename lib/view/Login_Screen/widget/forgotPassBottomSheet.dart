@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
-void showbottomSheet({
+void ForgotbottomSheet({
   required BuildContext context,
   dynamic Function()? ontap,
 }) {
   showModalBottomSheet(
     context: context,
-
     backgroundColor: Color(0xFF212121),
     isScrollControlled: true,
     useSafeArea: true,
@@ -17,9 +18,8 @@ void showbottomSheet({
     builder: (context) {
       return Container(
         width: double.infinity,
-        height: 260,
+        height: 300,
         padding: EdgeInsets.all(20),
-
         margin: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
@@ -41,7 +41,7 @@ void showbottomSheet({
                     SizedBox(height: 20),
                     RichText(
                       text: TextSpan(
-                        text: "Choose ",
+                        text: "Recovery email ",
                         style: Theme.of(
                           context,
                         ).textTheme.headlineMedium?.copyWith(
@@ -52,7 +52,7 @@ void showbottomSheet({
 
                         children: <TextSpan>[
                           TextSpan(
-                            text: "preference",
+                            text: "sent!",
                             style: Theme.of(
                               context,
                             ).textTheme.headlineMedium?.copyWith(
@@ -64,25 +64,46 @@ void showbottomSheet({
                         ],
                       ),
                     ),
-                    SizedBox(height: 24.h),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Image.asset(
-                            "assets/icons/Camera.png",
-                            width: 142.w,
-                            height: 114.h,
-                          ),
+                    SizedBox(height: 18.h),
+                    Padding(
+                      padding: EdgeInsets.only(left: 5, right: 5),
+                      child: Text(
+                        "We have just sent you a recovery email, This ",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineMedium?.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xFFFFFFFF).withOpacity(0.6),
                         ),
-                        SizedBox(width: 8.w),
-                        Flexible(
-                          child: Image.asset(
-                            "assets/icons/Gallery.png",
-                            width: 142.w,
-                            height: 114.h,
-                          ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Text(
+                        "email will help you to reset your password",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineMedium?.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xFFFFFFFF).withOpacity(0.6),
                         ),
-                      ],
+                      ),
+                    ),
+
+                    SizedBox(height: 20.h),
+                    Mybutton(
+                      text: "Back to Login",
+                      color: Color(0xFFFAD051),
+                      ontap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignInScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

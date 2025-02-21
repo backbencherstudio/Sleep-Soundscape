@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
-import 'package:sleep_soundscape/view/Login_Screen/widget/BottomSheet.dart';
+import 'package:sleep_soundscape/view/Login_Screen/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
@@ -75,6 +75,32 @@ class _SignInScreenState extends State<SignInScreen> {
                     Icon(
                       Icons.visibility_off_outlined,
                       color: Color(0xFF4B5155),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 12.h),
+
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ForgotpasswordScreen(),
+                      ),
+                    );
+                  },
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "Forgot Password?",
+
+                      style: Theme.of(
+                        context,
+                      ).textTheme.headlineMedium?.copyWith(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xFFFAD051),
+                      ),
                     ),
                   ),
                 ),
