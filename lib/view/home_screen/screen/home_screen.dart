@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (BuildContext context) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.95,
+          // height: MediaQuery.of(context).size.height * 0.95,
           decoration: BoxDecoration(
             color: Color(0xff212121),
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -158,6 +158,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 24.h),
                 Center(child: Image.asset("assets/images/phone.png", width: 130.w, height: 133.h)),
                 SizedBox(height: 35.h),
+                Text("Keep the charger connected Screen down your phone on the bed",   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Color.fromRGBO(256, 256, 256, 0.6),
+                  fontWeight: FontWeight.w300,
+                  fontSize: 14.sp,
+                ),),
                 CustomButton(
                   onPressed: () {
                     Navigator.pop(context);
