@@ -78,6 +78,25 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
+                SizedBox(height: 12.h),
+
+                GestureDetector(
+                  onTap: () {},
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "Forgot Password?",
+
+                      style: Theme.of(
+                        context,
+                      ).textTheme.headlineMedium?.copyWith(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xFFFAD051),
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(height: 79.h),
 
                 Mybutton(
