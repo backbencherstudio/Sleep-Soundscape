@@ -70,15 +70,12 @@ class MyApp extends StatelessWidget {
             initialRoute: '/',
             routes: {
               '/': (context) => const LoginScreen(),
-              '/${RouteName.onboardingScreen}':
-                  (context) => const OnboardingScreen(),
-
+              // '/${RouteName.onboardingScreen}':
+              //     (context) => const OnboardingScreen(),
               // '/': (context) => const SplashScreen(),
               // '/${RouteName.onboardingScreen}':
               //     (context) => const OnboardingScreen(),
               // '/${RouteName.parentScreens}': (context) => const ParentScreens(),
-              // '/${RouteName.onboardingScreenTwo}': (context) => const OnboardingScreenTwo(),
-              // '/${RouteName.onboardingScreenThree}': (context) => const OnboardingScreenThree()
             },
           );
         },

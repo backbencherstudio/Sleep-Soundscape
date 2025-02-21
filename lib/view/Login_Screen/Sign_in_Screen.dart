@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
-import 'package:sleep_soundscape/view/Login_Screen/widget/BottomSheet.dart';
+import 'package:sleep_soundscape/view/Login_Screen/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
@@ -81,7 +81,14 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 12.h),
 
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ForgotpasswordScreen(),
+                      ),
+                    );
+                  },
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
