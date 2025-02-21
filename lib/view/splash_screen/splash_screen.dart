@@ -22,15 +22,20 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
 
-    // Navigate to next screen after 3 seconds
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => OnboardingScreen()),
-      );
+    /// **Fix: Defer the context-dependent code using `addPostFrameCallback`**
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      precacheImage(AssetImage('assets/images/onboarding_one.png'), context);
+
+      // Navigate to next screen after 3 seconds
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => OnboardingScreen()),
+          );
+        }
+      });
     });
-
-
   }
 
   @override
@@ -53,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             ),
           ),
           Positioned(
-            top:380 ,
+            top: 380,
             left: 0,
             right: 0,
             child: Column(
@@ -61,31 +66,26 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 Center(
                   child: RichText(
                     textAlign: TextAlign.center,
-                                 text: TextSpan(
-                   children: [
-                  
-                     TextSpan(
-                       text: "Sleep\n",
-                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                         color: Color(0xffFFFFFF),
-                         fontWeight: FontWeight.w800,
-                         fontSize: 60.sp,
-                       )
-                  
-                  
-                  
-                     ),
-                     TextSpan(
-                         text: "Soundscape",
-                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                         color: Color(0xffFAD051),
-                         fontSize: 60.sp,
-                         fontWeight: FontWeight.w800
-                       )
-                     )
-                   ]
-                                 ),
-                  
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Sleep\n",
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Color(0xffFFFFFF),
+                            fontWeight: FontWeight.w700,
+                            fontSize: 36.sp,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "Soundscape",
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Color(0xffFAD051),
+                            fontWeight: FontWeight.w700,
+                            fontSize: 36.sp,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
