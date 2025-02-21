@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sleep_soundscape/Utils/route_name.dart';
-import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
-import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
+import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -16,8 +15,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final double deviceWidth = 1440.0;
-  static const double deviceHeight = 1383.0;
+  final double deviceWidth;
+  final double deviceHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -61,31 +60,10 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             ),
             initialRoute: '/',
-            routes: {
-
-              '/': (context) => const SplashScreen(),
-              '/${RouteName.onboardingScreen}': (context) => const OnboardingScreen(),
-              // '/${RouteName.onboardingScreenTwo}': (context) => const OnboardingScreenTwo(),
-              // '/${RouteName.onboardingScreenThree}': (context) => const OnboardingScreenThree()
-
-
-            },
+            routes: {'/': (context) => const LoginScreen()},
           );
         },
       ),
     );
   }
 }
-// echo "# sleep-soundscape" >> README.md
-// git init
-// git add README.md
-// git commit -m "first commit"
-// git branch -M main
-// git remote add origin https://github.com/backbencherstudio/sleep-soundscape.git
-// git push -u origin main
-//
-//
-//
-// git remote add origin https://github.com/backbencherstudio/sleep-soundscape.git
-// git branch -M main
-// git push -u origin main

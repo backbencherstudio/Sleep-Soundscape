@@ -49,30 +49,28 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            RichText(text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "Wake up ",
+            RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: "Wake up ",
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Color(0xffFFFFFF),
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w500
-                    )
-                )
-                ,  TextSpan(
-                  text: "time",
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Color(0xffFAD051),
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w500
-                  )
-
-                )
-
-              ]
-            ))
-
-
+                      color: Color(0xffFFFFFF),
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  TextSpan(
+                    text: "time",
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Color(0xffFAD051),
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
