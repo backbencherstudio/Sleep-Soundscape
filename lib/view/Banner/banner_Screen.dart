@@ -12,7 +12,7 @@ class BannerScreen extends StatelessWidget {
 
     List<Map<String, dynamic>> condition = [
       {
-        "title": "Now ",
+        "title": "Now 🔒",
         "icon": " ",
         "discription":
             "Get instant access and see how it can change your life.",
@@ -36,7 +36,12 @@ class BannerScreen extends StatelessWidget {
             "Get instant access and see how it can change your life.",
       },
     ];
-
+    List<Map<String, dynamic>> offer = [
+      {"icon": "assets/icons/note.png", "text": "Exclusive Soundscapes"},
+      {"icon": "⭐", "text": "Exclusive Content"},
+      {"icon": "assets/icons/save.png", "text": "Additional features"},
+      {"icon": "assets/icons/play.png", "text": "Add free experience"},
+    ];
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -144,6 +149,87 @@ class BannerScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 32.h),
+
+                    Glassbox2(
+                      title: "Free",
+                      discription: "No personalized notifications",
+                      title1: "Premium",
+                      discription1: "You’ll get personalized notifications",
+                    ),
+                    SizedBox(height: 58.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "How can I cancel?",
+
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFFFFFFFF),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Lorem ipsum dolor sit amet consectetur. Sed nunc urna nisi venenatis purus. Nisl id habitasse orci facilisis euismod velit. Ut vel odio scelerisque felis blandit odio. Aliquet elementum senectus viverra dui mi vulputate faucibus maecenas et. ",
+
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xFFFFFFFF).withOpacity(0.6),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+
+                    SizedBox(
+                      height: 300.h,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics:
+                            NeverScrollableScrollPhysics(), // If you want a fixed list
+                        itemCount: offer.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 8.h,
+                            ), // Adjust spacing
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                offer[index]["icon"].contains("assets/")
+                                    ? Image.asset(
+                                      offer[index]["icon"],
+                                      width: 24.w,
+                                      height: 24.h,
+                                    )
+                                    : Text(
+                                      offer[index]["icon"],
+                                      style: TextStyle(fontSize: 18.sp),
+                                    ),
+                                SizedBox(
+                                  width: 10.w,
+                                ), // Space between icon & text
+                                Expanded(
+                                  child: Text(
+                                    offer[index]["text"],
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall?.copyWith(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
