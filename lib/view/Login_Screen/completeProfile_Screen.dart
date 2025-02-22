@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
+import 'package:sleep_soundscape/view/goal_Screen/goal_Screen.dart';
 
 class CompleteprofileScreen extends StatelessWidget {
   const CompleteprofileScreen({super.key});
@@ -43,7 +44,12 @@ class CompleteprofileScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 26),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => GoalScreen()),
+                    );
+                  },
                   child: Image.asset(
                     "assets/icons/person.png",
                     height: 86.h,
@@ -120,7 +126,12 @@ class CompleteprofileScreen extends StatelessWidget {
                 Mybutton(
                   text: "Sign up",
                   color: Color(0xffFAD051),
-                  ontap: () {},
+                  ontap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => GoalScreen()),
+                    );
+                  },
                 ),
                 SizedBox(height: 24.h),
 

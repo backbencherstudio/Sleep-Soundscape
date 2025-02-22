@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/view/Banner/banner_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
 import 'package:sleep_soundscape/view/login_Screen/login_Screen.dart';
 import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
             ),
             initialRoute: '/',
             routes: {
-              '/': (context) => const LoginScreen(),
+              '/': (context) => const BannerScreen(),
               // '/${RouteName.onboardingScreen}':
               //     (context) => const OnboardingScreen(),
               // '/': (context) => const SplashScreen(),
