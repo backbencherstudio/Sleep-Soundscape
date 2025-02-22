@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/global_widget/custom_button.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/settings_item_tile.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -107,13 +108,14 @@ void settingModalSheet(BuildContext context){
                         Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),
                         SettingsItemTile(onTap: (){},imagePath: "assets/icons/about.png",title: "About"),
+                        SizedBox(height: 32.h,),
+                        CustomButton(text: "Sign out", onPressed: (){}),
                         SizedBox(height: 40.h,),
 
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 32.h,)
               ],
             ),
           ),
