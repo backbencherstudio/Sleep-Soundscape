@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/view/Banner/widget/glassBox.dart';
+import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
 class BannerScreen extends StatelessWidget {
@@ -88,7 +89,14 @@ class BannerScreen extends StatelessWidget {
                     Mybutton(
                       text: "Sign up",
                       color: Color(0xFFFAD051),
-                      ontap: () {},
+                      ontap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignInScreen(),
+                          ),
+                        );
+                      },
                     ),
                     SizedBox(height: 20.h),
 
@@ -185,17 +193,14 @@ class BannerScreen extends StatelessWidget {
                     SizedBox(height: 24.h),
 
                     SizedBox(
-                      height: 300.h,
+                      height: 250.h,
                       child: ListView.builder(
                         shrinkWrap: true,
-                        physics:
-                            NeverScrollableScrollPhysics(), // If you want a fixed list
+                        physics: NeverScrollableScrollPhysics(),
                         itemCount: offer.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 8.h,
-                            ), // Adjust spacing
+                            padding: EdgeInsets.symmetric(vertical: 8.h),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -209,9 +214,7 @@ class BannerScreen extends StatelessWidget {
                                       offer[index]["icon"],
                                       style: TextStyle(fontSize: 18.sp),
                                     ),
-                                SizedBox(
-                                  width: 10.w,
-                                ), // Space between icon & text
+                                SizedBox(width: 10.w),
                                 Expanded(
                                   child: Text(
                                     offer[index]["text"],
