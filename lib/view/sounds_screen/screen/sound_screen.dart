@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widget/setting_widget.dart';
-import '../widget/switch_button.dart';
+import '../../../global_widget/switch_button.dart';
 
 class SoundScreen extends StatefulWidget {
   const SoundScreen({super.key});
