@@ -6,6 +6,7 @@ import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
 import 'package:sleep_soundscape/view/login_Screen/login_Screen.dart';
 import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
 import 'package:sleep_soundscape/view/parent_screen/screen/parent_screen.dart';
+import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'model_view/parent_screen_provider.dart';
@@ -71,12 +72,8 @@ class MyApp extends StatelessWidget {
             initialRoute: '/',
             routes: {
               '/': (context) => const SettingsScreen(),
-              // '/${RouteName.onboardingScreen}':
-              //     (context) => const OnboardingScreen(),
-              // '/': (context) => const SplashScreen(),
-              // '/${RouteName.onboardingScreen}':
-              //     (context) => const OnboardingScreen(),
-              // '/${RouteName.parentScreens}': (context) => const ParentScreens(),
+              RouteName.profileScreen : (context) => ProfileScreen()
+
             },
           );
         },
