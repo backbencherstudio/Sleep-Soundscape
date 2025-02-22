@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/view/sounds_screen/widget/sound_dediction.dart';
-import 'package:sleep_soundscape/view/sounds_screen/widget/switch_button.dart';
+import 'package:sleep_soundscape/global_widget/switch_button.dart';
 
 void bottomSheetSetting(BuildContext context) {
   ValueNotifier<bool> isSwitched = ValueNotifier<bool>(false);
@@ -23,15 +23,20 @@ void bottomSheetSetting(BuildContext context) {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.grey, width: 1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(7.r),
-                    child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.grey, width: 1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(7.r),
+                      child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp),
+                    ),
                   ),
                 ),
                 RichText(
