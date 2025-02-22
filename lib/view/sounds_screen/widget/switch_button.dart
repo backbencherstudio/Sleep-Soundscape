@@ -18,7 +18,7 @@ class SwitchButton extends StatelessWidget {
       ),
       activeColor: Colors.green,
       inactiveTrackColor:  Colors.grey,
-      activeTrackColor: const Color(0xFFFB6012),
+      activeTrackColor: const Color(0xFFFAD051),
       trackOutlineColor: WidgetStateColor.transparent,
       thumbColor: const WidgetStatePropertyAll<Color>(Colors.white),
       value: isSwitchOn,
