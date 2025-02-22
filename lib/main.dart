@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
-import 'package:sleep_soundscape/view/Banner/banner_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
 import 'package:sleep_soundscape/view/login_Screen/login_Screen.dart';
 import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
 import 'package:sleep_soundscape/view/parent_screen/screen/parent_screen.dart';
+import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
+import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/temp.dart';
@@ -70,13 +71,9 @@ class MyApp extends StatelessWidget {
             ),
             initialRoute: '/',
             routes: {
-              '/': (context) => const BannerScreen(),
-              // '/${RouteName.onboardingScreen}':
-              //     (context) => const OnboardingScreen(),
-              // '/': (context) => const SplashScreen(),
-              // '/${RouteName.onboardingScreen}':
-              //     (context) => const OnboardingScreen(),
-              // '/${RouteName.parentScreens}': (context) => const ParentScreens(),
+              '/': (context) => const SettingsScreen(),
+              RouteName.profileScreen : (context) => ProfileScreen()
+
             },
           );
         },
