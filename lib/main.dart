@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
+import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
+import 'package:sleep_soundscape/view/login_Screen/login_Screen.dart';
+import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
+import 'package:sleep_soundscape/view/parent_screen/screen/parent_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
+import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
+import 'model_view/parent_screen_provider.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -15,8 +21,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final double deviceWidth = 1440.0;
-  static const double deviceHeight = 1383.0;
+  // final double deviceWidth = 1440.0;
+  // static const double deviceHeight = 1383.0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +31,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<HomeScreenProvider>(
           create: (_) => HomeScreenProvider(),
         ),
+        ChangeNotifierProvider<ParentScreensProvider>(
+          create: (_) => ParentScreensProvider(),
+        ),
       ],
       child: ScreenUtilInit(
-        designSize: Size(deviceWidth, deviceHeight),
+        //  designSize: Size(deviceWidth, deviceHeight),
         minTextAdapt: true,
         builder: (context, child) {
           return MaterialApp(
@@ -61,11 +70,13 @@ class MyApp extends StatelessWidget {
             ),
             initialRoute: '/',
             routes: {
-
               '/': (context) => const SettingsScreen(),
-
-
-
+              // '/${RouteName.onboardingScreen}':
+              //     (context) => const OnboardingScreen(),
+              // '/': (context) => const SplashScreen(),
+              // '/${RouteName.onboardingScreen}':
+              //     (context) => const OnboardingScreen(),
+              // '/${RouteName.parentScreens}': (context) => const ParentScreens(),
             },
           );
         },
@@ -73,16 +84,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// echo "# sleep-soundscape" >> README.md
-// git init
-// git add README.md
-// git commit -m "first commit"
-// git branch -M main
-// git remote add origin https://github.com/backbencherstudio/sleep-soundscape.git
-// git push -u origin main
-//
-//
-//
-// git remote add origin https://github.com/backbencherstudio/sleep-soundscape.git
-// git branch -M main
-// git push -u origin main

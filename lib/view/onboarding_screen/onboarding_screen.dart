@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/view/parent_screen/screen/parent_screen.dart';
 import '../../global_widget/custom_button.dart';
 import '../home_screen/screen/home_screen.dart'; // Import Home Screen
 
@@ -14,6 +15,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      precacheImage(AssetImage('assets/images/home_screen_img.png'), context);
+
+    });
+  }
   final List<Map<String, dynamic>> onboardingData = [
     {
       "image": "assets/images/onboarding_one.png",
@@ -45,7 +56,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const ParentScreens(),
         ),
       );
     }
@@ -74,7 +85,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   Positioned(
                     bottom: 100.h,
-                    left: 40.w,
+                    left: 23.w,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -85,24 +96,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 text: "${onboardingData[index]["title1"]} \n",
                                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 100.sp,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 40.sp,
                                 ),
                               ),
                               TextSpan(
                                 text: "${onboardingData[index]["title2"]}\n",
                                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                   color: const Color(0xffFAD051),
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 100.sp,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 40.sp,
                                 ),
                               ),
                               TextSpan(
                                 text: onboardingData[index]["title3"],
                                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 100.sp,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 40.sp,
                                 ),
                               ),
                             ],
@@ -117,8 +128,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 (index) => AnimatedContainer(
                               duration: const Duration(milliseconds: 300),
                               margin: const EdgeInsets.symmetric(horizontal: 5),
-                              width: _currentPage == index ? 90.w : 20.w,
-                              height: 12.h,
+                              width: _currentPage == index ? 45.w : 9.w,
+                              height: 9.h,
                               decoration: BoxDecoration(
 
                                 color: _currentPage == index
