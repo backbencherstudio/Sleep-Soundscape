@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
 
+import '../widget/alarm_setting.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -11,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _isRadioSelected = false;
+  bool isSelected =false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 /// **User Info**
                 ListTile(
                   leading: ClipOval(
-                    child: Image.asset("assets/images/user_1.png", height: 32.h, width: 32.w),
+                    child: Image.asset(
+                      "assets/images/user_1.png",
+                      height: 32.h,
+                      width: 32.w,
+                    ),
                   ),
                   title: Text(
                     "Hello Robart",
@@ -45,15 +51,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 12.sp,
                     ),
                   ),
-                  trailing: Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xff121221),
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.grey, width: 1.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(9.r),
-                      child: Image.asset("assets/icons/save.png", height: 10.h, width: 10.w),
+                  trailing: GestureDetector(
+                    onTap: ()=>alarmSetting(context),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xff121221),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.grey, width: 1.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(9.r),
+                        child: Image.asset(
+                          "assets/icons/save.png",
+                          height: 10.h,
+                          width: 10.w,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -88,7 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 TimePickerSpinner(
                   is24HourMode: false,
                   normalTextStyle: TextStyle(fontSize: 30, color: Colors.white),
-                  highlightedTextStyle: TextStyle(fontSize: 40, color: Colors.yellow),
+                  highlightedTextStyle: TextStyle(
+                    fontSize: 40,
+                    color: Colors.yellow,
+                  ),
                   spacing: 50,
                   itemHeight: 50,
                   onTimeChange: (time) {},
@@ -100,9 +116,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: _showBottomSheet,
                   child: Column(
                     children: [
-                      Image.asset("assets/icons/start_img.png", width: 50, height: 50),
+                      Image.asset(
+                        "assets/icons/start_img.png",
+                        width: 50,
+                        height: 50,
+                      ),
                       SizedBox(height: 16.h),
-                      Text("Start", style: TextStyle(color: Colors.white, fontSize: 16)),
+                      Text(
+                        "Start",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
                     ],
                   ),
                 ),
@@ -120,7 +143,9 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
       builder: (BuildContext context) {
         return Container(
           // height: MediaQuery.of(context).size.height * 0.95,
@@ -156,18 +181,50 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(height: 24.h),
-                Center(child: Image.asset("assets/images/phone.png", width: 130.w, height: 133.h)),
+                Center(
+                  child: Image.asset(
+                    "assets/images/phone.png",
+                    width: 130.w,
+                    height: 133.h,
+                  ),
+                ),
                 SizedBox(height: 35.h),
-                Text("Keep the charger connected Screen down your phone on the bed",   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Color.fromRGBO(256, 256, 256, 0.6),
-                  fontWeight: FontWeight.w300,
-                  fontSize: 14.sp,
-                ),),
+                Text(
+                  textAlign: TextAlign.center,
+                  "Keep the charger connected Screen down your phone on the bed",
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Color.fromRGBO(255, 255, 255, 0.60),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14.sp,
+                  ),
+                ),
+                SizedBox(height: 24.h),
                 CustomButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   text: 'Back to Login',
+                ),
+                SizedBox(height: 24.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+                    Radio(
+                      value: true,
+                      groupValue: isSelected,
+                      onChanged: (value) {
+                        setState(() {
+                          isSelected = value as bool;
+                        });
+                      },
+                    ),
+                    Text("Don’t remind me",style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Color.fromRGBO(255, 255, 255, 0.60),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12.sp
+                    ),),
+                  ],
                 ),
               ],
             ),
