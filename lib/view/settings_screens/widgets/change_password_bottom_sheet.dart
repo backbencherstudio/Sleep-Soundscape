@@ -86,7 +86,15 @@ void ChangePasswordBottomSheet(BuildContext context) {
                   color: Colors.white
                 ),
                 decoration: InputDecoration(
-                  prefix: ImageIcon(AssetImage("assets/icons/lock.png",),size: 18.r,color: Color.fromRGBO(255, 255, 255, 0.60),)
+                  hintText: "Enter your Current Password",
+                  hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                   color:
+                   Color.fromRGBO(255, 255, 255, 0.6)
+                  ),
+                  prefixIcon: Padding(
+                    padding:  EdgeInsets.all(12.r),
+                    child: ImageIcon(AssetImage("assets/icons/lock.png",),size: 18.r,color: Color.fromRGBO(255, 255, 255, 0.6),),
+                  )
                 ),
               )
 
