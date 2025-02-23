@@ -35,6 +35,6 @@ InputDecoration inputDecoration2(
       color: Color(0xFFFFFFFFF).withOpacity(0.6),
     ),
     prefixIcon: suffixIcon,
-    suffixIcon: puffix,
+    suffixIcon: Padding(padding: EdgeInsets.only(bottom: 169), child: puffix),
   );
 }
