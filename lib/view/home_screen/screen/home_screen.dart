@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
+import 'package:sleep_soundscape/view/reminder/reminder_screen.dart';
 
 import '../widget/alarm_setting.dart';
 
@@ -52,7 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   trailing: GestureDetector(
-                    onTap: ()=>alarmSetting(context),
+                    onTap: (){
+                      ReminderScreen().reminderBottomSheet(context);
+                      //alarmSetting(context);
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         color: const Color(0xff121221),
