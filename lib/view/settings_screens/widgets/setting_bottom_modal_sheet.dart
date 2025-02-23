@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
+import 'package:sleep_soundscape/view/settings_screens/widgets/change_password_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/settings_item_tile.dart';
+
+import 'bottom_sheet_header.dart';
 
 void settingBottomModalSheet(BuildContext context){
   showModalBottomSheet(
@@ -34,22 +37,7 @@ void settingBottomModalSheet(BuildContext context){
                   ),
                 ),
                 SizedBox(height: 12.h,),
-                AppBar(
-                  backgroundColor: Color(0xFF0F0F13) ,
-                  leadingWidth: 32.w,
-                  leading: GestureDetector(
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
-                      child:  ImageIcon(AssetImage("assets/icons/back.png"),size: 32.r,color: Colors.white,)),   //Image.asset("assets/icons/back.png",width: 32.w,height: 32.h,fit: BoxFit.contain,)),
-                  centerTitle: true,
-                  title: Text("Settings",),
-                  titleTextStyle: TextStyle(
-                      fontFamily: "Lexend",
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500
-                  ),
-                ),
+                BottomSheetHeader(imagePath:  "assets/icons/back.png",title:  "Settings",),
 
                 Expanded(
                   child: SingleChildScrollView(
@@ -62,7 +50,9 @@ void settingBottomModalSheet(BuildContext context){
                         SizedBox(height: 18.h,),
                         Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),
-                        SettingsItemTile(onTap: (){},imagePath: "assets/icons/cng-password.png",title: "Change Password"),
+                        SettingsItemTile(onTap: (){
+                          ChangePasswordBottomSheet(context);
+                        },imagePath: "assets/icons/cng-password.png",title: "Change Password"),
                         SizedBox(height: 18.h,),
                         Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),
