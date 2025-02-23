@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/view/Banner/widget/glassBox.dart';
-import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
+
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
 class BannerScreen extends StatelessWidget {
