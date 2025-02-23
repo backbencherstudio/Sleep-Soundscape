@@ -6,6 +6,7 @@ import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'model_view/parent_screen_provider.dart';
+import 'model_view/reminder_screen_provider.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -31,6 +32,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ParentScreensProvider>(
           create: (_) => ParentScreensProvider(),
         ),
+
+        ChangeNotifierProvider<ReminderScreenProvider>(
+          create: (_) => ReminderScreenProvider(),
+        ),
+
+
       ],
       child: ScreenUtilInit(
         //  designSize: Size(deviceWidth, deviceHeight),
