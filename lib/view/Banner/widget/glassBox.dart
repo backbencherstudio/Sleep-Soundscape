@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -95,6 +94,7 @@ class Glassbox extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class Glassbox2 extends StatelessWidget {
   String title;
   String discription;
