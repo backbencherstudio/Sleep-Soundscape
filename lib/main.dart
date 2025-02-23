@@ -64,33 +64,30 @@ class MyApp extends StatelessWidget {
               ),
               inputDecorationTheme: InputDecorationTheme(
                 filled: true,
-                fillColor:  Color.fromRGBO(255, 255, 255, 0.04),
+                fillColor: Color.fromRGBO(255, 255, 255, 0.04),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(
-                    color: Color.fromRGBO(255, 255, 255, 0.08)
+                    color: Color.fromRGBO(255, 255, 255, 0.08),
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(
-                      color: Color.fromRGBO(255, 255, 255, 0.08)
+                    color: Color.fromRGBO(255, 255, 255, 0.08),
                   ),
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
-                  borderSide: BorderSide(
-                      color: Color(0xFFF45757)
-                  ),
-                )
+                  borderSide: BorderSide(color: Color(0xFFF45757)),
+                ),
               ),
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             ),
             initialRoute: '/',
             routes: {
               '/': (context) => const SettingsScreen(),
-              RouteName.profileScreen : (context) => ProfileScreen()
-
+              RouteName.profileScreen: (context) => ProfileScreen(),
             },
           );
         },

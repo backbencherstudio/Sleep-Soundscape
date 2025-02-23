@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/view/Banner/widget/glassBox.dart';
+
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
 class BannerScreen extends StatelessWidget {
@@ -52,7 +53,7 @@ class BannerScreen extends StatelessWidget {
         ),
         child: Center(
           child: Padding(
-            padding: EdgeInsets.only(top: 28,left: 24,right: 24),
+            padding: EdgeInsets.only(top: 28, left: 24, right: 24),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -111,8 +112,7 @@ class BannerScreen extends StatelessWidget {
                         trackVisibility: true,
                         thickness: 1,
                         scrollbarOrientation:
-                            ScrollbarOrientation
-                                .left, // Move scrollbar to left
+                            ScrollbarOrientation.left, // Move scrollbar to left
                         child: ListView.builder(
                           controller: scrollController,
                           itemCount: condition.length,
