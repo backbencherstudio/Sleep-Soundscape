@@ -5,7 +5,9 @@ import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/view/Feedback_Screen/feedback_Screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
+import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'model_view/parent_screen_provider.dart';
+import 'model_view/reminder_screen_provider.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -31,6 +33,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ParentScreensProvider>(
           create: (_) => ParentScreensProvider(),
         ),
+
+        ChangeNotifierProvider<ReminderScreenProvider>(
+          create: (_) => ReminderScreenProvider(),
+        ),
+
+
       ],
       child: ScreenUtilInit(
         //  designSize: Size(deviceWidth, deviceHeight),
@@ -50,18 +58,29 @@ class MyApp extends StatelessWidget {
                 headlineMedium: TextStyle(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
+                ),
+
+                headlineSmall: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
                 ),
                 bodyLarge: TextStyle(
                   fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
                 bodyMedium: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
+                bodySmall:           TextStyle(
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
               ),
               inputDecorationTheme: InputDecorationTheme(
                 filled: true,
@@ -87,7 +106,9 @@ class MyApp extends StatelessWidget {
             ),
             initialRoute: '/',
             routes: {
-              '/': (context) => FeedbackScreen(),
+
+              '/': (context) => const SplashScreen(),
+
               RouteName.profileScreen: (context) => ProfileScreen(),
             },
           );

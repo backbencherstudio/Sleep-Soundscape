@@ -25,67 +25,65 @@ void showbottomSheet({
         ),
         child: SingleChildScrollView(
           child: Center(
-            child: Container(
-              child: Padding(
-                padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 6.h,
-                      width: 115.w,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 44, 47, 49),
-                        borderRadius: BorderRadius.circular(100.r),
-                      ),
+            child: Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+              child: Column(
+                children: [
+                  Container(
+                    height: 6.h,
+                    width: 115.w,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 44, 47, 49),
+                      borderRadius: BorderRadius.circular(100.r),
                     ),
-                    SizedBox(height: 20),
-                    RichText(
-                      text: TextSpan(
-                        text: "Choose ",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.headlineMedium?.copyWith(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFFFFFFFF),
-                        ),
+                  ),
+                  SizedBox(height: 20),
+                  RichText(
+                    text: TextSpan(
+                      text: "Choose ",
+                      style: Theme.of(
+                        context,
+                      ).textTheme.headlineMedium?.copyWith(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFFFFFFFF),
+                      ),
 
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: "preference",
-                            style: Theme.of(
-                              context,
-                            ).textTheme.headlineMedium?.copyWith(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFFFAD051),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 24.h),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Image.asset(
-                            "assets/icons/Camera.png",
-                            width: 142.w,
-                            height: 114.h,
-                          ),
-                        ),
-                        SizedBox(width: 8.w),
-                        Flexible(
-                          child: Image.asset(
-                            "assets/icons/Gallery.png",
-                            width: 142.w,
-                            height: 114.h,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "preference",
+                          style: Theme.of(
+                            context,
+                          ).textTheme.headlineMedium?.copyWith(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFFFAD051),
                           ),
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 24.h),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Image.asset(
+                          "assets/icons/Camera.png",
+                          width: 142.w,
+                          height: 114.h,
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Flexible(
+                        child: Image.asset(
+                          "assets/icons/Gallery.png",
+                          width: 142.w,
+                          height: 114.h,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

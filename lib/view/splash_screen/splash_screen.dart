@@ -23,11 +23,11 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _controller.forward();
 
     /// **Fix: Defer the context-dependent code using `addPostFrameCallback`**
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       precacheImage(AssetImage('assets/images/onboarding_one.png'), context);
 
       // Navigate to next screen after 3 seconds
-      Future.delayed(const Duration(seconds: 3), () {
+      await Future.delayed(const Duration(seconds: 3), () {
         if (mounted) {
           Navigator.pushReplacement(
             context,
@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           FadeTransition(
             opacity: _animation,
             child: Image.asset(
-              'assets/images/back.png',
+              'assets/images/onboarding_one.png',
               fit: BoxFit.cover, // Ensures full-screen display
             ),
           ),
