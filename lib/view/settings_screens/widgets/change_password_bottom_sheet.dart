@@ -81,13 +81,19 @@ void ChangePasswordBottomSheet(BuildContext context) {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 32.h),
-              TextFormField(
-                style: TextStyle(
-                  color: Colors.white
-                ),
-                decoration: InputDecoration(
-                  prefix: ImageIcon(AssetImage("assets/icons/lock.png",),size: 18.r,color: Color.fromRGBO(255, 255, 255, 0.60),)
-                ),
+              textFormField(context,"Enter your Current Password"),
+              SizedBox(height: 12.h,),
+              textFormField(context,"Enter new Password"),
+              SizedBox(height: 12.h,),
+              textFormField(context,"Re-Enter New Password"),
+              SizedBox(height: 12.h,),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text("Forgot Password?",style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: Color(0xFFFAD051),
+                  fontWeight: FontWeight.w300,
+                  fontFamily: "lexend"
+                ),),
               )
 
             ],
@@ -96,5 +102,26 @@ void ChangePasswordBottomSheet(BuildContext context) {
       );
     },
   );
+}
+
+TextFormField textFormField(BuildContext context, String hintText) {
+  return TextFormField(
+              style: TextStyle(
+                color: Colors.white
+              ),
+              decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                 color: Color.fromRGBO(255, 255, 255, 0.6),
+                  fontWeight: FontWeight.w300,
+                  fontFamily: "Lexend",
+                ),
+                prefixIcon: Padding(
+                  padding:  EdgeInsets.all(12.r),
+                  child: ImageIcon(AssetImage("assets/icons/lock.png",),size: 18.r,color: Colors.white,),
+                ),
+                suffixIcon: Icon(Icons.visibility_outlined,color:Color.fromRGBO(255, 255, 255, 0.6),size: 18.r, )
+              ),
+            );
 }
 
