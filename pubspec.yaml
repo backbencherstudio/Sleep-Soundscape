@@ -37,6 +37,10 @@ dependencies:
   provider: ^6.1.2
   flutter_screenutil: ^5.9.3
   flutter_time_picker_spinner: ^2.0.0
+  image_picker: ^1.1.2
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

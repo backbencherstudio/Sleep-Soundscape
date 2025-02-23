@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/view/settings_screens/widgets/edit_profile_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/subscribe_tile.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -91,10 +92,15 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    ImageIcon(
-                      AssetImage("assets/icons/edit.png"),
-                      color: Colors.white,
-                      size: 32.r,
+                    GestureDetector(
+                      onTap: (){
+                        EditProfileBottomSheet(context);
+                      },
+                      child: ImageIcon(
+                        AssetImage("assets/icons/edit.png"),
+                        color: Colors.white,
+                        size: 32.r,
+                      ),
                     ),
                   ],
                 ),

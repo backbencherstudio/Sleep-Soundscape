@@ -2,15 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
-import 'package:sleep_soundscape/view/Banner/banner_Screen.dart';
-import 'package:sleep_soundscape/view/Feedback_Screen/feedback_Screen.dart';
-import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
-import 'package:sleep_soundscape/view/login_Screen/login_Screen.dart';
-import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
-import 'package:sleep_soundscape/view/parent_screen/screen/parent_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
-import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/temp.dart';
 
@@ -22,7 +15,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   // final double deviceWidth = 1440.0;
   // static const double deviceHeight = 1383.0;
@@ -69,11 +62,31 @@ class MyApp extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
+              inputDecorationTheme: InputDecorationTheme(
+                filled: true,
+                fillColor: Color.fromRGBO(255, 255, 255, 0.04),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(
+                    color: Color.fromRGBO(255, 255, 255, 0.08),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(
+                    color: Color.fromRGBO(255, 255, 255, 0.08),
+                  ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(color: Color(0xFFF45757)),
+                ),
+              ),
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             ),
             initialRoute: '/',
             routes: {
-              '/': (context) => const FeedbackScreen(),
+              '/': (context) => const SettingsScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),
             },
           );
