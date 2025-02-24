@@ -84,7 +84,7 @@ class CompleteprofileScreen extends StatelessWidget {
                           style: Theme.of(
                             context,
                           ).textTheme.bodySmall!.copyWith(
-                            color: Color(0xFFFFFFFFF),
+                            color: Color(0xFFFFFFFFF).withOpacity(0.6),
                             fontWeight: FontWeight.w500,
                             fontSize: 14.sp,
                           ),
@@ -112,7 +112,7 @@ class CompleteprofileScreen extends StatelessWidget {
                           style: Theme.of(
                             context,
                           ).textTheme.bodySmall!.copyWith(
-                            color: Color(0xFFFFFFFFF),
+                            color: Color(0xFFFFFFFFF).withOpacity(0.6),
                             fontWeight: FontWeight.w500,
                             fontSize: 14.sp,
                           ),
