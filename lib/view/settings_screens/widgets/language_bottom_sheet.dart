@@ -55,7 +55,7 @@ void LanguageBottomSheet(BuildContext context){
                   ),
                 ),
                 SizedBox(height: 12.h,),
-                BottomSheetHeader(imagePath:  "assets/icons/back.png",title:  "Language",),
+                BottomSheetHeader(imagePath:"assets/icons/back.png",title:  "Language",),
 
                 Expanded(
                   child: Column(
