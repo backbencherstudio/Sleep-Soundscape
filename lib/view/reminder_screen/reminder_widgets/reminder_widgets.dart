@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/view/reminder_screen/setup_reminder_screen.dart';
 
 import '../../../model_view/reminder_screen_provider.dart';
 import '../add_reminder_screen.dart';
@@ -58,10 +59,13 @@ class ReminderWidgets{
           return  Consumer<ReminderScreenProvider>(
               builder: (_, reminderScreenProvider, child) {
                 if(reminderScreenProvider.pageId==1){
-                  return  ReminderPages();
+                  return  ReminderScreen();
                 }
                 else if(reminderScreenProvider.pageId==2){
                   return  AddReminderScreen();
+                }
+                else if(reminderScreenProvider.pageId==3){
+                  return SetupReminderScrfeen();
                 }
                 return SizedBox();
 

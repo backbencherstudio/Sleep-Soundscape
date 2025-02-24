@@ -26,7 +26,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.8, // 80% of screen width
+      width: double.infinity, // 80% of screen width
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

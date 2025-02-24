@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
@@ -116,6 +118,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         builder: (context) => CompleteprofileScreen(),
                       ),
                     );
+                    Navigator.pushNamedAndRemoveUntil(context, RouteName.homeScreen, (_)=>false);
                   },
                 ),
                 SizedBox(height: 24.h),
@@ -178,7 +181,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                     children: <TextSpan>[
                       TextSpan(
-                        text: "Sign in",
+                        text: "Sign up",
                         style: Theme.of(
                           context,
                         ).textTheme.headlineMedium?.copyWith(
@@ -186,6 +189,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           fontWeight: FontWeight.w300,
                           color: Color(0xFFFAD051),
                         ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = (){
+                            Navigator.pushNamedAndRemoveUntil(context, RouteName.signUpScreen, (_)=>false);
+                          }
                       ),
                     ],
                   ),
