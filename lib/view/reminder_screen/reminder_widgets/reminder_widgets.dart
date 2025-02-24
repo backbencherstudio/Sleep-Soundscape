@@ -58,7 +58,7 @@ class ReminderWidgets{
           return  Consumer<ReminderScreenProvider>(
               builder: (_, reminderScreenProvider, child) {
                 if(reminderScreenProvider.pageId==1){
-                  return  ReminderPages();
+                  return  ReminderScreen();
                 }
                 else if(reminderScreenProvider.pageId==2){
                   return  AddReminderScreen();
