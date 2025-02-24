@@ -1,0 +1,145 @@
+import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+// class ReminderDropDownButton extends StatelessWidget{
+//   const ReminderDropDownButton({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return CustomDropdown(
+//      // controller: homeScreenProvider.dropdownController,
+//
+//       decoration: CustomDropdownDecoration(
+//         hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+//           color: Colors.white.withOpacity(0.6),
+//           fontWeight: FontWeight.w400,
+//         ),
+//         listItemStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+//           color: Colors.white.withOpacity(0.6),
+//           fontWeight: FontWeight.w400,
+//         ),
+//         closedFillColor: Colors.white.withOpacity(0.04),
+//         closedBorder: Border.all(color: Colors.white.withOpacity(0.08),),
+//         closedSuffixIcon: Icon(Icons.keyboard_arrow_down,color: Colors.white,),
+//         expandedFillColor: Colors.white.withOpacity(0.04),
+//         expandedBorder: Border.all(color: Colors.white.withOpacity(0.08),),
+//        // expandedSuffixIcon: Icon(Icons.keyboard_arrow_up,color: Colors.white,),
+//
+//       ),
+//
+//       maxlines: 2,
+//       overlayHeight: 300.h,
+//       hintText: 'Select Reminder Type',
+//       items: ['Focus', 'Sleep', 'Breath', 'Meditation', 'Nap', 'General'],
+//       // Directly use the list
+//       // initialItem: homeScreenProvider.batteryList[0],
+//       onChanged: (value) {
+//         debugPrint("\n value : $value");
+//       },
+//     );
+//   }
+// }
+
+
+class ReminderDropDownButton extends StatefulWidget{
+  List<String>? uniqueItemList;
+  String? hintText;
+  bool? isMultipleChoice = false;
+   ReminderDropDownButton({super.key, required this.uniqueItemList, required this.hintText, this.isMultipleChoice});
+
+
+  @override
+  State<ReminderDropDownButton> createState() => _ReminderDropDownButtonState();
+}
+
+class _ReminderDropDownButtonState extends State<ReminderDropDownButton> {
+  bool isExpanded = false;
+  bool isSelected = false;
+  String selectedText = "";
+
+  void selectSingleItem (int index){
+    setState(() {
+      selectedText = widget.uniqueItemList![index];
+      isSelected = true;
+      isExpanded = false;
+    });
+
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return Column(
+      children: [
+        GestureDetector(
+          onTap:(){
+            setState(() {
+              isExpanded = !isExpanded;
+            });
+            debugPrint("\nCustom dropdown button added!\n");
+          },
+          child: Container(
+            width: 345,
+            padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 18.h),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14.r),
+              color: Colors.white.withOpacity(0.04),
+              border: Border.all(color: Colors.white.withOpacity(0.08),),
+            ),
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text( isSelected ? selectedText : widget.hintText ?? "Choose",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.white.withOpacity(0.6),
+                  fontWeight: FontWeight.w400,
+                ),),
+
+                Icon(Icons.keyboard_arrow_down,color: Colors.white,)
+              ],
+            )
+          ),
+        ),
+
+
+        SizedBox(height: 8.h,),
+        AnimatedContainer(
+          width: 345,
+          height: isExpanded ? 300 : 0,
+          curve: Curves.linear,
+          duration: Duration(milliseconds: 200),
+          padding: EdgeInsets.only(left: 16.w, right : 16.w, top: 18.h),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14.r),
+            color: Colors.white.withOpacity(0.04),
+            border: Border.all(color: Colors.white.withOpacity(0.08),),
+          ),
+          child: ListView.builder(
+            itemCount: widget.uniqueItemList?.length ?? 0,
+              physics: ClampingScrollPhysics(),
+            // shrinkWrap: true,
+             // padding: EdgeInsets.all(8.r),
+              itemBuilder: (_, index){
+              final String item = widget.uniqueItemList?[index] ?? "N/A";
+              return GestureDetector(
+                onTap:(){
+                  selectSingleItem(index);
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 15.h,
+                  children: [
+                  Text(item,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white,fontWeight: FontWeight.w300),),
+                    if(index!=(widget.uniqueItemList!.length - 1))
+                    Divider(color: Colors.white.withOpacity(0.08),)
+                  ],
+                ),
+              );
+              },
+          ),
+        )
+      ],
+    );
+  }
+}

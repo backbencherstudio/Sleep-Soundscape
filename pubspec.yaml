@@ -38,6 +38,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_time_picker_spinner: ^2.0.0
   image_picker: ^1.1.2
+  animated_custom_dropdown: ^3.1.1
 
 
 

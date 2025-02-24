@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
-import 'package:sleep_soundscape/view/Feedback_Screen/feedback_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/forgotPassword_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
+import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/about_screen.dart';
@@ -112,6 +115,13 @@ class MyApp extends StatelessWidget {
 
               RouteName.profileScreen: (context) => ProfileScreen(),
               RouteName.aboutScreen: (context) => AboutScreen(),
+
+              RouteName.signUpScreen: (context) => LoginScreen(),
+              RouteName.signInScreen: (context) => SignInScreen(),
+              RouteName.forgotPassword: (context) => ForgotpasswordScreen(),
+              RouteName.homeScreen: (context) => HomeScreen(),
+              //add prpose
+
             },
           );
         },

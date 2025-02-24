@@ -2,7 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/model_view/reminder_screen_provider.dart';
+import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/edit_profile_bottom_sheet.dart';
+import 'package:sleep_soundscape/view/settings_screens/widgets/setting_bottom_modal_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/subscribe_tile.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -32,9 +36,8 @@ class ProfileScreen extends StatelessWidget {
         actionsPadding: EdgeInsets.only(right: 24.w),
         actions: [
           GestureDetector(
-            onTap: (){
+              onTap: ()=>settingBottomModalSheet(context),
 
-            },
             child: ImageIcon(
               AssetImage("assets/icons/settings.png"),
               size: 32.r,
@@ -118,9 +121,12 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 12.h),
-                buildButtonTile(context:  context, imagePath: "assets/icons/notification.png",title: "Reminder"),
+                buildButtonTile(context:  context, imagePath: "assets/icons/notification.png",title: "Reminder",onTap: (){
+                    context.read<ReminderScreenProvider>().setPageID(1);
+                    ReminderWidgets().reminderBottomSheet(context);
+                }),
                 SizedBox(height: 12.h),
-                buildButtonTile(context:  context, imagePath: "assets/icons/download.png",title: "Reminder"),
+                buildButtonTile(context:  context, imagePath: "assets/icons/download.png",title: "Download",onTap: (){}),
                 SizedBox(height: 32.h),
               ],
             ),
@@ -130,27 +136,30 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Container buildButtonTile({required BuildContext context, required String imagePath, required String title}) {
-    return Container(
-                width: double.infinity,
-                height: 56.h,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(255, 255, 255, 0.04),
-                  borderRadius: BorderRadius.circular(14.r),
-                  border: Border.all(color:Color.fromRGBO(255, 255, 255, 0.08), )
+  Widget buildButtonTile({required BuildContext context, required String imagePath, required String title,required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+                  width: double.infinity,
+                  height: 56.h,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(255, 255, 255, 0.04),
+                    borderRadius: BorderRadius.circular(14.r),
+                    border: Border.all(color:Color.fromRGBO(255, 255, 255, 0.08), )
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ImageIcon(AssetImage(imagePath),color: Colors.white,size: 18.r,),
+                      SizedBox(width: 6.w,),
+                      Text(title,style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                      ),)
+                    ],
+                  ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ImageIcon(AssetImage(imagePath),color: Colors.white,size: 18.r,),
-                    SizedBox(width: 6.w,),
-                    Text(title,style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                    ),)
-                  ],
-                ),
-              );
+    );
   }
 
   Container buildTodaySleepInfoTile(BuildContext context) {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/model/goal.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
-import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
 
 // ignore: must_be_immutable
 class GoalScreen extends StatelessWidget {
@@ -74,7 +74,7 @@ class GoalScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 itemCount: goals.length,
-                itemBuilder: (BuildContext, index) {
+                itemBuilder: (context, index) {
                   return Column(
                     children: [
                       Container(
@@ -136,10 +136,7 @@ class GoalScreen extends StatelessWidget {
               text: "Continue",
               color: Color(0xFFFAD051),
               ontap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
+                Navigator.pushNamedAndRemoveUntil(context, RouteName.homeScreen, (_)=>false);
               },
             ),
             SizedBox(height: 25.h),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/global_widget/custom_button.dart';
 
 void ChangePasswordBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -89,12 +91,19 @@ void ChangePasswordBottomSheet(BuildContext context) {
               SizedBox(height: 12.h,),
               Align(
                 alignment: Alignment.centerRight,
-                child: Text("Forgot Password?",style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: Color(0xFFFAD051),
-                  fontWeight: FontWeight.w300,
-                  fontFamily: "lexend"
-                ),),
-              )
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, RouteName.forgotPassword);
+                  },
+                  child: Text("Forgot Password?",style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: Color(0xFFFAD051),
+                    fontWeight: FontWeight.w300,
+                    fontFamily: "lexend"
+                  ),),
+                ),
+              ),
+              SizedBox(height: 24.h,),
+              CustomButton(text: "Done", onPressed: (){})
 
             ],
           ),

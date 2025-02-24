@@ -48,6 +48,14 @@ class ReminderScreenProvider with ChangeNotifier{
   ReminderModel? get reminders => _reminders;
 
 
+  ReminderList? _reminderToSetup;
+  ReminderList? get reminderToSetup => _reminderToSetup;
+
+  void onSetup(int index){
+    _reminderToSetup = _reminders!.reminderList![index];
+    notifyListeners();
+  }
+
   
   void getReminders(){
     _reminders = ReminderModel.fromJson(jsonReminders);
