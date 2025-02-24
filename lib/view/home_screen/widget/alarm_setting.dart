@@ -37,10 +37,12 @@ void alarmSetting(BuildContext context) {
               SizedBox(height: 12.h),
               _buildProgressBar(),
 
-              SizedBox(height: 24.h),
+              SizedBox(height: 18.h),
               _buildSoundPreview(),
+              SizedBox(height: 18.h),
 
               Divider(color: Color.fromRGBO(255, 255, 255, 0.30)),
+              SizedBox(height: 18.h),
 
               // Sleep Analysis
               _buildSectionTitle("Sleep Analysis"),
@@ -74,10 +76,17 @@ void alarmSetting(BuildContext context) {
 
               SizedBox(height: 10.h),
               _buildSectionTitle("Advanced"),
+              SizedBox(height: 21.h),
 
               _buildInfoRow("Snooze", "5 min", null),
+              SizedBox(height: 24.h),
+
               _buildInfoRow("Alarm mode", "Always use", ()=>alarmMode(context)),
+              SizedBox(height: 24.h),
+
               _buildInfoRow("Get-up Challenge", "None", ()=>getChallange(context)),
+              SizedBox(height: 18.h),
+
             ],
           ),
         ),
@@ -129,12 +138,17 @@ Widget _buildHeader(context) {
           ],
         ),
       ),
-      Text(
-        "Done",
-        style: TextStyle(
-          color: Colors.red,
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w400,
+      GestureDetector(
+        onTap: (){
+          Navigator.pop(context);
+        },
+        child: Text(
+          "Done",
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ),
     ],
