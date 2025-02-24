@@ -15,7 +15,7 @@ class CustomBottomBar extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 15.h, left: 15.w, right: 15.w),
       height: 72.h,
-      width: 320.w,
+      width: 320.w, // Ensure this width works well with your screen size.
       padding: EdgeInsets.symmetric(horizontal: 5.w),
       decoration: BoxDecoration(
         color: const Color(0xff0F1618),
@@ -68,30 +68,32 @@ class CustomBottomBar extends StatelessWidget {
           builder: (_, provider, child) {
             bool isSelected = provider.selectedIndex == index;
             return Container(
-              height: 56.h,
+              height: 69.h,
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.r),
                 // Optionally add a shadow if selected
                 boxShadow: isSelected ? [] : [],
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    icon,
-                    color: const Color.fromRGBO(255, 255, 255, 0.60),
-                  ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      icon,
                       color: const Color.fromRGBO(255, 255, 255, 0.60),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 4.h),
+                    Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
+                        color: const Color.fromRGBO(255, 255, 255, 0.60),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },
