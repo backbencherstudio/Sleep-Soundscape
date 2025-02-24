@@ -10,7 +10,7 @@ void signOutBottomSheet(BuildContext context) {
     ),
     builder: (BuildContext context) {
       return Container(
-        height: MediaQuery.of(context).size.height*0.5,
+        height: MediaQuery.of(context).size.height*0.6,
         decoration: BoxDecoration(
           color: Color(0xff0F0F13),
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
@@ -47,16 +47,19 @@ void signOutBottomSheet(BuildContext context) {
             SizedBox(height: 12.h),
 
             // Preferred Earphones
-        Align(
-          alignment: Alignment.center,
-          child: Image.asset("assets/images/question_mark.png"),
-        ),
+            Align(
+              alignment: Alignment.center,
+              child: Image.asset("assets/images/question_mark.png",height: 146.h,width: 146.w,),
+            ),
             SizedBox(height: 40.h),
 
             Align(
                 alignment: Alignment.center,
-                child: CustomButton(text: "Set Timer", onPressed: (){})),
-            SizedBox(height: 6.h),
+                child: CustomButton(text: "Sign out", onPressed: (){})),
+            SizedBox(height: 24.h),
+            Align(
+                alignment: Alignment.center,
+                child: CustomButton(text: "Cancel", onPressed: (){},backgroundColor:Color(0xff19191C),textColor: Colors.white,)),
 
           ],
         ),
