@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:sleep_soundscape/model_view/reminder_screen_provider.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/add_reminder_header.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/dropdown_widget.dart';
-import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/set_time_widget.dart';
 
-class AddReminderScreen extends StatelessWidget {
-  const AddReminderScreen({super.key});
+import '../../model_view/reminder_screen_provider.dart';
 
-  dynamic nothing(dynamic id) {
-    debugPrint("\nNumber : $id\n");
-  }
-
+class SetupReminderScrfeen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,6 +15,7 @@ class AddReminderScreen extends StatelessWidget {
       padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 58.h),
       child: SingleChildScrollView(
         child: Column(
+
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
@@ -35,19 +30,23 @@ class AddReminderScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12.h),
-        
+
             ///Header
-            AddReminderHeader(headerText: "Add Reminder",onSave:  () => context.read<ReminderScreenProvider>().setPageID(1),),
+            Consumer<ReminderScreenProvider>(
+              builder: (_, reminderScreenProvider, child) {
+                return AddReminderHeader(headerText: reminderScreenProvider.reminderToSetup!.title!,onSave:  () => context.read<ReminderScreenProvider>().setPageID(1),);
+              }
+            ),
             SizedBox(height: 25.h),
             Text("Reminder Time"),
             SizedBox(height: 24.h),
-        
+
             ///Set timer widget
             SetTimer(),
             SizedBox(height: 32.h,),
             Text("Advanced"),
             SizedBox(height: 24.h,),
-        
+
             ReminderDropDownButton(hintText: "Select Reminder Type", uniqueItemList: ['Focus', 'Sleep', 'Breath', 'Meditation', 'Nap', 'General'],),
 
             SizedBox(height: 12.h,),
