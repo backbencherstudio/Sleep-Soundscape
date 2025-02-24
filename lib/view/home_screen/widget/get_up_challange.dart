@@ -154,7 +154,9 @@ Widget _buildInfoRow(String text, String actionText, VoidCallback? onTap) {
             SizedBox(width: 5.w),
             GestureDetector(
               onTap: onTap,
-              child: Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.white),
+              child:Transform.translate(
+                  offset: Offset(2, 0),
+                  child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp)),
             ),
           ]
         ],

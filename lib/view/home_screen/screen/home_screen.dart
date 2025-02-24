@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import '../../../Utils/route_name.dart';
 import '../../../global_widget/custom_button.dart';
 import '../../../model_view/reminder_screen_provider.dart';
 import '../../parent_screen/screen/parent_screen.dart';
@@ -33,11 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 // User Info
                 ListTile(
-                  leading: ClipOval(
-                    child: Image.asset(
-                      "assets/images/user_1.png",
-                      height: 32.h,
-                      width: 32.w,
+                  leading: GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, RouteName.profileScreen);
+                    },
+                    child: ClipOval(
+                      child: Image.asset(
+                        "assets/images/user_1.png",
+                        height: 35.h,
+                        width: 35.w,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   title: Text(
@@ -52,26 +59,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 12.sp,
                     ),
                   ),
-                  trailing: GestureDetector(
-                    // onTap: (){
-                    //   context.read<ReminderScreenProvider>().setPageID(1);
-                    //   ReminderWidgets().reminderBottomSheet(context);
-                    //   //alarmSetting(context);
-                    // },
-                    onTap: ()=>settingBottomModalSheet(context),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xff121221),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey, width: 1.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(9.r),
-                        child: Image.asset(
-                          "assets/icons/save.png",
-                          height: 10.h,
-                          width: 10.w,
-                        ),
+                  trailing: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xff121221),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.grey, width: 1.0),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(9.r),
+                      child: Image.asset(
+                        "assets/icons/save.png",
+                        height: 10.h,
+                        width: 10.w,
                       ),
                     ),
                   ),

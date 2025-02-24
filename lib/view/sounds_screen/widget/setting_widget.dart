@@ -35,7 +35,9 @@ void bottomSheetSetting(BuildContext context) {
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(7.r),
-                      child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp),
+                      child: Transform.translate(
+                          offset: Offset(2, 0),
+                          child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp)),
                     ),
                   ),
                 ),

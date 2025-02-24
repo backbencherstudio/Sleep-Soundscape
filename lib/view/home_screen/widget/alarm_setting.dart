@@ -10,6 +10,8 @@ import 'get_up_challange.dart';
 void alarmSetting(BuildContext context) {
   ValueNotifier<bool> isAlarmSwitched = ValueNotifier<bool>(false);
   ValueNotifier<bool> isVibrationSwitched = ValueNotifier<bool>(false);
+  ValueNotifier<bool> isAutoPlay = ValueNotifier<bool>(false);
+
 
   showModalBottomSheet(
     context: context,
@@ -69,7 +71,7 @@ void alarmSetting(BuildContext context) {
 
               // Alarm & Advanced Settings
               _buildSectionTitle("Alarm"),
-              _buildSwitchRow("Autoplay sounds while sleeping", isAlarmSwitched),
+              _buildSwitchRow("Autoplay sounds while sleeping", isAutoPlay),
 
               _buildInfoRow("Audio timer", "5 min", null),
               Divider(color: Color.fromRGBO(255, 255, 255, 0.60)),
@@ -163,7 +165,7 @@ Widget _buildSectionTitle(String title) {
       title,
       textAlign: TextAlign.left,
       style: TextStyle(
-        color: Color.fromRGBO(255, 255, 255, 0.30),
+        color:title =="Sounds Detection" ? Colors.white: Color.fromRGBO(255, 255, 255, 0.30),
         fontWeight: FontWeight.w400,
         fontSize: 12.sp,
       ),
@@ -180,7 +182,7 @@ Widget _buildSwitchRow(String label, ValueNotifier<bool> switchNotifier) {
         label,
         textAlign: TextAlign.left,
         style: TextStyle(
-          color: Colors.white,
+          color:label == "Autoplay sounds while sleeping" ? Color.fromRGBO(255, 255, 255, 0.50): Colors.white,
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
         ),
@@ -263,7 +265,9 @@ Widget _buildSoundPreview() {
             ),
           ),
           SizedBox(width: 8.w),
-          Icon(Icons.arrow_forward_ios_rounded, color: Colors.white, size: 16.sp),
+          Transform.translate(
+              offset: Offset(2, 0),
+              child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp)),
         ],
       ),
     ),
@@ -283,7 +287,7 @@ Widget _buildInfoRow(String text, String actionText, VoidCallback? onTap) {
           style: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 12.sp,
-            color:Colors.white,
+            color: text =="To keep running in low battery, Sleep will stop detection when the battery is below 20% and finish analysis when the battery is below 10%." ? Color.fromRGBO(255, 255, 255,0.50):Colors.white,
           ),
         ),
       ),
