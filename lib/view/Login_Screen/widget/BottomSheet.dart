@@ -17,7 +17,7 @@ void showbottomSheet({
     builder: (context) {
       return Container(
         width: double.infinity,
-        height: 260,
+        height: 300,
         padding: EdgeInsets.all(20),
 
         margin: EdgeInsets.only(
