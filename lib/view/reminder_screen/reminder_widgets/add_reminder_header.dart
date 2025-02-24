@@ -5,7 +5,11 @@ import 'package:provider/provider.dart';
 import '../../../model_view/reminder_screen_provider.dart';
 
 class AddReminderHeader extends StatelessWidget{
-  const AddReminderHeader({super.key});
+
+  String headerText;
+  Function onSave;
+
+   AddReminderHeader({super.key, required this.headerText, required this.onSave});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,7 @@ class AddReminderHeader extends StatelessWidget{
           ),
         ),
         Text(
-          "Add Reminder",
+          headerText,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.w600,
@@ -39,7 +43,7 @@ class AddReminderHeader extends StatelessWidget{
         ),
         TextButton(
           style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
-          onPressed: () {},
+          onPressed: ()=> onSave,
           child: Text(
             "Save",
             style: Theme.of(
