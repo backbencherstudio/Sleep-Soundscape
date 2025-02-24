@@ -4,7 +4,6 @@ import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/change_password_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/settings_item_tile.dart';
-import 'package:sleep_soundscape/view/settings_screens/widgets/sign_out_bottom_sheet.dart';
 
 import 'bottom_sheet_header.dart';
 
@@ -83,7 +82,7 @@ void settingBottomModalSheet(BuildContext context){
                         SizedBox(height: 24.h,),
                         SettingsItemTile(onTap: (){},imagePath: "assets/icons/about.png",title: "About"),
                         SizedBox(height: 32.h,),
-                        CustomButton(text: "Sign out", onPressed: ()=>signOutBottomSheet(contex)),
+                        CustomButton(text: "Sign out", onPressed: (){}),
                         SizedBox(height: 40.h,),
 
                       ],
