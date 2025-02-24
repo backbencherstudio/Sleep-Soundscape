@@ -7,6 +7,7 @@ import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
 import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
+import 'package:sleep_soundscape/view/settings_screens/personalization_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/about_screen.dart';
@@ -127,6 +128,7 @@ class MyApp extends StatelessWidget {
               RouteName.signInScreen: (context) => SignInScreen(),
               RouteName.forgotPassword: (context) => ForgotpasswordScreen(),
               RouteName.homeScreen: (context) => HomeScreen(),
+              RouteName.personalizationScreen: (context) => PersonalizationScreen(),
               //add prpose
 
             },

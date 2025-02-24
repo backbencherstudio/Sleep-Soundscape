@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
-            child: Column(
+            child: ListView(
               children: [
                 // User Info
                 ListTile(
@@ -186,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 102.h),
+                SizedBox(height: 90.h),
                 // Start Button
                 GestureDetector(
                   onTap: startForReady,
@@ -202,6 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         "Start",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
+                      SizedBox(height: 42.h,),
                     ],
                   ),
                 ),
