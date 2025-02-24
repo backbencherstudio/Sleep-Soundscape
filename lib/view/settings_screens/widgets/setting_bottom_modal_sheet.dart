@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/change_password_bottom_sheet.dart';
+import 'package:sleep_soundscape/view/settings_screens/widgets/invite_friend_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/settings_item_tile.dart';
 
 import 'bottom_sheet_header.dart';
@@ -56,7 +57,9 @@ void settingBottomModalSheet(BuildContext context){
                         SizedBox(height: 18.h,),
                         Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),
-                        SettingsItemTile(onTap: (){},imagePath: "assets/icons/invite-friends.png",title: "Invite Friends"),
+                        SettingsItemTile(onTap: (){
+                          InviteFriendBottomSheet(context);
+                        },imagePath: "assets/icons/invite-friends.png",title: "Invite Friends"),
                         SizedBox(height: 18.h,),
                         Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),

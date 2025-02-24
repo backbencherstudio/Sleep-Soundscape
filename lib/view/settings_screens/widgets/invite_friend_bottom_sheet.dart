@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
 
-void ChangePasswordBottomSheet(BuildContext context) {
+void InviteFriendBottomSheet(BuildContext context) {
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
@@ -56,9 +56,9 @@ void ChangePasswordBottomSheet(BuildContext context) {
                       fontWeight: FontWeight.w500,
                     ),
                     children: [
-                      TextSpan(text: "Change "),
+                      TextSpan(text: "Get-up  "),
                       TextSpan(
-                        text: "Password ",
+                        text: "Challenge ",
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium!.copyWith(
@@ -74,7 +74,7 @@ void ChangePasswordBottomSheet(BuildContext context) {
               ),
               SizedBox(height: 24.h),
               Text(
-                "Please enter the details below to change your password.",
+                "Invite friends and get reward",
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: Color.fromRGBO(255, 255, 255, 0.60),
                   fontFamily: "Lexend",
@@ -83,25 +83,17 @@ void ChangePasswordBottomSheet(BuildContext context) {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 32.h),
-              textFormField(context,"Enter your Current Password"),
-              SizedBox(height: 12.h,),
-              textFormField(context,"Enter new Password"),
-              SizedBox(height: 12.h,),
-              textFormField(context,"Re-Enter New Password"),
-              SizedBox(height: 12.h,),
+              Image.asset("assets/images/challenge-reward.png",width: 345,height: 330,fit: BoxFit.contain,),
+              SizedBox(height: 32.h),
               Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.pushNamed(context, RouteName.forgotPassword);
-                  },
-                  child: Text("Forgot Password?",style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: Color(0xFFFAD051),
-                    fontWeight: FontWeight.w300,
-                    fontFamily: "lexend"
-                  ),),
-                ),
-              ),
+                  alignment: Alignment.centerLeft,
+                  child: Text("Referral code",style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontFamily: "Lexend",
+                    fontWeight: FontWeight.w400
+                  ),)),
+
+
+
               SizedBox(height: 24.h,),
               CustomButton(text: "Done", onPressed: (){})
 
@@ -113,24 +105,4 @@ void ChangePasswordBottomSheet(BuildContext context) {
   );
 }
 
-TextFormField textFormField(BuildContext context, String hintText) {
-  return TextFormField(
-              style: TextStyle(
-                color: Colors.white
-              ),
-              decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                 color: Color.fromRGBO(255, 255, 255, 0.6),
-                  fontWeight: FontWeight.w300,
-                  fontFamily: "Lexend",
-                ),
-                prefixIcon: Padding(
-                  padding:  EdgeInsets.all(12.r),
-                  child: ImageIcon(AssetImage("assets/icons/lock.png",),size: 18.r,color: Colors.white,),
-                ),
-                suffixIcon: Icon(Icons.visibility_outlined,color:Color.fromRGBO(255, 255, 255, 0.6),size: 18.r, )
-              ),
-            );
-}
 
