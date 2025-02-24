@@ -24,20 +24,23 @@ void DownloadSheet({
         title:"Mindful waliking",
        description: "Heard by 77 people.",
         img: "assets/icons/img2.png", 
-        icons: Icons.download),
+        icons:Icons.download
 
-         Downloadmodel(
-        title:"Calm Light",
-       description: "Heard by 233 people.",
+        ),
+
+        Downloadmodel(
+        title:"Mindful waliking",
+       description: "Heard by 77 people.",
         img: "assets/icons/img1.png", 
-       icons: Icons.download),
+        icons:Icons.download
 
-         Downloadmodel(
-        title:"Peace",
-       description: "Heard by 150 people.",
+        ),
+        Downloadmodel(
+        title:"Mindful waliking",
+       description: "Heard by 77 people.",
         img: "assets/icons/img3.png", 
-        icons: Icons.download
-        
+        icons:Icons.download
+
         ),
     ];
       return Container(
@@ -48,87 +51,93 @@ void DownloadSheet({
         margin: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-              child: Column(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+            child: Column(
+              
+              children: [
+               Container(
+                  height: 6.h,
+                  width: 115.w,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 44, 47, 49),
+                    borderRadius: BorderRadius.circular(100.r),
+                  ),
+                ),
+                SizedBox(height: 15.h),
+                Row(
+                    
                 
-                children: [
-                 Container(
-                    height: 6.h,
-                    width: 115.w,
+                  children:[ 
+                    
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Image.asset("assets/icons/back.png",
+                        height: 32.h,
+                        width: 32.h,
+                        ),
+                      ),
+                    ),
+                 SizedBox(width:60.w ,),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: RichText(
+                      text: TextSpan(
+                        text: "Downloads",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineMedium?.copyWith(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFFFFFFFF),
+                        ),
+                      ),
+                                          ),
+                    ),
+              ]),
+              SizedBox(height: 32.h,),
+              //  Image.asset("assets/icons/dnld.png",
+              //  height: 178.h,
+              //  width: 178.w,
+              //  ),
+             Expanded(
+               child: ListView.builder(
+              
+                itemCount: done.length,
+                itemBuilder:(context,index){
+                return Column(
+                  children:[ Container(
+                  
+                    padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 44, 47, 49),
-                      borderRadius: BorderRadius.circular(100.r),
+                      borderRadius: BorderRadius.circular(16.r),
+                      border: Border.all(
+                        color: Color(0xFFFFFFFF).withOpacity(0.6),
+                      )
+                    ),
+                    child: Row(
+                     children: [
+                       Image.asset(done[index].img,
+                       height: 64.h,
+                       width: 64.w,
+                       ),
+                     ],
+                  
+                  
                     ),
                   ),
-                  SizedBox(height: 15.h),
-                  Row(
-                      
-                  
-                    children:[ 
-                      
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Image.asset("assets/icons/back.png",
-                          height: 32.h,
-                          width: 32.h,
-                          ),
-                        ),
-                      ),
-                   SizedBox(width:60.w ,),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: RichText(
-                        text: TextSpan(
-                          text: "Downloads",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.headlineMedium?.copyWith(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFFFFFFFF),
-                          ),
-                        ),
-                                            ),
-                      ),
-                ]),
-                 SizedBox(
-                  height: 20.h,
-                 ),
-                 Expanded(
-                   child: SizedBox(
-                    height:700.h ,
-                   
-                    child:   ListView.builder(
-                                   
-                                   itemCount: done.length,
-                                   itemBuilder:(context,index){
-                                   return ListTile(
-                    title: Text(done[index].title,),
-                    subtitle: Text(done[index].description),
-                    leading: Image.asset(done[index].img),
-                    trailing: Icon(done[index].icons),
-                                   );
-                                  }),
-                   ),
-                 )
-
-                //  Image.asset("assets/icons/dnld.png",
-                //  height: 178.h,
-                //  width: 178.w,
-                //  ),
-              //    SizedBox(height: 20.h),
-             
-
-                 
-                ],
-              ),
+                  SizedBox(height: 12,)
+               ] );
+               }),
+             ),
+        
+               
+              ],
             ),
           ),
         ),

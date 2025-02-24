@@ -38,38 +38,46 @@ class GoalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 24, right: 24),
-      child: Scaffold(
-        appBar: AppBar(
-          title: RichText(
-            text: TextSpan(
-              text: "Select your ",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFFFFFFFF),
-              ),
-
-              children: <TextSpan>[
-                TextSpan(
-                  text: "Goal",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFFFAD051),
-                  ),
-                ),
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        title: RichText(
+          text: TextSpan(
+            text: "Select your ",
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFFFFFFFF),
             ),
+    
+            children: <TextSpan>[
+              TextSpan(
+                text: "Goal",
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFFFAD051),
+                ),
+              ),
+            ],
           ),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          automaticallyImplyLeading: false,
-          actions: [Text("skip")],
         ),
-        backgroundColor: Colors.black,
-        body: Column(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        actions: [Padding(
+          padding: EdgeInsets.only(right: 20),
+          child: Text("skip",
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w300,
+            color: Color(0xfffFFFFFF).withOpacity(0.6)
+          ),
+          ))],
+      ),
+      backgroundColor: Colors.black,
+      body: Padding(
+        padding: EdgeInsets.only(left: 24,right: 24,),
+        child: Column(
           children: [
             Expanded(
               child: ListView.builder(
@@ -86,7 +94,7 @@ class GoalScreen extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.only(
                             left: 16,
-
+            
                             top: 24,
                             bottom: 10,
                           ),
@@ -111,7 +119,7 @@ class GoalScreen extends StatelessWidget {
                                 fontSize: 14.sp,
                               ),
                             ),
-
+            
                             trailing: Padding(
                               padding: EdgeInsets.only(
                                 left: 25.w,
