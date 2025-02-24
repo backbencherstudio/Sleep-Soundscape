@@ -77,34 +77,37 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 110.h),
                 // Wake-up Time Text
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "Wake up ",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(
-                          color: Colors.white,
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w500,
+                Align(
+                  alignment: Alignment.center,
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Wake up ",
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(
+                            color: Colors.white,
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      TextSpan(
-                        text: "time",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(
-                          color: const Color(0xffFAD051),
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w500,
+                        TextSpan(
+                          text: "time",
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(
+                            color: const Color(0xffFAD051),
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 54.h),
