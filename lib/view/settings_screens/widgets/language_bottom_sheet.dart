@@ -71,7 +71,7 @@ void LanguageBottomSheet(BuildContext context){
                               languages[index],
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 fontWeight: FontWeight.w300,
-                                fontFamily: "Lexend"
+                                fontFamily: "Lexend",
                               ),
                             ),
                             trailing: selectedLanguage == languages[index]
