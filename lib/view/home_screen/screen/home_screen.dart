@@ -56,11 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   trailing: GestureDetector(
-                    onTap: (){
-                      context.read<ReminderScreenProvider>().setPageID(1);
-                      ReminderWidgets().reminderBottomSheet(context);
-                      //alarmSetting(context);
-                    },
+                    onTap: ()=>alarmSetting(context),
                     child: Container(
                       decoration: BoxDecoration(
                         color: const Color(0xff121221),

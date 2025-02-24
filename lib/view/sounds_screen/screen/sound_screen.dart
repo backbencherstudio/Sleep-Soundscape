@@ -200,12 +200,20 @@ class _SoundScreenState extends State<SoundScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Select Sound",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w500,
+              GestureDetector(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.grey, width: 1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(7.r),
+                    child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp),
+                  ),
                 ),
               ),
               SizedBox(height: 10.h),
