@@ -24,29 +24,26 @@ void DownloadSheet({
         title:"Mindful waliking",
        description: "Heard by 77 people.",
         img: "assets/icons/img2.png", 
-        icons:Icons.download
-
+        
         ),
 
         Downloadmodel(
         title:"Mindful waliking",
        description: "Heard by 77 people.",
         img: "assets/icons/img1.png", 
-        icons:Icons.download
-
+       
         ),
         Downloadmodel(
         title:"Mindful waliking",
        description: "Heard by 77 people.",
         img: "assets/icons/img3.png", 
-        icons:Icons.download
-
+      
         ),
     ];
       return Container(
         width: double.infinity,
         height: 730,
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(10),
 
         margin: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -61,7 +58,8 @@ void DownloadSheet({
                   height: 6.h,
                   width: 115.w,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 44, 47, 49),
+                     color: Color(0xFF000000).withOpacity(0.6),
+                   
                     borderRadius: BorderRadius.circular(100.r),
                   ),
                 ),
@@ -112,10 +110,11 @@ void DownloadSheet({
                 itemBuilder:(context,index){
                 return Column(
                   children:[ Container(
-                  
+                 
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.r),
+                       color: Color(0xff0000000).withOpacity(0.1),
                       border: Border.all(
                         color: Color(0xFFFFFFFF).withOpacity(0.6),
                       )
@@ -126,9 +125,35 @@ void DownloadSheet({
                        height: 64.h,
                        width: 64.w,
                        ),
+                             SizedBox(width: 8.w,),
+                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(done[index].title,
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFFFFFFFF)
+                                ),
+                                ),
+                                SizedBox(height: 3.h,),
+                                Text(done[index].description,
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w300,
+                                  color: Color(0xFFFFFFFF).withOpacity(0.6)
+                                
+                                ))
+                              ],
+                             ),
+                            SizedBox(width: 20,),
+                          Flexible(
+                            child: Image.asset("assets/icons/downlod.png",
+                           
+                            ),
+                          ),
                      ],
-                  
-                  
+                
                     ),
                   ),
                   SizedBox(height: 12,)
