@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/global_widget/switch_button.dart';
 
+import 'off_the_detection_bottom_sheet.dart';
+
 void soundDetection(BuildContext context) {
   ValueNotifier<bool> isSwitched = ValueNotifier<bool>(false);
 
@@ -102,6 +104,7 @@ void soundDetection(BuildContext context) {
                       isSwitchOn: value,
                       onChange: (bool newValue) {
                         isSwitched.value = newValue;
+                        offTheDetectionBottomSheet(context);
                       },
                     );
                   },

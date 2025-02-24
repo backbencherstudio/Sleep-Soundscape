@@ -127,7 +127,10 @@ class ReminderScreen extends StatelessWidget {
                                 //onPressed: (){},
                                 //  child:
                                 GestureDetector(
-                                  onTap:(){},
+                                  onTap:(){
+                                    context.read<ReminderScreenProvider>().onSetup(index);
+                                    context.read<ReminderScreenProvider>().setPageID(3);
+                                  },
                                   child: Text("Setup",
                                     style: Theme.of(context).textTheme.bodyMedium,),
                                 ),

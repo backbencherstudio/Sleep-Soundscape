@@ -10,6 +10,7 @@ import 'package:sleep_soundscape/view/settings_screens/widgets/settings_item_til
 import 'package:sleep_soundscape/view/settings_screens/widgets/sign_out_bottom_sheet.dart';
 
 import 'bottom_sheet_header.dart';
+import 'faq_bottom_sheet.dart';
 
 void settingBottomModalSheet(BuildContext context){
   showModalBottomSheet(
@@ -86,11 +87,14 @@ void settingBottomModalSheet(BuildContext context){
                         SizedBox(height: 18.h,),
                         Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),
-                        SettingsItemTile(onTap: (){},imagePath: "assets/icons/faq.png",title: "FAQs"),
+                        SettingsItemTile(onTap: ()=>faqBottomSheet(contex),imagePath: "assets/icons/faq.png",title: "FAQs"),
                         SizedBox(height: 18.h,),
                         Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),
-                        SettingsItemTile(onTap: (){},imagePath: "assets/icons/about.png",title: "About"),
+                        SettingsItemTile(onTap: (){
+
+                          Navigator.pushNamed(context, RouteName.aboutScreen);
+                        },imagePath: "assets/icons/about.png",title: "About"),
                         SizedBox(height: 32.h,),
                         CustomButton(text: "Sign out", onPressed: ()=>signOutBottomSheet(contex)),
                         SizedBox(height: 40.h,),
