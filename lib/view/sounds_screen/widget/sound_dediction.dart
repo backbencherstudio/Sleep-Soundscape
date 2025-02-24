@@ -6,6 +6,7 @@ import 'off_the_detection_bottom_sheet.dart';
 
 void soundDetection(BuildContext context) {
   ValueNotifier<bool> isSwitched = ValueNotifier<bool>(false);
+  ValueNotifier<bool> isAudioRecord = ValueNotifier<bool>(false);
 
   showModalBottomSheet(
     context: context,
@@ -144,12 +145,12 @@ void soundDetection(BuildContext context) {
                   ),
                 ),
                 ValueListenableBuilder<bool>(
-                  valueListenable: isSwitched,
+                  valueListenable: isAudioRecord,
                   builder: (context, value, child) {
                     return SwitchButton(
                       isSwitchOn: value,
                       onChange: (bool newValue) {
-                        isSwitched.value = newValue;
+                        isAudioRecord.value = newValue;
                       },
                     );
                   },
