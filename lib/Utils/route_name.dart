@@ -8,5 +8,4 @@ class RouteName {
   static const homeScreen = "/homeScreen";
   static const profileScreen = "/profileScreen";
   static const aboutScreen = "/aboutScreen";
-
 }
