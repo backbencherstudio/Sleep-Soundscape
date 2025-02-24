@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/view/parent_screen/screen/parent_screen.dart';
 import '../../global_widget/custom_button.dart';
 import '../home_screen/screen/home_screen.dart'; // Import Home Screen
@@ -53,12 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const ParentScreens(),
-        ),
-      );
+      Navigator.pushNamedAndRemoveUntil(context, RouteName.signUpScreen, (_)=>false);
     }
   }
 
