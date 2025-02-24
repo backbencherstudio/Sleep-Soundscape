@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/model_view/reminder_screen_provider.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/edit_profile_bottom_sheet.dart';
+import 'package:sleep_soundscape/view/settings_screens/widgets/setting_bottom_modal_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/subscribe_tile.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -35,9 +36,8 @@ class ProfileScreen extends StatelessWidget {
         actionsPadding: EdgeInsets.only(right: 24.w),
         actions: [
           GestureDetector(
-            onTap: (){
+              onTap: ()=>settingBottomModalSheet(context),
 
-            },
             child: ImageIcon(
               AssetImage("assets/icons/settings.png"),
               size: 32.r,

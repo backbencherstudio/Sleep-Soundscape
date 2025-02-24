@@ -45,12 +45,12 @@ void settingBottomModalSheet(BuildContext context){
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SizedBox(height: 24.h,),
-                        SettingsItemTile(onTap: (){
-                          Navigator.pushNamed(context, RouteName.profileScreen);
-                        },imagePath: "assets/icons/profile.png",title: "Profile",),
-                        SizedBox(height: 18.h,),
-                        Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
+                        // SizedBox(height: 24.h,),
+                        // SettingsItemTile(onTap: (){
+                        //   Navigator.pushNamed(context, RouteName.profileScreen);
+                        // },imagePath: "assets/icons/profile.png",title: "Profile",),
+                        // SizedBox(height: 18.h,),
+                        // Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),
                         SettingsItemTile(onTap: (){
                           ChangePasswordBottomSheet(context);
