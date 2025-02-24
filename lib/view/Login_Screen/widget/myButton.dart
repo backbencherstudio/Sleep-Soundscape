@@ -24,7 +24,11 @@ class Mybutton extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           color: color,
         ),
-        child: Center(child: Text(text)),
+        child: Center(child: Text(text,
+      style:TextStyle(
+        color: Color(0xFF0000000)
+      )
+        )),
       ),
     );
   }
