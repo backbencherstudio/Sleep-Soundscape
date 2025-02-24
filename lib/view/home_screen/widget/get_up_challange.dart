@@ -49,18 +49,34 @@ void getChallange(BuildContext context) {
                     ),
                   ),
                 ),
-                SizedBox(width: 30.w,),
-                Text(textAlign: TextAlign.center,
-                  "Get-up-challange ",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500,
-                  ),)
+                SizedBox(width: 70.w,),
+                RichText(text: TextSpan(children: [
+
+                  TextSpan(
+                    text: "Get-up ",
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  TextSpan(
+                    text: "challange",
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Color(0xffFAD051),
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+
+                  ),
+
+
+
+                ])),
 
               ],
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: 32.h),
             
             Container(
               padding: EdgeInsets.symmetric(vertical: 32,horizontal: 90),
@@ -131,7 +147,9 @@ Widget _buildInfoRow(String text, String actionText, VoidCallback? onTap) {
       ),
       Row(
         children: [
-          Text(actionText, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+          Text(actionText, style: TextStyle(   color: Color.fromRGBO(255, 255, 255, 0.60),
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w300,)),
           if (onTap != null) ...[
             SizedBox(width: 5.w),
             GestureDetector(
@@ -149,6 +167,7 @@ Widget _buildSwitchRow(String label, ValueNotifier<bool> switchNotifier) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
+
       Text(
         label,
         textAlign: TextAlign.left,

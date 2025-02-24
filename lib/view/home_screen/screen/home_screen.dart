@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
-
+import 'package:provider/provider.dart';
 import '../../../global_widget/custom_button.dart';
+import '../../../model_view/reminder_screen_provider.dart';
 import '../../parent_screen/screen/parent_screen.dart';
-import '../../parent_screen/widget/bottom_navigation_bar.dart';
-import '../widget/alarm_setting.dart';
-
-
+import '../../reminder_screen/reminder_widgets/reminder_widgets.dart';
+import '../../settings_screens/widgets/setting_bottom_modal_sheet.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
@@ -55,7 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   trailing: GestureDetector(
-                    onTap: () => alarmSetting(context),
+                    // onTap: (){
+                    //   context.read<ReminderScreenProvider>().setPageID(1);
+                    //   ReminderWidgets().reminderBottomSheet(context);
+                    //   //alarmSetting(context);
+                    // },
+                    onTap: ()=>settingBottomModalSheet(context),
                     child: Container(
                       decoration: BoxDecoration(
                         color: const Color(0xff121221),
@@ -107,16 +110,82 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 54.h),
                 // Time Picker
-                TimePickerSpinner(
-                  is24HourMode: false,
-                  normalTextStyle: TextStyle(fontSize: 30, color: Colors.white),
-                  highlightedTextStyle: TextStyle(
-                    fontSize: 40,
-                    color: Colors.yellow,
-                  ),
-                  spacing: 50,
-                  itemHeight: 50,
-                  onTimeChange: (time) {},
+                // TimePickerSpinner(
+                //   is24HourMode: false,
+                //   normalTextStyle: TextStyle(fontSize: 30, color: Colors.white),
+                //   highlightedTextStyle: TextStyle(
+                //     fontSize: 40,
+                //     color: Colors.yellow,
+                //   ),
+                //   spacing: 50,
+                //   itemHeight: 50,
+                //   onTimeChange: (time) {},
+                // ),
+                Row(
+                  spacing: 5.w,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ReminderWidgets().buildCupertinoPicker(
+                      context,
+                      [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12],
+                      8,
+                          (value) {
+                        debugPrint("\nValue : $value\n");
+                      },
+                      false,
+                    ),
+                    Text(":"),
+                    ReminderWidgets().buildCupertinoPicker(
+                      context,
+                      [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25,
+                        26,
+                        27,
+                        28,
+                        29,
+                        30,
+                      ],
+                      22,
+                          (value) {
+                        debugPrint("\nValue : $value\n");
+                      },
+                      false,
+                    ),
+
+                    ReminderWidgets().buildCupertinoPicker(
+                      context,
+                      ['AM', 'PM'],
+                      'PM',
+                          (value) {
+                        debugPrint("\nValue : $value\n");
+                      },
+                      true,
+                    ),
+                  ],
                 ),
                 SizedBox(height: 102.h),
                 // Start Button
