@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
 
   void soundBottomSheet(BuildContext context) {
     final List<String> categories = ["Oceans", "Nature", "Rain", "Map", "Fire"];
     int selectedIndex = 0; // Track the selected category
     // Use a ValueNotifier to manage the state of the sound toggles.
-    final ValueNotifier<List<bool>> isPressedNotifier =
-    ValueNotifier(List.generate(6, (index) => false));
+    // final ValueNotifier<List<bool>> isPressedNotifier =
+    // ValueNotifier(List.generate(6, (index) => false));
 
     showModalBottomSheet(
       isScrollControlled: true,
@@ -147,12 +149,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
               SizedBox(height: 24.h),
               // Sound list using a ValueListenableBuilder to react to changes in isPressedNotifier.
               Expanded(
-                child: ValueListenableBuilder<List<bool>>(
-                  valueListenable: isPressedNotifier,
-                  builder: (context, isPressedList, child) {
+                child: Consumer<SoundScreenProvider>(
+                  builder: (context, soundScreenProvider,child) {
                     return ListView.builder(
-                      itemCount: 6,
+                      itemCount: soundScreenProvider.musicModel!.musicList!.length,
                       itemBuilder: (context, index) {
+                        final music = soundScreenProvider.musicModel!.musicList![index];
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                             vertical: 4.0,
@@ -172,12 +174,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
                             ),
                             child: ListTile(
                               leading: Image.asset(
-                                'assets/images/white_sound.png',
+                                music.imagePath!,
                                 width: 40,
                                 height: 40,
+                                fit: BoxFit.cover,
                               ),
                               title: Text(
-                                "Sound ${index + 1}",
+                                music.title!,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
@@ -185,36 +188,37 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
                                 ),
                               ),
                               subtitle: Text(
-                                "Subtitle ${index + 1}",
+                                music.subtitle!,
                                 style: TextStyle(
                                   color: Colors.white70,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
-                              trailing: GestureDetector(
-                                onTap: () {
-                                  // Update the ValueNotifier instead of calling setState.
-                                  final newList = List<bool>.from(isPressedList);
-                                  newList[index] = !newList[index];
-                                  isPressedNotifier.value = newList;
-                                },
-                                child: isPressedList[index]
-                                    ? Image.asset(
-                                  "assets/icons/play2.png",
-                                  height: 30,
-                                )
-                                    : Image.asset(
-                                  "assets/icons/play1.png",
-                                  height: 30,
-                                ),
+                              trailing: Consumer<SoundScreenProvider>(
+                                builder: (_, soundScreenProvider, child) {
+                                  return GestureDetector(
+                                    onTap: () async {
+                                      await soundScreenProvider.playMusic(index);
+                                    },
+                                    child: soundScreenProvider.playedMusic == index
+                                        ? Image.asset(
+                                      "assets/icons/play2.png",
+                                      height: 30,
+                                    )
+                                        : Image.asset(
+                                      "assets/icons/play1.png",
+                                      height: 30,
+                                    ),
+                                  );
+                                }
                               ),
                             ),
                           ),
                         );
                       },
                     );
-                  },
+                  }
                 ),
               ),
             ],
