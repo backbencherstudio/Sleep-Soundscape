@@ -1,44 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
-import 'package:provider/provider.dart';
-import 'package:sleep_soundscape/global_widget/custom_button.dart';
-import 'package:sleep_soundscape/view/reminder_screen/reminder_screen.dart';
-import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
 
-import '../../../model_view/reminder_screen_provider.dart';
+import '../../../global_widget/custom_button.dart';
+import '../../parent_screen/screen/parent_screen.dart';
+import '../../parent_screen/widget/bottom_navigation_bar.dart';
 import '../widget/alarm_setting.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isSelected =false;
-
+  final isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Background image and other UI elements.
       body: Stack(
         fit: StackFit.expand,
         children: [
-          /// **Background Image (Now Covers Full Screen)**
           Positioned.fill(
             child: Image.asset(
               "assets/images/home_screen_img.png",
               fit: BoxFit.cover,
             ),
           ),
-
-          /// **Main Content**
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
             child: Column(
               children: [
-                /// **User Info**
+                // User Info
                 ListTile(
                   leading: ClipOval(
                     child: Image.asset(
@@ -49,18 +44,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   title: Text(
                     "Hello Robart",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w300,
                       fontSize: 12.sp,
                     ),
                   ),
                   trailing: GestureDetector(
-                    onTap: (){
-                      context.read<ReminderScreenProvider>().setPageID(1);
-                      ReminderWidgets().reminderBottomSheet(context);
-                      //alarmSetting(context);
-                    },
+                    onTap: () => alarmSetting(context),
                     child: Container(
                       decoration: BoxDecoration(
                         color: const Color(0xff121221),
@@ -79,14 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(height: 110.h),
-
-                /// **Wake-up Time Text**
+                // Wake-up Time Text
                 RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(
                         text: "Wake up ",
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(
                           color: Colors.white,
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w500,
@@ -94,8 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       TextSpan(
                         text: "time",
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Color(0xffFAD051),
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(
+                          color: const Color(0xffFAD051),
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w500,
                         ),
@@ -104,8 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(height: 54.h),
-
-                /// **Time Picker**
+                // Time Picker
                 TimePickerSpinner(
                   is24HourMode: false,
                   normalTextStyle: TextStyle(fontSize: 30, color: Colors.white),
@@ -118,10 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTimeChange: (time) {},
                 ),
                 SizedBox(height: 102.h),
-
-                /// **Start Button**
+                // Start Button
                 GestureDetector(
-                  onTap: _showBottomSheet,
+                  onTap: startForReady,
                   child: Column(
                     children: [
                       Image.asset(
@@ -137,6 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
+                const Spacer(),
+                const CustomBottomBar(),
               ],
             ),
           ),
@@ -145,8 +147,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+
   /// **Bottom Sheet**
-  void _showBottomSheet() {
+  void startForReady() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -171,7 +174,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       TextSpan(
                         text: "Ready to ",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 20.sp,
@@ -179,7 +186,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       TextSpan(
                         text: "Sleep?",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(
                           color: Color(0xffFAD051),
                           fontWeight: FontWeight.w500,
                           fontSize: 20.sp,
@@ -200,7 +211,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(
                   textAlign: TextAlign.center,
                   "Keep the charger connected Screen down your phone on the bed",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(
                     color: Color.fromRGBO(255, 255, 255, 0.60),
                     fontWeight: FontWeight.w300,
                     fontSize: 14.sp,
@@ -222,15 +237,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       value: true,
                       groupValue: isSelected,
                       onChanged: (value) {
-                        setState(() {
-                          isSelected = value as bool;
-                        });
+                        // setState(() {
+                        // //  isSelected = value as bool;
+                        // });
                       },
                     ),
-                    Text("Don’t remind me",style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Color.fromRGBO(255, 255, 255, 0.60),
-                      fontWeight: FontWeight.w300,
-                      fontSize: 12.sp
+                    Text("Don’t remind me", style: Theme
+                        .of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(
+                        color: Color.fromRGBO(255, 255, 255, 0.60),
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12.sp
                     ),),
                   ],
                 ),
@@ -241,4 +260,5 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
+
 }

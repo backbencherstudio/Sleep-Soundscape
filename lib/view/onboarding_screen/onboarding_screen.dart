@@ -54,6 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
+
       Navigator.pushNamedAndRemoveUntil(context, RouteName.signUpScreen, (_)=>false);
     }
   }
