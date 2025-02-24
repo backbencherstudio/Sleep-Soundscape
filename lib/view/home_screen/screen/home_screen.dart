@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 
-import '../widget/parent_screen.dart';
+import '../../../global_widget/custom_button.dart';
+import '../../parent_screen/screen/parent_screen.dart';
 import '../../parent_screen/widget/bottom_navigation_bar.dart';
 import '../widget/alarm_setting.dart';
 
@@ -14,26 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void _showStartBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        height: 200.h,
-        decoration: BoxDecoration(
-          color: Colors.blueGrey,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-        ),
-        child: Center(
-          child: Text(
-            'Start Button Bottom Sheet',
-            style: TextStyle(fontSize: 18.sp, color: Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
-
+  final isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   title: Text(
                     "Hello Robart",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w300,
                       fontSize: 12.sp,
@@ -94,7 +80,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       TextSpan(
                         text: "Wake up ",
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(
                           color: Colors.white,
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w500,
@@ -102,7 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       TextSpan(
                         text: "time",
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(
                           color: const Color(0xffFAD051),
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w500,
@@ -127,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 102.h),
                 // Start Button
                 GestureDetector(
-                  onTap: _showStartBottomSheet,
+                  onTap: startForReady,
                   child: Column(
                     children: [
                       Image.asset(
@@ -152,4 +146,119 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+
+  /// **Bottom Sheet**
+  void startForReady() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          // height: MediaQuery.of(context).size.height * 0.95,
+          decoration: BoxDecoration(
+            color: Color(0xff212121),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Ready to ",
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "Sleep?",
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(
+                          color: Color(0xffFAD051),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                Center(
+                  child: Image.asset(
+                    "assets/images/phone.png",
+                    width: 130.w,
+                    height: 133.h,
+                  ),
+                ),
+                SizedBox(height: 35.h),
+                Text(
+                  textAlign: TextAlign.center,
+                  "Keep the charger connected Screen down your phone on the bed",
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(
+                    color: Color.fromRGBO(255, 255, 255, 0.60),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14.sp,
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                CustomButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  text: 'Back to Login',
+                ),
+                SizedBox(height: 24.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+                    Radio(
+                      value: true,
+                      groupValue: isSelected,
+                      onChanged: (value) {
+                        // setState(() {
+                        // //  isSelected = value as bool;
+                        // });
+                      },
+                    ),
+                    Text("Don’t remind me", style: Theme
+                        .of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(
+                        color: Color.fromRGBO(255, 255, 255, 0.60),
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12.sp
+                    ),),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
 }
