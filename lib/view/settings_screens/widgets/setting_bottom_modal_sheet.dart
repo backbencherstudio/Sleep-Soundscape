@@ -79,7 +79,9 @@ void settingBottomModalSheet(BuildContext context){
                         SizedBox(height: 18.h,),
                         Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),
-                        SettingsItemTile(onTap: (){},imagePath: "assets/icons/Personalization.png",title: "Personalization"),
+                        SettingsItemTile(onTap: (){
+                          Navigator.pushNamed(context, RouteName.personalizationScreen);
+                        },imagePath: "assets/icons/Personalization.png",title: "Personalization"),
                         SizedBox(height: 18.h,),
                         Divider(color: Color.fromRGBO(255, 255, 255, 0.1),),
                         SizedBox(height: 24.h,),
