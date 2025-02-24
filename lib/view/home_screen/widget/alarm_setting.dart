@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/view/home_screen/widget/snooze_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/home_screen/widget/sound_scape.dart';
 import 'package:sleep_soundscape/view/sounds_screen/widget/sound_dediction.dart';
 import 'package:sleep_soundscape/global_widget/switch_button.dart';
@@ -80,7 +81,7 @@ void alarmSetting(BuildContext context) {
               _buildSectionTitle("Advanced"),
               SizedBox(height: 21.h),
 
-              _buildInfoRow("Snooze", "5 min", null),
+              _buildInfoRow("Snooze", "5 min", ()=>snoozeBottomSheet(context)),
               SizedBox(height: 24.h),
 
               _buildInfoRow("Alarm mode", "Always use", ()=>alarmMode(context)),
