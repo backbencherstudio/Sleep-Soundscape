@@ -10,12 +10,63 @@ class SoundScreenProvider with ChangeNotifier{
   final Map<String,dynamic> _musicsList = {
     "musicList":[
       {
+        "category":"oceans",
         "title":"Ocean Waves",
         "subtitle":"Singer Nahidul Islam",
         "imagePath":"assets/images/musics/ocean_waves.png",
         "audioPath":"musics/ocean-waves.mp3"
       },
       {
+        "category":"fire",
+        "title":"Fire Sound-01",
+        "subtitle":"fire of backbencher",
+        "imagePath":"assets/images/musics/ocean_waves.png",
+        "audioPath":"musics/fire-01.mp3"
+      },
+      {
+        "category":"fire",
+        "title":"Fire Sound-02",
+        "subtitle":"fire of flutter",
+        "imagePath":"assets/images/musics/ocean_waves.png",
+        "audioPath":"musics/fire-02.mp3"
+      },
+      {
+        "category":"nature",
+        "title":"Nature Sound-01",
+        "subtitle":"Banasree Jungle Sound",
+        "imagePath":"assets/images/musics/ocean_waves.png",
+        "audioPath":"musics/nature-01.mp3"
+      },
+      {
+        "category":"nature",
+        "title":"Nature Sound-02",
+        "subtitle":"Rampura Jungle Sound",
+        "imagePath":"assets/images/musics/ocean_waves.png",
+        "audioPath":"musics/nature-02.mp3"
+      },
+      {
+        "category":"nature",
+        "title":"Nature Sound-03",
+        "subtitle":"Sundarban Jungle Sound",
+        "imagePath":"assets/images/musics/ocean_waves.png",
+        "audioPath":"musics/nature-03.mp3"
+      },
+      {
+        "category":"oceans",
+        "title":"Ocean Waves-02",
+        "subtitle":"Hatirjhil sound",
+        "imagePath":"assets/images/musics/ocean_waves.png",
+        "audioPath":"musics/waves-02.mp3"
+      },
+      {
+        "category":"rains",
+        "title":"Rain Sounds-02",
+        "subtitle":"Rainy day",
+        "imagePath":"assets/images/musics/rain.png",
+        "audioPath":"musics/rain-02.mp3"
+      },
+      {
+        "category":"rains",
         "title":"Rain Sounds",
         "subtitle":"Singer Shakin",
         "imagePath":"assets/images/musics/rain.png",

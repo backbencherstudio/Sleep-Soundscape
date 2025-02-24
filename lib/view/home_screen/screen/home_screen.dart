@@ -7,6 +7,7 @@ import '../../../model_view/reminder_screen_provider.dart';
 import '../../parent_screen/screen/parent_screen.dart';
 import '../../reminder_screen/reminder_widgets/reminder_widgets.dart';
 import '../../settings_screens/widgets/setting_bottom_modal_sheet.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final isSelected = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,192 +32,170 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
-            child: ListView(
-              children: [
-                // User Info
-                ListTile(
-                  leading: GestureDetector(
-                    onTap: (){
-                      Navigator.pushNamed(context, RouteName.profileScreen);
-                    },
-                    child: ClipOval(
-                      child: Image.asset(
-                        "assets/images/user_1.png",
-                        height: 35.h,
-                        width: 35.w,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  title: Text(
-                    "Hello Robart",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .bodyLarge
-                        ?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 12.sp,
-                    ),
-                  ),
-                  trailing: Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xff121221),
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.grey, width: 1.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(9.r),
-                      child: Image.asset(
-                        "assets/icons/save.png",
-                        height: 10.h,
-                        width: 10.w,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 110.h),
-                // Wake-up Time Text
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "Wake up ",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(
-                          color: Colors.white,
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      TextSpan(
-                        text: "time",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(
-                          color: const Color(0xffFAD051),
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 54.h),
-                // Time Picker
-                // TimePickerSpinner(
-                //   is24HourMode: false,
-                //   normalTextStyle: TextStyle(fontSize: 30, color: Colors.white),
-                //   highlightedTextStyle: TextStyle(
-                //     fontSize: 40,
-                //     color: Colors.yellow,
-                //   ),
-                //   spacing: 50,
-                //   itemHeight: 50,
-                //   onTimeChange: (time) {},
-                // ),
-                Row(
-                  spacing: 5.w,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ReminderWidgets().buildCupertinoPicker(
-                      context,
-                      [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12],
-                      8,
-                          (value) {
-                        debugPrint("\nValue : $value\n");
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // User Info
+                  ListTile(
+                    leading: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, RouteName.profileScreen);
                       },
-                      false,
+                      child: ClipOval(
+                        child: Image.asset(
+                          "assets/images/user_1.png",
+                          height: 35.h,
+                          width: 35.w,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                    Text(":"),
-                    ReminderWidgets().buildCupertinoPicker(
-                      context,
-                      [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9,
-                        10,
-                        11,
-                        12,
-                        13,
-                        14,
-                        15,
-                        16,
-                        17,
-                        18,
-                        19,
-                        20,
-                        21,
-                        22,
-                        23,
-                        24,
-                        25,
-                        26,
-                        27,
-                        28,
-                        29,
-                        30,
+                    title: Text(
+                      "Hello Robart",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12.sp,
+                      ),
+                    ),
+                    trailing: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xff121221),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.grey, width: 1.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(9.r),
+                        child: Image.asset(
+                          "assets/icons/save.png",
+                          height: 10.h,
+                          width: 10.w,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 110.h),
+                  // Wake-up Time Text
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Wake up ",
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Colors.white,
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "time",
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: const Color(0xffFAD051),
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ],
-                      22,
-                          (value) {
-                        debugPrint("\nValue : $value\n");
-                      },
-                      false,
                     ),
-
-                    ReminderWidgets().buildCupertinoPicker(
-                      context,
-                      ['AM', 'PM'],
-                      'PM',
-                          (value) {
-                        debugPrint("\nValue : $value\n");
-                      },
-                      true,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 90.h),
-                // Start Button
-                GestureDetector(
-                  onTap: startForReady,
-                  child: Column(
+                  ),
+                  SizedBox(height: 54.h),
+                  // Time Picker
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        "assets/icons/start_img.png",
-                        width: 50,
-                        height: 50,
+                      ReminderWidgets().buildCupertinoPicker(
+                        context,
+                        [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12],
+                        8,
+                            (value) {
+                          debugPrint("\nValue : $value\n");
+                        },
+                        false,
                       ),
-                      SizedBox(height: 16.h),
-                      Text(
-                        "Start",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      Text(":"),
+                      ReminderWidgets().buildCupertinoPicker(
+                        context,
+                        [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15,
+                          16,
+                          17,
+                          18,
+                          19,
+                          20,
+                          21,
+                          22,
+                          23,
+                          24,
+                          25,
+                          26,
+                          27,
+                          28,
+                          29,
+                          30,
+                        ],
+                        22,
+                            (value) {
+                          debugPrint("\nValue : $value\n");
+                        },
+                        false,
                       ),
-                      SizedBox(height: 42.h,),
+                      ReminderWidgets().buildCupertinoPicker(
+                        context,
+                        ['AM', 'PM'],
+                        'PM',
+                            (value) {
+                          debugPrint("\nValue : $value\n");
+                        },
+                        true,
+                      ),
                     ],
                   ),
-                ),
-                const Spacer(),
-                const CustomBottomBar(),
-              ],
+                  SizedBox(height: 90.h),
+                  // Start Button
+                  GestureDetector(
+                    onTap: startForReady,
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/icons/start_img.png",
+                          width: 50,
+                          height: 50,
+                        ),
+                        SizedBox(height: 16.h),
+                        Text(
+                          "Start",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 42.h,),
+                  // Removed Spacer to avoid render errors in a scrollable view.
+                  CustomBottomBar(),
+                ],
+              ),
             ),
           ),
         ],
       ),
     );
   }
-
 
   /// **Bottom Sheet**
   void startForReady() {
@@ -228,7 +208,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       builder: (BuildContext context) {
         return Container(
-          // height: MediaQuery.of(context).size.height * 0.95,
           decoration: BoxDecoration(
             color: Color(0xff212121),
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -243,11 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       TextSpan(
                         text: "Ready to ",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 20.sp,
@@ -255,11 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       TextSpan(
                         text: "Sleep?",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Color(0xffFAD051),
                           fontWeight: FontWeight.w500,
                           fontSize: 20.sp,
@@ -278,13 +249,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 35.h),
                 Text(
+                  "Keep the charger connected. Screen down your phone on the bed",
                   textAlign: TextAlign.center,
-                  "Keep the charger connected Screen down your phone on the bed",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Color.fromRGBO(255, 255, 255, 0.60),
                     fontWeight: FontWeight.w300,
                     fontSize: 14.sp,
@@ -300,26 +267,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 24.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-
                   children: [
                     Radio(
                       value: true,
                       groupValue: isSelected,
                       onChanged: (value) {
-                        // setState(() {
-                        // //  isSelected = value as bool;
-                        // });
+                        // If you want to update the radio button, manage the state appropriately.
                       },
                     ),
-                    Text("Don’t remind me", style: Theme
-                        .of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(
+                    Text(
+                      "Don’t remind me",
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Color.fromRGBO(255, 255, 255, 0.60),
                         fontWeight: FontWeight.w300,
-                        fontSize: 12.sp
-                    ),),
+                        fontSize: 12.sp,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -329,5 +292,4 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
-
 }
