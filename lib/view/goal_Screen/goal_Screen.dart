@@ -74,7 +74,7 @@ class GoalScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 itemCount: goals.length,
-                itemBuilder: (BuildContext, index) {
+                itemBuilder: (context, index) {
                   return Column(
                     children: [
                       Container(
