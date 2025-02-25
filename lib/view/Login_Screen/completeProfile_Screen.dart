@@ -5,6 +5,8 @@ import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 import 'package:sleep_soundscape/view/goal_Screen/goal_Screen.dart';
 
+import '../../Utils/route_name.dart';
+
 class CompleteprofileScreen extends StatelessWidget {
   const CompleteprofileScreen({super.key});
 
@@ -42,21 +44,13 @@ class CompleteprofileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 26),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => GoalScreen()),
-                    );
-                  },
-                  child: Image.asset(
-                    "assets/icons/person.png",
-                    height: 86.h,
-                    width: 86.w,
-                  ),
+                SizedBox(height: 24),
+                Image.asset(
+                  "assets/icons/person.png",
+                  height: 86.h,
+                  width: 86.w,
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 10.h),
                 Text(
                   "Choose Your Image",
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -70,8 +64,8 @@ class CompleteprofileScreen extends StatelessWidget {
                   height: 56.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
-                    color: Color.fromARGB(15, 44, 44, 44).withOpacity(0.8),
-                    border: Border.all(color: Color(0xFF4B5155)),
+                    color: Colors.white.withOpacity(0.04),
+                    border: Border.all(color: Colors.white.withOpacity(0.08)),
                   ),
                   child: Center(
                     child: Row(
@@ -80,14 +74,9 @@ class CompleteprofileScreen extends StatelessWidget {
                         Image.asset("assets/icons/1.png"),
                         SizedBox(width: 8.w),
                         Text(
-                          "Robert rollu the move to acyobhbe",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodySmall!.copyWith(
-                            color: Color(0xFFFFFFFFF).withOpacity(0.6),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp,
-                          ),
+                          "Nahidul Islam Shakin",
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(color: Colors.white.withOpacity(0.6)),
                         ),
                       ],
                     ),
@@ -98,8 +87,8 @@ class CompleteprofileScreen extends StatelessWidget {
                   height: 56.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
-                    color: Color.fromARGB(15, 44, 44, 44).withOpacity(0.8),
-                    border: Border.all(color: Color(0xFF4B5155)),
+                    color: Colors.white.withOpacity(0.04),
+                    border: Border.all(color: Colors.white.withOpacity(0.08)),
                   ),
                   child: Center(
                     child: Row(
@@ -108,28 +97,24 @@ class CompleteprofileScreen extends StatelessWidget {
                         Image.asset("assets/icons/1.png"),
                         SizedBox(width: 8.w),
                         Text(
-                          "kenzi.lawson@example.com",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodySmall!.copyWith(
-                            color: Color(0xFFFFFFFFF).withOpacity(0.6),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp,
-                          ),
+                          "shakinhabib2000@gmail.com",
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(color: Colors.white.withOpacity(0.6)),
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 150.h),
+                SizedBox(height: 79.h),
 
                 Mybutton(
                   text: "Sign up",
                   color: Color(0xffFAD051),
                   ontap: () {
-                    Navigator.push(
+                    Navigator.pushNamedAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => GoalScreen()),
+                      RouteName.goalScreen,
+                          (_) => false,
                     );
                   },
                 ),
