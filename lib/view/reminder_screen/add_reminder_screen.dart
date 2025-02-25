@@ -37,7 +37,7 @@ class AddReminderScreen extends StatelessWidget {
             SizedBox(height: 12.h),
         
             ///Header
-            AddReminderHeader(headerText: "Add Reminder",onSave:  () => context.read<ReminderScreenProvider>().setPageID(1),),
+            AddReminderHeader(headerText: "Add Reminder",onSave:  () => Navigator.pop(context),),
             SizedBox(height: 25.h),
             Text("Reminder Time"),
             SizedBox(height: 24.h),
