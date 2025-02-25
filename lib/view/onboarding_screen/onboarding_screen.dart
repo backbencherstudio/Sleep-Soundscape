@@ -43,7 +43,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      await context.read<OnboardingScreenProvider>().completeOnboarding();
+     await context.read<OnboardingScreenProvider>().completeOnboarding();
       Navigator.pushNamedAndRemoveUntil(context, RouteName.signUpScreen, (_) => false);
     }
   }
