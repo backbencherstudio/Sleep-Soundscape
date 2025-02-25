@@ -2,60 +2,39 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:sleep_soundscape/model_view/reminder_screen_provider.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/edit_profile_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/setting_bottom_modal_sheet.dart';
+import 'package:sleep_soundscape/view/settings_screens/widgets/sleep_phase_heat_map.dart';
 
 import '../reminder_screen/reminder_screen.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ProfileScreen extends StatelessWidget {
+   ProfileScreen({super.key});
 
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
   Map<DateTime, int> _data = {};
-
-  @override
-  void initState() {
-    _initExampleData();
-    super.initState();
-  }
-
-  void _initExampleData() {
-    var rng = Random();
-    var now = DateTime.now();
-    var today = DateTime(now.year, now.month, now.day);
-    for (int i = 0; i < 200; i++) {
-      DateTime date = today.subtract(Duration(days: i));
-      _data[date] = rng.nextInt(6); // Random number between 0 and 5
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF000000),
       appBar: AppBar(
         leadingWidth: 56.w,
-        backgroundColor: Colors.black,
-        surfaceTintColor: Colors.transparent,
+        // surfaceTintColor: Colors.transparent,
         leading: Padding(
           padding: EdgeInsets.only(left: 24.0.w),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: ImageIcon(
-              AssetImage("assets/icons/back.png"),
-              size: 32.r,
-              color: Colors.white,
+          child:                 GestureDetector(
+            onTap:()=> Navigator.pop(context),
+            child: Container(
+              width: 32.w,
+              height: 32.h,
+              padding: EdgeInsets.all(7.r),
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.08),),
+                shape: BoxShape.circle,
+
+              ),
+              child: Icon(Icons.arrow_back_ios_new,color: Theme.of(context).colorScheme.onSecondary,size: 18.r,),
             ),
           ),
         ),
@@ -63,13 +42,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           GestureDetector(
             onTap: () => settingBottomModalSheet(context),
+            child: Container(
+              width: 32.w,
+              height: 32.h,
+              padding: EdgeInsets.all(7.r),
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.08),),
+                shape: BoxShape.circle,
 
-            child: ImageIcon(
-              AssetImage("assets/icons/settings.png"),
-              size: 32.r,
-              color: Colors.white,
+              ),
+              child: Icon(Icons.settings,color: Theme.of(context).colorScheme.onSecondary,size: 18.r,),
             ),
           ),
+
+          // GestureDetector(
+          //   onTap: () => settingBottomModalSheet(context),
+          //   child: ImageIcon(
+          //     AssetImage("assets/icons/settings.png"),
+          //     size: 32.r,
+          //     color: Theme.of(context).appBarTheme.actionsIconTheme?.color,
+          //   ),
+          // ),
+
+
         ],
       ),
       body: SafeArea(
@@ -104,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             context,
                           ).textTheme.titleMedium!.copyWith(
                             fontFamily: "Lexend",
-                            color: Colors.white,
+                            // color: Colors.white,
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w500,
                           ),
@@ -115,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           style: Theme.of(
                             context,
                           ).textTheme.bodySmall!.copyWith(
-                            color: Color.fromRGBO(255, 255, 255, 0.60),
+                            // color: Color.fromRGBO(255, 255, 255, 0.60),
                             fontWeight: FontWeight.w300,
                             fontFamily: "Lexend",
                           ),
@@ -129,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       },
                       child: ImageIcon(
                         AssetImage("assets/icons/edit.png"),
-                        color: Colors.white,
+                        // color: Colors.white,
                         size: 32.r,
                       ),
                     ),
@@ -140,71 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // SizedBox(height: 12.h),
                 buildTodaySleepInfoTile(context),
                 SizedBox(height: 12.h),
-                Container(
-                  width: double.infinity,
-                  height: 280.h,
-                  padding: EdgeInsets.symmetric(horizontal: 14.w),
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(255, 255, 255, 0.04),
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 14.h.h,),
-                        Align(alignment: Alignment.centerLeft, child: Text("Sleep Phase",style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.white
-                        ),)),
-                        SizedBox(height: 32.h,),
-
-                         Text(
-                          "20",
-                          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFFFAD051),
-                          ),
-                        ),
-                         Text(
-                          "Days",
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFFFAD051),
-                          ),
-                        ),
-                        SizedBox(height: 24.h),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              HeatMap(
-
-                                startDate: DateTime(DateTime.now().year, DateTime.now().month - 3, DateTime.now().day),
-                                endDate: DateTime.now(),
-                                borderRadius: 2.r,
-                                size: 12.r,
-                                margin: EdgeInsets.symmetric(horizontal: 2.5.w,vertical: 2.5.h),
-                                defaultColor: Color.fromRGBO(255, 255, 255, 0.04,),
-                                colorMode: ColorMode.color,
-                                showText: false,
-                                textColor: Color.fromRGBO(255, 255, 255, 0.4),
-                                scrollable: true,
-                                showColorTip: false,
-                                datasets: _data,
-                                colorsets: {
-                                  1: Colors.amber.shade200,
-                                  // 2: Colors.amber.shade400,
-                                  // 3: Colors.amber.shade600,
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ),
+               SleepPhaseHeatmap(),
                 SizedBox(height: 12.h),
                 buildButtonTile(
                   context: context,
@@ -243,9 +174,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         width: double.infinity,
         height: 56.h,
         decoration: BoxDecoration(
-          color: Color.fromRGBO(255, 255, 255, 0.04),
+          // color: Color.fromRGBO(255, 255, 255, 0.04),
           borderRadius: BorderRadius.circular(14.r),
-          border: Border.all(color: Color.fromRGBO(255, 255, 255, 0.08)),
+          // border: Border.all(color: Color.fromRGBO(255, 255, 255, 0.08)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
