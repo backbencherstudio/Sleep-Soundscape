@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/view/home_screen/widget/alarm_setting.dart';
 
 import '../../../model_view/parent_screen_provider.dart';
+import '../../../model_view/theme_provider.dart';
 import '../../sounds_screen/widget/audio_timer_bottom_sheet.dart';
 import '../../sounds_screen/widget/sound_bottom_sheet.dart';
 
@@ -12,13 +13,15 @@ class CustomBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = context.watch<ThemeProvider>();
     return Container(
       margin: EdgeInsets.only(bottom: 15.h, left: 15.w, right: 15.w),
-      height: 72.h,
+     // height: 72.h,
       width: 320.w, // Ensure this width works well with your screen size.
       padding: EdgeInsets.symmetric(horizontal: 5.w),
       decoration: BoxDecoration(
-        color: const Color(0xff0F1618),
+        color: Theme.of(context).colorScheme.secondary,
+        border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.04)),
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Row(
@@ -68,32 +71,30 @@ class CustomBottomBar extends StatelessWidget {
           builder: (_, provider, child) {
             bool isSelected = provider.selectedIndex == index;
             return Container(
-              height: 69.h,
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            //  height: 69.h,
+              margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.r),
                 // Optionally add a shadow if selected
                 boxShadow: isSelected ? [] : [],
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      icon,
-                      color: const Color.fromRGBO(255, 255, 255, 0.60),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    icon,
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
+                  SizedBox(height: 4.h),
+                  Text(
+                    label,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.onSecondary,
                     ),
-                    SizedBox(height: 4.h),
-                    Text(
-                      label,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color.fromRGBO(255, 255, 255, 0.60),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             );
           },

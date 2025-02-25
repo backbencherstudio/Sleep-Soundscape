@@ -5,7 +5,7 @@ import 'package:sleep_soundscape/global_widget/custom_button.dart';
 void offTheDetectionBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.transparent,
+    // backgroundColor: Colors.transparent,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
     ),
@@ -13,7 +13,7 @@ void offTheDetectionBottomSheet(BuildContext context) {
       return Container(
         height: MediaQuery.of(context).size.height * 0.5,
         decoration: BoxDecoration(
-          color: Color(0xff0F0F13),
+          // color: Color(0xff0F0F13),
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
         ),
         padding: EdgeInsets.all(16.w),
@@ -28,7 +28,7 @@ void offTheDetectionBottomSheet(BuildContext context) {
                     TextSpan(
                       text: "Off the  ",
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
+                        // color: Colors.white,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500,
                       ),
@@ -51,7 +51,7 @@ void offTheDetectionBottomSheet(BuildContext context) {
             Text(
               "Off",
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
+                // color: Colors.white,
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w300,
               ),
@@ -64,7 +64,7 @@ void offTheDetectionBottomSheet(BuildContext context) {
             ListTile(
               title: Text("Off only this time"),
               titleTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white,
+                // color: Colors.white,
                 fontWeight: FontWeight.w300,
                 fontSize: 16.sp,
               ),
@@ -72,7 +72,7 @@ void offTheDetectionBottomSheet(BuildContext context) {
               subtitleTextStyle: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(
-                color: Color.fromRGBO(255, 255, 255, 0.60),
+                // color: Color.fromRGBO(255, 255, 255, 0.60),
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w300,
               ),

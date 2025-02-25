@@ -7,7 +7,7 @@ import '../../reminder_screen/reminder_widgets/reminder_widgets.dart';
 void snoozeBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.transparent,
+    // backgroundColor: Colors.transparent,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
     ),
@@ -15,7 +15,7 @@ void snoozeBottomSheet(BuildContext context) {
       return Container(
         height: MediaQuery.of(context).size.height*0.5,
         decoration: BoxDecoration(
-          color: Color(0xff0F0F13),
+          // color: Color(0xff0F0F13),
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
         ),
         padding: EdgeInsets.all(16.w),
@@ -30,7 +30,7 @@ void snoozeBottomSheet(BuildContext context) {
                     TextSpan(
                       text: "Snooze",
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
+                        // color: Colors.white,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500,
                       ),

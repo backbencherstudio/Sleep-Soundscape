@@ -6,6 +6,7 @@ import 'package:sleep_soundscape/model_view/notification_provider.dart';
 import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/profile_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
+import 'package:sleep_soundscape/model_view/theme_provider.dart';
 import 'package:sleep_soundscape/view/Download_Screen/test_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
@@ -63,6 +64,11 @@ class MyApp extends StatelessWidget {
           create: (_) => OnboardingScreenProvider(),
         ),
 
+        ChangeNotifierProvider<ThemeProvider>(
+          create: (_) => ThemeProvider(),
+        ),
+
+
 
 
 
@@ -71,16 +77,115 @@ class MyApp extends StatelessWidget {
         //  designSize: Size(deviceWidth, deviceHeight),
         minTextAdapt: true,
         builder: (context, child) {
+          final themeProvider = context.watch<ThemeProvider>();
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Counter App',
-            theme: ThemeData(
+            theme:  ThemeData(
               scaffoldBackgroundColor: Colors.white,
+
+              ///light-mode text theme
               textTheme: TextTheme(
                 headlineLarge: TextStyle(
                   fontSize: 48.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
+                ),
+                headlineMedium: TextStyle(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+
+                headlineSmall: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+                bodyLarge: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+                bodyMedium: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+                bodySmall:   TextStyle(
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+              ),
+              inputDecorationTheme: InputDecorationTheme(
+
+                ///light-fill color of TextFormField
+                filled: true,
+                fillColor: Colors.black.withOpacity(0.04),
+
+                ///light-mode label style
+               labelStyle:  TextStyle(
+                  color: Colors.black.withOpacity(0.6),
+                ),
+
+                ///light-mode hint style
+                hintStyle: TextStyle(
+                  color: Colors.black.withOpacity(0.6),
+                ),
+
+                ///light-enabledBorder color of TextFormField
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(color: Colors.black.withOpacity(0.08)),
+                ),
+
+                ///light-disabledBorder color of TextFormField
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(color: Colors.black.withOpacity(0.08)),
+                ),
+
+
+
+                ///dark-focusedBorder color of TextFormField
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(
+                    color:Color(0xffFAD051),
+                  ),
+                ),
+
+                ///dark-errorBorder color of TextFormField
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+
+                prefixIconColor:  Colors.black.withOpacity(0.6),
+                suffixIconColor: Colors.black.withOpacity(0.6),
+              ),
+
+              ///colorScheme for dak mode theme
+              colorScheme: ColorScheme.fromSeed(
+                  seedColor: Colors.blue,
+                  primary: Color(0xffFAD051),
+                  onPrimary: Colors.black,
+                  secondary: Colors.black.withOpacity(0.04),
+                  onSecondary: Colors.black.withOpacity(0.6),
+                  onTertiary: Colors.black,
+              ),
+            ),
+            themeMode: themeProvider.themeMode,
+            darkTheme: ThemeData(
+              scaffoldBackgroundColor: Colors.black,
+
+              ///dark-mode text theme
+              textTheme: TextTheme(
+                headlineLarge: TextStyle(
+                  fontSize: 48.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
                 headlineMedium: TextStyle(
                   fontSize: 24.sp,
@@ -104,32 +209,68 @@ class MyApp extends StatelessWidget {
                   color: Colors.white,
                 ),
                 bodySmall:           TextStyle(
-                fontSize: 10.sp,
-                fontWeight: FontWeight.w400,
-                color: Colors.white,
-              ),
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                ),
               ),
               inputDecorationTheme: InputDecorationTheme(
+
+                ///dark-fill color of TextFormField
                 filled: true,
-                fillColor: Color.fromRGBO(255, 255, 255, 0.04),
+                fillColor: Colors.white.withOpacity(0.04),
+
+                ///light-mode label style
+                labelStyle:  TextStyle(
+                  color: Colors.white.withOpacity(0.6),
+                ),
+
+                ///light-mode hint style
+                hintStyle: TextStyle(
+                  color: Colors.white.withOpacity(0.6),
+                ),
+
+                ///dark-enabledBorder color of TextFormField
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(
-                    color: Color.fromRGBO(255, 255, 255, 0.08),
+                    color: Colors.white.withOpacity(0.04),
                   ),
                 ),
+
+                ///dark-disabledBorder color of TextFormField
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(color: Colors.white.withOpacity(0.08)),
+                ),
+
+                ///dark-focusedBorder color of TextFormField
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(
-                    color: Color.fromRGBO(255, 255, 255, 0.08),
+                    color: Color(0xffFAD051),
                   ),
                 ),
+
+                ///dark-errorBorder color of TextFormField
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
-                  borderSide: BorderSide(color: Color(0xFFF45757)),
+                  borderSide: BorderSide(color: Colors.red),
                 ),
+
+                prefixIconColor:  Colors.white.withOpacity(0.6),
+                suffixIconColor: Colors.white.withOpacity(0.6),
               ),
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+
+              ///colorScheme for dak mode theme
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.blue,
+                primary: Color(0xffFAD051),
+                onPrimary: Colors.black,
+                secondary: Colors.white.withOpacity(0.04),
+                onSecondary: Colors.white.withOpacity(0.6),
+                onTertiary: Colors.white,
+              ),
             ),
             initialRoute: '/',
             routes: {
@@ -140,8 +281,6 @@ class MyApp extends StatelessWidget {
               RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),
               RouteName.aboutScreen: (context) => AboutScreen(),
-              RouteName.onboardingScreen: (context) => OnboardingScreen(),
-
               RouteName.signUpScreen: (context) => LoginScreen(),
               RouteName.signInScreen: (context) => SignInScreen(),
               RouteName.forgotPassword: (context) => ForgotpasswordScreen(),

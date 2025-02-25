@@ -19,8 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF000000),
-
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -33,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFFFFFFFF),
+                    //  color: Color(0xFFFFFFFF),
                     ),
 
                     children: <TextSpan>[
@@ -57,21 +55,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       showbottomSheet(context: context);
                     },
-                    child: Image.asset(
-                      "assets/icons/up.png",
-                      height: 84.h,
-                      width: 84.w,
+                    child: Container(
+                      padding: EdgeInsets.all(26.r),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.secondary,
+                            shape:BoxShape.circle,
+                      ),
+                      child: Icon(Icons.person_outline,size: 32.r,color: Theme.of(context).colorScheme.onTertiary,),
                     ),
                   ),
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 14.h),
                 Text(
                   "Choose Your Image",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFFFFFFFF),
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(height: 32.h),
                 TextFormField(
@@ -81,11 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   decoration: inputDecoration(
                     context : context,
-                   prefixIcon:  Image.asset(
-                      "assets/icons/1.png",
-                      height: 18.h,
-                      width: 18.w,
-                    ),
+                   prefixIcon: Icon(Icons.person_outline),
                   hintText:"Enter your name",
                   ),
                 ),
@@ -97,11 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   decoration: inputDecoration(
                     context :  context,
-                    prefixIcon:  Image.asset(
-                      "assets/icons/2.png",
-                      height: 18.h,
-                      width: 18.w,
-                    ),
+                    prefixIcon: Icon(Icons.email_outlined),
                     hintText:   "Enter your email",
                   ),
                 ),
@@ -113,14 +102,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   decoration: inputDecoration(
                     context : context,
-                    prefixIcon:  Image.asset(
-                      "assets/icons/3.png",
-                      height: 18.h,
-                      width: 18.w,
-                    ),
+                    prefixIcon:  Icon(Icons.lock_outline_rounded),
                     hintText:   "Enter your password",
                   suffixIcon:   Icon(
-                      Icons.visibility_off_outlined,
+                      Icons.visibility_outlined,
                       color: Color(0xFF4B5155),
                     ),
                   ),
@@ -129,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 Mybutton(
                   text: "Next",
-                  color: Color(0xffFAD051),
+                  color: Theme.of(context).colorScheme.primary,
                   ontap: () {
                     Navigator.pushNamed(context, RouteName.completeProfileScreen);
 

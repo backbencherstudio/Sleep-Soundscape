@@ -13,7 +13,6 @@ void alarmSetting(BuildContext context) {
   ValueNotifier<bool> isVibrationSwitched = ValueNotifier<bool>(false);
   ValueNotifier<bool> isAutoPlay = ValueNotifier<bool>(false);
 
-
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -24,7 +23,7 @@ void alarmSetting(BuildContext context) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height * 0.96,
-        decoration: BoxDecoration(color: Color(0xff0F0F13)),
+        // decoration: BoxDecoration(color: Color(0xff0F0F13)),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -33,63 +32,74 @@ void alarmSetting(BuildContext context) {
               SizedBox(height: 35.h),
 
               // Alarm Section
-              _buildSectionTitle("Alarm"),
-              _buildSwitchRow("Alarm", isAlarmSwitched),
-              _buildSwitchRow("Vibration", isVibrationSwitched),
+              _buildSectionTitle(context,"Alarm",),
+              _buildSwitchRow(context,"Alarm", isAlarmSwitched),
+              _buildSwitchRow(context,"Vibration", isVibrationSwitched),
 
               SizedBox(height: 12.h),
-              _buildProgressBar(),
+              _buildProgressBar(context),
 
               SizedBox(height: 18.h),
-              _buildSoundPreview(),
+              _buildSoundPreview(context),
               SizedBox(height: 18.h),
 
               Divider(color: Color.fromRGBO(255, 255, 255, 0.30)),
               SizedBox(height: 18.h),
 
               // Sleep Analysis
-              _buildSectionTitle("Sleep Analysis"),
-              _buildSectionTitle("Sounds Detection"),
+              _buildSectionTitle(context,"Sleep Analysis"),
+              _buildSectionTitle(context,"Sounds Detection"),
               SizedBox(height: 4.h),
 
-              _buildInfoRow(
+              _buildInfoRow(context,
                 "To keep running in low battery, Sleep will stop detection when the battery is below 20% and finish analysis when the battery is below 10%.",
                 "On",
-                    () => soundDetection(context),
+                () => soundDetection(context),
               ),
 
               Divider(color: Color.fromRGBO(255, 255, 255, 0.30)),
 
               // Soundscapes
-              _buildSectionTitle("Soundscapes"),
-              _buildInfoRow(
+              _buildSectionTitle(context,"Soundscapes"),
+              _buildInfoRow(context,
                 "Soundscapes",
                 "Calm Light",
-                    () => soundScape(context),
+                () => soundScape(context),
               ),
 
               SizedBox(height: 35.h),
 
               // Alarm & Advanced Settings
-              _buildSectionTitle("Alarm"),
-              _buildSwitchRow("Autoplay sounds while sleeping", isAutoPlay),
+              _buildSectionTitle(context,"Alarm"),
+              _buildSwitchRow(context,"Autoplay sounds while sleeping", isAutoPlay),
 
-              _buildInfoRow("Audio timer", "5 min", null),
+              _buildInfoRow(context,"Audio timer", "5 min", null),
               Divider(color: Color.fromRGBO(255, 255, 255, 0.60)),
 
               SizedBox(height: 10.h),
-              _buildSectionTitle("Advanced"),
+              _buildSectionTitle(context,"Advanced"),
               SizedBox(height: 21.h),
 
-              _buildInfoRow("Snooze", "5 min", ()=>snoozeBottomSheet(context)),
+              _buildInfoRow(context,
+                "Snooze",
+                "5 min",
+                () => snoozeBottomSheet(context),
+              ),
               SizedBox(height: 24.h),
 
-              _buildInfoRow("Alarm mode", "Always use", ()=>alarmMode(context)),
+              _buildInfoRow(context,
+                "Alarm mode",
+                "Always use",
+                () => alarmMode(context),
+              ),
               SizedBox(height: 24.h),
 
-              _buildInfoRow("Get-up Challenge", "None", ()=>getChallange(context)),
+              _buildInfoRow(context,
+                "Get-up Challenge",
+                "None",
+                () => getChallange(context),
+              ),
               SizedBox(height: 18.h),
-
             ],
           ),
         ),
@@ -99,23 +109,30 @@ void alarmSetting(BuildContext context) {
 }
 
 /// 🔹 **Header with Back Button & Title**
-Widget _buildHeader(context) {
+Widget _buildHeader(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       GestureDetector(
-        onTap: (){
+        onTap: () {
           Navigator.pop(context);
         },
         child: Container(
           decoration: BoxDecoration(
             color: Colors.transparent,
-            border: Border.all(color: Colors.grey, width: 1),
+            border: Border.all(
+              // color: Colors.grey,
+              width: 1,
+            ),
             shape: BoxShape.circle,
           ),
           child: Padding(
             padding: EdgeInsets.all(7.r),
-            child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp),
+            child: Icon(
+              Icons.arrow_back_ios,
+              // color: Colors.white,
+              size: 10.sp,
+            ),
           ),
         ),
       ),
@@ -124,15 +141,19 @@ Widget _buildHeader(context) {
           children: [
             TextSpan(
               text: "Sleep ",
-              style: TextStyle(
-                color: Colors.white,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w500,
               ),
+              // style: TextStyle(
+              //   // color: Colors.white,
+              //   fontSize: 20.sp,
+              //   fontWeight: FontWeight.w500,
+              // ),
             ),
             TextSpan(
               text: "Setting",
-              style: TextStyle(
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Color(0xffFAD051),
                 fontWeight: FontWeight.w500,
                 fontSize: 20.sp,
@@ -142,16 +163,17 @@ Widget _buildHeader(context) {
         ),
       ),
       GestureDetector(
-        onTap: (){
+        onTap: () {
           Navigator.pop(context);
         },
         child: Text(
           "Done",
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
             color: Colors.red,
             fontSize: 14.sp,
             fontWeight: FontWeight.w400,
           ),
+
         ),
       ),
     ],
@@ -159,34 +181,41 @@ Widget _buildHeader(context) {
 }
 
 /// 🔹 **Reusable Section Title**
-Widget _buildSectionTitle(String title) {
+Widget _buildSectionTitle(BuildContext context,String title) {
   return Align(
     alignment: Alignment.topLeft,
     child: Text(
       title,
       textAlign: TextAlign.left,
-      style: TextStyle(
-        color:title =="Sounds Detection" ? Colors.white: Color.fromRGBO(255, 255, 255, 0.30),
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+        // color:
+        // title == "Sounds Detection"
+        //     ? Colors.white
+        //     : Color.fromRGBO(255, 255, 255, 0.30),
         fontWeight: FontWeight.w400,
         fontSize: 12.sp,
       ),
+
     ),
   );
 }
 
 /// 🔹 **Switch Button Row**
-Widget _buildSwitchRow(String label, ValueNotifier<bool> switchNotifier) {
+Widget _buildSwitchRow(BuildContext context,String label, ValueNotifier<bool> switchNotifier) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Text(
         label,
         textAlign: TextAlign.left,
-        style: TextStyle(
-          color:label == "Autoplay sounds while sleeping" ? Color.fromRGBO(255, 255, 255, 0.50): Colors.white,
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+          // label == "Autoplay sounds while sleeping"
+          //     ? Color.fromRGBO(255, 255, 255, 0.50)
+          //     : Colors.white,
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
         ),
+
       ),
       ValueListenableBuilder<bool>(
         valueListenable: switchNotifier,
@@ -204,7 +233,7 @@ Widget _buildSwitchRow(String label, ValueNotifier<bool> switchNotifier) {
 }
 
 /// 🔹 **Progress Bar**
-Widget _buildProgressBar() {
+Widget _buildProgressBar(BuildContext context) {
   return Row(
     children: [
       Icon(Icons.notifications_outlined, color: Colors.white60),
@@ -221,11 +250,13 @@ Widget _buildProgressBar() {
 }
 
 /// 🔹 **Sound Preview Widget**
-Widget _buildSoundPreview() {
+Widget _buildSoundPreview(BuildContext context) {
   return Align(
     alignment: Alignment.topLeft,
     child: Container(
-      width: MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width * 0.5,
+      width:
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width *
+          0.5,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14.r),
         image: DecorationImage(
@@ -244,21 +275,23 @@ Widget _buildSoundPreview() {
               children: [
                 Text(
                   "Ringtone",
-                  style: TextStyle(
-                    color: Colors.white,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    // color: Colors.white,
                     fontWeight: FontWeight.w500,
                     fontSize: 12.sp,
                   ),
+
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   "Shadow of rain",
-                  style: TextStyle(
-                    color: Colors.white54,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    // color: Colors.white54,
                     fontWeight: FontWeight.w300,
                     fontSize: 10.sp,
                   ),
+
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -267,8 +300,9 @@ Widget _buildSoundPreview() {
           ),
           SizedBox(width: 8.w),
           Transform.translate(
-              offset: Offset(2, 0),
-              child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp)),
+            offset: Offset(2, 0),
+            child: Icon(Icons.arrow_back_ios, size: 10.sp),
+          ),
         ],
       ),
     ),
@@ -276,7 +310,7 @@ Widget _buildSoundPreview() {
 }
 
 /// 🔹 **Reusable Info Row (Label + Action)**
-Widget _buildInfoRow(String text, String actionText, VoidCallback? onTap) {
+Widget _buildInfoRow(BuildContext context,String text, String actionText, VoidCallback? onTap) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -285,23 +319,40 @@ Widget _buildInfoRow(String text, String actionText, VoidCallback? onTap) {
           text,
           maxLines: 5,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.w400,
             fontSize: 12.sp,
-            color: text =="To keep running in low battery, Sleep will stop detection when the battery is below 20% and finish analysis when the battery is below 10%." ? Color.fromRGBO(255, 255, 255,0.50):Colors.white,
+            // color:
+            // text ==
+            //     "To keep running in low battery, Sleep will stop detection when the battery is below 20% and finish analysis when the battery is below 10%."
+            //     ? Color.fromRGBO(255, 255, 255, 0.50)
+            //     : Colors.white,
           ),
+
         ),
       ),
       Row(
         children: [
-          Text(actionText, style: TextStyle(fontSize:12.sp, fontWeight:FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 0.60))),
+          Text(
+            actionText,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w300,
+              // color: Color.fromRGBO(255, 255, 255, 0.60),
+            ),
+
+          ),
           if (onTap != null) ...[
             SizedBox(width: 5.w),
             GestureDetector(
               onTap: onTap,
-              child: Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.white),
+              child: Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 16,
+                // color: Colors.white,
+              ),
             ),
-          ]
+          ],
         ],
       ),
     ],

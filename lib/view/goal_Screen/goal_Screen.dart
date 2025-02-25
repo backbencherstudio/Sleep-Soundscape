@@ -47,7 +47,6 @@ class GoalScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontSize: 20.sp,
               fontWeight: FontWeight.w500,
-              color: Color(0xFFFFFFFF),
             ),
 
             children: <TextSpan>[
@@ -65,92 +64,104 @@ class GoalScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
-        actionsPadding: EdgeInsets.only(right: 24.w),
         actions: [
-          TextButton(
-              onPressed: (){
-                Navigator.pop(context);
-              },
-              child: Text("skip",style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: GestureDetector(
+              onTap: (){                Navigator.pushNamedAndRemoveUntil(
+                context,
+                RouteName.homeScreen,
+                    (_) => false,
+              );},
+              child: Text(
+                "skip",
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w300,
-                  fontFamily: "lexend",
-                  color: Color.fromRGBO(255,255,255,0.6)
-              ),)
-          )
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
-      backgroundColor: Colors.black,
-      body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 16.r),
-        child: Column(
-          children: [
-            SizedBox(height: 8.h,),
-            Expanded(
-              child: ListView.builder(
-                itemCount: goals.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Container(
-                        height: 96.h,
-                        padding: EdgeInsets.symmetric(horizontal: 8,),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22.r),
-                          border: Border.all(color: Color(0xFF4B5155)),
-                          color: Colors.grey.shade700.withOpacity(0.2),
-                        ),
-                        child: Center(
-                          child: ListTile(
-                            title: Text(
-                              goals[index].title,
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodySmall!.copyWith(
-                                color: Color(0xFFFFFFFFF),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                            subtitle: Text(
-                              goals[index].description,
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodySmall!.copyWith(
-                                color: Color(0xFFFFFFFFF),
-                                fontWeight: FontWeight.w300,
-                                fontSize: 14.sp,
-                              ),
-                            ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(left: 24, right: 24),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: goals.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(22.r),
+                            border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.08)),
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              left: 16,
 
-                            trailing: Padding(
-                              padding: EdgeInsets.only(
-                                left: 25.w,
-                              ), // Add custom spacing here
-                              child: Image.asset(
-                                goals[index].img,
-                                height: 49.h,
-                                width: 48.w,
+                              top: 24,
+                              bottom: 10,
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                goals[index].title,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodyLarge!.copyWith(
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                              subtitle: Text(
+                                goals[index].description,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.onSecondary,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+
+                              trailing: Padding(
+                                padding: EdgeInsets.only(
+                                  left: 25.w,
+                                ), // Add custom spacing here
+                                child: Image.asset(
+                                  goals[index].img,
+                                  height: 49.h,
+                                  width: 48.w,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 16.h),
-                    ],
+                        SizedBox(height: 16.h),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20.h),
+              Mybutton(
+                text: "Continue",
+                color: Theme.of(context).colorScheme.primary,
+                ontap: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    RouteName.homeScreen,
+                    (_) => false,
                   );
                 },
               ),
-            ),
-            SizedBox(height: 6.h),
-            Mybutton(
-              text: "Continue",
-              color: Color(0xFFFAD051),
-              ontap: () {
-                Navigator.pushNamedAndRemoveUntil(context, RouteName.homeScreen, (_)=>false);
-              },
-            ),
-            SizedBox(height: 40.h),
-          ],
+              SizedBox(height: 25.h),
+            ],
+          ),
         ),
       ),
     );

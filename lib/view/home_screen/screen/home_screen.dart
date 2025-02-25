@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/model_view/theme_provider.dart';
 import '../../../Utils/route_name.dart';
 import '../../../global_widget/custom_button.dart';
 import '../../../model_view/reminder_screen_provider.dart';
@@ -19,11 +20,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
       // Background image and other UI elements.
       body: Stack(
         fit: StackFit.expand,
         children: [
+          if(themeProvider.themeMode == ThemeMode.dark)
           Positioned.fill(
 
             child: Image.asset(
@@ -55,25 +58,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       title: Text(
                         "Hello Robart",
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w300,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontSize: 12.sp,
                         ),
                       ),
-                      trailing: Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xff121221),
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey, width: 1.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(9.r),
-                          child: Image.asset(
-                            "assets/icons/save.png",
-                            height: 10.h,
-                            width: 10.w,
+                      trailing: GestureDetector(
+                        onTap: (){
+                          debugPrint("\nSwitching theme!\n");
+                          context.read<ThemeProvider>().toggleTheme();
+                          },
+                        child: Container(
+                          padding: EdgeInsets.all(4.r),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey, width: 1.0),
                           ),
+                          child: themeProvider.themeMode == ThemeMode.dark ?
+                          Icon(Icons.dark_mode_outlined
+                          ,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                            size: 15.r,
+                          ) :
+                          Icon(Icons.light_mode_outlined   ,
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            size: 15.r,),
                         ),
                       ),
                     ),
@@ -86,7 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         TextSpan(
                           text: "Wake up ",
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.white,
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w500,
                           ),
@@ -104,89 +112,94 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(height: 54.h),
                   // Time Picker
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ReminderWidgets().buildCupertinoPicker(
-                        context,
-                        [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12],
-                        8,
-                            (value) {
-                          debugPrint("\nValue : $value\n");
-                        },
-                        false,
-                      ),
-                      Text(":"),
-                      ReminderWidgets().buildCupertinoPicker(
-                        context,
-                        [
-                          1,
-                          2,
-                          3,
-                          4,
-                          5,
-                          6,
-                          7,
-                          8,
-                          9,
-                          10,
-                          11,
-                          12,
-                          13,
-                          14,
-                          15,
-                          16,
-                          17,
-                          18,
-                          19,
-                          20,
-                          21,
-                          22,
-                          23,
-                          24,
-                          25,
-                          26,
-                          27,
-                          28,
-                          29,
-                          30,
+                  SizedBox(
+                    width: 197.w,
+                    height: 139.h,
+                    child: FittedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ReminderWidgets().buildCupertinoPicker(
+                            context,
+                            [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12],
+                            8,
+                                (value) {
+                              debugPrint("\nValue : $value\n");
+                            },
+                            false,
+                          ),
+                          Text(":"),
+                          ReminderWidgets().buildCupertinoPicker(
+                            context,
+                            [
+                              1,
+                              2,
+                              3,
+                              4,
+                              5,
+                              6,
+                              7,
+                              8,
+                              9,
+                              10,
+                              11,
+                              12,
+                              13,
+                              14,
+                              15,
+                              16,
+                              17,
+                              18,
+                              19,
+                              20,
+                              21,
+                              22,
+                              23,
+                              24,
+                              25,
+                              26,
+                              27,
+                              28,
+                              29,
+                              30,
+                            ],
+                            22,
+                                (value) {
+                              debugPrint("\nValue : $value\n");
+                            },
+                            false,
+                          ),
+                          ReminderWidgets().buildCupertinoPicker(
+                            context,
+                            ['AM', 'PM'],
+                            'PM',
+                                (value) {
+                              debugPrint("\nValue : $value\n");
+                            },
+                            true,
+                          ),
                         ],
-                        22,
-                            (value) {
-                          debugPrint("\nValue : $value\n");
-                        },
-                        false,
                       ),
-                      ReminderWidgets().buildCupertinoPicker(
-                        context,
-                        ['AM', 'PM'],
-                        'PM',
-                            (value) {
-                          debugPrint("\nValue : $value\n");
-                        },
-                        true,
-                      ),
-                    ],
+                    ),
                   ),
                   SizedBox(height: 90.h),
                   // Start Button
-                  GestureDetector(
-                    onTap: startForReady,
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "assets/icons/start_img.png",
-                          width: 50,
-                          height: 50,
+                  Column(
+                    children: [
+                      Image.asset(
+                        "assets/icons/start_img.png",
+                        width: 50,
+                        height: 50,
+                      ),
+                      SizedBox(height: 10.h),
+                      Text(
+                        "Start",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSecondary,
                         ),
-                        SizedBox(height: 10.h),
-                        Text(
-                          "Start",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
+                      ),
 
-                      ],
-                    ),
+                    ],
                   ),
 
                   SizedBox(height: 42.h,),
@@ -197,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            bottom: 30,
+            bottom: 30.h,
             left: 0,
             right: 0,
             child: CustomBottomBar(),
