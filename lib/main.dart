@@ -136,7 +136,7 @@ class MyApp extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(
-                    color: Color(0xffF45757),
+                    color:Color(0xffFAD051),
                   ),
                 ),
 
@@ -202,13 +202,13 @@ class MyApp extends StatelessWidget {
 
                 ///dark-fill color of TextFormField
                 filled: true,
-                fillColor: Colors.black.withOpacity(0.04),
+                fillColor: Colors.white.withOpacity(0.04),
 
                 ///dark-enabledBorder color of TextFormField
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(
-                    color: Colors.black.withOpacity(0.04),
+                    color: Colors.white.withOpacity(0.04),
                   ),
                 ),
 
@@ -216,7 +216,7 @@ class MyApp extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(
-                    color: Color(0xffF45757),
+                    color: Color(0xffFAD051),
                   ),
                 ),
 
