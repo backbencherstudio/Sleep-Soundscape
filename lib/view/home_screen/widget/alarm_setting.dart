@@ -16,9 +16,10 @@ void alarmSetting(BuildContext context) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
+    // shape: RoundedRectangleBorder(
+    //   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    // ),
+
     builder: (BuildContext context) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 20),

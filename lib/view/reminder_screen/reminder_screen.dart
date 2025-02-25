@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
+import 'package:sleep_soundscape/view/reminder_screen/setup_reminder_screen.dart';
 
 import '../../model_view/reminder_screen_provider.dart';
+import 'add_reminder_screen.dart';
 
 class ReminderScreen extends StatelessWidget {
   const ReminderScreen({super.key});
@@ -55,7 +58,10 @@ class ReminderScreen extends StatelessWidget {
 
                   ),
                   onPressed: (){
-                    context.read<ReminderScreenProvider>().setPageID(2);
+                   // context.read<ReminderScreenProvider>().setPageID(2);
+
+                    ReminderWidgets.reminderBottomSheet(context:context, widgetToShowInBottomSheet: AddReminderScreen());
+
                   }, child: Text("Add",style: Theme.of(context).textTheme.bodyMedium,),)
               ],
             ),
@@ -128,7 +134,8 @@ class ReminderScreen extends StatelessWidget {
                                 GestureDetector(
                                   onTap:(){
                                     context.read<ReminderScreenProvider>().onSetup(index);
-                                    context.read<ReminderScreenProvider>().setPageID(3);
+                                    //context.read<ReminderScreenProvider>().setPageID(3);
+                                    ReminderWidgets.reminderBottomSheet(context:context, widgetToShowInBottomSheet: SetupReminderScreen());
                                   },
                                   child: Text("Setup",
                                     style: Theme.of(context).textTheme.bodyMedium,),
