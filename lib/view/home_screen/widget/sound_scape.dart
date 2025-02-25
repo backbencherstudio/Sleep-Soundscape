@@ -10,7 +10,7 @@ void soundScape(BuildContext context) {
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
-    backgroundColor: Color(0xff0F0F13),
+    // backgroundColor: Color(0xff0F0F13),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
     ),
@@ -19,7 +19,7 @@ void soundScape(BuildContext context) {
         height: MediaQuery.of(context).size.height * 0.96,
 
         decoration: BoxDecoration(
-          color: Color(0xff0F0F13),
+          // color: Color(0xff0F0F13),
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
         ),
         padding: EdgeInsets.all(16.w),
@@ -34,15 +34,19 @@ void soundScape(BuildContext context) {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.grey, width: 1),
+                      // color: Colors.transparent,
+                      border: Border.all(
+                          // color: Colors.grey,
+                          width: 1),
                       shape: BoxShape.circle,
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(7.r),
                       child: Transform.translate(
                           offset: Offset(2, 0),
-                          child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp)),
+                          child: Icon(Icons.arrow_back_ios,
+                              // color: Colors.white,
+                              size: 10.sp)),
                     ),
                   ),
                 ),
@@ -50,7 +54,7 @@ void soundScape(BuildContext context) {
                 Text(
                   "Soundscape ",
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
+                    // color: Colors.white,
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -70,13 +74,13 @@ void soundScape(BuildContext context) {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color(0xff19191C), // Background color
+                         color: Color(0xff19191C), // Background color
                         borderRadius: BorderRadius.circular(
                           10,
                         ), // Rounded corners
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            // color: Colors.black.withOpacity(0.2),
                             blurRadius: 5,
                             spreadRadius: 1,
                           ),
@@ -91,7 +95,7 @@ void soundScape(BuildContext context) {
                         title: Text(
                           "Sound ${index + 1}",
                           style: TextStyle(
-                            color: Colors.white,
+                            // color: Colors.white,
                             fontWeight: FontWeight.w500,
                             fontSize: 14.sp,
                           ),
