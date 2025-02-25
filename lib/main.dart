@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/model_view/notification_provider.dart';
 import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
+import 'package:sleep_soundscape/model_view/profile_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
 import 'package:sleep_soundscape/view/Download_Screen/test_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
@@ -50,6 +52,12 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider<SoundScreenProvider>(
           create: (_) => SoundScreenProvider(),
+        ),
+        ChangeNotifierProvider<ProfileScreenProvider>(
+          create: (_) => ProfileScreenProvider(),
+        ),
+        ChangeNotifierProvider<NotificationProvider>(
+          create: (_) => NotificationProvider(),
         ),
    ChangeNotifierProvider<OnboardingScreenProvider>(
           create: (_) => OnboardingScreenProvider(),
