@@ -126,11 +126,19 @@ class MyApp extends StatelessWidget {
                   color: Colors.black.withOpacity(0.6),
                 ),
 
-                ///dark-enabledBorder color of TextFormField
+                ///light-enabledBorder color of TextFormField
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(color: Colors.black.withOpacity(0.08)),
                 ),
+
+                ///light-disabledBorder color of TextFormField
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(color: Colors.black.withOpacity(0.08)),
+                ),
+
+
 
                 ///dark-focusedBorder color of TextFormField
                 focusedBorder: OutlineInputBorder(
@@ -204,12 +212,28 @@ class MyApp extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.white.withOpacity(0.04),
 
+                ///light-mode label style
+                labelStyle:  TextStyle(
+                  color: Colors.white.withOpacity(0.6),
+                ),
+
+                ///light-mode hint style
+                hintStyle: TextStyle(
+                  color: Colors.white.withOpacity(0.6),
+                ),
+
                 ///dark-enabledBorder color of TextFormField
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(
                     color: Colors.white.withOpacity(0.04),
                   ),
+                ),
+
+                ///dark-disabledBorder color of TextFormField
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14.r),
+                  borderSide: BorderSide(color: Colors.white.withOpacity(0.08)),
                 ),
 
                 ///dark-focusedBorder color of TextFormField
@@ -225,11 +249,14 @@ class MyApp extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(color: Colors.red),
                 ),
+
+                prefixIconColor:  Colors.white.withOpacity(0.6),
+                suffixIconColor: Colors.white.withOpacity(0.6),
               ),
 
               ///colorScheme for dak mode theme
               colorScheme: ColorScheme.fromSeed(
-                  seedColor: Colors.blue,
+                seedColor: Colors.blue,
                 primary: Color(0xffFAD051),
                 onPrimary: Colors.black,
                 secondary: Colors.white.withOpacity(0.04),
