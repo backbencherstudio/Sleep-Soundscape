@@ -16,8 +16,8 @@ class ReminderWidgets{
   //  List<dynamic>
    // items = [01,02,03,04,05,06,07,08,09,10,11,12];
     return SizedBox(
-      width: 80,
-      height: 160,
+      width: 70.w,
+      height: 139.h,
       child: CupertinoPicker(
         backgroundColor: Colors.transparent,
         scrollController: FixedExtentScrollController(
@@ -28,6 +28,8 @@ class ReminderWidgets{
         onSelectedItemChanged: (index) {
           onSelectedItemChanged(items[index]);
         },
+        squeeze: 01,
+      diameterRatio: 2,
         children: items.map((item) {
           return Center(
             child: Text(

@@ -18,6 +18,7 @@ InputDecoration inputDecoration({required  BuildContext context,  Widget? suffix
     // ),
     floatingLabelStyle: Theme.of(context).inputDecorationTheme.labelStyle,
     enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,
+    disabledBorder: Theme.of(context).inputDecorationTheme.disabledBorder,
     // OutlineInputBorder(
     //   borderRadius: BorderRadius.circular(14.r),
     //   borderSide: BorderSide(color: Color(0xFF4B5155).withOpacity(0.6)),
