@@ -66,11 +66,18 @@ class GoalScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         actionsPadding: EdgeInsets.only(right: 24.w),
-        actions: [Text("skip",style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            fontWeight: FontWeight.w300,
-            fontFamily: "lexend",
-            color: Color.fromRGBO(255,255,255,0.6)
-        ))],
+        actions: [
+          TextButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              child: Text("skip",style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w300,
+                  fontFamily: "lexend",
+                  color: Color.fromRGBO(255,255,255,0.6)
+              ),)
+          )
+        ],
       ),
       backgroundColor: Colors.black,
       body: Padding(
