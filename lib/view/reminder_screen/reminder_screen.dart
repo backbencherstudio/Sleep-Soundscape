@@ -25,7 +25,7 @@ class ReminderScreen extends StatelessWidget {
               height: 6.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                color: Colors.white.withOpacity(0.1),
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
             SizedBox(height: 12.h,),
@@ -41,16 +41,16 @@ class ReminderScreen extends StatelessWidget {
                     height: 32.h,
                     padding: EdgeInsets.all(7.r),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white.withOpacity(0.08),),
+                      border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.08),),
                       shape: BoxShape.circle,
 
                     ),
-                    child: Icon(Icons.arrow_back_ios_new,color: Colors.white,size: 18.r,),
+                    child: Icon(Icons.arrow_back_ios_new,color: Theme.of(context).colorScheme.onSecondary,size: 18.r,),
                   ),
                 ),
                 Text("Reminder",
                   style:Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,fontWeight: FontWeight.w600
+                  fontWeight: FontWeight.w600
                   ),),
                 TextButton(
                   style: TextButton.styleFrom(
@@ -83,7 +83,8 @@ class ReminderScreen extends StatelessWidget {
                           margin: EdgeInsets.only(bottom: 12.h),
                           padding: EdgeInsets.all(12.r),
                           decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.04),
+                              color: Theme.of(context).colorScheme.secondary,
+                              border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.08),),
                               borderRadius: BorderRadius.circular(14.r)
 
                           ),
