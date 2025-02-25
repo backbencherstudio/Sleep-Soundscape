@@ -52,12 +52,8 @@ class ReminderWidgets{
   required Widget widgetToShowInBottomSheet
   }){
     return showModalBottomSheet(
-        backgroundColor: Color(0xFF0F0F13),
         isScrollControlled: true,
         useSafeArea: true,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(26.r)),
-        ),
         context: context,
         builder: (context){
           return  widgetToShowInBottomSheet;
