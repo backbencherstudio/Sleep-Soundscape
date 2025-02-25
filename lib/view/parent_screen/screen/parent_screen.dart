@@ -40,7 +40,7 @@ class CustomBottomBar extends StatelessWidget {
             context,
             index: 3,
             icon: Icons.alarm_on_rounded,
-            label: "Audio Timer",
+            label: "Audio",
           ),
         ],
       ),

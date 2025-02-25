@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
+import 'package:sleep_soundscape/view/Download_Screen/test_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
@@ -119,7 +120,10 @@ class MyApp extends StatelessWidget {
             initialRoute: '/',
             routes: {
 
+
               '/': (context) => const SplashScreen(),
+              RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
+
 
               RouteName.profileScreen: (context) => ProfileScreen(),
               RouteName.aboutScreen: (context) => AboutScreen(),
