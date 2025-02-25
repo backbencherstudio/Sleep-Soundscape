@@ -40,6 +40,7 @@ class GoalScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         title: RichText(
           text: TextSpan(
             text: "Select your ",
