@@ -108,8 +108,8 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 24.h),
-                SubscribeTile(),
-                SizedBox(height: 12.h),
+                // SubscribeTile(),
+                // SizedBox(height: 12.h),
                 buildTodaySleepInfoTile(context),
                 SizedBox(height: 12.h),
                 Container(
