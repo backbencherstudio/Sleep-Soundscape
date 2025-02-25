@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
-
-import '../home_screen/screen/home_screen.dart';
-import '../onboarding_screen/onboarding_screen.dart';
-
+import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -19,24 +17,31 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
 
-    /// **Fix: Defer the context-dependent code using `addPostFrameCallback`**
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      precacheImage(AssetImage('assets/images/onboarding_one.png'), context);
+      await precacheImage(const AssetImage('assets/images/onboarding_one.png'), context);
+      await Future.delayed(const Duration(seconds: 3));
 
-      // Navigate to next screen after 3 seconds
-      await Future.delayed(const Duration(seconds: 3), () {
-        if (mounted) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => OnboardingScreen()),
-          );
-          Navigator.pushReplacementNamed(context, RouteName.onboardingScreen);
-        }
-      });
+      final onboardingProvider = Provider.of<OnboardingScreenProvider>(context, listen: false);
+      // Wait if provider is still loading.
+      if (onboardingProvider.isLoading) {
+        await Future.doWhile(() async {
+          await Future.delayed(const Duration(milliseconds: 100));
+          return onboardingProvider.isLoading;
+        });
+      }
+
+      if (onboardingProvider.hasSeenOnboarding) {
+        // Onboarding completed before; navigate to SignUp (or Home) screen.
+        Navigator.pushReplacementNamed(context, RouteName.signUpScreen);
+      } else {
+        // First time launch; navigate to Onboarding screen.
+        Navigator.pushReplacementNamed(context, RouteName.onboardingScreen);
+      }
     });
   }
 
@@ -56,42 +61,37 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             opacity: _animation,
             child: Image.asset(
               'assets/images/onboarding_one.png',
-              fit: BoxFit.cover, // Ensures full-screen display
+              fit: BoxFit.cover,
             ),
           ),
           Positioned(
-            top: 380,
+            top: 380.h,
             left: 0,
             right: 0,
-            child: Column(
-              children: [
-                Center(
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Sleep\n",
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Color(0xffFFFFFF),
-                            fontWeight: FontWeight.w700,
-                            fontSize: 36.sp,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "Soundscape",
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Color(0xffFAD051),
-                            fontWeight: FontWeight.w700,
-                            fontSize: 36.sp,
-                          ),
-                        )
-                      ],
+            child: Center(
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Sleep\n",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 36.sp,
+                      ),
                     ),
-                  ),
+                    TextSpan(
+                      text: "Soundscape",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: const Color(0xffFAD051),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 36.sp,
+                      ),
+                    )
+                  ],
                 ),
-                const SizedBox(height: 20),
-              ],
+              ),
             ),
           ),
         ],
