@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
 import 'package:sleep_soundscape/view/Download_Screen/test_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
+import 'package:sleep_soundscape/view/goal_Screen/goal_Screen.dart';
 import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
 import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/personalization_screen.dart';
@@ -47,6 +50,9 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider<SoundScreenProvider>(
           create: (_) => SoundScreenProvider(),
+        ),
+   ChangeNotifierProvider<OnboardingScreenProvider>(
+          create: (_) => OnboardingScreenProvider(),
         ),
 
 
@@ -123,8 +129,7 @@ class MyApp extends StatelessWidget {
 
               '/': (context) => const SplashScreen(),
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
-
-
+              RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),
               RouteName.aboutScreen: (context) => AboutScreen(),
               RouteName.onboardingScreen: (context) => OnboardingScreen(),
@@ -134,6 +139,7 @@ class MyApp extends StatelessWidget {
               RouteName.forgotPassword: (context) => ForgotpasswordScreen(),
               RouteName.homeScreen: (context) => HomeScreen(),
               RouteName.personalizationScreen: (context) => PersonalizationScreen(),
+              RouteName.goalScreen: (context) => GoalScreen(),
               //add prpose
 
             },

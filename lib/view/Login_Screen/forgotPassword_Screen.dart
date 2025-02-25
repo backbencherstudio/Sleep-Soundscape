@@ -101,14 +101,14 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
 
                 TextFormField(
                   decoration: inputDecoration(
-                    context,
-                    Image.asset(
+                   context:  context,
+                  prefixIcon:  Image.asset(
                       "assets/icons/2.png",
                       height: 18.h,
                       width: 18.w,
                     ),
-                    "Enter your email",
-                    null,
+                  hintText:   "Enter your email",
+
                   ),
                 ),
 
