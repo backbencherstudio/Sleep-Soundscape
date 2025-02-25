@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
-import 'package:sleep_soundscape/view/parent_screen/screen/parent_screen.dart';
+import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
 import '../../global_widget/custom_button.dart';
-import '../home_screen/screen/home_screen.dart'; // Import Home Screen
-
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -16,16 +15,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      precacheImage(AssetImage('assets/images/home_screen_img.png'), context);
-
-    });
-  }
   final List<Map<String, dynamic>> onboardingData = [
     {
       "image": "assets/images/onboarding_one.png",
@@ -47,15 +36,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     },
   ];
 
-  void _nextPage() {
+  void _nextPage() async {
     if (_currentPage < onboardingData.length - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
     } else {
-
-      Navigator.pushNamedAndRemoveUntil(context, RouteName.signUpScreen, (_)=>false);
+      await context.read<OnboardingScreenProvider>().completeOnboarding();
+      Navigator.pushNamedAndRemoveUntil(context, RouteName.signUpScreen, (_) => false);
     }
   }
 
@@ -90,7 +79,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: "${onboardingData[index]["title1"]} \n",
+                                text: "${onboardingData[index]["title1"]}\n",
                                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
@@ -116,8 +105,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ],
                           ),
                         ),
-
-                        SizedBox(height: 20.h,),
+                        SizedBox(height: 20.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
@@ -128,7 +116,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               width: _currentPage == index ? 45.w : 9.w,
                               height: 9.h,
                               decoration: BoxDecoration(
-
                                 color: _currentPage == index
                                     ? const Color(0xffFAD051)
                                     : Colors.white,
@@ -137,7 +124,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 30),
+                        SizedBox(height: 30.h),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.9,
                           child: CustomButton(
@@ -154,9 +141,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
           ),
-
-          // Page Indicator (Dots)
-
         ],
       ),
     );
