@@ -17,33 +17,28 @@ class AddReminderHeader extends StatelessWidget{
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
-          onTap:
-              () => context.read<ReminderScreenProvider>().setPageID(1),
+          onTap:()=> Navigator.pop(context),
           child: Container(
             width: 32.w,
             height: 32.h,
             padding: EdgeInsets.all(7.r),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.white.withOpacity(0.08)),
+              border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.08),),
               shape: BoxShape.circle,
+
             ),
-            child: Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.white,
-              size: 18.r,
-            ),
+            child: Icon(Icons.arrow_back_ios_new,color: Theme.of(context).colorScheme.onSecondary,size: 18.r,),
           ),
         ),
         Text(
           headerText,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
+          style:Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.w600
           ),
         ),
         TextButton(
           style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
-          onPressed: ()=> onSave,
+          onPressed: (){ onSave();},
           child: Text(
             "Save",
             style: Theme.of(

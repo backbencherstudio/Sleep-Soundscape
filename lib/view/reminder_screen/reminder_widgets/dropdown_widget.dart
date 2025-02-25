@@ -79,23 +79,23 @@ class _ReminderDropDownButtonState extends State<ReminderDropDownButton> {
             debugPrint("\nCustom dropdown button added!\n");
           },
           child: Container(
-            width: 345,
+            width: 345.w,
             padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 18.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14.r),
-              color: Colors.white.withOpacity(0.04),
-              border: Border.all(color: Colors.white.withOpacity(0.08),),
+              color: Theme.of(context).colorScheme.secondary,
+              border: Border.all(color: Theme.of(context).colorScheme.secondary,),
             ),
             child:Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text( isSelected ? selectedText : widget.hintText ?? "Choose",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white.withOpacity(0.6),
+                 // color: Colors.white.withOpacity(0.6),
                   fontWeight: FontWeight.w400,
                 ),),
 
-                Icon(Icons.keyboard_arrow_down,color: Colors.white,)
+                Icon(Icons.keyboard_arrow_down,color: Theme.of(context).colorScheme.onPrimary,)
               ],
             )
           ),
@@ -111,8 +111,8 @@ class _ReminderDropDownButtonState extends State<ReminderDropDownButton> {
           padding: EdgeInsets.only(left: 16.w, right : 16.w, top: 18.h),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14.r),
-            color: Colors.white.withOpacity(0.04),
-            border: Border.all(color: Colors.white.withOpacity(0.08),),
+            color: Theme.of(context).colorScheme.secondary,
+            border:  Border.all(color: Theme.of(context).colorScheme.secondary,),
           ),
           child: ListView.builder(
             itemCount: widget.uniqueItemList?.length ?? 0,
@@ -130,7 +130,7 @@ class _ReminderDropDownButtonState extends State<ReminderDropDownButton> {
                   spacing: 15.h,
                   children: [
                   Text(item,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white,fontWeight: FontWeight.w300),),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),),
                     if(index!=(widget.uniqueItemList!.length - 1))
                     Divider(color: Colors.white.withOpacity(0.08),)
                   ],
