@@ -38,39 +38,46 @@ class GoalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 24, right: 24),
-      child: Scaffold(
-        appBar: AppBar(
-          title: RichText(
-            text: TextSpan(
-              text: "Select your ",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFFFFFFFF),
-              ),
-
-              children: <TextSpan>[
-                TextSpan(
-                  text: "Goal",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFFFAD051),
-                  ),
-                ),
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
+        title: RichText(
+          text: TextSpan(
+            text: "Select your ",
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFFFFFFFF),
             ),
+
+            children: <TextSpan>[
+              TextSpan(
+                text: "Goal",
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFFFAD051),
+                ),
+              ),
+            ],
           ),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          automaticallyImplyLeading: false,
-          actions: [Text("skip")],
         ),
-        backgroundColor: Colors.black,
-        body: Column(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        actionsPadding: EdgeInsets.only(right: 24.w),
+        actions: [Text("skip",style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontWeight: FontWeight.w300,
+            fontFamily: "lexend",
+            color: Color.fromRGBO(255,255,255,0.6)
+        ))],
+      ),
+      backgroundColor: Colors.black,
+      body: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 16.r),
+        child: Column(
           children: [
+            SizedBox(height: 8.h,),
             Expanded(
               child: ListView.builder(
                 itemCount: goals.length,
@@ -78,18 +85,14 @@ class GoalScreen extends StatelessWidget {
                   return Column(
                     children: [
                       Container(
+                        height: 96.h,
+                        padding: EdgeInsets.symmetric(horizontal: 8,),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(22.r),
                           border: Border.all(color: Color(0xFF4B5155)),
                           color: Colors.grey.shade700.withOpacity(0.2),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            left: 16,
-
-                            top: 24,
-                            bottom: 10,
-                          ),
+                        child: Center(
                           child: ListTile(
                             title: Text(
                               goals[index].title,
@@ -131,7 +134,7 @@ class GoalScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 6.h),
             Mybutton(
               text: "Continue",
               color: Color(0xFFFAD051),
@@ -139,7 +142,7 @@ class GoalScreen extends StatelessWidget {
                 Navigator.pushNamedAndRemoveUntil(context, RouteName.homeScreen, (_)=>false);
               },
             ),
-            SizedBox(height: 25.h),
+            SizedBox(height: 40.h),
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
+import 'package:sleep_soundscape/view/Download_Screen/test_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
@@ -11,7 +12,6 @@ import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
 import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/personalization_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
-import 'package:sleep_soundscape/view/settings_screens/settings_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/about_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'model_view/parent_screen_provider.dart';
@@ -124,11 +124,14 @@ class MyApp extends StatelessWidget {
             initialRoute: '/',
             routes: {
 
+
               '/': (context) => const SplashScreen(),
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
 
+
               RouteName.profileScreen: (context) => ProfileScreen(),
               RouteName.aboutScreen: (context) => AboutScreen(),
+              RouteName.onboardingScreen: (context) => OnboardingScreen(),
 
               RouteName.signUpScreen: (context) => LoginScreen(),
               RouteName.signInScreen: (context) => SignInScreen(),
