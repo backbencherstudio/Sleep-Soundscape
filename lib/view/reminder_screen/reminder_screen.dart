@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../model_view/reminder_screen_provider.dart';
-import 'add_reminder_screen.dart';
 
 class ReminderScreen extends StatelessWidget {
   const ReminderScreen({super.key});
