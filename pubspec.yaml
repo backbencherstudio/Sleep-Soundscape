@@ -40,7 +40,9 @@ dependencies:
   image_picker: ^1.1.2
   animated_custom_dropdown: ^3.1.1
   audioplayers: ^6.2.0
+  flutter_heatmap_calendar: ^1.0.5
   shared_preferences: ^2.5.2
+
 
 
 dev_dependencies:
