@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         fit: StackFit.expand,
         children: [
           Positioned.fill(
+
             child: Image.asset(
               "assets/images/home_screen_img.png",
               fit: BoxFit.cover,
@@ -36,40 +37,43 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   // User Info
-                  ListTile(
-                    leading: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, RouteName.profileScreen);
-                      },
-                      child: ClipOval(
-                        child: Image.asset(
-                          "assets/images/user_1.png",
-                          height: 35.h,
-                          width: 35.w,
-                          fit: BoxFit.cover,
+                  Padding(
+                    padding:  EdgeInsets.only(top:20.0),
+                    child: ListTile(
+                      leading: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, RouteName.profileScreen);
+                        },
+                        child: ClipOval(
+                          child: Image.asset(
+                            "assets/images/user_1.png",
+                            height: 35.h,
+                            width: 35.w,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    title: Text(
-                      "Hello Robart",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                        fontSize: 12.sp,
+                      title: Text(
+                        "Hello Robart",
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 12.sp,
+                        ),
                       ),
-                    ),
-                    trailing: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xff121221),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey, width: 1.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(9.r),
-                        child: Image.asset(
-                          "assets/icons/save.png",
-                          height: 10.h,
-                          width: 10.w,
+                      trailing: Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0xff121221),
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.grey, width: 1.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(9.r),
+                          child: Image.asset(
+                            "assets/icons/save.png",
+                            height: 10.h,
+                            width: 10.w,
+                          ),
                         ),
                       ),
                     ),
@@ -175,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 50,
                           height: 50,
                         ),
-                        SizedBox(height: 16.h),
+                        SizedBox(height: 10.h),
                         Text(
                           "Start",
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -187,11 +191,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   SizedBox(height: 42.h,),
                   // Removed Spacer to avoid render errors in a scrollable view.
-                  CustomBottomBar(),
+
                 ],
               ),
             ),
           ),
+          Positioned(
+            bottom: 30,
+            left: 0,
+            right: 0,
+            child: CustomBottomBar(),
+          )
         ],
       ),
     );

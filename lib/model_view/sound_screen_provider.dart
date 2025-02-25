@@ -7,6 +7,8 @@ class SoundScreenProvider with ChangeNotifier{
   SoundScreenProvider(){
     getMusics();
   }
+  
+
   final Map<String,dynamic> _musicsList = {
     "musicList":[
       {
