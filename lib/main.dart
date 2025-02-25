@@ -84,6 +84,14 @@ class MyApp extends StatelessWidget {
             theme:  ThemeData(
               scaffoldBackgroundColor: Colors.white,
 
+              appBarTheme: AppBarTheme(
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                actionsIconTheme: IconThemeData(
+                  color: Colors.white.withOpacity(0.6)
+                )
+              ),
+
               ///light mode bottom sheet theme
               bottomSheetTheme: BottomSheetThemeData(
                 backgroundColor: Colors.white,
@@ -187,6 +195,14 @@ class MyApp extends StatelessWidget {
             themeMode: themeProvider.themeMode,
             darkTheme: ThemeData(
               scaffoldBackgroundColor: Colors.black,
+
+              appBarTheme: AppBarTheme(
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  actionsIconTheme: IconThemeData(
+                      color: Colors.black.withOpacity(0.6)
+                  )
+              ),
 
               ///dark mode bottom sheet theme
               bottomSheetTheme: BottomSheetThemeData(
