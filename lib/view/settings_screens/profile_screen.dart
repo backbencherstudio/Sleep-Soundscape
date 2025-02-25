@@ -10,6 +10,8 @@ import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_
 import 'package:sleep_soundscape/view/settings_screens/widgets/edit_profile_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/setting_bottom_modal_sheet.dart';
 
+import '../reminder_screen/reminder_screen.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -209,8 +211,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   imagePath: "assets/icons/notification.png",
                   title: "Reminder",
                   onTap: () {
-                    context.read<ReminderScreenProvider>().setPageID(1);
-                    ReminderWidgets().reminderBottomSheet(context);
+                    //context.read<ReminderScreenProvider>().setPageID(1);
+                    ReminderWidgets.reminderBottomSheet(context:context, widgetToShowInBottomSheet: ReminderScreen());
                   },
                 ),
                 SizedBox(height: 12.h),

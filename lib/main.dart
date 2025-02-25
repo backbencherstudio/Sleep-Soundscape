@@ -76,6 +76,14 @@ class MyApp extends StatelessWidget {
             theme:  ThemeData(
               scaffoldBackgroundColor: Colors.white,
 
+              ///light mode bottom sheet theme
+              bottomSheetTheme: BottomSheetThemeData(
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.r),),
+                ),
+              ),
+
               ///light-mode text theme
               textTheme: TextTheme(
                 headlineLarge: TextStyle(
@@ -171,6 +179,14 @@ class MyApp extends StatelessWidget {
             themeMode: themeProvider.themeMode,
             darkTheme: ThemeData(
               scaffoldBackgroundColor: Colors.black,
+
+              ///dark mode bottom sheet theme
+              bottomSheetTheme: BottomSheetThemeData(
+                backgroundColor: Color(0xff0F0F13),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.r),),
+                ),
+              ),
 
               ///dark-mode text theme
               textTheme: TextTheme(

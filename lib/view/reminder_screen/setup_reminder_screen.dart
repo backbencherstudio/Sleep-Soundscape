@@ -7,7 +7,9 @@ import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/set_time_
 
 import '../../model_view/reminder_screen_provider.dart';
 
-class SetupReminderScrfeen extends StatelessWidget{
+class SetupReminderScreen extends StatelessWidget{
+  const SetupReminderScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

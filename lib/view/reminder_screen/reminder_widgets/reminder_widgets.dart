@@ -48,7 +48,9 @@ class ReminderWidgets{
 
 
 
-  Future<dynamic> reminderBottomSheet(BuildContext context){
+  static Future<dynamic> reminderBottomSheet({required BuildContext context,
+  required Widget widgetToShowInBottomSheet
+  }){
     return showModalBottomSheet(
         backgroundColor: Color(0xFF0F0F13),
         isScrollControlled: true,
@@ -58,21 +60,22 @@ class ReminderWidgets{
         ),
         context: context,
         builder: (context){
-          return  Consumer<ReminderScreenProvider>(
-              builder: (_, reminderScreenProvider, child) {
-                if(reminderScreenProvider.pageId==1){
-                  return  ReminderScreen();
-                }
-                else if(reminderScreenProvider.pageId==2){
-                  return  AddReminderScreen();
-                }
-                else if(reminderScreenProvider.pageId==3){
-                  return SetupReminderScrfeen();
-                }
-                return SizedBox();
-
-              }
-          );
+          return  widgetToShowInBottomSheet;
+          //   Consumer<ReminderScreenProvider>(
+          //     builder: (_, reminderScreenProvider, child) {
+          //       if(reminderScreenProvider.pageId==1){
+          //         return  ReminderScreen();
+          //       }
+          //       else if(reminderScreenProvider.pageId==2){
+          //         return  AddReminderScreen();
+          //       }
+          //       else if(reminderScreenProvider.pageId==3){
+          //         return SetupReminderScrfeen();
+          //       }
+          //       return SizedBox();
+          //
+          //     }
+          // );
           //   Padding(
           //   padding:  EdgeInsets.only(left: 24.w,right: 24.w,bottom: 58.h),
           //   child: Column(
