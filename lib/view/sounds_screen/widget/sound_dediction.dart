@@ -18,7 +18,7 @@ void soundDetection(BuildContext context) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height * 0.96,
-        decoration: BoxDecoration(color: Color(0xff0F0F13)),
+        // decoration: BoxDecoration(color: Color(0xff0F0F13)),
         child: Column(
           children: [
             SizedBox(height: 24.h),
@@ -30,15 +30,20 @@ void soundDetection(BuildContext context) {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.grey, width: 1),
+                      // color: Colors.transparent,
+                      border: Border.all(
+                          // color: Colors.grey,
+                          width: 1),
                       shape: BoxShape.circle,
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(7.r),
                       child:Transform.translate(
                           offset: Offset(2, 0),
-                          child: Icon(Icons.arrow_back_ios, color: Colors.white, size: 10.sp)),
+                          child: Icon(Icons.arrow_back_ios,
+
+                              // color: Colors.white,
+                              size: 10.sp)),
                     ),
                   ),
                 ),
@@ -50,7 +55,7 @@ void soundDetection(BuildContext context) {
                       TextSpan(
                         text: "Sound ",
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
+                          // color: Colors.white,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
                         ),
@@ -77,7 +82,7 @@ void soundDetection(BuildContext context) {
                 "Sound detection",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Color.fromRGBO(255, 255, 255, 0.30),
+                  // color: Color.fromRGBO(255, 255, 255, 0.30),
                   fontWeight: FontWeight.w400,
                   fontSize: 12.sp,
                 ),
@@ -93,7 +98,7 @@ void soundDetection(BuildContext context) {
                   "Sound detection",
                   textAlign: TextAlign.left,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.white,
+                    // color: Colors.white,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                   ),
@@ -120,7 +125,7 @@ void soundDetection(BuildContext context) {
                 "Audio clean audio recordings",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white,
+                  // color: Colors.white,
                   fontWeight: FontWeight.w400,
                   fontSize: 14.sp,
                 ),
@@ -140,7 +145,7 @@ void soundDetection(BuildContext context) {
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12.sp,
-                      color: Color.fromRGBO(255, 255, 255, 0.60),
+                      // color: Color.fromRGBO(255, 255, 255, 0.60),
                     ),
                   ),
                 ),
@@ -166,7 +171,7 @@ void soundDetection(BuildContext context) {
                 "Advanced",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Color.fromRGBO(255, 255, 255, 0.30),
+                  // color: Color.fromRGBO(255, 255, 255, 0.30),
                   fontWeight: FontWeight.w400,
                   fontSize: 12.sp,
                 ),
@@ -179,7 +184,7 @@ void soundDetection(BuildContext context) {
                 "Clean all audio recordings",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white,
+                  // color: Colors.white,
                   fontWeight: FontWeight.w400,
                   fontSize: 12.sp,
                 ),
@@ -192,7 +197,7 @@ void soundDetection(BuildContext context) {
                 "Total audio 0.00 Mb",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Color.fromRGBO(255, 255, 255, 0.30),
+                  // color: Color.fromRGBO(255, 255, 255, 0.30),
                   fontWeight: FontWeight.w400,
                   fontSize: 12.sp,
                 ),

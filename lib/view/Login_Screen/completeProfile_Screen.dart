@@ -13,6 +13,7 @@ class CompleteprofileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.black87,
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -25,7 +26,7 @@ class CompleteprofileScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFFFFFFFF),
+                      // color: Color(0xFFFFFFFF),
                     ),
 
                     children: <TextSpan>[
@@ -54,7 +55,7 @@ class CompleteprofileScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
-                    color: Color(0xFFFFFFFF),
+                    // color: Color(0xFFFFFFFF),
                   ),
                 ),
                 SizedBox(height: 32.h),
@@ -62,19 +63,27 @@ class CompleteprofileScreen extends StatelessWidget {
                   height: 56.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
-                    color: Colors.white.withOpacity(0.04),
-                    border: Border.all(color: Colors.white.withOpacity(0.08)),
+                    // color: Colors.white.withOpacity(0.04),
+                    border: Border.all(
+                      // color: Colors.white.withOpacity(0.08)
+                    ),
                   ),
                   child: Center(
                     child: Row(
                       children: [
                         SizedBox(width: 16.w),
-                        Image.asset("assets/icons/1.png"),
+                        Image.asset(
+                          "assets/icons/1.png",
+                          color: Colors.black87,
+                        ),
                         SizedBox(width: 8.w),
                         Text(
                           "Nahidul Islam Shakin",
-                          style: Theme.of(context).textTheme.bodyMedium!
-                              .copyWith(color: Colors.white.withOpacity(0.6)),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.copyWith(
+                            // color: Colors.white.withOpacity(0.6)
+                          ),
                         ),
                       ],
                     ),
@@ -85,19 +94,27 @@ class CompleteprofileScreen extends StatelessWidget {
                   height: 56.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
-                    color: Colors.white.withOpacity(0.04),
-                    border: Border.all(color: Colors.white.withOpacity(0.08)),
+                    // color: Colors.white.withOpacity(0.04),
+                    border: Border.all(
+                      // color: Colors.white.withOpacity(0.08)
+                    ),
                   ),
                   child: Center(
                     child: Row(
                       children: [
                         SizedBox(width: 16.w),
-                        Image.asset("assets/icons/1.png"),
+                        Image.asset(
+                          "assets/icons/1.png",
+                          color: Colors.black87,
+                        ),
                         SizedBox(width: 8.w),
                         Text(
                           "shakinhabib2000@gmail.com",
-                          style: Theme.of(context).textTheme.bodyMedium!
-                              .copyWith(color: Colors.white.withOpacity(0.6)),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.copyWith(
+                            // color: Colors.white.withOpacity(0.6)
+                          ),
                         ),
                       ],
                     ),
@@ -112,7 +129,7 @@ class CompleteprofileScreen extends StatelessWidget {
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       RouteName.goalScreen,
-                          (_) => false,
+                      (_) => false,
                     );
                   },
                 ),
@@ -124,7 +141,7 @@ class CompleteprofileScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w300,
-                      color: Color(0xFFFFFFFF),
+                      // color: Color(0xFFFFFFFF),
                     ),
 
                     children: <TextSpan>[
@@ -135,7 +152,7 @@ class CompleteprofileScreen extends StatelessWidget {
                         ).textTheme.headlineMedium?.copyWith(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w300,
-                          color: Color(0xFFFAD051),
+                           // color: Color(0xFFFAD051),
                         ),
                         recognizer:
                             TapGestureRecognizer()

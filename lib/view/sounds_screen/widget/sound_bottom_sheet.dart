@@ -13,7 +13,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      backgroundColor: Color(0xff0F0F14),
+      // backgroundColor: Color(0xff0F0F14),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
@@ -21,7 +21,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
         return Container(
           height: MediaQuery.of(context).size.height * 0.9, // 90% of screen height
           decoration: BoxDecoration(
-            color: Color(0xff0F0F13),
+            // color: Color(0xff0F0F13),
             borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
           ),
           padding: EdgeInsets.all(16.w),
@@ -36,9 +36,9 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 7.w),
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
+                    // color: Colors.transparent,
                     border: Border.all(
-                      color: Color.fromRGBO(255, 255, 255, 0.20),
+                      // color: Color.fromRGBO(255, 255, 255, 0.20),
                       width: 1,
                     ),
                     shape: BoxShape.circle,
@@ -49,7 +49,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                       offset: Offset(2, 0),
                       child: Icon(
                         Icons.arrow_back_ios,
-                        color: Colors.white,
+                        // color: Colors.white,
                         size: 10.sp,
                       ),
                     ),
@@ -64,7 +64,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.r),
                     border: Border.all(
-                      color: Color.fromRGBO(255, 255, 255, 0.08),
+                      // color: Color.fromRGBO(255, 255, 255, 0.08),
                       width: 1,
                     ),
                   ),
@@ -72,27 +72,27 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color.fromRGBO(255, 255, 255, 0.08),
+                          // color: Color.fromRGBO(255, 255, 255, 0.08),
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color.fromRGBO(255, 255, 255, 0.08),
+                          // color: Color.fromRGBO(255, 255, 255, 0.08),
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                       filled: true,
-                      fillColor: Color(0xff19191C),
+                      // fillColor: Color(0xff19191C),
                       prefixIcon: Icon(
                         Icons.search,
-                        color: Color.fromRGBO(255, 255, 255, 0.50),
+                        // color: Color.fromRGBO(255, 255, 255, 0.50),
                       ),
                       hintText: "search",
                       hintStyle: TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 0.50),
+                        // color: Color.fromRGBO(255, 255, 255, 0.50),
                       ),
                     ),
                   ),
@@ -123,7 +123,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(14.r),
                             border: Border.all(
-                              color: Colors.grey,
+                              // color: Colors.grey,
                               width: 0.8,
                             ),
                             color: isSelected
@@ -134,7 +134,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                           child: Text(
                             categories[index],
                             style: TextStyle(
-                              color: isSelected ? Colors.black : Colors.white,
+                              // color: isSelected ? Colors.black : Colors.white,
                               fontSize: 14.sp,
                               fontWeight:
                               isSelected ? FontWeight.w400 : FontWeight.normal,
@@ -162,11 +162,11 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                           ),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.grey[900],
+                              // color: Colors.grey[900],
                               borderRadius: BorderRadius.circular(10.r),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
+                                  // color: Colors.black.withOpacity(0.2),
                                   blurRadius: 5,
                                   spreadRadius: 1,
                                 ),
@@ -182,7 +182,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                               title: Text(
                                 music.title!,
                                 style: TextStyle(
-                                  color: Colors.white,
+                                   //color: Colors.white,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14.sp,
                                 ),
@@ -190,7 +190,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                               subtitle: Text(
                                 music.subtitle!,
                                 style: TextStyle(
-                                  color: Colors.white70,
+                                  // color: Colors.white70,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w300,
                                 ),
