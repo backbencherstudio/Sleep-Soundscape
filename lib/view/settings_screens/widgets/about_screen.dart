@@ -96,19 +96,19 @@ class _AboutScreenState extends State<AboutScreen> {
 
 
                 const Spacer(),
-                Text("www.omegaorion.com",style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                Text("www.backbencher.studio",style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Color.fromRGBO(255, 255, 255, 0.60),
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w300
                 ),),
                 SizedBox(height: 18.h,),
-                Text("Made with Love from India",style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                Text("Made with Love from Bangladesh",style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Color.fromRGBO(255, 255, 255, 0.60),
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w300
                 ),),
                 SizedBox(height: 5.h,),
-                Text("2023 Sleep Soundscape",style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                Text("2025 Sleep Soundscape",style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Color.fromRGBO(255, 255, 255, 0.60),
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w300

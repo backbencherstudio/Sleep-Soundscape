@@ -71,13 +71,14 @@ class PersonalizationScreen extends StatelessWidget {
           fontFamily: "lexend",
           color: Color.fromRGBO(255,255,255,0.6)
         ),)],
+        surfaceTintColor: Colors.transparent,
       ),
       backgroundColor: Colors.black,
       body: Padding(
         padding:  EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           children: [
-            SizedBox(height: 32.h,),
+            SizedBox(height: 8.h,),
             Expanded(
               child: ListView.builder(
                 itemCount: goals.length,
