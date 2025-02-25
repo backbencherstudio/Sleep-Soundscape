@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await precacheImage(const AssetImage('assets/images/onboarding_one.png'), context);
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 2));
 
       final onboardingProvider = Provider.of<OnboardingScreenProvider>(context, listen: false);
       // Wait if provider is still loading.

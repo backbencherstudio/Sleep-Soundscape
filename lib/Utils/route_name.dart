@@ -9,4 +9,6 @@ class RouteName {
   static const profileScreen = "/profileScreen";
   static const aboutScreen = "/aboutScreen";
   static const personalizationScreen = "/personalizationScreen";
+  static const completeProfileScreen = '/completeProfileScreen';
+  static const goalScreen = '/goalSetupScreen';
 }

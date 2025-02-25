@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-InputDecoration inputDecoration(
-  BuildContext context,
-  Widget? suffixIcon,
-  String lebel,
-  Widget? puffix,
-) {
+InputDecoration inputDecoration({required  BuildContext context,  Widget? suffixIcon, String? labelText, String? hintText, Widget? prefixIcon,}) {
   return InputDecoration(
-    fillColor: Colors.grey.shade700.withOpacity(0.2),
+    fillColor: Colors.white.withOpacity(0.04),
     filled: true,
-    labelText: lebel,
-    labelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+    labelText: labelText,
+    labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
       color: Color(0xFFFFFFFFF).withOpacity(0.6),
-      fontWeight: FontWeight.w500,
-      fontSize: 14.sp,
+    ),
+    hintText: hintText,
+    hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+      color: Color(0xFFFFFFFFF).withOpacity(0.6),
     ),
     floatingLabelStyle: Theme.of(
       context,
@@ -31,7 +28,7 @@ InputDecoration inputDecoration(
       borderRadius: BorderRadius.circular(14.r),
       borderSide: BorderSide(color: Color(0xFF9BA2A7)),
     ),
-    prefixIcon: suffixIcon,
-    suffixIcon: puffix,
+    prefixIcon:prefixIcon ,
+    suffixIcon: suffixIcon,
   );
 }
