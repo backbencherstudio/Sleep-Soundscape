@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/model_view/theme_provider.dart';
 import '../../../Utils/route_name.dart';
 import '../../../global_widget/custom_button.dart';
 import '../../../model_view/reminder_screen_provider.dart';
@@ -61,18 +62,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 12.sp,
                         ),
                       ),
-                      trailing: Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xff121221),
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey, width: 1.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(9.r),
-                          child: Image.asset(
-                            "assets/icons/save.png",
-                            height: 10.h,
-                            width: 10.w,
+                      trailing: GestureDetector(
+                        onTap: (){
+                          debugPrint("\nSwitching theme!\n");
+                          context.read<ThemeProvider>().toggleTheme();
+                          },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: const Color(0xff121221),
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey, width: 1.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(9.r),
+                            child: Image.asset(
+                              "assets/icons/save.png",
+                              height: 10.h,
+                              width: 10.w,
+                            ),
                           ),
                         ),
                       ),

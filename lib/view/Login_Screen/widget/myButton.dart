@@ -25,8 +25,8 @@ class Mybutton extends StatelessWidget {
           color: color,
         ),
         child: Center(child: Text(text,
-      style:TextStyle(
-        color: Color(0xFF0000000)
+      style:Theme.of(context).textTheme.bodyMedium?.copyWith(
+        color: Theme.of(context).colorScheme.onPrimary,
       )
         )),
       ),
