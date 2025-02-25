@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/BottomSheet.dart';
@@ -26,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.only(left: 24, right: 24),
             child: Column(
               children: [
-                SizedBox(height: 70),
                 RichText(
                   text: TextSpan(
                     text: "Sign ",
@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 26),
+                SizedBox(height: 24.h),
                 GestureDetector(
                   onTap: () {},
                   child: GestureDetector(
@@ -75,142 +75,148 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 32.h),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Color(0xFFFFFFFFF).withOpacity(0.9),
+                    fontWeight: FontWeight.w400
+                  ),
                   decoration: inputDecoration(
-                    context,
-                    Image.asset(
+                    context : context,
+                   prefixIcon:  Image.asset(
                       "assets/icons/1.png",
                       height: 18.h,
                       width: 18.w,
                     ),
-                    "Enter your name",
-                    null,
+                  hintText:"Enter your name",
                   ),
                 ),
                 SizedBox(height: 16.h),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Color(0xFFFFFFFFF).withOpacity(0.9),
+                      fontWeight: FontWeight.w400
+                  ),
                   decoration: inputDecoration(
-                    context,
-                    Image.asset(
+                    context :  context,
+                    prefixIcon:  Image.asset(
                       "assets/icons/2.png",
                       height: 18.h,
                       width: 18.w,
                     ),
-                    "Enter your email",
-                    null,
+                    hintText:   "Enter your email",
                   ),
                 ),
                 SizedBox(height: 16.h),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Color(0xFFFFFFFFF).withOpacity(0.9),
+                      fontWeight: FontWeight.w400
+                  ),
                   decoration: inputDecoration(
-                    context,
-                    Image.asset(
+                    context : context,
+                    prefixIcon:  Image.asset(
                       "assets/icons/3.png",
                       height: 18.h,
                       width: 18.w,
                     ),
-                    "Enter your password",
-                    Icon(
+                    hintText:   "Enter your password",
+                  suffixIcon:   Icon(
                       Icons.visibility_off_outlined,
                       color: Color(0xFF4B5155),
                     ),
                   ),
                 ),
-                SizedBox(height: 79.h),
+                SizedBox(height: 70.h),
 
                 Mybutton(
-                  text: "Sign up",
+                  text: "Next",
                   color: Color(0xffFAD051),
                   ontap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CompleteprofileScreen(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, RouteName.completeProfileScreen);
+
                   },
                 ),
-                SizedBox(height: 24.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      child: Divider(
-                        color: Color.fromARGB(255, 156, 141, 141),
-                        thickness: 2.0,
-                      ),
-                    ),
-                    SizedBox(width: 8.h),
-                    Text(
-                      "or",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.headlineMedium?.copyWith(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFFFFFFF),
-                      ),
-                    ),
-                    SizedBox(width: 8.h),
-                    Flexible(
-                      child: Divider(
-                        color: Color.fromARGB(255, 156, 141, 141),
-                        thickness: 2.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 32.h),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/icons/google.png",
-                      height: 64.h,
-                      width: 64.w,
-                    ),
-                    SizedBox(width: 16.w),
-                    Image.asset(
-                      "assets/icons/apple.png",
-                      height: 64.h,
-                      width: 64.w,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 24.h),
-                RichText(
-                  text: TextSpan(
-                    text: "Have an account? ",
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xFFFFFFFF),
-                    ),
-
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: "Sign in",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.headlineMedium?.copyWith(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w300,
-                          color: Color(0xFFFAD051),
-                        ),
-                        recognizer:
-                            TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SignInScreen(),
-                                  ),
-                                );
-                              },
-                      ),
-                    ],
-                  ),
-                ),
+                // SizedBox(height: 24.h),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Flexible(
+                //       child: Divider(
+                //         color: Color.fromARGB(255, 156, 141, 141),
+                //         thickness: 2.0,
+                //       ),
+                //     ),
+                //     SizedBox(width: 8.h),
+                //     Text(
+                //       "or",
+                //       style: Theme.of(
+                //         context,
+                //       ).textTheme.headlineMedium?.copyWith(
+                //         fontSize: 18.sp,
+                //         fontWeight: FontWeight.w500,
+                //         color: Color(0xFFFFFFFF),
+                //       ),
+                //     ),
+                //     SizedBox(width: 8.h),
+                //     Flexible(
+                //       child: Divider(
+                //         color: Color.fromARGB(255, 156, 141, 141),
+                //         thickness: 2.0,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(height: 32.h),
+                //
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Image.asset(
+                //       "assets/icons/google.png",
+                //       height: 64.h,
+                //       width: 64.w,
+                //     ),
+                //     SizedBox(width: 16.w),
+                //     Image.asset(
+                //       "assets/icons/apple.png",
+                //       height: 64.h,
+                //       width: 64.w,
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(height: 24.h),
+                // RichText(
+                //   text: TextSpan(
+                //     text: "Have an account? ",
+                //     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                //       fontSize: 16.sp,
+                //       fontWeight: FontWeight.w300,
+                //       color: Color(0xFFFFFFFF),
+                //     ),
+                //
+                //     children: <TextSpan>[
+                //       TextSpan(
+                //         text: "Sign in",
+                //         style: Theme.of(
+                //           context,
+                //         ).textTheme.headlineMedium?.copyWith(
+                //           fontSize: 16.sp,
+                //           fontWeight: FontWeight.w300,
+                //           color: Color(0xFFFAD051),
+                //         ),
+                //         recognizer:
+                //             TapGestureRecognizer()
+                //               ..onTap = () {
+                //                 Navigator.push(
+                //                   context,
+                //                   MaterialPageRoute(
+                //                     builder: (context) => SignInScreen(),
+                //                   ),
+                //                 );
+                //               },
+                //       ),
+                //     ],
+                //   ),
+                // ),
 
                 SizedBox(height: 50.h),
               ],

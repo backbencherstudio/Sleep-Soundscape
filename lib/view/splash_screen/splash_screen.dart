@@ -28,12 +28,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       precacheImage(AssetImage('assets/images/onboarding_one.png'), context);
 
       // Navigate to next screen after 3 seconds
-      await Future.delayed(const Duration(seconds: 3), () {
+      await Future.delayed(const Duration(seconds: 2), () {
         if (mounted) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => OnboardingScreen()),
-          );
           Navigator.pushReplacementNamed(context, RouteName.onboardingScreen);
         }
       });

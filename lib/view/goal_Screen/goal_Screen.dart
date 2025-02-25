@@ -48,7 +48,7 @@ class GoalScreen extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: Color(0xFFFFFFFF),
             ),
-    
+
             children: <TextSpan>[
               TextSpan(
                 text: "Goal",
@@ -64,19 +64,30 @@ class GoalScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
-        actions: [Padding(
-          padding: EdgeInsets.only(right: 20),
-          child: Text("skip",
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w300,
-            color: Color(0xfffFFFFFF).withOpacity(0.6)
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: GestureDetector(
+              onTap: (){                Navigator.pushNamedAndRemoveUntil(
+                context,
+                RouteName.homeScreen,
+                    (_) => false,
+              );},
+              child: Text(
+                "skip",
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w300,
+                  color: Color(0xfffFFFFFF).withOpacity(0.6),
+                ),
+              ),
+            ),
           ),
-          ))],
+        ],
       ),
       backgroundColor: Colors.black,
       body: Padding(
-        padding: EdgeInsets.only(left: 24,right: 24,),
+        padding: EdgeInsets.only(left: 24, right: 24),
         child: Column(
           children: [
             Expanded(
@@ -94,7 +105,7 @@ class GoalScreen extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.only(
                             left: 16,
-            
+
                             top: 24,
                             bottom: 10,
                           ),
@@ -119,7 +130,7 @@ class GoalScreen extends StatelessWidget {
                                 fontSize: 14.sp,
                               ),
                             ),
-            
+
                             trailing: Padding(
                               padding: EdgeInsets.only(
                                 left: 25.w,
@@ -144,7 +155,11 @@ class GoalScreen extends StatelessWidget {
               text: "Continue",
               color: Color(0xFFFAD051),
               ontap: () {
-                Navigator.pushNamedAndRemoveUntil(context, RouteName.homeScreen, (_)=>false);
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  RouteName.homeScreen,
+                  (_) => false,
+                );
               },
             ),
             SizedBox(height: 25.h),

@@ -53,28 +53,28 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 TextFormField(
                   decoration: inputDecoration(
-                    context,
-                    Image.asset(
+                   context:  context,
+                 prefixIcon:    Image.asset(
                       "assets/icons/1.png",
                       height: 18.h,
                       width: 18.w,
                     ),
-                    "Enter your name",
-                    null,
+                   hintText:  "Enter your name",
+
                   ),
                 ),
 
                 SizedBox(height: 16.h),
                 TextFormField(
                   decoration: inputDecoration(
-                    context,
-                    Image.asset(
+                   context:  context,
+                  prefixIcon:   Image.asset(
                       "assets/icons/3.png",
                       height: 18.h,
                       width: 18.w,
                     ),
-                    "Enter your password",
-                    Icon(
+                  hintText:   "Enter your password",
+                  suffixIcon:   Icon(
                       Icons.visibility_off_outlined,
                       color: Color(0xFF4B5155),
                     ),
