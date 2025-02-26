@@ -10,15 +10,12 @@ class SetTimer extends StatefulWidget{
 }
 
 class _SetTimerState extends State<SetTimer> {
-  List<int> minutes = [];
 
-  @override
-  void initState() {
-    for(int i = 0; i<=60; i++){
-      minutes.add(i);
-    }
-    super.initState();
-  }
+
+  List<int> hours = List.generate(12, (index) => index + 1); // 1-12
+  List<int> minutes = List.generate(60, (index) => index); // 0-59
+  List<String> amPm = ['AM', 'PM'];
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +25,7 @@ class _SetTimerState extends State<SetTimer> {
       children: [
         ReminderWidgets().buildCupertinoPicker(
           context,
-          [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12],
+          hours,
           8,
               (value) {
             debugPrint("\nValue : $value\n");
@@ -48,7 +45,7 @@ class _SetTimerState extends State<SetTimer> {
 
         ReminderWidgets().buildCupertinoPicker(
           context,
-          ['AM', 'PM'],
+          amPm,
           'PM',
               (value) {
             debugPrint("\nValue : $value\n");
