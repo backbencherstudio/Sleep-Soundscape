@@ -1,5 +1,5 @@
 class AppUrls {
-  AppUrls._();
+  AppUrls();
   //https://energy-backend.ddns.net
   static const String baseUrl = 'http://192.168.40.25:3000/api';
   //'https://dependent-boxes-eh-mandate.trycloudflare.com';

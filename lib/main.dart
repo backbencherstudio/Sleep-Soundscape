@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
 import 'package:sleep_soundscape/model_view/notification_provider.dart';
 import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/profile_screen_provider.dart';
@@ -69,7 +70,9 @@ class MyApp extends StatelessWidget {
           create: (_) => ThemeProvider(),
         ),
 
-
+ChangeNotifierProvider<ForgetPassProvider>(
+          create: (_) => ForgetPassProvider(),
+        ),
 
 
 
