@@ -144,25 +144,50 @@ void soundBottomSheet(BuildContext context) {
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                               child: ListTile(
-                                leading: Image.network(
-                                  music.imagePath ?? '',
+                                leading: music.imagePath != null && music.imagePath!.isNotEmpty
+                                    ? Image.network(
+                                  music.imagePath!,
+                                  width: 40,
+                                  height: 40,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset(
+                                      'assets/images/calm.png', // Fallback if network image fails
+                                      width: 40,
+                                      height: 40,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                                    : Image.asset(
+                                  'assets/images/calm.png', // Default asset image
                                   width: 40,
                                   height: 40,
                                   fit: BoxFit.cover,
                                 ),
-                                title: Text(music.title ?? ''),
-                                subtitle: Text(music.subtitle ?? ''),
+
+                                title: Text(music.title ?? '',style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: themeProvider.themeMode == ThemeMode.dark ? Colors.white54 : Colors.black87
+                                ),),
+                                subtitle: Text(music.subtitle ?? '',style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: themeProvider.themeMode == ThemeMode.dark ? Colors.white54 : Colors.black87
+                                ),),
                                 trailing: GestureDetector(
                                   onTap: () async {
+                                    print("🎵 Clicked Play/Pause for index: $index");
                                     await soundScreenProvider.playMusic(index);
                                   },
-                                  child: Icon(
-                                    soundScreenProvider.playedMusic == index && soundScreenProvider.isPlaying
-                                        ? Icons.pause
-                                        : Icons.play_arrow,
-                                    size: 30,
+                                  child: soundScreenProvider.playedMusic == index && soundScreenProvider.isPlaying
+                                      ? Image.asset("assets/icons/play2.png", height: 30)  // Pause icon
+                                      : Image.asset(
+                                    "assets/icons/play1.png",
+                                    height: 30,
+                                    color: themeProvider.themeMode == ThemeMode.dark ? Colors.white54 : Colors.black,
                                   ),
                                 ),
+
+
+
                               ),
                             ),
                           );
@@ -179,3 +204,4 @@ void soundBottomSheet(BuildContext context) {
     },
   );
 }
+
