@@ -24,6 +24,7 @@ import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'model_view/ForgetPass_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
+import 'model_view/sign-up_provider.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -75,6 +76,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
+        ),
+        ChangeNotifierProvider<SignUpProvider>(
+          create: (_) => SignUpProvider(),
         ),
 
 
