@@ -2,6 +2,7 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
 import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
@@ -32,6 +33,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await AndroidAlarmManager.initialize();
+
+
+  final prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString("token");
+
+
   runApp(MyApp());
 }
 
