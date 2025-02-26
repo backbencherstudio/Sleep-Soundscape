@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
 import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
 import 'package:sleep_soundscape/model_view/notification_provider.dart';
 import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
@@ -25,6 +26,7 @@ import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'model_view/ForgetPass_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
+import 'model_view/sign-up_provider.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -83,9 +85,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
         ),
+        ChangeNotifierProvider<SignUpProvider>(
+          create: (_) => SignUpProvider(),
+        ),
 
 
-
+ ChangeNotifierProvider<ForgetPassProvider>(
+          create: (_) => ForgetPassProvider(),
+        ),
 
 
       ],

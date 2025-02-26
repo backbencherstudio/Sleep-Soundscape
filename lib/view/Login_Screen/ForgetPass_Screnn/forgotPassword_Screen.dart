@@ -136,7 +136,9 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
 
              await value.sendResetCode(email);
 
-             ForgotbottomSheet(context: context);
+             ForgotbottomSheet(context: context,
+             email: email,
+             );
 
             },
           );
