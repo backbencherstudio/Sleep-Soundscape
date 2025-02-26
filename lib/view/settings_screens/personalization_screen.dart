@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
 import 'package:sleep_soundscape/model/goal.dart';
+import 'package:sleep_soundscape/model_view/theme_provider.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
 // ignore: must_be_immutable
@@ -39,6 +41,9 @@ class PersonalizationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final darkTheme = context.watch<ThemeProvider>().isDarkMode;
+
     return Scaffold(
       appBar: AppBar(
         title: RichText(
@@ -47,7 +52,7 @@ class PersonalizationScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontSize: 20.sp,
               fontWeight: FontWeight.w500,
-              color: Color(0xFFFFFFFF),
+              // color: Color(0xFFFFFFFF),
             ),
 
             children: <TextSpan>[
@@ -80,7 +85,7 @@ class PersonalizationScreen extends StatelessWidget {
         ],
         surfaceTintColor: Colors.transparent,
       ),
-      backgroundColor: Colors.black,
+
       body: Padding(
         padding:  EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
@@ -98,7 +103,7 @@ class PersonalizationScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(22.r),
                           border: Border.all(color: Color(0xFF4B5155)),
-                          color: Colors.grey.shade700.withOpacity(0.2),
+                          color: Color.fromRGBO(0, 0, 0, 0.04),
                         ),
                         child: Center(
                           child: ListTile(
@@ -107,7 +112,7 @@ class PersonalizationScreen extends StatelessWidget {
                               style: Theme.of(
                                 context,
                               ).textTheme.bodySmall!.copyWith(
-                                color: Color(0xFFFFFFFFF),
+
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16.sp,
                               ),
@@ -117,7 +122,7 @@ class PersonalizationScreen extends StatelessWidget {
                               style: Theme.of(
                                 context,
                               ).textTheme.bodySmall!.copyWith(
-                                color: Color(0xFFFFFFFFF),
+
                                 fontWeight: FontWeight.w300,
                                 fontSize: 14.sp,
                               ),

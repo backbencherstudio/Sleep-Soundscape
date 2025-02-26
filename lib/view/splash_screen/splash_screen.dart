@@ -30,36 +30,34 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       final loginAuthProvider = context.read<LoginAuthProvider>();
       final onboardingProvider = context.read<OnboardingScreenProvider>();
 
-      // Ensure loginData is not null before accessing token.
-      String? token;
-      if (loginAuthProvider.loginData?.token != null) {
-        token = await AuthStorageService.getToken(key: loginAuthProvider.loginData!.token!);
-      }
+      // Ensure SharedPreferences has initialized
+      await Future.delayed(const Duration(milliseconds: 100));
 
-      // Preload image for performance optimization.
+      // Retrieve stored token
+      String? token = await AuthStorageService.getToken();
+      debugPrint("Retrieved Token in Splash: $token");
+
+      // Preload image
       await precacheImage(const AssetImage('assets/images/onboarding_one.png'), context);
 
-      debugPrint("\n\n\n get user-token: ${loginAuthProvider.loginData?.token}");
-
-      // Wait 2 seconds before navigation (for splash delay).
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2)); // Splash delay
 
       if (token != null && token.isNotEmpty) {
-        // Token exists, navigate to HomeScreen.
+        // Token exists, navigate to HomeScreen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),
         );
-        return; // Stop further execution.
-      } else {
-        // No token, navigate to SignInScreen.
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => SignInScreen()),
-        );
+        return; // Stop execution
       }
 
-      // Ensure onboardingProvider has completed loading before checking its value.
+      // No valid token, go to SignInScreen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => SignInScreen()),
+      );
+
+      // Ensure onboarding is loaded before checking
       if (onboardingProvider.isLoading) {
         await Future.doWhile(() async {
           await Future.delayed(const Duration(milliseconds: 100));
@@ -67,13 +65,15 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         });
       }
 
-      // Navigate based on onboarding status.
+      // Navigate based on onboarding status
       if (onboardingProvider.hasSeenOnboarding) {
         Navigator.pushReplacementNamed(context, RouteName.signUpScreen);
       } else {
         Navigator.pushReplacementNamed(context, RouteName.onboardingScreen);
       }
     });
+
+
 
   }
 

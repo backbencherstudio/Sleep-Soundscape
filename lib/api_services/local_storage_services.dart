@@ -1,25 +1,23 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthStorageService{
+class AuthStorageService {
+  static const String _tokenKey = "token"; // Define key to avoid duplication
 
-  ///store a string
-  static Future<void> saveToken({required String key, required String value}) async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(key, value);
+  /// Store token
+  static Future<void> saveToken({required String token}) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_tokenKey, token);
   }
 
-  /// get access to a string
-  static Future<String?> getToken ({required String key}) async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    String? token = prefs.getString(key);
-    return token;
+  /// Get token
+  static Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_tokenKey);
   }
 
-  /// delete token from the storage
-  static Future<void> removeToken () async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove("token");
+  /// Delete token
+  static Future<void> removeToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_tokenKey);
   }
-
 }
