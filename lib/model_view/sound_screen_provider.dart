@@ -1,11 +1,16 @@
+import 'dart:convert';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:sleep_soundscape/api_services/api_end_point.dart';
 
 import '../model/music_model.dart';
 
 class SoundScreenProvider with ChangeNotifier{
   SoundScreenProvider(){
     getMusics();
+    //fetchSound();
   }
   
 
@@ -109,6 +114,26 @@ class SoundScreenProvider with ChangeNotifier{
 
     notifyListeners();
   }
+  int selectedIndex = 0;
+
+  final List<String> categories = ["Oceans", "Nature", "Rain", "Map", "Fire"];
+  //
+  // Future<void> fetchSound() async {
+  //   try {
+  //     final response = await http.get(Uri.parse(AppUrls.sound(category))); // Ensure Uri is parsed
+  //
+  //     if (response.statusCode == 200) {
+  //       // Successfully fetched data
+  //       final data = jsonDecode(response.body);
+  //       print('Data: $data'); // Handle data as needed
+  //     } else {
+  //       print('Failed to load data. Status Code: ${response.statusCode}');
+  //       print('Response body: ${response.body}'); // Print response body for debugging
+  //     }
+  //   } catch (error) {
+  //     print('Error fetching data: $error');
+  //   }
+  // }
 
   //
   // final AudioPlayer _audioPlayer = AudioPlayer();
