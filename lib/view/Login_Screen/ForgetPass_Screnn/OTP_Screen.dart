@@ -8,7 +8,7 @@ import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
 // ignore: must_be_immutable
 class Otpscreen extends StatelessWidget {
-  final String email; // Get email from previous screen
+  final String email; 
   Otpscreen({super.key, required this.email});
 
   TextEditingController otpController = TextEditingController();
@@ -80,7 +80,11 @@ Consumer<ForgetPassProvider>(
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ResetpassScreen(),
+                            builder: (context) => ResetpassScreen(
+                              email: email,
+                              otp: otpController.text,
+
+                            ),
                           ),
                         );
                       } else {
