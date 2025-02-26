@@ -42,6 +42,14 @@ dependencies:
   audioplayers: ^6.2.0
   flutter_heatmap_calendar: ^1.0.5
   shared_preferences: ^2.5.2
+  flutter_launcher_icons: ^0.14.3
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/brand_logo.png"
+  min_sdk_android: 23 # android min sdk min:16, default 21
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/brand_logo.png"
 
 
 
@@ -68,6 +76,7 @@ flutter:
     - assets/images/musics/
     - assets/icons/
     - assets/musics/
+    - assets/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
