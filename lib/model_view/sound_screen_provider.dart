@@ -7,7 +7,7 @@ import '../model/sound_model.dart';
 
 class SoundScreenProvider with ChangeNotifier {
   SoundScreenProvider() {
-    fetchSound(categories.first); // Fetch first category initially
+    fetchSound(categories.first); // Fetch initial category
   }
 
   List<SoundModel> _soundList = [];
@@ -26,7 +26,9 @@ class SoundScreenProvider with ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      final url = '${AppUrls.sound}?category=$category';
+      final url = AppUrls.sound(category);
+      print('Fetching URL: $url');
+
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
@@ -43,21 +45,33 @@ class SoundScreenProvider with ChangeNotifier {
     }
   }
 
-  // Play Music
+  // Play/Pause Music (Toggles Playback)
   Future<void> playMusic(int index) async {
     if (_soundList.isEmpty) return;
+
+    final String audioUrl = _soundList[index].audioPath ?? "";
+
+    if (audioUrl.isEmpty) {
+      print("🔴 Error: Audio URL is empty!");
+      return;
+    }
 
     if (playedMusic == index && isPlaying) {
       await pauseMusic();
       return;
     }
 
-    playedMusic = index;
-    final String audioUrl = _soundList[index].audioPath ?? "";
+    if (isPlaying) {
+      await stopMusic();
+    }
 
-    if (audioUrl.isNotEmpty) {
+    playedMusic = index;
+    try {
       await _audioPlayer.play(UrlSource(audioUrl));
       isPlaying = true;
+      print("▶️ Playing Music: $audioUrl");
+    } catch (e) {
+      print("🔴 Error Playing Music: $e");
     }
 
     notifyListeners();
@@ -65,16 +79,26 @@ class SoundScreenProvider with ChangeNotifier {
 
   // Pause Music
   Future<void> pauseMusic() async {
-    await _audioPlayer.pause();
-    isPlaying = false;
+    try {
+      await _audioPlayer.pause();
+      isPlaying = false;
+      print("⏸️ Paused Music");
+    } catch (e) {
+      print("🔴 Error Pausing Music: $e");
+    }
     notifyListeners();
   }
 
-  // Stop Music
+  // Stop Music (Stops & Resets State)
   Future<void> stopMusic() async {
-    await _audioPlayer.stop();
-    isPlaying = false;
-    playedMusic = -1;
+    try {
+      await _audioPlayer.stop();
+      isPlaying = false;
+      playedMusic = -1;
+      print("⏹️ Stopped Music");
+    } catch (e) {
+      print("🔴 Error Stopping Music: $e");
+    }
     notifyListeners();
   }
 }
