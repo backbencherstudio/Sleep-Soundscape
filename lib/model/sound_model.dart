@@ -1,4 +1,4 @@
-class GetSound {
+class SoundModel {
   String? sId;
   String? category;
   String? title;
@@ -7,34 +7,41 @@ class GetSound {
   String? audioPath;
   int? iV;
 
-  GetSound(
-      {this.sId,
-        this.category,
-        this.title,
-        this.subtitle,
-        this.imagePath,
-        this.audioPath,
-        this.iV});
+  SoundModel({
+    this.sId,
+    this.category,
+    this.title,
+    this.subtitle,
+    this.imagePath,
+    this.audioPath,
+    this.iV,
+  });
 
-  GetSound.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
-    category = json['category'];
-    title = json['title'];
-    subtitle = json['subtitle'];
-    imagePath = json['imagePath'];
-    audioPath = json['audioPath'];
-    iV = json['__v'];
+  factory SoundModel.fromJson(Map<String, dynamic> json) {
+    return SoundModel(
+      sId: json['_id'],
+      category: json['category'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      imagePath: json['imagePath'],
+      audioPath: json['audioPath'],
+      iV: json['__v'],
+    );
+  }
+
+  static List<SoundModel> listFromJson(List<dynamic> jsonList) {
+    return jsonList.map((json) => SoundModel.fromJson(json)).toList();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['category'] = this.category;
-    data['title'] = this.title;
-    data['subtitle'] = this.subtitle;
-    data['imagePath'] = this.imagePath;
-    data['audioPath'] = this.audioPath;
-    data['__v'] = this.iV;
-    return data;
+    return {
+      '_id': sId,
+      'category': category,
+      'title': title,
+      'subtitle': subtitle,
+      'imagePath': imagePath,
+      'audioPath': audioPath,
+      '__v': iV,
+    };
   }
 }
