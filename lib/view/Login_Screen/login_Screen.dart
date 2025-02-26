@@ -38,7 +38,9 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: "up",
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineMedium?.copyWith(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
                           color: Color(0xFFFAD051),
@@ -58,15 +60,24 @@ class LoginScreen extends StatelessWidget {
                       color: Theme.of(context).colorScheme.secondary,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(Icons.person_outline, size: 32.r, color: Theme.of(context).colorScheme.onTertiary),
+                    child: Icon(
+                      Icons.person_outline,
+                      size: 32.r,
+                      color: Theme.of(context).colorScheme.onTertiary,
+                    ),
                   ),
                 ),
                 SizedBox(height: 14.h),
-                Text("Choose Your Image", style: Theme.of(context).textTheme.bodyMedium),
+                Text(
+                  "Choose Your Image",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
                 SizedBox(height: 32.h),
                 TextFormField(
                   controller: nameController,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
                   decoration: inputDecoration(
                     context: context,
                     prefixIcon: Icon(Icons.person_outline),
@@ -76,7 +87,9 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 16.h),
                 TextFormField(
                   controller: emailController,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
                   decoration: inputDecoration(
                     context: context,
                     prefixIcon: Icon(Icons.email_outlined),
@@ -87,13 +100,19 @@ class LoginScreen extends StatelessWidget {
                 TextFormField(
                   controller: passController,
                   obscureText: signUpProvider.isObscure,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
                   decoration: inputDecoration(
                     context: context,
                     prefixIcon: Icon(Icons.lock_outline_rounded),
                     hintText: "Enter your password",
                     suffixIcon: IconButton(
-                      icon: Icon(signUpProvider.isObscure ? Icons.visibility_off_outlined : Icons.visibility_outlined),
+                      icon: Icon(
+                        signUpProvider.isObscure
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                      ),
                       onPressed: () {
                         signUpProvider.togglePasswordVisibility();
                       },
@@ -101,24 +120,37 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 24.h),
-            
+
                 // Show loading indicator if signup is in progress
                 if (signUpProvider.isLoading) CircularProgressIndicator(),
-            
+
                 // Spacer(),
-                SizedBox(height: 80.h,),
-            
+                SizedBox(height: 80.h),
+
                 Mybutton(
-                  text: "Next",
-                  color: Theme.of(context).colorScheme.primary,
+                  text: signUpProvider.isLoading ? "Loading..." : "Next",
+                  color: signUpProvider.isLoading
+                      ? Colors.grey
+                      : Theme.of(context).colorScheme.primary,
                   ontap: () async {
-                    signUpProvider.createUser(
-                      email: emailController.text, // Replace with actual user input
-                      password: passController.text, // Replace with actual user input
-                      name: nameController.text, // Replace with actual user input
+                    if (signUpProvider.isLoading) return; // Prevent multiple taps
+
+                    bool success = await signUpProvider.createUser(
+                      email: emailController.text.trim(),
+                      password: passController.text.trim(),
+                      name: nameController.text.trim(),
                     );
+                    if (success) {
+                      Navigator.pushNamed(context, RouteName.signInScreen);
+                    } else {
+                      // Show an error message using SnackBar
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(signUpProvider.errorMessage ?? "Signup failed")),
+                      );
+                    }
                   },
                 ),
+
                 SizedBox(height: 20.h),
                 RichText(
                   text: TextSpan(
@@ -130,17 +162,22 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: "Sign in",
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineMedium?.copyWith(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
                         ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignInScreen()),
-                            );
-                          },
+                        recognizer:
+                            TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignInScreen(),
+                                  ),
+                                );
+                              },
                       ),
                     ],
                   ),
