@@ -31,7 +31,7 @@ void alarmSetting(BuildContext context) {
           child: Column(
             children: [
               SizedBox(height: 24.h),
-              _buildHeader(context),
+              _buildHeader(context,themeProvider),
               SizedBox(height: 35.h),
 
               // Alarm Section
@@ -57,7 +57,7 @@ void alarmSetting(BuildContext context) {
               _buildInfoRow(context,
                 "To keep running in low battery, Sleep will stop detection when the battery is below 20% and finish analysis when the battery is below 10%.",
                 "On",
-                () => soundDetection(context),
+                () => soundDetection(context),themeProvider
               ),
 
               Divider(color: Color.fromRGBO(255, 255, 255, 0.30)),
@@ -67,7 +67,7 @@ void alarmSetting(BuildContext context) {
               _buildInfoRow(context,
                 "Soundscapes",
                 "Calm Light",
-                () => soundScape(context),
+                () => soundScape(context),themeProvider
               ),
 
               SizedBox(height: 35.h),
@@ -76,7 +76,7 @@ void alarmSetting(BuildContext context) {
               _buildSectionTitle(context,"Alarm"),
               _buildSwitchRow(context,"Autoplay sounds while sleeping", isAutoPlay),
 
-              _buildInfoRow(context,"Audio timer", "5 min", null),
+              _buildInfoRow(context,"Audio timer", "5 min", null,themeProvider),
               Divider(color: Color.fromRGBO(255, 255, 255, 0.60)),
 
               SizedBox(height: 10.h),
@@ -86,21 +86,21 @@ void alarmSetting(BuildContext context) {
               _buildInfoRow(context,
                 "Snooze",
                 "5 min",
-                () => snoozeBottomSheet(context),
+                () => snoozeBottomSheet(context),themeProvider
               ),
               SizedBox(height: 24.h),
 
               _buildInfoRow(context,
                 "Alarm mode",
                 "Always use",
-                () => alarmMode(context),
+                () => alarmMode(context),themeProvider
               ),
               SizedBox(height: 24.h),
 
               _buildInfoRow(context,
                 "Get-up Challenge",
                 "None",
-                () => getChallange(context),
+                () => getChallange(context),themeProvider
               ),
               SizedBox(height: 18.h),
             ],
@@ -112,7 +112,7 @@ void alarmSetting(BuildContext context) {
 }
 
 /// 🔹 **Header with Back Button & Title**
-Widget _buildHeader(BuildContext context) {
+Widget _buildHeader(BuildContext context,themeProvider) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -124,7 +124,7 @@ Widget _buildHeader(BuildContext context) {
           decoration: BoxDecoration(
             color: Colors.transparent,
             border: Border.all(
-              // color: Colors.grey,
+              color: themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black87,
               width: 1,
             ),
             shape: BoxShape.circle,
@@ -133,7 +133,8 @@ Widget _buildHeader(BuildContext context) {
             padding: EdgeInsets.all(7.r),
             child: Icon(
               Icons.arrow_back_ios,
-              // color: Colors.white,
+
+              color: themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black87,
               size: 10.sp,
             ),
           ),
@@ -257,9 +258,7 @@ Widget _buildSoundPreview(BuildContext context) {
   return Align(
     alignment: Alignment.topLeft,
     child: Container(
-      width:
-          MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width *
-          0.5,
+      width:MediaQuery.of(context).size.width*5,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14.r),
         image: DecorationImage(
@@ -313,7 +312,7 @@ Widget _buildSoundPreview(BuildContext context) {
 }
 
 /// 🔹 **Reusable Info Row (Label + Action)**
-Widget _buildInfoRow(BuildContext context,String text, String actionText, VoidCallback? onTap) {
+Widget _buildInfoRow(BuildContext context,String text, String actionText, VoidCallback? onTap,themeProvider) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -352,7 +351,7 @@ Widget _buildInfoRow(BuildContext context,String text, String actionText, VoidCa
               child: Icon(
                 Icons.arrow_forward_ios_rounded,
                 size: 16,
-                // color: Colors.white,
+                 color: themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black87,
               ),
             ),
           ],
