@@ -36,7 +36,7 @@ class SetupReminderScreen extends StatelessWidget{
             ///Header
             Consumer<ReminderScreenProvider>(
               builder: (_, reminderScreenProvider, child) {
-                return AddReminderHeader(headerText: reminderScreenProvider.reminderToSetup!.title!,onSave:  () => context.read<ReminderScreenProvider>().setPageID(1),);
+                return AddReminderHeader(headerText: reminderScreenProvider.reminderToSetup!.title!,onSave:  () => Navigator.pop(context),);
               }
             ),
             SizedBox(height: 25.h),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
+import 'package:sleep_soundscape/model_view/theme_provider.dart';
 
 void InviteFriendBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -13,8 +15,12 @@ void InviteFriendBottomSheet(BuildContext context) {
     ),
     context: context,
     isScrollControlled: true,
-    backgroundColor: Color(0xFF0F0F13),
+    // backgroundColor: Color(0xFF0F0F13),
     builder: (context) {
+
+      final darkTheme = context.watch<ThemeProvider>().isDarkMode;
+
+
       return SizedBox(
         width: double.infinity,
         height: MediaQuery.of(context).size.height * 0.9,
@@ -27,7 +33,7 @@ void InviteFriendBottomSheet(BuildContext context) {
                 width: 115.w,
                 height: 6.h,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(255, 255, 255, 0.10),
+                  color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.10) : Color.fromRGBO(0, 0, 0, 0.10),
                   borderRadius: BorderRadius.circular(100.r),
                 ),
               ),
@@ -41,16 +47,15 @@ void InviteFriendBottomSheet(BuildContext context) {
                   },
                   child: ImageIcon(
                     AssetImage("assets/icons/back.png"),
-                    color: Colors.white,
+                    color: darkTheme ? Colors.white : Colors.black,
                     size: 32.r,
                   ),
                 ),
                 centerTitle: true,
                 title: RichText(
                   text: TextSpan(
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontFamily: "Lexend",
-                      color: Colors.white,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
                     ),
@@ -60,7 +65,7 @@ void InviteFriendBottomSheet(BuildContext context) {
                         text: "Challenge ",
                         style: Theme.of(
                           context,
-                        ).textTheme.titleMedium!.copyWith(
+                        ).textTheme.headlineMedium!.copyWith(
                           fontFamily: "Lexend",
                           color: Color(0xFFFAD051),
                           fontSize: 20.sp,
@@ -79,7 +84,7 @@ void InviteFriendBottomSheet(BuildContext context) {
                       Text(
                         "Invite friends and get reward",
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Color.fromRGBO(255, 255, 255, 0.60),
+                          // color: Color.fromRGBO(255, 255, 255, 0.60),
                           fontFamily: "Lexend",
                           fontWeight: FontWeight.w300,
                         ),
@@ -87,9 +92,9 @@ void InviteFriendBottomSheet(BuildContext context) {
                       ),
                       SizedBox(height: 32.h),
                       Image.asset(
-                        "assets/images/challenge-reward.png",
-                        width: 345,
-                        height: 330,
+                        darkTheme ? "assets/images/challenge-reward.png" : "assets/images/reward-light.png",
+                        width: 345.w,
+                        height: 330.h,
                         fit: BoxFit.contain,
                       ),
                       SizedBox(height: 32.h),
@@ -116,9 +121,9 @@ void InviteFriendBottomSheet(BuildContext context) {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(14.r),
                             border: Border.all(
-                              color: Color.fromRGBO(255, 255, 255, 0.08),
+                              color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.08) : Color.fromRGBO(0, 0, 0, 0.08),
                             ),
-                            color: Color.fromRGBO(255, 255, 255, 0.04),
+                            color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.04) : Color.fromRGBO(0, 0, 0, 0.04),
                           ),
                           child: Row(
                             children: [
@@ -126,15 +131,13 @@ void InviteFriendBottomSheet(BuildContext context) {
                                 "ROBER007",
                                 style: Theme.of(
                                   context,
-                                ).textTheme.bodyMedium!.copyWith(
-                                  color: Color.fromRGBO(255, 255, 255, 0.6),
-                                ),
+                                ).textTheme.bodyMedium
                               ),
                               Spacer(),
                               ImageIcon(
                                 AssetImage("assets/icons/copy.png"),
                                 size: 24.r,
-                                color: Color.fromRGBO(255, 255, 255, 1),
+                                color: darkTheme ? Color.fromRGBO(255, 255, 255, 1) : Colors.black,
                               ),
                             ],
                           ),
@@ -175,6 +178,8 @@ void InviteFriendBottomSheet(BuildContext context) {
 }
 
 Widget shareItemTile({required BuildContext context, required String imagePath, required String title, required VoidCallback onTap}) {
+  final darkTheme = context.watch<ThemeProvider>().isDarkMode;
+
   return GestureDetector(
     onTap: onTap,
     child: Container(
@@ -183,22 +188,20 @@ Widget shareItemTile({required BuildContext context, required String imagePath, 
       height: 54.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14.r),
-        border: Border.all(color: Color.fromRGBO(255, 255, 255, 0.08)),
-        color: Color.fromRGBO(255, 255, 255, 0.04),
+        border: Border.all(color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.08) : Color.fromRGBO(0, 0, 0, 0.08)),
+        color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.04) : Color.fromRGBO(0, 0, 0, 0.04),
       ),
       child: Row(
         children: [
           ImageIcon(
             AssetImage(imagePath),
             size: 18.r,
-            color: Color.fromRGBO(255, 255, 255, 1),
+            color: darkTheme ?  Color.fromRGBO(255, 255, 255, 1) : Colors.black,
           ),
           SizedBox(width: 8.w),
           Text(
             title,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Color.fromRGBO(255, 255, 255, 1),
-            ),
+            style: Theme.of(context).textTheme.bodyMedium
           ),
           Spacer(),
           IconButton(
@@ -206,7 +209,7 @@ Widget shareItemTile({required BuildContext context, required String imagePath, 
             icon: ImageIcon(
               AssetImage("assets/icons/arrow-right.png"),
               size: 24.r,
-              color: Color.fromRGBO(255, 255, 255, 1),
+              color: darkTheme ?  Color.fromRGBO(255, 255, 255, 1) : Colors.black,
             ),
           ),
         ],

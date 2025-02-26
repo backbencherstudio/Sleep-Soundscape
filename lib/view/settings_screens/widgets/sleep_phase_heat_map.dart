@@ -3,6 +3,7 @@ import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/model_view/profile_screen_provider.dart';
+import 'package:sleep_soundscape/model_view/theme_provider.dart';
 
 class SleepPhaseHeatmap extends StatelessWidget {
   const SleepPhaseHeatmap({super.key});
@@ -35,7 +36,7 @@ class SleepPhaseHeatmap extends StatelessWidget {
       height: 280.h,
       padding: EdgeInsets.symmetric(horizontal: 14.w),
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(255, 255, 255, 0.04),
+        color: context.watch<ThemeProvider>().isDarkMode? Color.fromRGBO(255, 255, 255, 0.04) : Color.fromRGBO(0, 0, 0, 0.04),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Center(
@@ -47,15 +48,13 @@ class SleepPhaseHeatmap extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 "Sleep Phase",
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: Colors.white,
-                ),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
             SizedBox(height: 32.h),
             Text(
               "20",
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w500,
                 color: const Color(0xFFFAD051),
@@ -78,10 +77,10 @@ class SleepPhaseHeatmap extends StatelessWidget {
                     borderRadius: 2.r,
                     size: 12.r,
                     margin: EdgeInsets.symmetric(horizontal: 2.5.w, vertical: 2.5.h),
-                    defaultColor: const Color.fromRGBO(255, 255, 255, 0.04),
-                    colorMode: ColorMode.color,
+                    defaultColor: context.watch<ThemeProvider>().isDarkMode ?  const Color.fromRGBO(255, 255, 255, 0.04) : const Color.fromRGBO(0, 0, 0, 0.04),
+                    // colorMode: ColorMode.color,
                     showText: false,
-                    textColor: const Color.fromRGBO(255, 255, 255, 0.4),
+                    textColor: context.watch<ThemeProvider>().isDarkMode ? const Color.fromRGBO(255, 255, 255, 0.4) : const Color.fromRGBO(0, 0, 0, 0.4),
                     scrollable: true,
                     showColorTip: false,
                     datasets: usageData, // ✅ Updated to use provider data

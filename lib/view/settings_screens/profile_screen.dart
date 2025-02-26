@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/model_view/theme_provider.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/edit_profile_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/setting_bottom_modal_sheet.dart';
@@ -11,7 +13,7 @@ import 'package:sleep_soundscape/view/settings_screens/widgets/sleep_phase_heat_
 import '../reminder_screen/reminder_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-   ProfileScreen({super.key});
+  ProfileScreen({super.key});
 
   Map<DateTime, int> _data = {};
 
@@ -20,21 +22,28 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 56.w,
-        // surfaceTintColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
         leading: Padding(
           padding: EdgeInsets.only(left: 24.0.w),
-          child:                 GestureDetector(
-            onTap:()=> Navigator.pop(context),
+          child: GestureDetector(
+            onTap: () => Navigator.pop(context),
             child: Container(
               width: 32.w,
               height: 32.h,
               padding: EdgeInsets.all(7.r),
               decoration: BoxDecoration(
-                border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.08),),
+                border: Border.all(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSecondary.withOpacity(0.08),
+                ),
                 shape: BoxShape.circle,
-
               ),
-              child: Icon(Icons.arrow_back_ios_new,color: Theme.of(context).colorScheme.onSecondary,size: 18.r,),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                color: Theme.of(context).colorScheme.onSecondary,
+                size: 18.r,
+              ),
             ),
           ),
         ),
@@ -47,11 +56,18 @@ class ProfileScreen extends StatelessWidget {
               height: 32.h,
               padding: EdgeInsets.all(7.r),
               decoration: BoxDecoration(
-                border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.08),),
+                border: Border.all(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSecondary.withOpacity(0.08),
+                ),
                 shape: BoxShape.circle,
-
               ),
-              child: Icon(Icons.settings,color: Theme.of(context).colorScheme.onSecondary,size: 18.r,),
+              child: Icon(
+                Icons.settings,
+                color: Theme.of(context).colorScheme.onSecondary,
+                size: 18.r,
+              ),
             ),
           ),
 
@@ -63,8 +79,6 @@ class ProfileScreen extends StatelessWidget {
           //     color: Theme.of(context).appBarTheme.actionsIconTheme?.color,
           //   ),
           // ),
-
-
         ],
       ),
       body: SafeArea(
@@ -94,12 +108,11 @@ class ProfileScreen extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "Rober Fox",
+                          "Robert Fox",
                           style: Theme.of(
                             context,
-                          ).textTheme.titleMedium!.copyWith(
+                          ).textTheme.headlineMedium?.copyWith(
                             fontFamily: "Lexend",
-                            // color: Colors.white,
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w500,
                           ),
@@ -124,7 +137,10 @@ class ProfileScreen extends StatelessWidget {
                       },
                       child: ImageIcon(
                         AssetImage("assets/icons/edit.png"),
-                        // color: Colors.white,
+                        color:
+                            context.watch<ThemeProvider>().isDarkMode
+                                ? Colors.white
+                                : Colors.black,
                         size: 32.r,
                       ),
                     ),
@@ -135,7 +151,7 @@ class ProfileScreen extends StatelessWidget {
                 // SizedBox(height: 12.h),
                 buildTodaySleepInfoTile(context),
                 SizedBox(height: 12.h),
-               SleepPhaseHeatmap(),
+                SleepPhaseHeatmap(),
                 SizedBox(height: 12.h),
                 buildButtonTile(
                   context: context,
@@ -143,7 +159,10 @@ class ProfileScreen extends StatelessWidget {
                   title: "Reminder",
                   onTap: () {
                     //context.read<ReminderScreenProvider>().setPageID(1);
-                    ReminderWidgets.reminderBottomSheet(context:context, widgetToShowInBottomSheet: ReminderScreen());
+                    ReminderWidgets.reminderBottomSheet(
+                      context: context,
+                      widgetToShowInBottomSheet: ReminderScreen(),
+                    );
                   },
                 ),
                 SizedBox(height: 12.h),
@@ -174,21 +193,35 @@ class ProfileScreen extends StatelessWidget {
         width: double.infinity,
         height: 56.h,
         decoration: BoxDecoration(
-          // color: Color.fromRGBO(255, 255, 255, 0.04),
+          color:
+              context.watch<ThemeProvider>().isDarkMode
+                  ? Color.fromRGBO(255, 255, 255, 0.04)
+                  : Color.fromRGBO(0, 0, 0, 0.04),
           borderRadius: BorderRadius.circular(14.r),
-          // border: Border.all(color: Color.fromRGBO(255, 255, 255, 0.08)),
+          border: Border.all(
+            color:
+                context.watch<ThemeProvider>().isDarkMode
+                    ? Color.fromRGBO(255, 255, 255, 0.08)
+                    : Color.fromRGBO(0, 0, 0, 0.08),
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ImageIcon(AssetImage(imagePath), color: Colors.white, size: 18.r),
+            ImageIcon(
+              AssetImage(imagePath),
+              color:
+                  context.watch<ThemeProvider>().isDarkMode
+                      ? Colors.white
+                      : Colors.black,
+              size: 18.r,
+            ),
             SizedBox(width: 6.w),
             Text(
               title,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w300,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w300),
             ),
           ],
         ),
@@ -202,26 +235,32 @@ class ProfileScreen extends StatelessWidget {
       height: 100.h,
       padding: EdgeInsets.symmetric(horizontal: 12.r),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(255, 255, 255, 0.04),
+        color:
+            context.watch<ThemeProvider>().isDarkMode
+                ? Color.fromRGBO(255, 255, 255, 0.04)
+                : Colors.black.withOpacity(0.04),
         borderRadius: BorderRadius.circular(14.r),
-        border: Border.all(color: Color.fromRGBO(255, 255, 255, 0.08)),
+        border: Border.all(
+          color:
+              context.watch<ThemeProvider>().isDarkMode
+                  ? Color.fromRGBO(255, 255, 255, 0.08)
+                  : Colors.black.withOpacity(0.08),
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             children: [
-              Text(
-                "Today",
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge!.copyWith(color: Colors.white),
-              ),
+              Text("Today", style: Theme.of(context).textTheme.bodyLarge),
               Spacer(),
               ImageIcon(
                 AssetImage("assets/icons/arrow-right.png"),
                 size: 24.r,
-                color: Colors.white,
+                color:
+                    context.watch<ThemeProvider>().isDarkMode
+                        ? Colors.white
+                        : Colors.black,
               ),
             ],
           ),
@@ -230,10 +269,9 @@ class ProfileScreen extends StatelessWidget {
             children: [
               Text(
                 "Sleep",
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
               ),
               Spacer(),
               Column(
@@ -244,19 +282,15 @@ class ProfileScreen extends StatelessWidget {
                       children: <TextSpan>[
                         TextSpan(
                           text: "0",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodySmall!.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall!
+                              .copyWith(fontWeight: FontWeight.w300),
                         ),
                         TextSpan(
                           text: " min",
                           style: Theme.of(
                             context,
                           ).textTheme.bodySmall!.copyWith(
-                            color: Color.fromRGBO(255, 255, 255, 0.50),
+                            // color: Color.fromRGBO(255, 255, 255, 0.50),
                             fontWeight: FontWeight.w300,
                           ),
                         ),
@@ -267,7 +301,7 @@ class ProfileScreen extends StatelessWidget {
                   Text(
                     "Today sleep",
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Color.fromRGBO(255, 255, 255, 0.50),
+                      // color: Color.fromRGBO(255, 255, 255, 0.50),
                       fontWeight: FontWeight.w300,
                     ),
                   ),
@@ -278,8 +312,11 @@ class ProfileScreen extends StatelessWidget {
                 height: 34,
                 width: 1.w,
                 child: VerticalDivider(
-                  color: Color.fromRGBO(255, 255, 255, 0.5),
-                  thickness: 0,
+                  color:
+                      context.watch<ThemeProvider>().isDarkMode
+                          ? Color.fromRGBO(255, 255, 255, 0.5)
+                          : Color.fromRGBO(0, 0, 0, 0.5),
+                  thickness: 1,
                 ),
               ),
               Spacer(),
@@ -289,7 +326,6 @@ class ProfileScreen extends StatelessWidget {
                   Text(
                     "0",
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Colors.white,
                       fontWeight: FontWeight.w300,
                     ),
                   ),
@@ -297,7 +333,7 @@ class ProfileScreen extends StatelessWidget {
                   Text(
                     "Sleep quality",
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Color.fromRGBO(255, 255, 255, 0.50),
+                      // color: Color.fromRGBO(255, 255, 255, 0.50),
                       fontWeight: FontWeight.w300,
                     ),
                   ),

@@ -113,13 +113,12 @@ class CompleteprofileScreen extends StatelessWidget {
                   );
                 },
               ),
-              SizedBox(height: 24.h),
+              SizedBox(height: 20.h),
 
               RichText(
                 text: TextSpan(
                   text: "Have an account? ",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: 16.sp,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w400,
                     // color: Color(0xFFFFFFFF),
                   ),

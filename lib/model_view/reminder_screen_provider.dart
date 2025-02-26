@@ -7,12 +7,6 @@ class ReminderScreenProvider with ChangeNotifier{
     getReminders();
   }
 
-  int _pageID = 1;
-  int get pageId => _pageID;
-  void setPageID(int pageId){
-    _pageID = pageId;
-    notifyListeners();
-  }
 
   final Map<String, dynamic> jsonReminders = {
     "reminderList" : [
@@ -62,8 +56,13 @@ class ReminderScreenProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  void addReminder(ReminderList reminder){
-    _reminders!.reminderList!.add(reminder);
+
+  ///Setting Alarm/Reminder
+  DateTime? _selectedTime;
+  DateTime? get selectedTime => _selectedTime;
+
+  Future<void> addReminder({required DateTime time}) async {
+
     notifyListeners();
   }
   
