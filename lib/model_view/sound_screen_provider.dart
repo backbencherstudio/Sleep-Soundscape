@@ -29,6 +29,7 @@ class SoundScreenProvider with ChangeNotifier {
       final url = AppUrls.sound(category);
       print('Fetching URL: $url');
 
+      debugPrint(" category is selected =====${category}");
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
@@ -61,7 +62,7 @@ class SoundScreenProvider with ChangeNotifier {
 
         _playedMusic = index;
 
-        String demoAudioPath = "http://192.168.40.25:3000/uploads/sounds/1740473347754-fire-02.mp3";
+        //String demoAudioPath = "http://192.168.40.25:3000/uploads/sounds/1740473347754-fire-02.mp3";
         String baseUrl = "http://192.168.40.25:3000";
         String fullPath = "$baseUrl${_soundList[index].audioPath}";
  debugPrint("full path :${fullPath}");
