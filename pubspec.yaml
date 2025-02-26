@@ -43,6 +43,7 @@ dependencies:
   flutter_heatmap_calendar: ^1.0.5
   shared_preferences: ^2.5.2
   flutter_launcher_icons: ^0.14.3
+  pin_code_fields: ^8.0.1
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true

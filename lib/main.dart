@@ -10,7 +10,7 @@ import 'package:sleep_soundscape/model_view/theme_provider.dart';
 import 'package:sleep_soundscape/view/Download_Screen/test_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
-import 'package:sleep_soundscape/view/Login_Screen/forgotPassword_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
 import 'package:sleep_soundscape/view/goal_Screen/goal_Screen.dart';
 import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';

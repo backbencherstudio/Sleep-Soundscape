@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(left: 24.w, right: 24.w),
