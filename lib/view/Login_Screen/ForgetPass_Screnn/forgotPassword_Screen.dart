@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
-import 'package:sleep_soundscape/view/Login_Screen/widget/forgotPassBottomSheet.dart';
+import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/widget/forgotPassBottomSheet.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
@@ -55,7 +55,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFFFFFFFF),
+                     
                     ),
 
                     children: <TextSpan>[
@@ -80,7 +80,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w300,
-                      color: Color(0xFFFFFFFF).withOpacity(0.6),
+                      
                     ),
                   ),
                 ),
@@ -91,24 +91,23 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w300,
-                      color: Color(0xFFFFFFFF).withOpacity(0.6),
+                    
                     ),
                   ),
                 ),
                 SizedBox(height: 32.h),
 
                 TextFormField(
-                  decoration: inputDecoration(
-                   context:  context,
-                  prefixIcon:  Image.asset(
-                      "assets/icons/2.png",
-                      height: 18.h,
-                      width: 18.w,
-                    ),
-                  hintText:   "Enter your email",
-
-                  ),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                   
+                    fontWeight: FontWeight.w400
                 ),
+                decoration: inputDecoration(
+                  context :  context,
+                  prefixIcon: Icon(Icons.email_outlined),
+                  hintText:   "Enter your email",
+                ),
+              ),
 
                 SizedBox(height: 290.h),
 
