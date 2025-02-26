@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,7 +11,7 @@ class ApiServices{
         Map<String, String>? headers}) async {
     try {
       http.Response response =
-      await http.post(Uri.parse(url), body: body, headers: headers);
+      await http.post(Uri.parse(url), body: jsonEncode(body), headers: headers);
       return response;
     } catch (error) {
       debugPrint("Error : $error}");

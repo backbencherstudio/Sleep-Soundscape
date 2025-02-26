@@ -56,6 +56,66 @@ class ReminderScreenProvider with ChangeNotifier{
     notifyListeners();
   }
 
+  int _selectedHour = 0;
+  int _selectedMinute = 0;
+  String _selectedAmPm = 'AM';
+
+  String _selectedDay = "Saturday";
+
+
+  void setHour(int selectedH){
+    _selectedHour = selectedH;
+  }
+
+  void setMinute(int selectedM){
+    _selectedMinute = selectedM;
+  }
+
+  void setAmPm(int selectedAmPm){
+    if(selectedAmPm == -1){
+      _selectedAmPm = 'AM';
+    }
+    else if(selectedAmPm == -2){
+      _selectedAmPm = 'PM';
+    }
+
+  }
+
+
+  ///convert user inputted time to DateTime object
+  void onSave(){
+    _selectedHour = ((_selectedAmPm == "PM") && (_selectedHour!=12)) ? _selectedHour + 12 : _selectedHour;
+    DateTime now = DateTime.now();
+    int day;
+    if(_selectedDay == 'Sunday'){
+      day = DateTime.sunday;
+    }
+    else if(_selectedDay == "Monday"){
+      day = DateTime.monday;
+    }
+    else if(_selectedDay == "Tuesday"){
+      day = DateTime.tuesday;
+    }
+    else if(_selectedDay == "Wednesday"){
+      day = DateTime.wednesday;
+    }
+    else if(_selectedDay == "Thursday"){
+      day = DateTime.thursday;
+    }
+    else if(_selectedDay == "Friday"){
+      day = DateTime.friday;
+    }
+    else if(_selectedDay == "Saturday"){
+      day = DateTime.saturday;
+    }
+    else{
+      day = now.day;
+    }
+
+    _selectedTime =  DateTime(now.year, now.month, day, _selectedHour, _selectedMinute,);
+    debugPrint("\n selected time : $_selectedTime\n");
+    notifyListeners();
+  }
 
   ///Setting Alarm/Reminder
   DateTime? _selectedTime;

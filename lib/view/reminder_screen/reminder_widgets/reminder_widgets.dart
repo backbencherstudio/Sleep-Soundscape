@@ -11,7 +11,7 @@ import '../reminder_screen.dart';
 class ReminderWidgets{
 
   Widget buildCupertinoPicker(BuildContext context,
-      List<dynamic> items, dynamic selectedValue, Function(dynamic) onSelectedItemChanged, bool isAmPm
+      List<dynamic> items, dynamic selectedValue, void Function(int) onSelectedItemChanged, bool isAmPm
       ) {
   //  List<dynamic>
    // items = [01,02,03,04,05,06,07,08,09,10,11,12];
@@ -26,7 +26,7 @@ class ReminderWidgets{
         itemExtent: 40,
         looping: isAmPm ? false : true,
         onSelectedItemChanged: (index) {
-          onSelectedItemChanged(items[index]);
+         // onSelectedItemChanged(items[index]);
         },
         squeeze: 01,
       diameterRatio: 2,
