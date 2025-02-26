@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/ResetPass_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
@@ -77,7 +78,7 @@ class Otpscreen extends StatelessWidget {
               ),
              Mybutton(text: "Confirm", color: Color(0xFFFAD051), ontap: (){
               //povider-----logic then redirect to reset password screen
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetpassScreen()));
            
              })
             ],
