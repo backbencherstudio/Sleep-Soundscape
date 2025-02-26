@@ -42,9 +42,7 @@ dependencies:
   audioplayers: ^6.2.0
   flutter_heatmap_calendar: ^1.0.5
   shared_preferences: ^2.5.2
-<<<<<<< HEAD
-  http: ^1.3.0
-=======
+
   flutter_launcher_icons: ^0.14.3
   android_alarm_manager_plus: ^4.0.7
   flutter_local_notifications: ^18.0.1
@@ -57,7 +55,7 @@ flutter_launcher_icons:
   adaptive_icon_background: "#ffffff"
   adaptive_icon_foreground: "assets/brand_logo.png"
 
->>>>>>> 7359c0b3f250654a9569dc3aa494e6b0342f5b17
+
 
 
 dev_dependencies:
