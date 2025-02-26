@@ -19,7 +19,7 @@ class AuthStorageService{
   /// delete token from the storage
   static Future<void> removeToken () async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove("user-token");
+    await prefs.remove("token");
   }
 
 }
