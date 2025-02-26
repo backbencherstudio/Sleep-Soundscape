@@ -33,6 +33,7 @@ class SoundScreenProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
+        debugPrint("\nRay music list : $jsonData\n");
         _soundList = SoundModel.listFromJson(jsonData);
       } else {
         print('Failed to load sounds. Status Code: ${response.statusCode}');
