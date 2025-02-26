@@ -6,5 +6,7 @@ class AppUrls {
   static  String sound(category) => '$baseUrl/sounds/filterSounds?category=fire&${category}=abcd2';
   //static String readNotification(id) => '$baseUrl/notification/mark-read/${id}';
 
+static String loginUrl = '$baseUrl/users/logIn';
+
 
 }
