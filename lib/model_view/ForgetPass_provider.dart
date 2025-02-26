@@ -10,39 +10,39 @@ class ForgetPassProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
-  Future<bool> sendResetCode(String email) async {
-    if (email.isEmpty) {
-      _errorMessage = "Email cannot be empty";
-      notifyListeners();
-      return false;
-    }
-
+  // Send Reset Code Function
+  Future<void> sendResetCode(String email) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
 
-    final url = Uri.parse('${AppUrls.baseUrl}/auth/forgot-password');
+    final body = {"email": email};
 
     try {
       final response = await http.post(
-        url,
+        Uri.parse(AppUrls.forgotPassword),
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"email": email}),
+        body: jsonEncode(body),
       );
 
-      if (response.statusCode == 200) {
-        _isLoading = false;
-        notifyListeners();
-        return true; // Success
-      } else {
-        _errorMessage = "Failed to send reset code";
-      }
-    } catch (e) {
-      _errorMessage = "Something went wrong: $e";
-    }
+      debugPrint(" Reset Password Response: ${response.body}");
 
-    _isLoading = false;
-    notifyListeners();
-    return false;
+      if (response.statusCode == 200) {
+          debugPrint(" Reset Code Sent Successfully!");
+          
+      } else {
+        debugPrint(" Failed to send reset code: ");
+
+        // _errorMessage = "Error: ${response.statusCode}";
+      }
+    } catch (error) {
+      debugPrint(" Failed to send reset code: ");
+
+      _errorMessage = "Network error: $error";
+      print(" Error Sending Reset Code: $error");
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }
