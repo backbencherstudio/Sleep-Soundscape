@@ -131,20 +131,13 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text("Please enter an email address")),
                 );
-                return;
+
               }
 
-              bool success = await value.sendResetCode(email);
+             await value.sendResetCode(email);
 
-              if (success) {
-                // ignore: use_build_context_synchronously
-                ForgotbottomSheet(context: context);
-              } else {
-                // ignore: use_build_context_synchronously
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(value.errorMessage ?? "Unknown error")),
-                );
-              }
+             ForgotbottomSheet(context: context);
+
             },
           );
   },
