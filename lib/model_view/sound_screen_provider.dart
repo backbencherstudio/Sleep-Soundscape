@@ -45,60 +45,34 @@ class SoundScreenProvider with ChangeNotifier {
     }
   }
 
-  // Play/Pause Music (Toggles Playback)
+  int _playedMusic = -1;
+  // int get playedMusic => _playedMusic;
+  // final AudioPlayer _audioPlayer = AudioPlayer();
   Future<void> playMusic(int index) async {
-    if (_soundList.isEmpty) return;
-
-    final String audioUrl = _soundList[index].audioPath ?? "";
-
-    if (audioUrl.isEmpty) {
-      print("🔴 Error: Audio URL is empty!");
-      return;
-    }
-
-    if (playedMusic == index && isPlaying) {
-      await pauseMusic();
-      return;
-    }
-
-    if (isPlaying) {
-      await stopMusic();
-    }
-
-    playedMusic = index;
     try {
-      await _audioPlayer.play(UrlSource(audioUrl));
-      isPlaying = true;
-      print("▶️ Playing Music: $audioUrl");
+      if (_playedMusic == index) {
+        // If already playing, stop it
+        await _audioPlayer.stop();
+        _playedMusic = -1;
+      } else {
+        // Stop any currently playing music before starting a new one
+        await _audioPlayer.stop();
+
+        _playedMusic = index;
+
+        String demoAudioPath = "http://192.168.40.25:3000/uploads/sounds/1740473347754-fire-02.mp3";
+        String baseUrl = "http://192.168.40.25:3000";
+        String fullPath = "$baseUrl${_soundList[index].audioPath}";
+ debugPrint("full path :${fullPath}");
+        await _audioPlayer.setSource(UrlSource(fullPath,));
+        await _audioPlayer.play(UrlSource(fullPath),volume: 1000);
+      }
     } catch (e) {
-      print("🔴 Error Playing Music: $e");
+      print("Error playing audio: $e");
     }
 
     notifyListeners();
   }
 
-  // Pause Music
-  Future<void> pauseMusic() async {
-    try {
-      await _audioPlayer.pause();
-      isPlaying = false;
-      print("⏸️ Paused Music");
-    } catch (e) {
-      print("🔴 Error Pausing Music: $e");
-    }
-    notifyListeners();
-  }
 
-  // Stop Music (Stops & Resets State)
-  Future<void> stopMusic() async {
-    try {
-      await _audioPlayer.stop();
-      isPlaying = false;
-      playedMusic = -1;
-      print("⏹️ Stopped Music");
-    } catch (e) {
-      print("🔴 Error Stopping Music: $e");
-    }
-    notifyListeners();
-  }
 }

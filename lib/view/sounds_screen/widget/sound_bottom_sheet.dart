@@ -173,18 +173,18 @@ void soundBottomSheet(BuildContext context) {
                                     color: themeProvider.themeMode == ThemeMode.dark ? Colors.white54 : Colors.black87
                                 ),),
                                 trailing: GestureDetector(
-                                  onTap: () async {
-                                    print("🎵 Clicked Play/Pause for index: $index");
-                                    await soundScreenProvider.playMusic(index);
+                                  onTap: () {
+                                    soundScreenProvider.playMusic(index);
                                   },
                                   child: soundScreenProvider.playedMusic == index && soundScreenProvider.isPlaying
-                                      ? Image.asset("assets/icons/play2.png", height: 30)  // Pause icon
+                                      ? Image.asset("assets/icons/play2.png", height: 30) // Pause icon
                                       : Image.asset(
                                     "assets/icons/play1.png",
                                     height: 30,
                                     color: themeProvider.themeMode == ThemeMode.dark ? Colors.white54 : Colors.black,
                                   ),
                                 ),
+
 
 
 
