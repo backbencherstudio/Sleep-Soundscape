@@ -6,12 +6,9 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
 import '../../../model_view/theme_provider.dart';
 
   void soundBottomSheet(BuildContext context) {
-    final List<String> categories = ["Oceans", "Nature", "Rain", "Map", "Fire"];
-    int selectedIndex = 0; // Track the selected category
-    // Use a ValueNotifier to manage the state of the sound toggles.
-    // final ValueNotifier<List<bool>> isPressedNotifier =
-    // ValueNotifier(List.generate(6, (index) => false));
+    int selectedIndex = 0;
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final soundScreenProvider = Provider.of<SoundScreenProvider>(context, listen: false);
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -110,7 +107,7 @@ import '../../../model_view/theme_provider.dart';
                 height: 40.h, // Fixed height for smoother UI
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: categories.length,
+                  itemCount: soundScreenProvider.categories.length,
                   itemBuilder: (context, index) {
                     bool isSelected = selectedIndex == index;
                     return GestureDetector(
@@ -144,7 +141,7 @@ import '../../../model_view/theme_provider.dart';
                           ),
                           alignment: Alignment.center,
                           child: Text(
-                            categories[index],
+                            soundScreenProvider.categories[index],
                             style: TextStyle(
                               // color: isSelected ? Colors.black : Colors.white,
                               fontSize: 14.sp,

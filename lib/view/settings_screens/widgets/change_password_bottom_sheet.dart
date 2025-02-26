@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
+import 'package:sleep_soundscape/model_view/theme_provider.dart';
 
 void ChangePasswordBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -13,8 +15,11 @@ void ChangePasswordBottomSheet(BuildContext context) {
     ),
     context: context,
     isScrollControlled: true,
-    backgroundColor: Color(0xFF0F0F13),
+    // backgroundColor: Color(0xFF0F0F13),
     builder: (context) {
+
+      final darkTheme = context.watch<ThemeProvider>().isDarkMode;
+
       return SizedBox(
         width: double.infinity,
         height: MediaQuery.of(context).size.height * 0.9,
@@ -28,7 +33,7 @@ void ChangePasswordBottomSheet(BuildContext context) {
                 width: 115.w,
                 height: 6.h,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(255, 255, 255, 0.10),
+                  color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.10) : Color.fromRGBO(0, 0, 0, 0.10),
                   borderRadius: BorderRadius.circular(100.r),
                 ),
               ),
@@ -42,16 +47,15 @@ void ChangePasswordBottomSheet(BuildContext context) {
                   },
                   child: ImageIcon(
                     AssetImage("assets/icons/back.png"),
-                    color: Colors.white,
+                    color: darkTheme ?  Colors.white : Colors.black,
                     size: 32.r,
                   ),
                 ),
                 centerTitle: true,
                 title: RichText(
                   text: TextSpan(
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontFamily: "Lexend",
-                      color: Colors.white,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
                     ),
@@ -61,7 +65,7 @@ void ChangePasswordBottomSheet(BuildContext context) {
                         text: "Password ",
                         style: Theme.of(
                           context,
-                        ).textTheme.titleMedium!.copyWith(
+                        ).textTheme.headlineMedium!.copyWith(
                           fontFamily: "Lexend",
                           color: Color(0xFFFAD051),
                           fontSize: 20.sp,
@@ -76,7 +80,7 @@ void ChangePasswordBottomSheet(BuildContext context) {
               Text(
                 "Please enter the details below to change your password.",
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Color.fromRGBO(255, 255, 255, 0.60),
+                  // color: Color.fromRGBO(255, 255, 255, 0.60),
                   fontFamily: "Lexend",
                   fontWeight: FontWeight.w300,
                 ),
@@ -114,20 +118,19 @@ void ChangePasswordBottomSheet(BuildContext context) {
 }
 
 TextFormField textFormField(BuildContext context, String hintText) {
+
   return TextFormField(
-              style: TextStyle(
-                color: Colors.white
-              ),
+              style: Theme.of(context).textTheme.bodyLarge,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                 color: Color.fromRGBO(255, 255, 255, 0.6),
+                 // color: Color.fromRGBO(255, 255, 255, 0.6),
                   fontWeight: FontWeight.w300,
                   fontFamily: "Lexend",
                 ),
                 prefixIcon: Padding(
                   padding:  EdgeInsets.all(12.r),
-                  child: ImageIcon(AssetImage("assets/icons/lock.png",),size: 18.r,color: Colors.white,),
+                  child: ImageIcon(AssetImage("assets/icons/lock.png",),size: 18.r,color: context.watch<ThemeProvider>().isDarkMode ? Colors.white : Colors.black,),
                 ),
                 suffixIcon: Icon(Icons.visibility_outlined,color:Color.fromRGBO(255, 255, 255, 0.6),size: 18.r, )
               ),
