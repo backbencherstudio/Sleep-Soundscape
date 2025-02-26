@@ -5,6 +5,7 @@ import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
 void ForgotbottomSheet({
   required BuildContext context,
+  String? email,
   dynamic Function()? ontap,
 }) {
   showModalBottomSheet(
@@ -101,7 +102,7 @@ void ForgotbottomSheet({
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Otpscreen(),
+                          builder: (context) => Otpscreen(email: email!),
                         ),
                       );
                     },
