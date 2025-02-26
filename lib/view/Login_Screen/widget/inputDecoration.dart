@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 InputDecoration inputDecoration({required  BuildContext context,  Widget? suffixIcon, String? labelText, String? hintText, Widget? prefixIcon,}) {
   return InputDecoration(
