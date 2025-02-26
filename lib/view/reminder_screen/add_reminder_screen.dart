@@ -44,6 +44,7 @@ class AddReminderScreen extends StatelessWidget {
         
             ///Set timer widget
             SetTimer(),
+
             SizedBox(height: 32.h,),
             Text("Advanced"),
             SizedBox(height: 24.h,),
