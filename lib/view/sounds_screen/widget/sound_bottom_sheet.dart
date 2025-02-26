@@ -3,13 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
 
+import '../../../model_view/theme_provider.dart';
+
   void soundBottomSheet(BuildContext context) {
     final List<String> categories = ["Oceans", "Nature", "Rain", "Map", "Fire"];
     int selectedIndex = 0; // Track the selected category
     // Use a ValueNotifier to manage the state of the sound toggles.
     // final ValueNotifier<List<bool>> isPressedNotifier =
     // ValueNotifier(List.generate(6, (index) => false));
-
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -38,7 +40,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                   decoration: BoxDecoration(
                     // color: Colors.transparent,
                     border: Border.all(
-                      // color: Color.fromRGBO(255, 255, 255, 0.20),
+                       color: themeProvider.themeMode == ThemeMode.dark ? Color.fromRGBO(255, 255, 255, 0.20) :Colors.black,
                       width: 1,
                     ),
                     shape: BoxShape.circle,
@@ -49,7 +51,7 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                       offset: Offset(2, 0),
                       child: Icon(
                         Icons.arrow_back_ios,
-                        // color: Colors.white,
+                         color:  themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black,
                         size: 10.sp,
                       ),
                     ),
@@ -64,28 +66,32 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.r),
                     border: Border.all(
-                      // color: Color.fromRGBO(255, 255, 255, 0.08),
-                      width: 1,
+                       color: Colors.transparent,
+                     // width: 1,
                     ),
                   ),
                   child: TextFormField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
+                          color: Colors.transparent,
+
                           // color: Color.fromRGBO(255, 255, 255, 0.08),
-                          width: 1.0,
+                          //width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
+                          color: Colors.transparent,
+
                           // color: Color.fromRGBO(255, 255, 255, 0.08),
-                          width: 1.0,
+                         // width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                       filled: true,
-                      // fillColor: Color(0xff19191C),
+                       fillColor:  themeProvider.themeMode == ThemeMode.dark ? Color(0xff19191C) : Color(0xffF5F5F5),
                       prefixIcon: Icon(
                         Icons.search,
                         // color: Color.fromRGBO(255, 255, 255, 0.50),
@@ -123,12 +129,18 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(14.r),
                             border: Border.all(
-                              // color: Colors.grey,
-                              width: 0.8,
+                               color: Colors.grey,
+                              width: 0.1,
                             ),
+
+
+
                             color: isSelected
                                 ? Color(0xffFAD051)
-                                : Color(0xff19191C),
+                                :   themeProvider.themeMode == ThemeMode.dark ? Color(0xff19191C) : Color(0xffF5F5F5),
+
+
+
                           ),
                           alignment: Alignment.center,
                           child: Text(
@@ -162,12 +174,12 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                           ),
                           child: Container(
                             decoration: BoxDecoration(
-                              // color: Colors.grey[900],
+                               color: themeProvider.themeMode == ThemeMode.dark ? Colors.grey[900] :   Color(0xffF5F5F5) ,
                               borderRadius: BorderRadius.circular(10.r),
                               boxShadow: [
                                 BoxShadow(
-                                  // color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 5,
+                                  color: Colors.transparent,
+                                  blurRadius: 1,
                                   spreadRadius: 1,
                                 ),
                               ],
@@ -181,18 +193,16 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                               ),
                               title: Text(
                                 music.title!,
-                                style: TextStyle(
-                                   //color: Colors.white,
+                                style:Theme.of(context).textTheme.bodySmall?.copyWith(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14.sp,
                                 ),
                               ),
                               subtitle: Text(
                                 music.subtitle!,
-                                style: TextStyle(
-                                  // color: Colors.white70,
+                                style:Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  fontWeight: FontWeight.w300,
                                 ),
                               ),
                               trailing: Consumer<SoundScreenProvider>(
@@ -203,12 +213,14 @@ import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
                                     },
                                     child: soundScreenProvider.playedMusic == index
                                         ? Image.asset(
-                                      "assets/icons/play2.png",
+                                      "assets/icons/play2.png" ,
                                       height: 30,
+                                     // color: themeProvider.themeMode == ThemeMode.dark ? Colors.white54 : Colors.black12,
                                     )
                                         : Image.asset(
                                       "assets/icons/play1.png",
                                       height: 30,
+                                      color: themeProvider.themeMode == ThemeMode.dark ? Colors.white54 : Colors.black,
                                     ),
                                   );
                                 }

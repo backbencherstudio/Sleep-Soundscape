@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../../../model_view/theme_provider.dart';
 
 void soundScape(BuildContext context) {
-  List<bool> isPressedList = List.generate(
-    6,
-    (index) => false,
-  ); // Track state for each item
+  // List<bool> isPressedList = List.generate(
+  //   6,
+  //   (index) => false,
+  // ); // Track state for each item
+  final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
 
   showModalBottomSheet(
     isScrollControlled: true,
@@ -74,17 +78,22 @@ void soundScape(BuildContext context) {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                         color: Color(0xff19191C), // Background color
+                         color: themeProvider.themeMode == ThemeMode.dark ? Color(0xff19191C) : Color(0xffF5F5F5), // Background color
                         borderRadius: BorderRadius.circular(
                           10,
-                        ), // Rounded corners
-                        boxShadow: [
-                          BoxShadow(
-                            // color: Colors.black.withOpacity(0.2),
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                          ),
-                        ],
+                        ),
+                        border: Border.all(
+                          color: themeProvider.themeMode == ThemeMode.dark ? Colors.transparent : Color.fromRGBO(255, 255, 255, 0.70),
+                          width: 2
+                        ),
+                        // Rounded corners
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     // color: Colors.black.withOpacity(0.2),
+                        //     blurRadius: 1,
+                        //     spreadRadius: 1,
+                        //   ),
+                        // ],
                       ),
                       child: ListTile(
                         leading: Image.asset(
@@ -95,7 +104,7 @@ void soundScape(BuildContext context) {
                         title: Text(
                           "Sound ${index + 1}",
                           style: TextStyle(
-                            // color: Colors.white,
+                             color: themeProvider.themeMode == ThemeMode.dark  ?  Colors.white : Colors.black,
                             fontWeight: FontWeight.w500,
                             fontSize: 14.sp,
                           ),

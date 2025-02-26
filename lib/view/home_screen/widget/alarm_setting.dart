@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/view/home_screen/widget/snooze_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/home_screen/widget/sound_scape.dart';
 import 'package:sleep_soundscape/view/sounds_screen/widget/sound_dediction.dart';
 import 'package:sleep_soundscape/global_widget/switch_button.dart';
 
+import '../../../model_view/theme_provider.dart';
 import 'alarm_mode.dart';
 import 'get_up_challange.dart';
 
@@ -12,14 +14,14 @@ void alarmSetting(BuildContext context) {
   ValueNotifier<bool> isAlarmSwitched = ValueNotifier<bool>(false);
   ValueNotifier<bool> isVibrationSwitched = ValueNotifier<bool>(false);
   ValueNotifier<bool> isAutoPlay = ValueNotifier<bool>(false);
+  final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
 
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    // shape: RoundedRectangleBorder(
-    //   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    // ),
-
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
     builder: (BuildContext context) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -38,7 +40,7 @@ void alarmSetting(BuildContext context) {
               _buildSwitchRow(context,"Vibration", isVibrationSwitched),
 
               SizedBox(height: 12.h),
-              _buildProgressBar(context),
+              _buildProgressBar(context,themeProvider),
 
               SizedBox(height: 18.h),
               _buildSoundPreview(context),
@@ -234,10 +236,10 @@ Widget _buildSwitchRow(BuildContext context,String label, ValueNotifier<bool> sw
 }
 
 /// 🔹 **Progress Bar**
-Widget _buildProgressBar(BuildContext context) {
+Widget _buildProgressBar(BuildContext context,themeProvider) {
   return Row(
     children: [
-      Icon(Icons.notifications_outlined, color: Colors.white60),
+      Icon(Icons.notifications_outlined, color: themeProvider.themeMode == ThemeMode.dark ? Colors.white54  : Colors.black12),
       SizedBox(width: 10.w),
       Expanded(
         child: LinearProgressIndicator(
@@ -277,7 +279,7 @@ Widget _buildSoundPreview(BuildContext context) {
                 Text(
                   "Ringtone",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    // color: Colors.white,
+                     color: Colors.white,
                     fontWeight: FontWeight.w500,
                     fontSize: 12.sp,
                   ),
@@ -288,7 +290,7 @@ Widget _buildSoundPreview(BuildContext context) {
                 Text(
                   "Shadow of rain",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    // color: Colors.white54,
+                     color: Colors.white54,
                     fontWeight: FontWeight.w300,
                     fontSize: 10.sp,
                   ),
@@ -302,7 +304,7 @@ Widget _buildSoundPreview(BuildContext context) {
           SizedBox(width: 8.w),
           Transform.translate(
             offset: Offset(2, 0),
-            child: Icon(Icons.arrow_back_ios, size: 10.sp),
+            child: Icon(Icons.arrow_forward_ios_rounded, size: 10.sp,color: Colors.white54,),
           ),
         ],
       ),
