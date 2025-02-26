@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:sleep_soundscape/api_services/api_end_point.dart';
 
 class SignUpProvider extends ChangeNotifier {
+  bool _isSuccess = false;
+  bool get isSuccess => _isSuccess;
   bool _isLoading = false;
   String? _errorMessage;
   bool _obscureText = true;
@@ -21,6 +23,7 @@ class SignUpProvider extends ChangeNotifier {
   /// Create a new user account
   Future<bool> createUser({required String email, required String password, required String name}) async {
     _setLoading(true);
+    _isSuccess =false;
 
     final url = Uri.parse(AppUrls.signUp);
     final body = jsonEncode({
@@ -37,6 +40,7 @@ class SignUpProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 201) {
+        _isSuccess =true;
         _setLoading(false);
         debugPrint(" Response data: ${response.body}");
         return true;
@@ -44,7 +48,7 @@ class SignUpProvider extends ChangeNotifier {
       }
     } catch (e) {
     }
-
+    _isSuccess =false;
     _setLoading(false);
     return false;
   }
