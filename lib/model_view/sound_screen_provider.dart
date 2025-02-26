@@ -92,7 +92,7 @@ class SoundScreenProvider with ChangeNotifier{
 
   int _playedMusic = -1;
   int get playedMusic => _playedMusic;
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  final AudioPlayer _audioPlayer = AudioPlayer()..setPlayerMode(PlayerMode.mediaPlayer);
   Future<void> playMusic(int index) async {
     try {
       if (_playedMusic == index) {
@@ -105,8 +105,15 @@ class SoundScreenProvider with ChangeNotifier{
 
         _playedMusic = index;
 
-        await _audioPlayer.setSource(AssetSource(_musicModel!.musicList![index].audioPath!));
-        await _audioPlayer.play(AssetSource(_musicModel!.musicList![index].audioPath!),volume: 1000);
+        String demoAudioPath = "http://192.168.40.25:3000/uploads/sounds/1740474121011-fire-02.mp3";
+        debugPrint("\nDemo AudioPath : $demoAudioPath\n");
+
+        await _audioPlayer.setPlayerMode(PlayerMode.mediaPlayer);
+       // await _audioPlayer.setSource(UrlSource(demoAudioPath));
+        await _audioPlayer.setVolume(1.0);
+        await _audioPlayer.play(UrlSource(demoAudioPath));
+        debugPrint("\nAudio played\n");
+//        await _audioPlayer.play(UrlSource(demoAudioPath),volume: 1000);
       }
     } catch (e) {
       print("Error playing audio: $e");
