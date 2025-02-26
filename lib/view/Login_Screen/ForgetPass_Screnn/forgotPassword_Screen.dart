@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/widget/forgotPassBottomSheet.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
@@ -13,6 +15,8 @@ class ForgotpasswordScreen extends StatefulWidget {
 }
 
 class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
+
+  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,6 +102,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                 SizedBox(height: 32.h),
 
                 TextFormField(
+                  controller: emailController,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                    
                     fontWeight: FontWeight.w400
@@ -111,13 +116,39 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
 
                 SizedBox(height: 290.h),
 
-                Mybutton(
-                  text: "Done",
-                  color: Color(0xffFAD051),
-                  ontap: () {
-                    ForgotbottomSheet(context: context);
-                  },
-                ),
+           Consumer<ForgetPassProvider>(
+  builder: (context, value, child) {
+    return value.isLoading
+        ? CircularProgressIndicator() 
+        : Mybutton(
+            text: "Done",
+            color: Color(0xffFAD051),
+            ontap: () async {
+              String email = emailController.text.trim();
+              
+              
+              if (email.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Please enter an email address")),
+                );
+                return;
+              }
+
+              bool success = await value.sendResetCode(email);
+
+              if (success) {
+                // ignore: use_build_context_synchronously
+                ForgotbottomSheet(context: context);
+              } else {
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(value.errorMessage ?? "Unknown error")),
+                );
+              }
+            },
+          );
+  },
+),
                 SizedBox(height: 24.h),
               ],
             ),

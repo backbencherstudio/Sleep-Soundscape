@@ -1,6 +1,6 @@
 
 
-import 'package:flutter/widgets.dart';
+
 
 class Downloadmodel {
 String title;

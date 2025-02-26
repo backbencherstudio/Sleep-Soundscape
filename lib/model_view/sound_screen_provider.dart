@@ -1,98 +1,53 @@
 import 'dart:convert';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:sleep_soundscape/api_services/api_end_point.dart';
+import '../model/sound_model.dart';
 
-import '../model/music_model.dart';
-
-class SoundScreenProvider with ChangeNotifier{
-  SoundScreenProvider(){
-    getMusics();
-    //fetchSound();
+class SoundScreenProvider with ChangeNotifier {
+  SoundScreenProvider() {
+    fetchSound(categories.first); // Fetch initial category
   }
-  
 
-  final Map<String,dynamic> _musicsList = {
-    "musicList":[
-      {
-        "category":"oceans",
-        "title":"Ocean Waves",
-        "subtitle":"Singer Nahidul Islam",
-        "imagePath":"assets/images/musics/ocean_waves.png",
-        "audioPath":"musics/ocean-waves.mp3"
-      },
-      {
-        "category":"fire",
-        "title":"Fire Sound-01",
-        "subtitle":"fire of backbencher",
-        "imagePath":"assets/images/musics/ocean_waves.png",
-        "audioPath":"musics/fire-01.mp3"
-      },
-      {
-        "category":"fire",
-        "title":"Fire Sound-02",
-        "subtitle":"fire of flutter",
-        "imagePath":"assets/images/musics/ocean_waves.png",
-        "audioPath":"musics/fire-02.mp3"
-      },
-      {
-        "category":"nature",
-        "title":"Nature Sound-01",
-        "subtitle":"Banasree Jungle Sound",
-        "imagePath":"assets/images/musics/ocean_waves.png",
-        "audioPath":"musics/nature-01.mp3"
-      },
-      {
-        "category":"nature",
-        "title":"Nature Sound-02",
-        "subtitle":"Rampura Jungle Sound",
-        "imagePath":"assets/images/musics/ocean_waves.png",
-        "audioPath":"musics/nature-02.mp3"
-      },
-      {
-        "category":"nature",
-        "title":"Nature Sound-03",
-        "subtitle":"Sundarban Jungle Sound",
-        "imagePath":"assets/images/musics/ocean_waves.png",
-        "audioPath":"musics/nature-03.mp3"
-      },
-      {
-        "category":"oceans",
-        "title":"Ocean Waves-02",
-        "subtitle":"Hatirjhil sound",
-        "imagePath":"assets/images/musics/ocean_waves.png",
-        "audioPath":"musics/waves-02.mp3"
-      },
-      {
-        "category":"rains",
-        "title":"Rain Sounds-02",
-        "subtitle":"Rainy day",
-        "imagePath":"assets/images/musics/rain.png",
-        "audioPath":"musics/rain-02.mp3"
-      },
-      {
-        "category":"rains",
-        "title":"Rain Sounds",
-        "subtitle":"Singer Shakin",
-        "imagePath":"assets/images/musics/rain.png",
-        "audioPath":"musics/rain-sound.mp3"
+  List<SoundModel> _soundList = [];
+  List<SoundModel> get soundList => _soundList;
+
+  List<String> categories = ["Oceans", "Nature", "Rain", "Map", "Fire"];
+  int playedMusic = -1;
+  bool isPlaying = false;
+  bool isLoading = false;
+
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  // Fetch Sounds for the Selected Category
+  Future<void> fetchSound(String category) async {
+    try {
+      isLoading = true;
+      notifyListeners();
+
+      final url = AppUrls.sound(category);
+      print('Fetching URL: $url');
+
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body);
+        _soundList = SoundModel.listFromJson(jsonData);
+      } else {
+        print('Failed to load sounds. Status Code: ${response.statusCode}');
       }
-    ]
-  };
-
-  MusicModel? _musicModel;
-  MusicModel? get musicModel => _musicModel;
-
-  void getMusics(){
-    _musicModel = MusicModel.fromJson(_musicsList);
-    notifyListeners();
+    } catch (error) {
+      print('Error fetching sounds: $error');
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
   }
 
   int _playedMusic = -1;
-  int get playedMusic => _playedMusic;
-  final AudioPlayer _audioPlayer = AudioPlayer()..setPlayerMode(PlayerMode.mediaPlayer);
+  // int get playedMusic => _playedMusic;
+  // final AudioPlayer _audioPlayer = AudioPlayer();
   Future<void> playMusic(int index) async {
     try {
       if (_playedMusic == index) {
@@ -105,15 +60,12 @@ class SoundScreenProvider with ChangeNotifier{
 
         _playedMusic = index;
 
-        String demoAudioPath = "http://192.168.40.25:3000/uploads/sounds/1740474121011-fire-02.mp3";
-        debugPrint("\nDemo AudioPath : $demoAudioPath\n");
-
-        await _audioPlayer.setPlayerMode(PlayerMode.mediaPlayer);
-       // await _audioPlayer.setSource(UrlSource(demoAudioPath));
-        await _audioPlayer.setVolume(1.0);
-        await _audioPlayer.play(UrlSource(demoAudioPath));
-        debugPrint("\nAudio played\n");
-//        await _audioPlayer.play(UrlSource(demoAudioPath),volume: 1000);
+        String demoAudioPath = "http://192.168.40.25:3000/uploads/sounds/1740473347754-fire-02.mp3";
+        String baseUrl = "http://192.168.40.25:3000";
+        String fullPath = "$baseUrl${_soundList[index].audioPath}";
+ debugPrint("full path :${fullPath}");
+        await _audioPlayer.setSource(UrlSource(fullPath,));
+        await _audioPlayer.play(UrlSource(fullPath),volume: 1000);
       }
     } catch (e) {
       print("Error playing audio: $e");
@@ -121,50 +73,6 @@ class SoundScreenProvider with ChangeNotifier{
 
     notifyListeners();
   }
-  int selectedIndex = 0;
 
-  final List<String> categories = ["Oceans", "Nature", "Rain", "Map", "Fire"];
-  //
-  // Future<void> fetchSound() async {
-  //   try {
-  //     final response = await http.get(Uri.parse(AppUrls.sound(category))); // Ensure Uri is parsed
-  //
-  //     if (response.statusCode == 200) {
-  //       // Successfully fetched data
-  //       final data = jsonDecode(response.body);
-  //       print('Data: $data'); // Handle data as needed
-  //     } else {
-  //       print('Failed to load data. Status Code: ${response.statusCode}');
-  //       print('Response body: ${response.body}'); // Print response body for debugging
-  //     }
-  //   } catch (error) {
-  //     print('Error fetching data: $error');
-  //   }
-  // }
-
-  //
-  // final AudioPlayer _audioPlayer = AudioPlayer();
-  // bool isPlaying = false;
-  //
-  // Future<void> _playAudio() async {
-  //   await _audioPlayer.play(AssetSource('audio/song1.mp3'));
-  //   setState(() {
-  //     isPlaying = true;
-  //   });
-  // }
-  //
-  // Future<void> _pauseAudio() async {
-  //   await _audioPlayer.pause();
-  //   setState(() {
-  //     isPlaying = false;
-  //   });
-  // }
-  //
-  // Future<void> _stopAudio() async {
-  //   await _audioPlayer.stop();
-  //   setState(() {
-  //     isPlaying = false;
-  //   });
-  // }
 
 }

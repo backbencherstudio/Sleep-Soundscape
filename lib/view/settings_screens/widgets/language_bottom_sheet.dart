@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
+import 'package:sleep_soundscape/model_view/theme_provider.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/change_password_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/invite_friend_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/notification_bottom_sheet.dart';
@@ -35,8 +37,11 @@ void LanguageBottomSheet(BuildContext context){
       ),
       context: context,
       isScrollControlled: true,
-      backgroundColor: Color(0xFF0F0F13),
-      builder: (contex) {
+      // backgroundColor: Color(0xFF0F0F13),
+      builder: (context) {
+
+        final darkTheme = context.watch<ThemeProvider>().isDarkMode;
+
         return SizedBox(
           width: double.infinity,
           height: MediaQuery.of(context).size.height * 0.9,
@@ -50,7 +55,7 @@ void LanguageBottomSheet(BuildContext context){
                   width: 115.w,
                   height: 6.h,
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(255, 255, 255, 0.10),
+                      color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.10) : Color.fromRGBO(0, 0, 0, 0.10) ,
                       borderRadius: BorderRadius.circular(100.r)
                   ),
                 ),
@@ -64,7 +69,7 @@ void LanguageBottomSheet(BuildContext context){
                       ListView.separated(
                         shrinkWrap: true,
                         itemCount: languages.length,
-                        separatorBuilder: (context, index) => Divider(color: Color.fromRGBO(255, 255, 255, 0.1), height: 1),
+                        separatorBuilder: (context, index) => Divider(color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.1) : Color.fromRGBO(0, 0, 0, 0.1), height: 1),
                         itemBuilder: (context, index) {
                           return ListTile(
                             title: Text(
@@ -75,8 +80,8 @@ void LanguageBottomSheet(BuildContext context){
                               ),
                             ),
                             trailing: selectedLanguage == languages[index]
-                                ? const Icon(Icons.radio_button_checked, color: Color(0xFFFAD051))
-                                : const Icon(Icons.radio_button_off, color: Color.fromRGBO(255,255,255,0.6)),
+                                ?  Icon(Icons.radio_button_checked, color: Color(0xFFFAD051))
+                                :  Icon(Icons.radio_button_off, color: darkTheme ? Color.fromRGBO(255,255,255,0.6) : Color.fromRGBO(0,0,0,0.6)),
                             onTap: () {
                               // setState(() {
                               //   selectedLanguage = languages[index];
