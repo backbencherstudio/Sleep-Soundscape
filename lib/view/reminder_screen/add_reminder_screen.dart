@@ -43,7 +43,15 @@ class AddReminderScreen extends StatelessWidget {
             SizedBox(height: 24.h),
         
             ///Set timer widget
-            SetTimer(),
+            Consumer<ReminderScreenProvider>(
+              builder: (_, reminderScreenProvider, child) {
+                return SetTimer(
+                  onSelectedHour: reminderScreenProvider.setHour,
+                  onSelectedMinute: reminderScreenProvider.setMinute,
+                  onSelectedAmPm: reminderScreenProvider.setAmPm,
+                );
+              }
+            ),
 
             SizedBox(height: 32.h,),
             Text("Advanced"),
