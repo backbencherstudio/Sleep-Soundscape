@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/api_services/local_storage_services.dart';
 import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
-import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
@@ -81,6 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     if(value.length < 8){
                       return "Password must be at least 6 characters long" ;
                     }
+                    return null;
                   },
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     // color: Color(0xFFFFFFFFF).withOpacity(0.9),
@@ -132,11 +133,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                 _passwordController.text,
                               );
 
+                              await AuthStorageService.saveToken(key: "token", value: loginAuthProvider.loginData!.token!);
+                              debugPrint("\n\n user-token = ${loginAuthProvider.loginData!.token}");
+
                               if (loginAuthProvider.isSuccess) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text("Login failed! Try again"),
-                                    backgroundColor: Colors.red,
+                                    content: Text("Login success!"),
+                                    backgroundColor: Colors.green,
                                   ),
                                 );
 
