@@ -91,4 +91,51 @@ class ForgetPassProvider with ChangeNotifier {
     notifyListeners();
   }
 }
+
+
+ Future<void> resetPassword(String email, String otp, String newPassword, String confirmPassword) async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    if (newPassword != confirmPassword) {
+      _errorMessage = "Passwords do not match!";
+      _isLoading = false;
+      notifyListeners();
+      return;
+    }
+
+    final body = {
+      "email": email.trim(),
+      "resetCode": otp.trim(),
+      "newPassword": newPassword.trim(),
+      "confirmPassword": confirmPassword.trim(),
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse('${AppUrls.baseUrl}/users/reset-password'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(body),
+      );
+
+      debugPrint("Response Status: ${response.statusCode}");
+      debugPrint("Response Body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        debugPrint("Password Reset Successfully!");
+        _isSuccess = true;
+      } else {
+        final responseBody = jsonDecode(response.body);
+        _errorMessage = "Failed to reset password: ${responseBody['message'] ?? 'Unknown error'}";
+      }
+    } catch (error) {
+      _errorMessage = "Error resetting password: $error";
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+
 }
