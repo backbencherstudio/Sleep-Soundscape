@@ -22,13 +22,13 @@ class _SignInScreenState extends State<SignInScreen> {
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _emailConteroller.dispose();
-    _passwordController.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  //   _emailConteroller.dispose();
+  //   _passwordController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +50,17 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 TextFormField(
                   controller: _emailConteroller,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value){
+                    if(value == null || value.isEmpty){
+                      return "Email is required!" ;
+                    }
+                    final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                    if (!emailRegex.hasMatch(value)) {
+                      return "Enter a valid email address";
+                    }
+                    return null;
+                  },
                   style: Theme.of(
                     context,
                   ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
@@ -63,6 +74,14 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 16.h),
                 TextFormField(
                   controller: _passwordController,
+                  validator: (value){
+                    if(value == null || value.isEmpty){
+                      return "Password is required!" ;
+                    }
+                    if(value.length < 8){
+                      return "Password must be at least 6 characters long" ;
+                    }
+                  },
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     // color: Color(0xFFFFFFFFF).withOpacity(0.9),
                     fontWeight: FontWeight.w400,
@@ -107,34 +126,39 @@ class _SignInScreenState extends State<SignInScreen> {
                           text: "Sign in",
                           color: Color(0xffFAD051),
                           ontap: () async {
-                         await   loginAuthProvider.userLogin(
-                              _emailConteroller.text,
-                              _passwordController.text,
-                            );
-
-                            if (loginAuthProvider.isSuccess) {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => CompleteprofileScreen(),
-                              //   ),
-                              // );
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                RouteName.homeScreen,
-                                (_) => false,
+                            if (_formKey.currentState!.validate())  {
+                              await loginAuthProvider.userLogin(
+                                _emailConteroller.text,
+                                _passwordController.text,
                               );
 
-                              _emailConteroller.clear();
-                              _passwordController.clear();
+                              if (loginAuthProvider.isSuccess) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Login failed! Try again"),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
 
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("Login failed! Try again"),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  RouteName.homeScreen,
+                                      (_) => false,
+                                );
+
+                                _emailConteroller.clear();
+                                _passwordController.clear();
+                              } else {
+                                _emailConteroller.clear();
+                                _passwordController.clear();
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Login failed! Try again"),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
                             }
                           },
                         );
