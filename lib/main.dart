@@ -21,6 +21,7 @@ import 'package:sleep_soundscape/view/settings_screens/personalization_screen.da
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/about_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
+import 'model_view/ForgetPass_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
 import 'model_view/temp.dart';
@@ -71,6 +72,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<LoginAuthProvider>(
           create: (_) => LoginAuthProvider(),
+        ),
+        ChangeNotifierProvider<ForgetPassProvider>(
+          create: (_) => ForgetPassProvider(),
         ),
 
 
