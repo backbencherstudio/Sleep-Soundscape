@@ -7,8 +7,8 @@ class AppUrls {
   static String sound(String category) => '$baseUrl/sounds/filterSounds?category=$category';
   //static String readNotification(id) => '$baseUrl/notification/mark-read/${id}';
    static String forgotPassword  = '$baseUrl/api/users/forgot-password';
-  static String loginUrl = '$baseUrl/users/logIn';
-  static String signUp = '$baseUrl/users/signup';
+  static String loginUrl = '$baseUrl/api/users/logIn';
+  static String signUp = '$baseUrl/api/users/signup';
 
 
 }

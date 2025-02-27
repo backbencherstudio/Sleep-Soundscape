@@ -44,7 +44,10 @@ class LoginAuthProvider with ChangeNotifier {
 
 
       // If API call is successful
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && jsonResponse['success'] == true) {
+
+        debugPrint("\njson response success : ${jsonResponse['success']}");
+
         _isSuccess = true;
         _loginData = LoginDataModel.fromJson(jsonResponse ?? {});
       } else {

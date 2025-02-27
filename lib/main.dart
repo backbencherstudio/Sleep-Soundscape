@@ -120,6 +120,17 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Counter App',
+            supportedLocales: [
+              Locale('en', 'US'), // English
+              Locale('es', 'ES'), // Spanish
+              Locale('fr', 'FR'), // French
+            ],
+            // Add localization delegates
+            localizationsDelegates: [
+              // GlobalMaterialLocalizations.delegate,
+              // GlobalWidgetsLocalizations.delegate,
+              // GlobalCupertinoLocalizations.delegate,
+            ],
             theme:  ThemeData(
               scaffoldBackgroundColor: Colors.white,
 
