@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
-import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/widget/forgotPassBottomSheet.dart';
-import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
-import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
+import 'package:sleep_soundscape/model_view/sign-up_provider.dart';
+import 'package:sleep_soundscape/view/Login_Screen/signIN_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/signUp_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
+// ignore: must_be_immutable
 class ResetpassScreen extends StatefulWidget {
   String email;
   String otp;
@@ -25,6 +26,8 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
   TextEditingController confirmPassController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+           final loginProvider = Provider.of<SignUpProvider>(context);
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -108,6 +111,8 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 ),
                 SizedBox(height: 32.h),
    TextFormField(
+                        obscureText: loginProvider.isObscure,
+
     controller: passwordController,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     // color: Color(0xFFFFFFFFF).withOpacity(0.9),
@@ -117,13 +122,18 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                   context : context,
                   prefixIcon:  Icon(Icons.lock_outline_rounded),
                   hintText:   "Enter your new password",
-                  suffixIcon:   Icon(
-                    Icons.visibility_outlined,
+                  suffixIcon: GestureDetector(
+                      onTap: () {
+                         loginProvider.togglePasswordVisibility();
+                      },
+                      child: Icon(loginProvider.isObscure ? Icons.visibility_off_outlined : Icons.visibility_outlined),
                   ),
                 ),
               ),
               SizedBox(height: 10.h,),
     TextFormField(
+                          obscureText: loginProvider.isObscure,
+
       controller: confirmPassController,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     // color: Color(0xFFFFFFFFF).withOpacity(0.9),
@@ -133,8 +143,11 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                   context : context,
                   prefixIcon:  Icon(Icons.lock_outline_rounded),
                   hintText:   "Confirm your password",
-                  suffixIcon:   Icon(
-                    Icons.visibility_outlined,
+                 suffixIcon: GestureDetector(
+                      onTap: () {
+                         loginProvider.togglePasswordVisibility();
+                      },
+                      child: Icon(loginProvider.isObscure ? Icons.visibility_off_outlined : Icons.visibility_outlined),
                   ),
                 ),
               ),
@@ -156,7 +169,7 @@ Consumer<ForgetPassProvider>(
                               if (provider.isSuccess) {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                                  MaterialPageRoute(builder: (context) => SignupScreen()),
                                 );
                               } else if (provider.errorMessage != null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
