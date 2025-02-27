@@ -27,24 +27,7 @@ class ProfileScreen extends StatelessWidget {
           padding: EdgeInsets.only(left: 24.0.w),
           child: GestureDetector(
             onTap: () => Navigator.pop(context),
-            child: Container(
-              width: 32.w,
-              height: 32.h,
-              padding: EdgeInsets.all(7.r),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.onSecondary.withOpacity(0.08),
-                ),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.arrow_back_ios_new,
-                color: Theme.of(context).colorScheme.onSecondary,
-                size: 18.r,
-              ),
-            ),
+            child: ImageIcon(AssetImage("assets/icons/back.png")),
           ),
         ),
         actionsPadding: EdgeInsets.only(right: 24.w),
