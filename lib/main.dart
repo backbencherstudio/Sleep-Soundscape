@@ -25,11 +25,15 @@ import 'model_view/ForgetPass_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
 import 'model_view/temp.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await AndroidAlarmManager.initialize();
+  // Start background service
+   await initializeService();
   runApp(MyApp());
 }
 
