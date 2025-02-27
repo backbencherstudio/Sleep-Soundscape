@@ -50,7 +50,7 @@ class ForgetPassProvider with ChangeNotifier {
   notifyListeners();
 
   
-  if (otp.isEmpty || otp.length < 6) {
+  if (otp.isEmpty || otp.length < 4) {
     _errorMessage = "Invalid OTP";
     notifyListeners();
     return;
@@ -58,7 +58,7 @@ class ForgetPassProvider with ChangeNotifier {
 
   final body = {
     "email": email.trim(),
-    "resetCode": otp.trim(),
+    "otp": otp.trim(),
   };
 
   debugPrint("Sending OTP verification request with body: ${jsonEncode(body)}");
@@ -68,7 +68,7 @@ class ForgetPassProvider with ChangeNotifier {
 
   try {
     final response = await http.post(
-      Uri.parse('${AppUrls.baseUrl}/users/verify-reset-code'),
+      Uri.parse('${AppUrls.baseUrl}/api/users/verify-reset-code'),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode(body), 
     );
@@ -93,7 +93,12 @@ class ForgetPassProvider with ChangeNotifier {
 }
 
 
- Future<void> resetPassword(String email, String otp, String newPassword, String confirmPassword) async {
+ Future<void> resetPassword(String email, 
+//  String otp, 
+ String newPassword, 
+ String confirmPassword
+ 
+ ) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -107,14 +112,12 @@ class ForgetPassProvider with ChangeNotifier {
 
     final body = {
       "email": email.trim(),
-      "resetCode": otp.trim(),
-      "newPassword": newPassword.trim(),
-      "confirmPassword": confirmPassword.trim(),
+      "newPassword":newPassword.trim(),
     };
 
     try {
       final response = await http.post(
-        Uri.parse('${AppUrls.baseUrl}/users/reset-password'),
+        Uri.parse('${AppUrls.baseUrl}/api/users/reset-password'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(body),
       );

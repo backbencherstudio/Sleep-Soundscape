@@ -40,7 +40,7 @@ class Otpscreen extends StatelessWidget {
               ),
               SizedBox(height: 24.h),
               PinCodeTextField(
-                length: 6,
+                length: 4,
                 obscureText: false,
                 controller: otpController,
                 pinTheme: PinTheme(
@@ -68,16 +68,16 @@ Consumer<ForgetPassProvider>(
         ? Center(child: CircularProgressIndicator())
         : Mybutton(
             text: "Confirm",
-            color: otpController.text.length == 6
+            color: otpController.text.length == 4
                 ? Color(0xFFFAD051)
                 : Colors.grey, // Button color change based on OTP length
-            ontap: otpController.text.length == 6
-                ? () {
-                    provider.verifyOtp(email, otpController.text.trim());
+            ontap: otpController.text.length == 4
+                ? () async{
+                  await  provider.verifyOtp(email, otpController.text.trim());
 
               
-                    
-                     () {
+                  
+                      
                       if (provider.isSuccess) {
                         Navigator.push(
                           context,
@@ -92,12 +92,14 @@ Consumer<ForgetPassProvider>(
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(provider.errorMessage ??
+                            
+                            content: 
+                            Text(provider.errorMessage ??
                                 "Failed to verify OTP"),
                           ),
                         );
                       }
-                    };
+                    
                   }
                 : null, // Disable button if OTP not entered
           );
