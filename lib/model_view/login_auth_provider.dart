@@ -61,16 +61,4 @@ class LoginAuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-
-  Future<void>  createUser()async {
-
-    try{
-
-
-    }catch(error){
-
-      debugPrint("error message : ${error}");
-    }
-
-  }
 }

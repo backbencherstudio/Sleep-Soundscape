@@ -23,13 +23,13 @@ class _SignInScreenState extends State<SignInScreen> {
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   _emailConteroller.dispose();
-  //   _passwordController.dispose();
-  // }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailConteroller.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Consumer<LoginAuthProvider>(
                   builder: (context, loginAuthProvider, child) {
                     return loginAuthProvider.isLoginProgress
-                        ? CircularProgressIndicator()
+                        ? Center(child: CircularProgressIndicator())
                         : Mybutton(
                           text: "Sign in",
                           color: Color(0xffFAD051),
@@ -150,12 +150,12 @@ class _SignInScreenState extends State<SignInScreen> {
                               debugPrint("\n\n user-token = ${loginAuthProvider.loginData!.token}");
 
                               if (loginAuthProvider.isSuccess) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("Login success!"),
-                                    backgroundColor: Colors.green,
-                                  ),
-                                );
+                                // ScaffoldMessenger.of(context).showSnackBar(
+                                //   SnackBar(
+                                //     content: Text("Login success!"),
+                                //     backgroundColor: Colors.green,
+                                //   ),
+                                // );
 
                                 Navigator.pushNamedAndRemoveUntil(
                                   context,
@@ -166,13 +166,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                 _emailConteroller.clear();
                                 _passwordController.clear();
                               } else {
-                                _emailConteroller.clear();
-                                _passwordController.clear();
+                                // _emailConteroller.clear();
+                                // _passwordController.clear();
 
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text("Login failed! Try again"),
                                     backgroundColor: Colors.red,
+                                    duration: Duration(seconds: 2),
                                   ),
                                 );
                               }
