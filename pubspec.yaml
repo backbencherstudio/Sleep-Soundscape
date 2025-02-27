@@ -48,6 +48,7 @@ dependencies:
   flutter_local_notifications: ^18.0.1
   flutter_background_service: ^5.1.0
   pin_code_fields: ^8.0.1
+  timezone: ^0.10.0
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
