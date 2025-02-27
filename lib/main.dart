@@ -11,6 +11,7 @@ import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/profile_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/theme_provider.dart';
+import 'package:sleep_soundscape/notification_services/notification_services.dart';
 import 'package:sleep_soundscape/view/Download_Screen/test_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/signIN_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
@@ -33,6 +34,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await AndroidAlarmManager.initialize();
+
+  final notificationService = NotificationServices();
+  await notificationService.initialize();
 
 
   final prefs = await SharedPreferences.getInstance();
