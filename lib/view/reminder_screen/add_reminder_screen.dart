@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/model_view/reminder_screen_provider.dart';
+import 'package:sleep_soundscape/notification_services/notification_services.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/add_reminder_header.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/dropdown_widget.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
@@ -41,6 +42,7 @@ class AddReminderScreen extends StatelessWidget {
               onSave:  () async {
 
               await context.read<ReminderScreenProvider>().onSave();
+             // await NotificationServices.scheduledNotification("Manual Alarm triggered", "This is alarm body");
               Navigator.pop(context);
 
               },

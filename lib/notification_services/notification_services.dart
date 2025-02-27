@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:timezone/data/latest.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,7 @@ class NotificationServices {
     InitializationSettings(android: androidInitializationSettings);
 
     await _localNotificationsPlugin.initialize(initializationSettings);
+    initializeTimeZones();
 
   }
 
@@ -41,11 +44,13 @@ class NotificationServices {
         0,
         title,
         body,
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 10)),
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 2)),
         notificationDetails,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle
     );
+
+
 
   }
 

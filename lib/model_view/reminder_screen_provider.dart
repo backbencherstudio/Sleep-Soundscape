@@ -1,17 +1,26 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:sleep_soundscape/model/reminder.dart';
+import 'package:timezone/data/latest.dart';
+
+import '../notification_services/notification_services.dart';
 
 /// Initialize background service
 Future<void> initializeService() async {
   final service = FlutterBackgroundService();
 
   await service.configure(
-    iosConfiguration: IosConfiguration(),
+    iosConfiguration: IosConfiguration(
+      onForeground: onStart,
+    ),
     androidConfiguration: AndroidConfiguration(
       onStart: onStart,
+      autoStart: true,
       isForegroundMode: true,
     ),
   );
@@ -23,12 +32,13 @@ Future<void> initializeService() async {
 @pragma('vm:entry-point') // Required for AOT compilation
 void onStart(ServiceInstance service) async {
   print("Alarm Triggered & Playing Sound!");
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   // Listen for commands (only play audio when alarmCallback() invokes it)
   service.on("play_audio").listen((event) async {
     print("Alarm Triggered: Playing Sound!");
 
-    final AudioPlayer _audioPlayer = AudioPlayer();
+
     String demoAudioPath = "musics/waves-02.mp3";
 
     try {
@@ -37,12 +47,55 @@ void onStart(ServiceInstance service) async {
       print("\nError playing audio: $e/n");
     }
   });
+
+  service.on("stop_audio").listen((event)  async {
+    debugPrint("Stopping Alarm Sound...");
+    try{
+
+      await _audioPlayer.stop();
+      await _audioPlayer.dispose();
+      debugPrint("\nSuccessfully alarm stopped.\n");
+    }catch(error){
+      debugPrint("\nError while stopping alarm audio : $error\n");
+    }
+
+  });
+
+  if (service is AndroidServiceInstance) {
+    service.setAsForegroundService();
+  }
 }
 
 // Example alarm callback function
-void alarmCallback() {
+@pragma('vm:entry-point') // Required for AOT compilation
+void alarmCallback()  {
+  WidgetsFlutterBinding.ensureInitialized();
   debugPrint("\nAlarm triggered!\n");
-  FlutterBackgroundService().invoke("play_audio");
+
+  FlutterBackgroundService service = FlutterBackgroundService();
+  service.invoke('play_audio');
+
+  Timer(Duration(seconds: 30),(){
+    service.invoke("stop_audio");
+  });
+
+
+  // final AudioPlayer _audioPlayer = AudioPlayer();
+  // String demoAudioPath = "musics/waves-02.mp3";
+  //
+  // try {
+  //    _audioPlayer.play(AssetSource(demoAudioPath), volume: 1,);
+  //    final notificationService = NotificationServices();
+  //    initializeTimeZones();
+  //     notificationService.initialize();
+  //
+  //    NotificationServices.scheduledNotification("Manual Alarm triggered", "This is alarm body");
+  //   //  Future.delayed(Duration(seconds: 10));
+  //     //_audioPlayer.stop();
+  // } catch (e) {
+  //   print("\nError playing audio: $e/n");
+  // }
+  //FlutterBackgroundService().invoke("play_audio");
 }
 
 
@@ -110,10 +163,12 @@ class ReminderScreenProvider with ChangeNotifier{
 
   void setHour(int selectedH){
     _selectedHour = selectedH;
+    notifyListeners();
   }
 
   void setMinute(int selectedM){
     _selectedMinute = selectedM;
+    notifyListeners();
   }
 
   void setAmPm(int selectedAmPm){
@@ -123,7 +178,7 @@ class ReminderScreenProvider with ChangeNotifier{
     else if(selectedAmPm == -2){
       _selectedAmPm = 'PM';
     }
-
+    notifyListeners();
   }
 
 
@@ -131,6 +186,8 @@ class ReminderScreenProvider with ChangeNotifier{
   Future<void> onSave() async {
 
     try{
+
+      debugPrint("\n_Selected hour : $_selectedHour, minute : $_selectedMinute\n");
 
       _selectedHour = ((_selectedAmPm == "PM") && (_selectedHour != 12))
           ? _selectedHour + 12
@@ -170,16 +227,24 @@ class ReminderScreenProvider with ChangeNotifier{
         day = now.day;
       }
 
-      _selectedTime = nextDay;
+     // _selectedTime = nextDay;
+      _selectedTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 12, 32,);
       debugPrint("\n selected time : $_selectedTime\n");
       notifyListeners();
 
-      DateTime _time = DateTime.now().add(Duration(minutes: 1));
+      DateTime _time = DateTime.now().add(Duration(seconds: 5));
       //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, DateTime.now().hour, DateTime.now().minute+1);
-      debugPrint("\nalarm time : $_time\n");
+      debugPrint("\nalarm time : $_selectedTime\n");
 
-      bool scheduled = await AndroidAlarmManager.oneShotAt(_time, 0,
+      bool scheduled = await AndroidAlarmManager.oneShotAt(_selectedTime ?? _time, Random().nextInt(1095),
         alarmCallback,
+        alarmClock: true,
+        allowWhileIdle: true,
+        rescheduleOnReboot: true,
+        params: {
+        "param1": "Hello",
+          'param2' : "World"
+        },
         exact: true,
         wakeup: true,);
 

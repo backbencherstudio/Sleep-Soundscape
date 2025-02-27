@@ -38,7 +38,7 @@ class LoginAuthProvider with ChangeNotifier {
       );
 
       // Decode response body
-      var jsonResponse = jsonDecode(response.body ?? "{}");
+      var jsonResponse = jsonDecode(response.body);
 
       debugPrint("\n\nLogin response : ${jsonResponse}\n\n");
 
@@ -61,16 +61,4 @@ class LoginAuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-
-  Future<void>  createUser()async {
-
-    try{
-
-
-    }catch(error){
-
-      debugPrint("error message : ${error}");
-    }
-
-  }
 }

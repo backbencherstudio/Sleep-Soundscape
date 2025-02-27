@@ -1,5 +1,6 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +25,7 @@ import 'package:sleep_soundscape/view/settings_screens/personalization_screen.da
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/about_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
+import 'package:timezone/data/latest.dart';
 import 'model_view/ForgetPass_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
@@ -34,10 +36,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await AndroidAlarmManager.initialize();
+  await initializeService();
 
-  final notificationService = NotificationServices();
-  await notificationService.initialize();
-
+  initializeTimeZones();
 
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
@@ -46,12 +47,34 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // final double deviceWidth = 1440.0;
-  // static const double deviceHeight = 1383.0;
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+
+  PermissionStatus _exactAlarmPermissionStatus = PermissionStatus.granted;
+
+  @override
+  void initState() {
+    super.initState();
+    AndroidAlarmManager.initialize();
+    _checkExactAlarmPermission();
+  }
+
+  void _checkExactAlarmPermission() async {
+    final currentStatus = await Permission.scheduleExactAlarm.request();
+   // await Permission.scheduleExactAlarm.
+    // setState(() {
+    //   _exactAlarmPermissionStatus = currentStatus;
+    // });
+  }
+
+
+  // final double deviceWidth = 1440.0;
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -335,7 +358,7 @@ class MyApp extends StatelessWidget {
             routes: {
 
 
-              '/': (context) => const SplashScreen(),
+              '/': (context) => const HomeScreen(),
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
               RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),
