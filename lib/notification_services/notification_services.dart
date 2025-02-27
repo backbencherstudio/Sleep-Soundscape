@@ -43,12 +43,12 @@ class NotificationServices {
     const NotificationDetails notificationDetails =
     NotificationDetails(android: androidNotificationDetails);
 
-    await _localNotificationsPlugin.show(
-      _notificationId,
-      title,
-      body,
-      notificationDetails,
-    );
+    // await _localNotificationsPlugin.show(
+    // //  _notificationId,
+    //   title,
+    //   body,
+    //   notificationDetails,
+    // );
   }
 
 

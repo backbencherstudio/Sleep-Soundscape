@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
+
+import '../../../api_services/local_storage_services.dart';
 void signOutBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
@@ -55,7 +58,14 @@ void signOutBottomSheet(BuildContext context) {
 
             Align(
                 alignment: Alignment.center,
-                child: CustomButton(text: "Sign out", onPressed: (){})),
+                child: CustomButton(text: "Sign out", onPressed: ()async{
+                  await  AuthStorageService.removeToken();
+                  Navigator.pushNamedAndRemoveUntil(context, RouteName.signInScreen, (_)=>false);
+
+                  debugPrint("Log out Successfully");
+
+
+                })),
             SizedBox(height: 24.h),
             Align(
                 alignment: Alignment.center,

@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
 import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/widget/forgotPassBottomSheet.dart';
 import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/login_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 
 class ResetpassScreen extends StatefulWidget {
-  const ResetpassScreen({super.key});
+  String email;
+  String otp;
+   ResetpassScreen({
+    required this.email,
+    required this.otp,
+    super.key});
 
   @override
   State<ResetpassScreen> createState() => _ResetpassScreenState();
 }
 
 class _ResetpassScreenState extends State<ResetpassScreen> {
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPassController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,6 +95,7 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                   ),
                 ),
                 Padding(
+                 
                   padding: EdgeInsets.only(left: 18, right: 18),
                   child: Text(
                     "reset your password.",
@@ -97,6 +108,7 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 ),
                 SizedBox(height: 32.h),
    TextFormField(
+    controller: passwordController,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     // color: Color(0xFFFFFFFFF).withOpacity(0.9),
                     fontWeight: FontWeight.w400
@@ -112,6 +124,7 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
               ),
               SizedBox(height: 10.h,),
     TextFormField(
+      controller: confirmPassController,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     // color: Color(0xFFFFFFFFF).withOpacity(0.9),
                     fontWeight: FontWeight.w400
@@ -126,12 +139,32 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 ),
               ),
                 SizedBox(height: 290.h),
+Consumer<ForgetPassProvider>(
+                  builder: (context, provider, child) {
+                    return provider.isLoading
+                        ? CircularProgressIndicator()
+                        : Mybutton(
+                            text: "Done",
+                            color: Color(0xffFAD051),
+                            ontap: () {
+                              provider.resetPassword(
+                                widget.email ,widget.otp,
+                                passwordController.text,
+                                confirmPassController.text,
+                              );
 
-                Mybutton(
-                  text: "Done",
-                  color: Color(0xffFAD051),
-                  ontap: () {
-                    ForgotbottomSheet(context: context);
+                              if (provider.isSuccess) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                                );
+                              } else if (provider.errorMessage != null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(provider.errorMessage!)),
+                                );
+                              }
+                            },
+                          );
                   },
                 ),
                 SizedBox(height: 24.h),
