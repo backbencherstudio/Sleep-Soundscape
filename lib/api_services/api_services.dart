@@ -34,8 +34,8 @@ class ApiServices{
 
       return response;
     } catch (error) {
-      debugPrint("Error : ${error}\n");
-      return {"success": "Failed"};
+      debugPrint("\n\nError : ${error}\n");
+      return {"\nsuccess": "Failed"};
     }
   }
 
