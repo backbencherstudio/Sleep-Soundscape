@@ -79,7 +79,7 @@ class PersonalizationScreen extends StatelessWidget {
               child: Text("skip",style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontWeight: FontWeight.w300,
                   fontFamily: "lexend",
-                  color: Color.fromRGBO(255,255,255,0.6)
+                  // color: Color.fromRGBO(255,255,255,0.6)
               ),)
           )
         ],
