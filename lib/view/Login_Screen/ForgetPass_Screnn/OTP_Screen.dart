@@ -75,7 +75,9 @@ Consumer<ForgetPassProvider>(
                 ? () {
                     provider.verifyOtp(email, otpController.text.trim());
 
-                    Future.delayed(Duration(seconds: 3), () {
+              
+                    
+                     () {
                       if (provider.isSuccess) {
                         Navigator.push(
                           context,
@@ -95,7 +97,7 @@ Consumer<ForgetPassProvider>(
                           ),
                         );
                       }
-                    });
+                    };
                   }
                 : null, // Disable button if OTP not entered
           );

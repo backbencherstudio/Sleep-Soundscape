@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
-import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/signIN_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/widget/forgotPassBottomSheet.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
@@ -117,8 +117,8 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                 SizedBox(height: 290.h),
 
            Consumer<ForgetPassProvider>(
-  builder: (context, value, child) {
-    return value.isLoading
+      builder: (context, forgetPassProvider, child) {
+            return forgetPassProvider.isLoading
         ? CircularProgressIndicator() 
         : Mybutton(
             text: "Done",
@@ -134,7 +134,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
 
               }
 
-             await value.sendResetCode(email);
+             await forgetPassProvider.sendResetCode(email);
 
              ForgotbottomSheet(context: context,
              email: email,
