@@ -1,5 +1,7 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,20 +29,31 @@ import 'model_view/ForgetPass_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
 import 'model_view/sign-up_provider.dart';
+import 'model_view/sound_setting_provider.dart';
 import 'model_view/temp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Ensure screen size initialization
   await ScreenUtil.ensureScreenSize();
+
+  // Initialize Hive
+  await Hive.initFlutter();
+
+  // Open Hive boxes globally before running the app
+  await Hive.openBox('soundSettings');
+
+  // Initialize Android Alarm Manager
   await AndroidAlarmManager.initialize();
 
-
+  // Load shared preferences
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
 
-
   runApp(MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -87,6 +100,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<SignUpProvider>(
           create: (_) => SignUpProvider(),
+        ),
+     ChangeNotifierProvider<SoundSettingProvider>(
+          create: (_) => SoundSettingProvider(),
         ),
 
 
