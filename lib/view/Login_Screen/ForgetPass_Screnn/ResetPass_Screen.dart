@@ -153,30 +153,39 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
               ),
                 SizedBox(height: 290.h),
 Consumer<ForgetPassProvider>(
-                  builder: (context, provider, child) {
-                    return provider.isLoading
+                  builder: (context, forgetPassProviderprovider, child) {
+                    return forgetPassProviderprovider.isLoading
                         ? CircularProgressIndicator()
                         : Mybutton(
                             text: "Done",
                             color: Color(0xffFAD051),
-                            ontap: () {
-                              provider.resetPassword(
-                                widget.email ,widget.otp,
+                           ontap: () async {
+  if (passwordController.text != confirmPassController.text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.redAccent,
+        content: Text("Passwords don't match"),
+      ),
+    );
+    return; 
+  }
+                             await forgetPassProviderprovider.resetPassword(
+                                widget.email ,
                                 passwordController.text,
                                 confirmPassController.text,
                               );
 
-                              if (provider.isSuccess) {
+                              if (forgetPassProviderprovider.isSuccess) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => SignupScreen()),
                                 );
-                              } else if (provider.errorMessage != null) {
+                              } else if (forgetPassProviderprovider.errorMessage != null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   
                                   SnackBar(
                                       backgroundColor: Colors.redAccent,
-                                    content: Text(provider.errorMessage!)),
+                                    content: Text(forgetPassProviderprovider.errorMessage!)),
                                 );
                               }
                             },
