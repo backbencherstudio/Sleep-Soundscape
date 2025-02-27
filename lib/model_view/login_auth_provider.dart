@@ -38,7 +38,7 @@ class LoginAuthProvider with ChangeNotifier {
       );
 
       // Decode response body
-      var jsonResponse = jsonDecode(response.body ?? "{}");
+      var jsonResponse = jsonDecode(response.body);
 
       debugPrint("\n\nLogin response : ${jsonResponse}\n\n");
 

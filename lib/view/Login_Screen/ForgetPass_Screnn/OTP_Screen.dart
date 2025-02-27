@@ -92,7 +92,9 @@ Consumer<ForgetPassProvider>(
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(provider.errorMessage ??
+                              backgroundColor: Colors.redAccent,
+                            content: 
+                            Text(provider.errorMessage ??
                                 "Failed to verify OTP"),
                           ),
                         );

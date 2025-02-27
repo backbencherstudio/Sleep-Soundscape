@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/view/Login_Screen/signIN_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/BottomSheet.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
@@ -144,7 +145,9 @@ class SignupScreen extends StatelessWidget {
                     } else {
                       // Show an error message using SnackBar
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(signUpProvider.errorMessage ?? "Signup failed")),
+                        SnackBar(
+                        
+                          content: Text(signUpProvider.errorMessage ?? "Signup failed")),
                       );
                     }
                   },

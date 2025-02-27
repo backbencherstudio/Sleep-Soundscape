@@ -173,7 +173,10 @@ Consumer<ForgetPassProvider>(
                                 );
                               } else if (provider.errorMessage != null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(provider.errorMessage!)),
+                                  
+                                  SnackBar(
+                                      backgroundColor: Colors.redAccent,
+                                    content: Text(provider.errorMessage!)),
                                 );
                               }
                             },
