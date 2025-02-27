@@ -22,7 +22,7 @@ class ForgetpassauthService {
       if (response.statusCode == 200) {
 
         debugPrint("\n\n ${response.statusCode}\n\n");
-        debugPrint("\n\n ${response}\n\n");
+       
 
         final responseBody = jsonDecode(response.body);
         if (responseBody['message'] == "Reset code sent to your email") {
