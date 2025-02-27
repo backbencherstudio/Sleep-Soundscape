@@ -5,7 +5,7 @@ import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/api_services/local_storage_services.dart';
 import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
 import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
-import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/signIN_Screen.dart';
 import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

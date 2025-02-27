@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/api_services/local_storage_services.dart';
 import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
+import 'package:sleep_soundscape/model_view/sign-up_provider.dart';
 import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
@@ -22,16 +23,18 @@ class _SignInScreenState extends State<SignInScreen> {
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   _emailConteroller.dispose();
-  //   _passwordController.dispose();
-  // }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailConteroller.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+       final loginProvider = Provider.of<SignUpProvider>(context);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -73,6 +76,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 SizedBox(height: 16.h),
                 TextFormField(
+                                      obscureText: loginProvider.isObscure,
+
                   controller: _passwordController,
                   validator: (value){
                     if(value == null || value.isEmpty){
@@ -91,9 +96,17 @@ class _SignInScreenState extends State<SignInScreen> {
                     context: context,
                     prefixIcon: Icon(Icons.lock_outline_rounded),
                     hintText: "Enter your password",
-                    suffixIcon: Icon(Icons.visibility_outlined),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                         loginProvider.togglePasswordVisibility();
+                      },
+                      child: Icon(loginProvider.isObscure ? Icons.visibility_off_outlined : Icons.visibility_outlined),
                   ),
-                ),
+
+
+
+
+                ),),
                 SizedBox(height: 12.h),
 
                 GestureDetector(
@@ -122,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Consumer<LoginAuthProvider>(
                   builder: (context, loginAuthProvider, child) {
                     return loginAuthProvider.isLoginProgress
-                        ? CircularProgressIndicator()
+                        ? Center(child: CircularProgressIndicator())
                         : Mybutton(
                           text: "Sign in",
                           color: Color(0xffFAD051),
@@ -137,12 +150,12 @@ class _SignInScreenState extends State<SignInScreen> {
                               debugPrint("\n\n user-token = ${loginAuthProvider.loginData!.token}");
 
                               if (loginAuthProvider.isSuccess) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("Login success!"),
-                                    backgroundColor: Colors.green,
-                                  ),
-                                );
+                                // ScaffoldMessenger.of(context).showSnackBar(
+                                //   SnackBar(
+                                //     content: Text("Login success!"),
+                                //     backgroundColor: Colors.green,
+                                //   ),
+                                // );
 
                                 Navigator.pushNamedAndRemoveUntil(
                                   context,
@@ -153,13 +166,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                 _emailConteroller.clear();
                                 _passwordController.clear();
                               } else {
-                                _emailConteroller.clear();
-                                _passwordController.clear();
+                                // _emailConteroller.clear();
+                                // _passwordController.clear();
 
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text("Login failed! Try again"),
                                     backgroundColor: Colors.red,
+                                    duration: Duration(seconds: 2),
                                   ),
                                 );
                               }

@@ -2,23 +2,23 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:sleep_soundscape/Utils/route_name.dart';
-import 'package:sleep_soundscape/view/Login_Screen/Sign_in_Screen.dart';
+import 'package:sleep_soundscape/view/Login_Screen/signIN_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/BottomSheet.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
+import '../../Utils/route_name.dart';
 import '../../model_view/sign-up_provider.dart';
 
-class LoginScreen extends StatelessWidget {
-   LoginScreen({super.key});
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final signUpProvider = Provider.of<SignUpProvider>(context);
 
-
+    TextEditingController nameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passController = TextEditingController();
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
