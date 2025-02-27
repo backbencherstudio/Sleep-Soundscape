@@ -39,7 +39,7 @@ class SignUpProvider extends ChangeNotifier {
         body: body,
       );
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         _isSuccess =true;
         _setLoading(false);
         debugPrint(" Response data: ${response.body}");

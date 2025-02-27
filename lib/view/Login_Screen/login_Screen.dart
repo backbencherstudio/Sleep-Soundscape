@@ -10,15 +10,15 @@ import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
 import '../../model_view/sign-up_provider.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
+   LoginScreen({super.key});
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final signUpProvider = Provider.of<SignUpProvider>(context);
 
-    TextEditingController nameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passController = TextEditingController();
+
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
