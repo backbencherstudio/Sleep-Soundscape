@@ -55,7 +55,7 @@ void audioTimerBottomSheet(BuildContext context) {
                             fontWeight: FontWeight.w400
                         ),),
                         DropdownButton<int>(
-                          value: soundSettingProvider.soundSettings.soundscapes?.audioTimer ?? 0,
+                          value: soundSettingProvider.soundSettings.soundscapes?.audioTimer ?? 1,
                           dropdownColor:Theme.of(context).colorScheme.secondary, // Background color of dropdown menu
                           underline: SizedBox(), // Remove default underline
                           alignment: AlignmentDirectional.centerEnd, // Align menu options to the right

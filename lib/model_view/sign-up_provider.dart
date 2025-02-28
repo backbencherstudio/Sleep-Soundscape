@@ -1,64 +1,78 @@
-import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:sleep_soundscape/api_services/api_end_point.dart';
 
 class SignUpProvider extends ChangeNotifier {
   bool _isSuccess = false;
-  bool get isSuccess => _isSuccess;
   bool _isLoading = false;
   String? _errorMessage;
   bool _obscureText = true;
+  File? _selectedImage;
 
+  bool get isSuccess => _isSuccess;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   bool get isObscure => _obscureText;
+  File? get selectedImage => _selectedImage;
 
-  /// Toggle password visibility
   void togglePasswordVisibility() {
     _obscureText = !_obscureText;
     notifyListeners();
   }
 
-  /// Create a new user account
-  Future<bool> createUser({required String email, required String password, required String name}) async {
+  void setImage(File image) {
+    _selectedImage = image;
+    notifyListeners();
+  }
+
+  Future<bool> createUser({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
     _setLoading(true);
-    _isSuccess =false;
+    _isSuccess = false;
+    _errorMessage = null;
 
     final url = Uri.parse(AppUrls.signUp);
-    final body = jsonEncode({
-      "email": email,
-      "password": password,
-      "name": name,
-    });
 
     try {
-      final response = await http.post(
-        url,
-        headers: {"Content-Type": "application/json"},
-        body: body,
-      );
+      var request = http.MultipartRequest("POST", url);
+      request.fields["name"] = name;
+      request.fields["email"] = email;
+      request.fields["password"] = password;
 
-      if (response.statusCode == 201) {
-        _isSuccess =true;
+      if (_selectedImage != null) {
+        request.files.add(await http.MultipartFile.fromPath(
+          "image", // Ensure this matches the backend's expected field name
+          _selectedImage!.path,
+        ));
+      }
+
+      var response = await request.send();
+      final responseData = await http.Response.fromStream(response);
+
+      debugPrint("Response Data: ${responseData.body}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        _isSuccess = true;
+        _errorMessage = null;
         _setLoading(false);
-        debugPrint(" Response data: ${response.body}");
         return true;
       } else {
+        _errorMessage = "Signup failed: ${responseData.body}";
       }
     } catch (e) {
+      _errorMessage = "Error: ${e.toString()}";
     }
-    _isSuccess =false;
+
     _setLoading(false);
     return false;
   }
 
-  /// Update loading state
   void _setLoading(bool loading) {
     _isLoading = loading;
     notifyListeners();
   }
-
-
-
 }
