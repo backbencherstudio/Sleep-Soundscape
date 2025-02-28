@@ -35,9 +35,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await AndroidAlarmManager.initialize();
+  initializeTimeZones();
   await initializeService();
 
-  initializeTimeZones();
+
 
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
