@@ -347,7 +347,7 @@ class MyApp extends StatelessWidget {
             routes: {
 
 
-              '/': (context) => const HomeScreen(),
+              '/': (context) => const SplashScreen(),
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
               RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/global_widget/switch_button.dart';
 
+import '../../../model_view/sound_setting_provider.dart';
 import 'off_the_detection_bottom_sheet.dart';
 
 void soundDetection(BuildContext context) {
   ValueNotifier<bool> isSwitched = ValueNotifier<bool>(false);
   ValueNotifier<bool> isAudioRecord = ValueNotifier<bool>(false);
-
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -103,20 +104,23 @@ void soundDetection(BuildContext context) {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                ValueListenableBuilder<bool>(
-                  valueListenable: isSwitched,
-                  builder: (context, value, child) {
-                    return SwitchButton(
-                      isSwitchOn: value,
-                      onChange: (bool newValue) {
-                        isSwitched.value = newValue;
-                        offTheDetectionBottomSheet(context);
-                      },
-                    );
-                  },
-                ),
+        Consumer<SoundSettingProvider>(
+          builder: (context, soundSettingProvider, child) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+
+                // SwitchButton(
+                //   isSwitchOn: soundSettingProvider.soundSettings.sleepAnalysis!.soundsDetection?.enabled  ?? false,
+                //   onChange: soundSettingProvider.soundDetection,
+                // ),
+              ],
+            );
+          },
+        )
               ],
             ),
+
 
             // Sleep Analysis Section
             Align(
