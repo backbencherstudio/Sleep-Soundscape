@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/view/home_screen/widget/audio_timer_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/home_screen/widget/snooze_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/home_screen/widget/sound_scape.dart';
 import 'package:sleep_soundscape/view/sounds_screen/widget/sound_dediction.dart';
@@ -44,15 +45,15 @@ void alarmSetting(BuildContext context) {
                     _buildSoundPreview(soundSettingProvider.soundSettings.alarm?.ringtone?.name ?? "Default"),
                     SizedBox(height: 18.h),
 
-                    Divider(color: Color.fromRGBO(255, 255, 255, 0.30)),
+                    Divider(  color: Theme.of(context).colorScheme.onSecondary,),
                     SizedBox(height: 18.h),
                     _buildSectionTitle(context, "Sleep Analysis"),
                     SizedBox(height: 18.h),
 
                     _buildSectionTitle1(context, "Sounds Detection"),
                     SizedBox(height: 4.h),
-                    _buildInfoRow1(context, "To keep running in low battery, Sleep will stop detection when the battery is below 20% and finish analysis when the battery is below 10%.", "On", () => soundDetection(context), themeProvider),
-                    Divider(color: Color.fromRGBO(255, 255, 255, 0.30)),
+                    _buildInfoRow1(context, "To keep running in low battery, Sleep will stop detection when the battery is below 20% and finish analysis when the battery is below 10%.", soundSettingProvider.soundSettings.sleepAnalysis?.soundsDetection?.enabled ?? false, () => soundDetection(context), themeProvider),
+                    Divider(  color: Theme.of(context).colorScheme.onSecondary,),
                     _buildSectionTitle(context, "Soundscapes"),
                     SizedBox(height: 18.h),
 
@@ -60,18 +61,20 @@ void alarmSetting(BuildContext context) {
                     SizedBox(height: 35.h),
                     _buildSectionTitle(context, "Alarm"),
                     _buildSwitchRow(context, "Autoplay sounds while sleeping", soundSettingProvider.soundSettings.soundscapes?.alarmAutoplay ?? false, soundSettingProvider.toggleAutoPlay),
-                    _buildInfoRow(context, "Audio timer", "5 min", null, themeProvider),
-                    Divider(color: Color.fromRGBO(255, 255, 255, 0.60)),
+                    SizedBox(height: 21.h),
+
+                    _buildInfoRow(context, "Audio timer", soundSettingProvider.soundSettings.soundscapes?.audioTimer, () => audioTimerBottomSheet(context), themeProvider),
+                    Divider(  color: Theme.of(context).colorScheme.onSecondary,),
                     SizedBox(height: 10.h),
                     _buildSectionTitle(context, "Advanced"),
                     SizedBox(height: 21.h),
-                    _buildInfoRow(context, "Snooze", "5 min", () => snoozeBottomSheet(context), themeProvider),
+                    _buildInfoRow(context, "Snooze", soundSettingProvider.soundSettings.advanced?.snooze, () => snoozeBottomSheet(context), themeProvider),
                     SizedBox(height: 24.h),
                     _buildInfoRow(context, "Alarm mode", "Always use", () => alarmMode(context), themeProvider),
                     SizedBox(height: 24.h),
                     _buildInfoRow(context, "Get-up Challenge", "None", () => getChallange(context), themeProvider),
                     SizedBox(height: 18.h),
-
+  Text("the data ${soundSettingProvider.soundSettings.sleepAnalysis?.soundsDetection?.enabled}")
                   ],
                 ),
               ),
@@ -258,28 +261,55 @@ Widget _buildSectionTitle(BuildContext context, String title) {
 }
 
 
-Widget _buildInfoRow(BuildContext context, String label, String value, Function()? onTap, ThemeProvider themeProvider) {
+Widget _buildInfoRow(BuildContext context, String label, dynamic? value, Function()? onTap, ThemeProvider themeProvider) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Expanded(child: Text(label, maxLines: 5, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400, fontSize: 12.sp))),
-      if (onTap != null) GestureDetector(onTap: onTap, child: Icon(Icons.arrow_forward_ios_rounded, size: 16, color: themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black87)),
-    ],
-  );
-}
-
-Widget _buildInfoRow1(BuildContext context, String label, String value, Function()? onTap, ThemeProvider themeProvider) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Expanded(child: Text(label, maxLines: 5, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400, fontSize: 12.sp,         color: Theme.of(context).colorScheme.onSecondary, // Using secondary color
-      ))),
-      if (onTap != null) GestureDetector(onTap: onTap, child: Icon(Icons.arrow_forward_ios_rounded, size: 16,
-          color: themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black87
-        //  color: Theme.of(context).colorScheme.onSecondary, // Using secondary color
-
-
+      if (onTap != null) GestureDetector(onTap: onTap, child: Row(
+        children: [
+          Text(value.toString()),
+          Icon(Icons.arrow_forward_ios_rounded, size: 16, color: themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black87),
+        ],
       )),
     ],
   );
 }
+
+Widget _buildInfoRow1(BuildContext context, String label, bool value, Function()? onTap, ThemeProvider themeProvider) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Expanded(
+        child: Text(
+          label,
+          maxLines: 5,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            fontWeight: FontWeight.w400,
+            fontSize: 12.sp,
+            color: Theme.of(context).colorScheme.onSecondary, // Using secondary color
+          ),
+        ),
+      ),
+      if (onTap != null)
+        GestureDetector(
+          onTap: onTap,
+          child: Row(
+            children: [
+              Text(value ? "On" : "Off",style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w300
+              ),),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 16,
+                color: themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black87,
+              ),
+            ],
+          ),
+        ),
+    ],
+  );
+}
+

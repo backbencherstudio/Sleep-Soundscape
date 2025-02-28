@@ -5,7 +5,7 @@ import 'package:sleep_soundscape/global_widget/custom_button.dart';
 
 import '../../../model_view/sound_setting_provider.dart';
 
-void snoozeBottomSheet(BuildContext context) {
+void audioTimerBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
     shape: RoundedRectangleBorder(
@@ -24,7 +24,7 @@ void snoozeBottomSheet(BuildContext context) {
           children: [
             Center(
               child: Text(
-                "Snooze",
+                "Audio Timer",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w500,
@@ -39,7 +39,7 @@ void snoozeBottomSheet(BuildContext context) {
               child: Consumer<SoundSettingProvider>(
                 builder: (context, soundSettingProvider, child) {
                   return DropdownButton<int>(
-                    value: soundSettingProvider.soundSettings.advanced?.snooze ?? 1, // Default to 1 min if null
+                    value: soundSettingProvider.soundSettings.soundscapes?.audioTimer ?? 1, // Default to 1 min if null
                     items: List.generate(
                       9,
                           (index) => DropdownMenuItem<int>(
@@ -49,7 +49,7 @@ void snoozeBottomSheet(BuildContext context) {
                     ),
                     onChanged: (newValue) {
                       if (newValue != null) {
-                        soundSettingProvider.setSnooze(newValue); // Update provider state
+                        soundSettingProvider.setAudioTime(newValue); // Update provider state
                       }
                     },
                   );
@@ -65,7 +65,7 @@ void snoozeBottomSheet(BuildContext context) {
                   return CustomButton(
                     text: "Save",
                     onPressed: () {
-                      Navigator.pop(context, soundSettingProvider.soundSettings.advanced?.snooze ?? 1); // Return selected snooze time
+                      Navigator.pop(context, soundSettingProvider.soundSettings.soundscapes?.audioTimer ?? 1); // Return selected snooze time
                     },
                   );
                 },

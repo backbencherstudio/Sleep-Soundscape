@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
       // Navigate based on onboarding status
       if (onboardingProvider.hasSeenOnboarding) {
-        Navigator.pushReplacementNamed(context, RouteName.signUpScreen);
+        Navigator.pushReplacementNamed(context, RouteName.signInScreen);
       } else {
         Navigator.pushReplacementNamed(context, RouteName.onboardingScreen);
       }
