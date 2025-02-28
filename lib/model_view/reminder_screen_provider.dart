@@ -20,8 +20,8 @@ Future<void> initializeService() async {
     ),
     androidConfiguration: AndroidConfiguration(
       onStart: onStart,
-      autoStart: true,
-      isForegroundMode: true,
+      autoStart: false,
+      isForegroundMode: false,
     ),
   );
 
@@ -31,18 +31,23 @@ Future<void> initializeService() async {
 /// Runs when the alarm triggers
 @pragma('vm:entry-point') // Required for AOT compilation
 void onStart(ServiceInstance service) async {
-  print("Alarm Triggered & Playing Sound!");
+  print("\nbackground service's onStart method started\n");
   final AudioPlayer _audioPlayer = AudioPlayer();
 
   // Listen for commands (only play audio when alarmCallback() invokes it)
   service.on("play_audio").listen((event) async {
-    print("Alarm Triggered: Playing Sound!");
+    debugPrint("\nAlarm Triggered: Playing Sound!\n");
 
 
     String demoAudioPath = "musics/waves-02.mp3";
 
     try {
       await _audioPlayer.play(AssetSource(demoAudioPath), volume: 1);
+         final notificationService = NotificationServices();
+         initializeTimeZones();
+          notificationService.initialize();
+
+         NotificationServices.scheduledNotification("Manual Alarm triggered", "This is alarm body");
     } catch (e) {
       print("\nError playing audio: $e/n");
     }
@@ -53,7 +58,7 @@ void onStart(ServiceInstance service) async {
     try{
 
       await _audioPlayer.stop();
-      await _audioPlayer.dispose();
+     // await _audioPlayer.dispose();
       debugPrint("\nSuccessfully alarm stopped.\n");
     }catch(error){
       debugPrint("\nError while stopping alarm audio : $error\n");
@@ -236,7 +241,7 @@ class ReminderScreenProvider with ChangeNotifier{
       //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, DateTime.now().hour, DateTime.now().minute+1);
       debugPrint("\nalarm time : $_selectedTime\n");
 
-      bool scheduled = await AndroidAlarmManager.oneShotAt(_selectedTime ?? _time, Random().nextInt(1095),
+      bool scheduled = await AndroidAlarmManager.oneShotAt(_time, Random().nextInt(1095),
         alarmCallback,
         alarmClock: true,
         allowWhileIdle: true,

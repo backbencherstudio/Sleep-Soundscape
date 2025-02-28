@@ -1,21 +1,26 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
 
 
     <queries>
         <package android:name="com.android.alarmclock"/>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
     </queries>
 
     <application
@@ -26,7 +31,6 @@
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true"
         android:requestLegacyExternalStorage="true">
-
 
         <activity
             android:name=".MainActivity"
@@ -51,28 +55,46 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2"/>
+
+        <!--  Fix AlarmManager Service -->
         <service
             android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmService"
             android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="false"/>
+            android:exported="true"
+            tools:node="replace"/>
+
+        <!--  Fix Background Service -->
+        <service
+            android:name="id.flutter.flutter_background_service.BackgroundService"
+            android:foregroundServiceType="mediaPlayback"
+            android:permission="android.permission.FOREGROUND_SERVICE"
+            android:exported="false"
+            tools:node="replace"/>
+
+
+        <!-- ✅ Local Notification Services -->
+        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" android:exported="true"/>
+        <receiver android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" android:exported="true"/>
+
+        <!-- ✅ Add `android:exported="true"` for Android 12+ -->
         <receiver
-            android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmBroadcastReceiver"
-            android:exported="false"/>
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmBroadcastReceiver" android:exported="false"/>
+
         <receiver
             android:name="dev.fluttercommunity.plus.androidalarmmanager.RebootBroadcastReceiver"
             android:enabled="false"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
     </application>
-
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.PROCESS_TEXT"/>
-            <data android:mimeType="text/plain"/>
-        </intent>
-    </queries>
 </manifest>
