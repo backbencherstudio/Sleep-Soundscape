@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:timezone/data/latest.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
@@ -20,38 +22,36 @@ class NotificationServices {
     InitializationSettings(android: androidInitializationSettings);
 
     await _localNotificationsPlugin.initialize(initializationSettings);
-
-
-  }
-
-  static scheduledNotification(){}
-
-  //Foreground message handler
-  Future<void> _onMessageHandler() async {
+    initializeTimeZones();
 
   }
 
-  static Future<void> _showNotification(String? title, String? body) async {
+  static scheduledNotification(String title, String body) async {
     const AndroidNotificationDetails androidNotificationDetails =
     AndroidNotificationDetails(
-        'general_channel', // Channel ID
-        'General Notifications', // Channel Name
-        importance: Importance.high,
+        'important_notification', // Channel ID
+        'Sleep SoundScape App', // Channel Name
+        importance: Importance.max,
         priority: Priority.high,
         icon: "@mipmap/launcher_icon");
 
-    const NotificationDetails notificationDetails =
-    NotificationDetails(android: androidNotificationDetails);
+    var iosDetails = const DarwinNotificationDetails();
 
-    // await _localNotificationsPlugin.show(
-    // //  _notificationId,
-    //   title,
-    //   body,
-    //   notificationDetails,
-    // );
+    var notificationDetails =
+    NotificationDetails(android: androidNotificationDetails,iOS: iosDetails);
+
+    await _localNotificationsPlugin.zonedSchedule(
+        0,
+        title,
+        body,
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 2)),
+        notificationDetails,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle
+    );
+
+
+
   }
-
-
-
 
 }

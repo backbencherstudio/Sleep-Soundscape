@@ -1,7 +1,6 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +12,7 @@ import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/profile_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/sound_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/theme_provider.dart';
+import 'package:sleep_soundscape/notification_services/notification_services.dart';
 import 'package:sleep_soundscape/view/Download_Screen/test_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/signIN_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/completeProfile_Screen.dart';
@@ -23,44 +23,57 @@ import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
 import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/personalization_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
-import 'package:sleep_soundscape/view/settings_screens/about_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
+import 'package:timezone/data/latest.dart';
 import 'model_view/ForgetPass_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
 import 'model_view/sign-up_provider.dart';
-import 'model_view/sound_setting_provider.dart';
 import 'model_view/temp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Ensure screen size initialization
   await ScreenUtil.ensureScreenSize();
-
-  // Initialize Hive
-  await Hive.initFlutter();
-
-  // Open Hive boxes globally before running the app
-  await Hive.openBox('soundSettings');
-
-  // Initialize Android Alarm Manager
   await AndroidAlarmManager.initialize();
+  await initializeService();
 
-  // Load shared preferences
+  initializeTimeZones();
+
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
+
 
   runApp(MyApp());
 }
 
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // final double deviceWidth = 1440.0;
-  // static const double deviceHeight = 1383.0;
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+
+  PermissionStatus _exactAlarmPermissionStatus = PermissionStatus.granted;
+
+  @override
+  void initState() {
+    super.initState();
+    AndroidAlarmManager.initialize();
+    _checkExactAlarmPermission();
+  }
+
+  void _checkExactAlarmPermission() async {
+    final currentStatus = await Permission.scheduleExactAlarm.request();
+   // await Permission.scheduleExactAlarm.
+    // setState(() {
+    //   _exactAlarmPermissionStatus = currentStatus;
+    // });
+  }
+
+
+  // final double deviceWidth = 1440.0;
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -101,9 +114,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<SignUpProvider>(
           create: (_) => SignUpProvider(),
         ),
-     ChangeNotifierProvider<SoundSettingProvider>(
-          create: (_) => SoundSettingProvider(),
-        ),
 
 
  ChangeNotifierProvider<ForgetPassProvider>(
@@ -120,17 +130,6 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Counter App',
-            supportedLocales: [
-              Locale('en', 'US'), // English
-              Locale('es', 'ES'), // Spanish
-              Locale('fr', 'FR'), // French
-            ],
-            // Add localization delegates
-            localizationsDelegates: [
-              // GlobalMaterialLocalizations.delegate,
-              // GlobalWidgetsLocalizations.delegate,
-              // GlobalCupertinoLocalizations.delegate,
-            ],
             theme:  ThemeData(
               scaffoldBackgroundColor: Colors.white,
 
@@ -362,7 +361,7 @@ class MyApp extends StatelessWidget {
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
               RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),
-              RouteName.aboutScreen: (context) => AboutScreen(),
+            //  RouteName.aboutScreen: (context) => AboutScreen(),
               RouteName.signUpScreen: (context) => SignupScreen(),
               RouteName.signInScreen: (context) => SignInScreen(),
               RouteName.forgotPassword: (context) => ForgotpasswordScreen(),
