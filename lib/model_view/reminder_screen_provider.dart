@@ -186,6 +186,59 @@ class ReminderScreenProvider with ChangeNotifier{
 
   String _selectedDay = "Saturday";
 
+  List<bool> _repetitionDay = List<bool>.filled(7,false);
+  List<bool> get repetitionDay => _repetitionDay;
+
+  void onSelectRepeat(int index, bool value){
+    if(value == true){
+      debugPrint("\n$index number day will repeat.\n");
+    }
+    else{
+      debugPrint("\n$index number day will not repeat.\n");
+    }
+    _repetitionDay[index] = value;
+
+    if(index == 0){
+      updateRepeatDays('Sunday', value);
+    }
+    else if (index == 1){
+      updateRepeatDays('Monday', value);
+    }
+    else if (index == 2){
+      updateRepeatDays('Tuesday', value);
+    }
+    else if (index == 3){
+      updateRepeatDays('Wednesday', value);
+    }
+    else if (index == 4){
+      updateRepeatDays('Thursday', value);
+    }
+    else if (index == 5){
+      updateRepeatDays('Friday', value);
+    }
+    else if (index == 6){
+      updateRepeatDays('Saturday', value);
+    }
+
+    notifyListeners();
+  }
+
+  List<String> _selectedRepeatDays = [];
+
+  void updateRepeatDays (String day, bool isSelected){
+    if(isSelected){
+      if(!_selectedRepeatDays.contains(day)){
+        _selectedRepeatDays.add(day);
+        notifyListeners();
+      }
+    }
+    else{
+      _selectedRepeatDays.remove(day);
+      notifyListeners();
+    }
+    debugPrint("\nDays to repeate : $_selectedRepeatDays\n");
+  }
+
 
   ///Set alarm hour
   void setHour(int selectedH){
