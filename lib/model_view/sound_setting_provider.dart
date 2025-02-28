@@ -41,7 +41,12 @@ class SoundSettingProvider extends ChangeNotifier {
     _soundSettings.alarm!.volume = volume;
     saveSettings();
   }
-
+// sound detection
+  void soundDetection() {
+    _soundSettings.sleepAnalysis?.soundsDetection ??= SoundsDetection();
+    _soundSettings.sleepAnalysis?.soundsDetection?.enabled = !(_soundSettings.sleepAnalysis?.soundsDetection?.enabled ?? false);
+    saveSettings();
+  }
   /// Toggle AutoPlay
   void toggleAutoPlay() {
     _soundSettings.soundscapes ??= Soundscapes();
