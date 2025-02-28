@@ -23,7 +23,6 @@ import 'package:sleep_soundscape/view/home_screen/screen/home_screen.dart';
 import 'package:sleep_soundscape/view/onboarding_screen/onboarding_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/personalization_screen.dart';
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
-import 'package:sleep_soundscape/view/settings_screens/widgets/about_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'package:timezone/data/latest.dart';
 import 'model_view/ForgetPass_provider.dart';
@@ -362,7 +361,7 @@ class _MyAppState extends State<MyApp> {
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
               RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),
-              RouteName.aboutScreen: (context) => AboutScreen(),
+            //  RouteName.aboutScreen: (context) => AboutScreen(),
               RouteName.signUpScreen: (context) => SignupScreen(),
               RouteName.signInScreen: (context) => SignInScreen(),
               RouteName.forgotPassword: (context) => ForgotpasswordScreen(),
