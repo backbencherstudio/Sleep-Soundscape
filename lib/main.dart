@@ -29,6 +29,7 @@ import 'model_view/ForgetPass_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
 import 'model_view/sign-up_provider.dart';
+import 'model_view/sound_setting_provider.dart';
 import 'model_view/temp.dart';
 
 void main() async {
@@ -119,6 +120,9 @@ class _MyAppState extends State<MyApp> {
 
  ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
+        ),
+ ChangeNotifierProvider<SoundSettingProvider>(
+          create: (_) => SoundSettingProvider(),
         ),
 
 
@@ -358,7 +362,7 @@ class _MyAppState extends State<MyApp> {
             routes: {
 
 
-              '/': (context) => const HomeScreen(),
+              '/': (context) => const SplashScreen(),
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
               RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),

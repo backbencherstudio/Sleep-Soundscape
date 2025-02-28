@@ -42,15 +42,20 @@ void alarmSetting(BuildContext context) {
                     SizedBox(height: 18.h),
 
                     _buildSoundPreview(soundSettingProvider.soundSettings.alarm?.ringtone?.name ?? "Default"),
+                    SizedBox(height: 18.h),
 
                     Divider(color: Color.fromRGBO(255, 255, 255, 0.30)),
                     SizedBox(height: 18.h),
                     _buildSectionTitle(context, "Sleep Analysis"),
-                    _buildSectionTitle(context, "Sounds Detection"),
+                    SizedBox(height: 18.h),
+
+                    _buildSectionTitle1(context, "Sounds Detection"),
                     SizedBox(height: 4.h),
-                    _buildInfoRow(context, "To keep running in low battery, Sleep will stop detection when the battery is below 20% and finish analysis when the battery is below 10%.", "On", () => soundDetection(context), themeProvider),
+                    _buildInfoRow1(context, "To keep running in low battery, Sleep will stop detection when the battery is below 20% and finish analysis when the battery is below 10%.", "On", () => soundDetection(context), themeProvider),
                     Divider(color: Color.fromRGBO(255, 255, 255, 0.30)),
                     _buildSectionTitle(context, "Soundscapes"),
+                    SizedBox(height: 18.h),
+
                     _buildInfoRow(context, "Soundscapes", "Calm Light", () => soundScape(context), themeProvider),
                     SizedBox(height: 35.h),
                     _buildSectionTitle(context, "Alarm"),
@@ -67,8 +72,6 @@ void alarmSetting(BuildContext context) {
                     _buildInfoRow(context, "Get-up Challenge", "None", () => getChallange(context), themeProvider),
                     SizedBox(height: 18.h),
 
-                   Text("${soundSettingProvider.soundSettings.alarm?.vibration}"),
-                    Text("${soundSettingProvider.soundSettings.alarm?.enabled}")
                   ],
                 ),
               ),
@@ -234,7 +237,22 @@ Widget _buildSectionTitle(BuildContext context, String title) {
     child: Text(
       title,
       textAlign: TextAlign.left,
-      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400, fontSize: 12.sp),
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400, fontSize: 12.sp,
+        color: Theme.of(context).colorScheme.onSecondary, // Using secondary color
+
+      ),
+    ),
+  );
+}Widget _buildSectionTitle1(BuildContext context, String title) {
+  return Align(
+    alignment: Alignment.topLeft,
+    child: Text(
+      title,
+      textAlign: TextAlign.left,
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400, fontSize: 12.sp,
+      //  color: Theme.of(context).colorScheme.onSecondary, // Using secondary color
+
+      ),
     ),
   );
 }
@@ -246,6 +264,22 @@ Widget _buildInfoRow(BuildContext context, String label, String value, Function(
     children: [
       Expanded(child: Text(label, maxLines: 5, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400, fontSize: 12.sp))),
       if (onTap != null) GestureDetector(onTap: onTap, child: Icon(Icons.arrow_forward_ios_rounded, size: 16, color: themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black87)),
+    ],
+  );
+}
+
+Widget _buildInfoRow1(BuildContext context, String label, String value, Function()? onTap, ThemeProvider themeProvider) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Expanded(child: Text(label, maxLines: 5, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400, fontSize: 12.sp,         color: Theme.of(context).colorScheme.onSecondary, // Using secondary color
+      ))),
+      if (onTap != null) GestureDetector(onTap: onTap, child: Icon(Icons.arrow_forward_ios_rounded, size: 16,
+          color: themeProvider.themeMode == ThemeMode.dark ? Colors.white : Colors.black87
+        //  color: Theme.of(context).colorScheme.onSecondary, // Using secondary color
+
+
+      )),
     ],
   );
 }
