@@ -10,6 +10,7 @@ import 'package:sleep_soundscape/view/settings_screens/widgets/language_bottom_s
 import 'package:sleep_soundscape/view/settings_screens/widgets/notification_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/settings_item_tile.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/sign_out_bottom_sheet.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'bottom_sheet_header.dart';
 import 'faq_bottom_sheet.dart';
@@ -47,7 +48,11 @@ void settingBottomModalSheet(BuildContext context){
                   ),
                 ),
                 SizedBox(height: 12.h,),
-                BottomSheetHeader(imagePath:  "assets/icons/back.png",title:  "Settings",),
+                BottomSheetHeader(imagePath:  "assets/icons/back.png",
+                title:     AppLocalizations.of(context)!.settings,
+                
+                
+                ),
 
                 Expanded(
                   child: SingleChildScrollView(
@@ -62,7 +67,11 @@ void settingBottomModalSheet(BuildContext context){
                         SizedBox(height: 24.h,),
                         SettingsItemTile(onTap: (){
                           ChangePasswordBottomSheet(context);
-                        },imagePath: "assets/icons/cng-password.png",title: "Change Password"),
+                        },imagePath: "assets/icons/cng-password.png",
+                        title: AppLocalizations.of(context)!.changePasswords//===++++====*****
+                        
+                        
+                        ),
                         SizedBox(height: 18.h,),
                         Divider( color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.1) : Color.fromRGBO(0, 0, 0, 0.1), ),
                         SizedBox(height: 24.h,),

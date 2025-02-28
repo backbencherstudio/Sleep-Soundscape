@@ -50,8 +50,6 @@ void main() async {
 
 
 
-
-
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
   await Hive.initFlutter();
@@ -122,7 +120,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<NotificationProvider>(
           create: (_) => NotificationProvider(),
         ),
-   ChangeNotifierProvider<OnboardingScreenProvider>(
+        ChangeNotifierProvider<OnboardingScreenProvider>(
           create: (_) => OnboardingScreenProvider(),
         ),
 
@@ -140,7 +138,7 @@ class _MyAppState extends State<MyApp> {
         ),
 
 
- ChangeNotifierProvider<ForgetPassProvider>(
+        ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
         ),
 
@@ -179,11 +177,11 @@ ChangeNotifierProvider<LocalProvider>(
               scaffoldBackgroundColor: Colors.white,
 
               appBarTheme: AppBarTheme(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                actionsIconTheme: IconThemeData(
-                  color: Colors.white.withOpacity(0.6)
-                )
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  actionsIconTheme: IconThemeData(
+                      color: Colors.white.withOpacity(0.6)
+                  )
               ),
 
               ///light mode bottom sheet theme
@@ -235,7 +233,7 @@ ChangeNotifierProvider<LocalProvider>(
                 fillColor: Colors.black.withOpacity(0.04),
 
                 ///light-mode label style
-               labelStyle:  TextStyle(
+                labelStyle:  TextStyle(
                   color: Colors.black.withOpacity(0.6),
                 ),
 
@@ -278,12 +276,12 @@ ChangeNotifierProvider<LocalProvider>(
 
               ///colorScheme for dak mode theme
               colorScheme: ColorScheme.fromSeed(
-                  seedColor: Colors.blue,
-                  primary: Color(0xffFAD051),
-                  onPrimary: Colors.black,
-                  secondary: Colors.black.withOpacity(0.04),
-                  onSecondary: Colors.black.withOpacity(0.6),
-                  onTertiary: Colors.black,
+                seedColor: Colors.blue,
+                primary: Color(0xffFAD051),
+                onPrimary: Colors.black,
+                secondary: Colors.black.withOpacity(0.04),
+                onSecondary: Colors.black.withOpacity(0.6),
+                onTertiary: Colors.black,
               ),
             ),
             themeMode: themeProvider.themeMode,
@@ -406,7 +404,7 @@ ChangeNotifierProvider<LocalProvider>(
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
               RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),
-            //  RouteName.aboutScreen: (context) => AboutScreen(),
+              //  RouteName.aboutScreen: (context) => AboutScreen(),
               RouteName.signUpScreen: (context) => SignupScreen(),
               RouteName.signInScreen: (context) => SignInScreen(),
               RouteName.forgotPassword: (context) => ForgotpasswordScreen(),

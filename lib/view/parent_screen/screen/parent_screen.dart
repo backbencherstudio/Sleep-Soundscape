@@ -7,6 +7,7 @@ import '../../../model_view/parent_screen_provider.dart';
 import '../../../model_view/theme_provider.dart';
 import '../../sounds_screen/widget/audio_timer_bottom_sheet.dart';
 import '../../sounds_screen/widget/sound_bottom_sheet.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({super.key});
@@ -31,19 +32,19 @@ class CustomBottomBar extends StatelessWidget {
             context,
             index: 0,
             icon: Icons.alarm,
-            label: "Alarm",
+            label: AppLocalizations.of(context)!.alarm,
           ),
           _buildNavItem(
             context,
             index: 1,
             icon: Icons.surround_sound_sharp,
-            label: "Sounds",
+            label: AppLocalizations.of(context)!.sounds,
           ),
           _buildNavItem(
             context,
             index: 3,
             icon: Icons.alarm_on_rounded,
-            label: "Audio",
+            label: AppLocalizations.of(context)!.audio,
           ),
         ],
       ),

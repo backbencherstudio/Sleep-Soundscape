@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // Background image and other UI elements.
       body: Stack(
         fit: StackFit.expand,
@@ -194,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: 10.h),
                       Text(
-                        "Start",
+                        AppLocalizations.of(context)!.start,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Theme.of(context).colorScheme.onSecondary,
                         ),

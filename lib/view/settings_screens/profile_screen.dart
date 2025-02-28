@@ -9,6 +9,7 @@ import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_
 import 'package:sleep_soundscape/view/settings_screens/widgets/edit_profile_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/setting_bottom_modal_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/sleep_phase_heat_map.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../reminder_screen/reminder_screen.dart';
 
@@ -102,7 +103,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         SizedBox(width: 6.h),
                         Text(
-                          "Joined 2 days ago",
+                          AppLocalizations.of(context)!.joined2DaysAgo,  // local=====
                           style: Theme.of(
                             context,
                           ).textTheme.bodySmall!.copyWith(
@@ -139,7 +140,7 @@ class ProfileScreen extends StatelessWidget {
                 buildButtonTile(
                   context: context,
                   imagePath: "assets/icons/notification.png",
-                  title: "Reminder",
+                  title:    AppLocalizations.of(context)!.reminder,
                   onTap: () {
                     //context.read<ReminderScreenProvider>().setPageID(1);
                     ReminderWidgets.reminderBottomSheet(
@@ -152,7 +153,7 @@ class ProfileScreen extends StatelessWidget {
                 buildButtonTile(
                   context: context,
                   imagePath: "assets/icons/download.png",
-                  title: "Download",
+                  title:    AppLocalizations.of(context)!.download,
                   onTap: () {},
                 ),
                 SizedBox(height: 32.h),
@@ -235,7 +236,7 @@ class ProfileScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text("Today", style: Theme.of(context).textTheme.bodyLarge),
+              Text(   AppLocalizations.of(context)!.today, style: Theme.of(context).textTheme.bodyLarge),
               Spacer(),
               ImageIcon(
                 AssetImage("assets/icons/arrow-right.png"),
@@ -251,7 +252,7 @@ class ProfileScreen extends StatelessWidget {
           Row(
             children: [
               Text(
-                "Sleep",
+                   AppLocalizations.of(context)!.sleep,
                 style: Theme.of(
                   context,
                 ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
@@ -282,7 +283,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    "Today sleep",
+                       AppLocalizations.of(context)!.todaySleep,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       // color: Color.fromRGBO(255, 255, 255, 0.50),
                       fontWeight: FontWeight.w300,
@@ -314,8 +315,8 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    "Sleep quality",
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      AppLocalizations.of(context)!.sleepQuality, 
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       // color: Color.fromRGBO(255, 255, 255, 0.50),
                       fontWeight: FontWeight.w300,
                     ),
