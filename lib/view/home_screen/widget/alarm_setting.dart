@@ -5,7 +5,6 @@ import 'package:sleep_soundscape/view/home_screen/widget/snooze_bottom_sheet.dar
 import 'package:sleep_soundscape/view/home_screen/widget/sound_scape.dart';
 import 'package:sleep_soundscape/view/sounds_screen/widget/sound_dediction.dart';
 import 'package:sleep_soundscape/global_widget/switch_button.dart';
-import 'package:volume_controller/volume_controller.dart';
 
 import '../../../model_view/sound_setting_provider.dart';
 import '../../../model_view/theme_provider.dart';

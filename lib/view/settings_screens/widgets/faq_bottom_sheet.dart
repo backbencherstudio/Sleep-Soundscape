@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
 import 'package:sleep_soundscape/model_view/theme_provider.dart';
+import 'package:sleep_soundscape/view/settings_screens/widgets/bottom_sheet_header.dart';
 void faqBottomSheet(BuildContext context) {
   showModalBottomSheet(
     isScrollControlled: true,
@@ -19,55 +20,24 @@ void faqBottomSheet(BuildContext context) {
         height: MediaQuery.of(context).size.height * 0.9, // 90% of screen height
         decoration: BoxDecoration(
           // color: const Color(0xff0F0F13),
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.h)),
         ),
         padding: EdgeInsets.all(16.w),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Header: Back button and title.
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 7.w),
-                    decoration: BoxDecoration(
-                      // color: Colors.transparent,
-                      border: Border.all(
-                        color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.20) : Color.fromRGBO(0, 0, 0, 0.20),
-                        width: 1,
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(7.r),
-                      child: Transform.translate(
-                        offset: const Offset(2, 0),
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: darkTheme ? Colors.white : Colors.black,
-                          size: 10.r,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 100.w),
-                Expanded(
-                  child: Text(
-                    "FAQs",
-                    style: TextStyle(
-
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
+            SizedBox(height: 6.h,),
+            Container(
+              width: 115.w,
+              height: 6.h,
+              decoration: BoxDecoration(
+                  color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.10) : Color.fromRGBO(0, 0, 0, 0.10),
+                  borderRadius: BorderRadius.circular(100.r)
+              ),
             ),
+            SizedBox(height: 12.h,),
+            // Header: Back button and title.
+            BottomSheetHeader(imagePath: "assets/icons/back.png", title: "FAQs"),
             SizedBox(height: 32.h),
             // Search field.
             Padding(
