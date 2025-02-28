@@ -43,8 +43,6 @@ void main() async {
 
 
 
-
-
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
   await Hive.initFlutter();
@@ -61,21 +59,32 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  PermissionStatus _exactAlarmPermissionStatus = PermissionStatus.granted;
-
   @override
   void initState() {
     super.initState();
     AndroidAlarmManager.initialize();
-    _checkExactAlarmPermission();
+    _askNecessaryPermission();
   }
 
-  void _checkExactAlarmPermission() async {
-    final currentStatus = await Permission.scheduleExactAlarm.request();
-   // await Permission.scheduleExactAlarm.
-    // setState(() {
-    //   _exactAlarmPermissionStatus = currentStatus;
-    // });
+  void _askNecessaryPermission() async {
+    PermissionStatus notificationPermission = await Permission.notification.request();
+    PermissionStatus others = await Permission.calendarFullAccess.request();
+    await Permission.scheduleExactAlarm.request();
+    await Permission.reminders.request();
+    await Permission.accessMediaLocation.request();
+    await Permission.audio.request();
+    await Permission.ignoreBatteryOptimizations.request();
+    await Permission.manageExternalStorage.request();
+    await Permission.mediaLibrary.request();
+    await Permission.storage.request();
+    if (notificationPermission.isGranted) {
+      debugPrint("\nNotification permission granted\n");
+    } else if (notificationPermission.isDenied) {
+      debugPrint("\nNotification permission denied\n");
+    } else if (notificationPermission.isPermanentlyDenied) {
+      debugPrint("\nNotification permission permanently denied. Please enable it from settings.\n");
+      openAppSettings(); // Open app settings if permission is permanently denied
+    }
   }
 
 
@@ -104,7 +113,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<NotificationProvider>(
           create: (_) => NotificationProvider(),
         ),
-   ChangeNotifierProvider<OnboardingScreenProvider>(
+        ChangeNotifierProvider<OnboardingScreenProvider>(
           create: (_) => OnboardingScreenProvider(),
         ),
 
@@ -122,10 +131,10 @@ class _MyAppState extends State<MyApp> {
         ),
 
 
- ChangeNotifierProvider<ForgetPassProvider>(
+        ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
         ),
- ChangeNotifierProvider<SoundSettingProvider>(
+        ChangeNotifierProvider<SoundSettingProvider>(
           create: (_) => SoundSettingProvider(),
         ),
 
@@ -143,11 +152,11 @@ class _MyAppState extends State<MyApp> {
               scaffoldBackgroundColor: Colors.white,
 
               appBarTheme: AppBarTheme(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                actionsIconTheme: IconThemeData(
-                  color: Colors.white.withOpacity(0.6)
-                )
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  actionsIconTheme: IconThemeData(
+                      color: Colors.white.withOpacity(0.6)
+                  )
               ),
 
               ///light mode bottom sheet theme
@@ -199,7 +208,7 @@ class _MyAppState extends State<MyApp> {
                 fillColor: Colors.black.withOpacity(0.04),
 
                 ///light-mode label style
-               labelStyle:  TextStyle(
+                labelStyle:  TextStyle(
                   color: Colors.black.withOpacity(0.6),
                 ),
 
@@ -242,12 +251,12 @@ class _MyAppState extends State<MyApp> {
 
               ///colorScheme for dak mode theme
               colorScheme: ColorScheme.fromSeed(
-                  seedColor: Colors.blue,
-                  primary: Color(0xffFAD051),
-                  onPrimary: Colors.black,
-                  secondary: Colors.black.withOpacity(0.04),
-                  onSecondary: Colors.black.withOpacity(0.6),
-                  onTertiary: Colors.black,
+                seedColor: Colors.blue,
+                primary: Color(0xffFAD051),
+                onPrimary: Colors.black,
+                secondary: Colors.black.withOpacity(0.04),
+                onSecondary: Colors.black.withOpacity(0.6),
+                onTertiary: Colors.black,
               ),
             ),
             themeMode: themeProvider.themeMode,
@@ -370,7 +379,7 @@ class _MyAppState extends State<MyApp> {
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
               RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),
-            //  RouteName.aboutScreen: (context) => AboutScreen(),
+              //  RouteName.aboutScreen: (context) => AboutScreen(),
               RouteName.signUpScreen: (context) => SignupScreen(),
               RouteName.signInScreen: (context) => SignInScreen(),
               RouteName.forgotPassword: (context) => ForgotpasswordScreen(),
