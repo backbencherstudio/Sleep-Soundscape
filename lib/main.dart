@@ -1,5 +1,7 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,9 +42,11 @@ void main() async {
 
   initializeTimeZones();
 
+
+
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
-
+  await Hive.initFlutter();
 
   runApp(MyApp());
 }
