@@ -9,6 +9,7 @@ import 'off_the_detection_bottom_sheet.dart';
 void soundDetection(BuildContext context) {
   ValueNotifier<bool> isSwitched = ValueNotifier<bool>(false);
   ValueNotifier<bool> isAudioRecord = ValueNotifier<bool>(false);
+
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -104,23 +105,26 @@ void soundDetection(BuildContext context) {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-        Consumer<SoundSettingProvider>(
-          builder: (context, soundSettingProvider, child) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+                Consumer<SoundSettingProvider>(
+                  builder: (context, soundSettingProvider, child) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SwitchButton(
+                          isSwitchOn: soundSettingProvider.soundSettings.sleepAnalysis?.soundsDetection?.enabled ?? false,
+                          onChange: (bool newValue) {
+                            soundSettingProvider.toggleSoundDetection();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                ),
 
-                // SwitchButton(
-                //   isSwitchOn: soundSettingProvider.soundSettings.sleepAnalysis!.soundsDetection?.enabled  ?? false,
-                //   onChange: soundSettingProvider.soundDetection,
-                // ),
-              ],
-            );
-          },
-        )
+
+
               ],
             ),
-
 
             // Sleep Analysis Section
             Align(
