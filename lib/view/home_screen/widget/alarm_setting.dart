@@ -6,12 +6,10 @@ import 'package:sleep_soundscape/view/home_screen/widget/snooze_bottom_sheet.dar
 import 'package:sleep_soundscape/view/home_screen/widget/sound_scape.dart';
 import 'package:sleep_soundscape/view/sounds_screen/widget/sound_dediction.dart';
 import 'package:sleep_soundscape/global_widget/switch_button.dart';
-
 import '../../../model_view/sound_setting_provider.dart';
 import '../../../model_view/theme_provider.dart';
 import 'alarm_mode.dart';
 import 'get_up_challange.dart';
-
 void alarmSetting(BuildContext context) {
   final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
   showModalBottomSheet(
@@ -42,7 +40,13 @@ void alarmSetting(BuildContext context) {
                     //_buildVolumeController(),
                     SizedBox(height: 18.h),
 
-                    _buildSoundPreview(soundSettingProvider.soundSettings.alarm?.ringtone?.name ?? "Default"),
+                    Align(
+                      alignment: Alignment.centerLeft, // Aligns the container to the left
+                      child: _buildSoundPreview(
+                        context,
+                        soundSettingProvider.soundSettings.alarm?.ringtone?.name ?? "Default",
+                      ),
+                    ),
                     SizedBox(height: 18.h),
 
                     Divider(  color: Theme.of(context).colorScheme.onSecondary,),
@@ -74,7 +78,6 @@ void alarmSetting(BuildContext context) {
                     SizedBox(height: 24.h),
                     _buildInfoRow(context, "Get-up Challenge", "None", () => getChallange(context), themeProvider),
                     SizedBox(height: 18.h),
-  Text("the data ${soundSettingProvider.soundSettings.sleepAnalysis?.soundsDetection?.enabled}")
                   ],
                 ),
               ),
@@ -179,13 +182,19 @@ Widget _buildHeader(BuildContext context, ThemeProvider themeProvider, SoundSett
 }
 
 /// 🔹 **Sound Preview Widget**
-Widget _buildSoundPreview(String ringtone) {
+Widget _buildSoundPreview(BuildContext context,String ringtone) {
   return Container(
+    alignment: Alignment.topLeft,
+ width: MediaQuery.of(context).size.width*0.5,
     padding: EdgeInsets.all(12.w),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(14.r),
-      color: Colors.grey.shade800,
+      borderRadius: BorderRadius.circular(14.r), // Rounded corners
+      image: DecorationImage(
+        image: AssetImage("assets/images/white_sound.png"), // Replace with your image path
+        fit: BoxFit.cover, // Adjust to cover the entire container
+      ),
     ),
+
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -261,7 +270,7 @@ Widget _buildSectionTitle(BuildContext context, String title) {
 }
 
 
-Widget _buildInfoRow(BuildContext context, String label, dynamic? value, Function()? onTap, ThemeProvider themeProvider) {
+Widget _buildInfoRow(BuildContext context, String label, dynamic value, Function()? onTap, ThemeProvider themeProvider) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [

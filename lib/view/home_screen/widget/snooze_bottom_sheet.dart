@@ -35,27 +35,56 @@ void snoozeBottomSheet(BuildContext context) {
 
             // Snooze Time Dropdown using Consumer
             Align(
-              alignment: Alignment.center,
+              alignment: Alignment.centerRight, // Align dropdown to the right
               child: Consumer<SoundSettingProvider>(
                 builder: (context, soundSettingProvider, child) {
-                  return DropdownButton<int>(
-                    value: soundSettingProvider.soundSettings.advanced?.snooze ?? 1, // Default to 1 min if null
-                    items: List.generate(
-                      9,
-                          (index) => DropdownMenuItem<int>(
-                        value: index + 1,
-                        child: Text("${index + 1} min"),
-                      ),
+                  return Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    padding: EdgeInsets.symmetric(horizontal: 12.w), // Add some padding
+                    decoration: BoxDecoration(
+                     color:Theme.of(context).colorScheme.secondary,
+                      borderRadius: BorderRadius.circular(10.r), // Rounded corners
+                     // border: Border.all(color: Colors.grey[400]!), // Border color
                     ),
-                    onChanged: (newValue) {
-                      if (newValue != null) {
-                        soundSettingProvider.setSnooze(newValue); // Update provider state
-                      }
-                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween, // Move dropdown to the right
+                      children: [
+                        Text("Interval ",style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w400
+                        ),),
+                        DropdownButton<int>(
+                          value: soundSettingProvider.soundSettings.advanced?.snooze ?? 1, // Default to 1 min if null
+                          dropdownColor:Theme.of(context).colorScheme.secondary, // Background color of dropdown menu
+                          underline: SizedBox(), // Remove default underline
+                          alignment: AlignmentDirectional.centerEnd, // Align menu options to the right
+                          items: List.generate(
+                            9,
+                                (index) => DropdownMenuItem<int>(
+                              value: index + 1,
+                              child: Text(
+                                "${index + 1} min",
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 13.sp,
+                                ),
+                              ),
+                            ),
+                          ),
+                          onChanged: (newValue) {
+                            if (newValue != null) {
+                              soundSettingProvider.setSnooze(newValue); // Update provider state
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
             ),
+
             SizedBox(height: 40.h),
 
             Align(
