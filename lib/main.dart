@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,6 +35,7 @@ import 'model_view/ForgetPass_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
 import 'model_view/sign-up_provider.dart';
+import 'model_view/sound_setting_provider.dart';
 import 'model_view/temp.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -42,13 +45,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await AndroidAlarmManager.initialize();
+  initializeTimeZones();
   await initializeService();
 
-  initializeTimeZones();
+
+
+
 
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
-
+  await Hive.initFlutter();
 
   runApp(MyApp());
 }
@@ -62,21 +68,32 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  PermissionStatus _exactAlarmPermissionStatus = PermissionStatus.granted;
-
   @override
   void initState() {
     super.initState();
     AndroidAlarmManager.initialize();
-    _checkExactAlarmPermission();
+    _askNecessaryPermission();
   }
 
-  void _checkExactAlarmPermission() async {
-    final currentStatus = await Permission.scheduleExactAlarm.request();
-   // await Permission.scheduleExactAlarm.
-    // setState(() {
-    //   _exactAlarmPermissionStatus = currentStatus;
-    // });
+  void _askNecessaryPermission() async {
+    PermissionStatus notificationPermission = await Permission.notification.request();
+    PermissionStatus others = await Permission.calendarFullAccess.request();
+    await Permission.scheduleExactAlarm.request();
+    await Permission.reminders.request();
+    await Permission.accessMediaLocation.request();
+    await Permission.audio.request();
+    await Permission.ignoreBatteryOptimizations.request();
+    await Permission.manageExternalStorage.request();
+    await Permission.mediaLibrary.request();
+    await Permission.storage.request();
+    if (notificationPermission.isGranted) {
+      debugPrint("\nNotification permission granted\n");
+    } else if (notificationPermission.isDenied) {
+      debugPrint("\nNotification permission denied\n");
+    } else if (notificationPermission.isPermanentlyDenied) {
+      debugPrint("\nNotification permission permanently denied. Please enable it from settings.\n");
+      openAppSettings(); // Open app settings if permission is permanently denied
+    }
   }
 
 
@@ -126,9 +143,16 @@ class _MyAppState extends State<MyApp> {
  ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
         ),
+<<<<<<< HEAD
 ChangeNotifierProvider<LocalProvider>(
           create: (_) => LocalProvider(),
         ),
+=======
+ ChangeNotifierProvider<SoundSettingProvider>(
+          create: (_) => SoundSettingProvider(),
+        ),
+
+>>>>>>> 149ec6f4f60eef89842636e5107d36c073baef5e
 
       ],
       child: ScreenUtilInit(
@@ -378,7 +402,7 @@ ChangeNotifierProvider<LocalProvider>(
             routes: {
 
 
-              '/': (context) => const HomeScreen(),
+              '/': (context) => const SplashScreen(),
               RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
               RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),

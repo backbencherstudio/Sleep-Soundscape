@@ -110,7 +110,7 @@ class SoundsDetection {
   bool? enabled;
   String? description;
 
-  SoundsDetection({this.enabled, this.description});
+  SoundsDetection({this.enabled =false, this.description});
 
   SoundsDetection.fromJson(Map<String, dynamic> json) {
     enabled = json['enabled'];

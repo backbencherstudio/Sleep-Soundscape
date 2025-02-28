@@ -41,6 +41,19 @@ class SoundSettingProvider extends ChangeNotifier {
     _soundSettings.alarm!.volume = volume;
     saveSettings();
   }
+  //toggle sound detection
+  void toggleSoundDetection() {
+
+    _soundSettings.sleepAnalysis ??= SleepAnalysis();
+    _soundSettings.sleepAnalysis!.soundsDetection ??= SoundsDetection();
+
+    _soundSettings.sleepAnalysis!.soundsDetection!.enabled =
+    !(_soundSettings.sleepAnalysis!.soundsDetection!.enabled ?? false);
+
+    saveSettings();
+    notifyListeners();
+  }
+
 
   /// Toggle AutoPlay
   void toggleAutoPlay() {
@@ -53,6 +66,12 @@ class SoundSettingProvider extends ChangeNotifier {
   void setSnooze(int value) {
     _soundSettings.advanced ??= Advanced();
     _soundSettings.advanced!.snooze = value;
+    saveSettings();
+  }
+
+  void setAudioTime(int value) {
+    _soundSettings.soundscapes ??= Soundscapes();
+    _soundSettings.soundscapes!.audioTimer = value;
     saveSettings();
   }
 

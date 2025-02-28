@@ -26,7 +26,16 @@ class ReminderWidgets{
         itemExtent: 40,
         looping: isAmPm ? false : true,
         onSelectedItemChanged: (index) {
-         // onSelectedItemChanged(items[index]);
+          if(items[index] == 'AM'){
+            onSelectedItemChanged(-1);
+          }
+          else if(items[index] == 'PM'){
+            onSelectedItemChanged(-2);
+          }
+          else{
+            onSelectedItemChanged(items[index]);
+          }
+
         },
         squeeze: 01,
       diameterRatio: 2,

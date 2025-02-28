@@ -25,7 +25,7 @@ Future<void> initializeService() async {
     ),
   );
 
-  service.startService();
+ // service.startService();
 }
 
 /// Runs when the alarm triggers
@@ -39,15 +39,10 @@ void onStart(ServiceInstance service) async {
     debugPrint("\nAlarm Triggered: Playing Sound!\n");
 
 
-    String demoAudioPath = "musics/waves-02.mp3";
+    String demoAudioPath = "musics/alarm-01.mp3";
 
     try {
       await _audioPlayer.play(AssetSource(demoAudioPath), volume: 1);
-         final notificationService = NotificationServices();
-         initializeTimeZones();
-          notificationService.initialize();
-
-         NotificationServices.scheduledNotification("Manual Alarm triggered", "This is alarm body");
     } catch (e) {
       print("\nError playing audio: $e/n");
     }
@@ -71,19 +66,41 @@ void onStart(ServiceInstance service) async {
   }
 }
 
-// Example alarm callback function
+/// Alarm callback method, should be called when alarm triggered
 @pragma('vm:entry-point') // Required for AOT compilation
-void alarmCallback()  {
-  WidgetsFlutterBinding.ensureInitialized();
-  debugPrint("\nAlarm triggered!\n");
-
+void alarmCallback(Map<String, dynamic> params) async {
   FlutterBackgroundService service = FlutterBackgroundService();
-  service.invoke('play_audio');
+  bool isRunning = await service.isRunning();
+  if(isRunning){
+    debugPrint("\nAlarm already running. Skipping duplicate execution.\n");
+    return;
+  }
+  final String title = params["title"];
+  final String body = params["body"];
+  final int alarmID = params["alarmId"];
 
-  Timer(Duration(seconds: 30),(){
-    service.invoke("stop_audio");
-  });
+  ///Canceling the alarm immediately after it fires
+  await AndroidAlarmManager.cancel(alarmID);
 
+  try{
+
+    WidgetsFlutterBinding.ensureInitialized();
+    debugPrint("\nAlarm triggered!\n");
+      debugPrint("\nBackground Service Starting...\n");
+      await service.startService();
+
+
+    service.invoke('play_audio');
+
+
+    Timer(Duration(seconds: 30),(){
+      service.invoke("stop_audio");
+    });
+
+
+  }catch(error){
+    debugPrint("\nError while triggering alarm : $error\n");
+  }
 
   // final AudioPlayer _audioPlayer = AudioPlayer();
   // String demoAudioPath = "musics/waves-02.mp3";
@@ -168,11 +185,13 @@ class ReminderScreenProvider with ChangeNotifier{
 
   void setHour(int selectedH){
     _selectedHour = selectedH;
+    debugPrint("\nSelected hour : $selectedH\n");
     notifyListeners();
   }
 
   void setMinute(int selectedM){
     _selectedMinute = selectedM;
+    debugPrint("\nSelected minute : $selectedM\n");
     notifyListeners();
   }
 
@@ -183,6 +202,7 @@ class ReminderScreenProvider with ChangeNotifier{
     else if(selectedAmPm == -2){
       _selectedAmPm = 'PM';
     }
+    debugPrint("\nSelected am / pm : $selectedAmPm\n");
     notifyListeners();
   }
 
@@ -232,28 +252,71 @@ class ReminderScreenProvider with ChangeNotifier{
         day = now.day;
       }
 
-     // _selectedTime = nextDay;
-      _selectedTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 12, 32,);
+     ///set the exact alarm time
+      _selectedTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, _selectedHour, _selectedMinute,);
       debugPrint("\n selected time : $_selectedTime\n");
-      notifyListeners();
 
-      DateTime _time = DateTime.now().add(Duration(seconds: 5));
-      //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, DateTime.now().hour, DateTime.now().minute+1);
-      debugPrint("\nalarm time : $_selectedTime\n");
+      ///difference between now and alarm time
+      Duration difference = (_selectedTime.subtract(Duration(minutes: 5),)).difference(now);
 
-      bool scheduled = await AndroidAlarmManager.oneShotAt(_time, Random().nextInt(1095),
+      ///Initialize time zone for showing alarm notification using local time zone
+      initializeTimeZones();
+
+      ///Initialize notification
+      final notificationService = NotificationServices();
+      notificationService.initialize();
+
+      ///Scheduling alarm notification based on difference of now and alarm time
+      /// If alarm is gonna happen in 5 minutes set the notification time after 1 second of adding alarm
+      /// else set it before 5 minutes of alarm trigger
+      if(difference.isNegative || difference.inMinutes == 0){
+        NotificationServices.scheduledNotification("Sleep Soundscape", "Alarm is going to ring", Duration(seconds: 1) );
+      }
+      else{
+        NotificationServices.scheduledNotification("Sleep Soundscape", "Alarm is going to ring", difference );
+      }
+
+      final int alarmId = DateTime.now().millisecondsSinceEpoch.remainder(100000);
+
+      ///Alarm scheduling
+      bool scheduled = await AndroidAlarmManager.oneShotAt(
+
+        ///This is alarm time (When alarm should triggered)
+        _selectedTime,
+
+        ///This is alarm id (alarm id should be unique for each alarm)
+        alarmId,
+
+        ///This is background service, when alarm time comes, this method will trigger
         alarmCallback,
-        alarmClock: true,
-        allowWhileIdle: true,
-        rescheduleOnReboot: true,
-        params: {
-        "param1": "Hello",
-          'param2' : "World"
-        },
-        exact: true,
-        wakeup: true,);
 
-      debugPrint("Alarm Scheduled: $scheduled");
+        ///Turn on alarm clock
+        alarmClock: true,
+
+        ///Ring alarm when phone is in idle
+        allowWhileIdle: true,
+
+        ///Re-schedule alarm after the mobile re-boot or re-start, if it false, the alarm will not re-scheduled after
+        ///re-boot or power off - on
+        rescheduleOnReboot: true,
+
+        ///This parameter will pass to alarmCallBack
+        params: {
+        "title": "Alarm Title",
+          "body" : "Alarm Body",
+          "alarmId": alarmId
+        },
+
+        ///If true, the alarm will trigger at the exact specified time.
+        /// If false, the system may delay the alarm slightly to optimize battery performance.
+        exact: true,
+
+        ///If true, the alarm wakes up the device if it’s sleeping.
+        /// If false, the alarm only triggers when the device is already awake.
+        wakeup: true,
+      );
+
+      debugPrint("\nAlarm Scheduled : $scheduled\n");
 
     }catch(error){
       debugPrint("\nerror while saving alarm : $error\n");
@@ -294,8 +357,8 @@ class ReminderScreenProvider with ChangeNotifier{
 
 
   ///Setting Alarm/Reminder
-  DateTime? _selectedTime;
-  DateTime? get selectedTime => _selectedTime;
+  DateTime _selectedTime = DateTime.now().add(Duration(seconds: 5));
+  DateTime get selectedTime => _selectedTime;
 
   Future<void> addReminder({required DateTime time}) async {
 

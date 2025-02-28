@@ -1,14 +1,10 @@
-
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
-
 import '../model/sound_setting_model.dart';
 
 class HiveServices {
   static const String _boxName = "soundSettings";
-
   /// Save Sound Settings
   static Future<void> saveSoundSettings(SoundSettingModel settings) async {
     try {
