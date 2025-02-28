@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
 
-import '../../reminder_screen/reminder_widgets/reminder_widgets.dart';
+import '../../../model_view/sound_setting_provider.dart';
 
 void audioTimerBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
-    // backgroundColor: Colors.transparent,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
     ),
     builder: (BuildContext context) {
       return Container(
-        height: MediaQuery.of(context).size.height*0.5,
+        height: MediaQuery.of(context).size.height * 0.4,
         decoration: BoxDecoration(
-          // color: Color(0xff0F0F13),
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
         ),
         padding: EdgeInsets.all(16.w),
@@ -24,109 +23,106 @@ void audioTimerBottomSheet(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             Center(
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Audio  ",
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        // color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    TextSpan(
-                      text: "Timer",
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Color(0xffFAD051),
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+              child: Text(
+                "Audio Timer",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: 20.h),
 
-            // Preferred Earphones
+            // Snooze Time Dropdown using Consumer
             Align(
-              alignment: Alignment.center,
-
-              child:       Row(
-                spacing: 5.w,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ReminderWidgets().buildCupertinoPicker(
-                    context,
-                    [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12],
-                    8,
-                        (value) {
-                      debugPrint("\nValue : $value\n");
-                    },
-                    false,
-                  ),
-                  Text(":"),
-                  ReminderWidgets().buildCupertinoPicker(
-                    context,
-                    [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6,
-                      7,
-                      8,
-                      9,
-                      10,
-                      11,
-                      12,
-                      13,
-                      14,
-                      15,
-                      16,
-                      17,
-                      18,
-                      19,
-                      20,
-                      21,
-                      22,
-                      23,
-                      24,
-                      25,
-                      26,
-                      27,
-                      28,
-                      29,
-                      30,
-                    ],
-                    22,
-                        (value) {
-                      debugPrint("\nValue : $value\n");
-                    },
-                    false,
-                  ),
-
-                  ReminderWidgets().buildCupertinoPicker(
-                    context,
-                    ['AM', 'PM'],
-                    'PM',
-                        (value) {
-                      debugPrint("\nValue : $value\n");
-                    },
-                    true,
-                  ),
-                ],
+              alignment: Alignment.centerRight, // Align dropdown to the right
+              child: Consumer<SoundSettingProvider>(
+                builder: (context, soundSettingProvider, child) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    padding: EdgeInsets.symmetric(horizontal: 12.w), // Add some padding
+                    decoration: BoxDecoration(
+                      color:Theme.of(context).colorScheme.secondary,
+                      borderRadius: BorderRadius.circular(10.r), // Rounded corners
+                      // border: Border.all(color: Colors.grey[400]!), // Border color
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween, // Move dropdown to the right
+                      children: [
+                        Text("Audio Timer ",style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w400
+                        ),),
+                        DropdownButton<int>(
+                          value: soundSettingProvider.soundSettings.soundscapes?.audioTimer ?? 1,
+                          dropdownColor:Theme.of(context).colorScheme.secondary, // Background color of dropdown menu
+                          underline: SizedBox(), // Remove default underline
+                          alignment: AlignmentDirectional.centerEnd, // Align menu options to the right
+                          items: List.generate(
+                            9,
+                                (index) => DropdownMenuItem<int>(
+                              value: index + 1,
+                              child: Text(
+                                "${index + 1} min",
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 13.sp,
+                                ),
+                              ),
+                            ),
+                          ),
+                          onChanged: (newValue) {
+                            if (newValue != null) {
+                              soundSettingProvider.setAudioTime(newValue);// Update provider state
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
+            //
+            // Align(
+            //   alignment: Alignment.center,
+            //   child: Consumer<SoundSettingProvider>(
+            //     builder: (context, soundSettingProvider, child) {
+            //       return DropdownButton<int>(
+            //         value: soundSettingProvider.soundSettings.soundscapes?.audioTimer ?? 1, // Default to 1 min if null
+            //         items: List.generate(
+            //           9,
+            //               (index) => DropdownMenuItem<int>(
+            //             value: index + 1,
+            //             child: Text("${index + 1} min"),
+            //           ),
+            //         ),
+            //         onChanged: (newValue) {
+            //           if (newValue != null) {
+            //             soundSettingProvider.setAudioTime(newValue); // Update provider state
+            //           }
+            //         },
+            //       );
+            //     },
+            //   ),
+            // ),
             SizedBox(height: 40.h),
 
             Align(
-                alignment: Alignment.center,
-                child: CustomButton(text: "Set Timer", onPressed: (){})),
+              alignment: Alignment.center,
+              child: Consumer<SoundSettingProvider>(
+                builder: (context, soundSettingProvider, child) {
+                  return CustomButton(
+                    text: "Save",
+                    onPressed: () {
+                      Navigator.pop(context, soundSettingProvider.soundSettings.soundscapes?.audioTimer ?? 1); // Return selected snooze time
+                    },
+                  );
+                },
+              ),
+            ),
             SizedBox(height: 6.h),
-
           ],
         ),
       );
