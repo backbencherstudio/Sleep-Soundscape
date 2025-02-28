@@ -26,7 +26,7 @@ class NotificationServices {
 
   }
 
-  static scheduledNotification(String title, String body) async {
+  static scheduledNotification(String title, String body, Duration duration) async {
     const AndroidNotificationDetails androidNotificationDetails =
     AndroidNotificationDetails(
         'important_notification', // Channel ID
@@ -44,7 +44,7 @@ class NotificationServices {
         0,
         title,
         body,
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 2)),
+        tz.TZDateTime.now(tz.local).add(duration),
         notificationDetails,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle

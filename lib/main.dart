@@ -57,21 +57,32 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  PermissionStatus _exactAlarmPermissionStatus = PermissionStatus.granted;
-
   @override
   void initState() {
     super.initState();
     AndroidAlarmManager.initialize();
-    _checkExactAlarmPermission();
+    _askNecessaryPermission();
   }
 
-  void _checkExactAlarmPermission() async {
-    final currentStatus = await Permission.scheduleExactAlarm.request();
-   // await Permission.scheduleExactAlarm.
-    // setState(() {
-    //   _exactAlarmPermissionStatus = currentStatus;
-    // });
+  void _askNecessaryPermission() async {
+    PermissionStatus notificationPermission = await Permission.notification.request();
+    PermissionStatus others = await Permission.calendarFullAccess.request();
+    await Permission.scheduleExactAlarm.request();
+    await Permission.reminders.request();
+    await Permission.accessMediaLocation.request();
+    await Permission.audio.request();
+    await Permission.ignoreBatteryOptimizations.request();
+    await Permission.manageExternalStorage.request();
+    await Permission.mediaLibrary.request();
+    await Permission.storage.request();
+    if (notificationPermission.isGranted) {
+      debugPrint("\nNotification permission granted\n");
+    } else if (notificationPermission.isDenied) {
+      debugPrint("\nNotification permission denied\n");
+    } else if (notificationPermission.isPermanentlyDenied) {
+      debugPrint("\nNotification permission permanently denied. Please enable it from settings.\n");
+      openAppSettings(); // Open app settings if permission is permanently denied
+    }
   }
 
 
