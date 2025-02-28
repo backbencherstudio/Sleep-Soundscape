@@ -70,7 +70,17 @@ class AddReminderScreen extends StatelessWidget {
 
             SizedBox(height: 12.h,),
 
-            ReminderDropDownButton(hintText : "Select repeat",uniqueItemList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],),
+            Consumer<ReminderScreenProvider>(
+              builder: (_, reminderScreenProvider, child) {
+                return ReminderDropDownButton(
+                  hintText : "Select repeat",
+                  uniqueItemList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                  isMultipleChoice: true,
+                  onMultipleChoice: reminderScreenProvider.onSelectRepeat,
+
+                );
+              }
+            ),
 
             SizedBox(height: 50.h,),
           ],

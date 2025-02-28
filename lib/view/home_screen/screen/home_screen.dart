@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final loginAuthProvider = Provider.of<LoginAuthProvider>(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // Background image and other UI elements.
       body: Stack(
         fit: StackFit.expand,
