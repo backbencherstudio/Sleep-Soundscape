@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // Background image and other UI elements.
       body: Stack(
         fit: StackFit.expand,

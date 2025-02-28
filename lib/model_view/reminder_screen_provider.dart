@@ -5,6 +5,7 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:intl/intl.dart';
 import 'package:sleep_soundscape/model/reminder.dart';
 import 'package:timezone/data/latest.dart';
 
@@ -42,7 +43,8 @@ void onStart(ServiceInstance service) async {
     String demoAudioPath = "musics/alarm-01.mp3";
 
     try {
-      await _audioPlayer.play(AssetSource(demoAudioPath), volume: 1);
+      await _audioPlayer.setReleaseMode(ReleaseMode.loop);
+      await _audioPlayer.play(AssetSource(demoAudioPath), volume: 1,);
     } catch (e) {
       print("\nError playing audio: $e/n");
     }
@@ -68,16 +70,15 @@ void onStart(ServiceInstance service) async {
 
 /// Alarm callback method, should be called when alarm triggered
 @pragma('vm:entry-point') // Required for AOT compilation
-void alarmCallback(Map<String, dynamic> params) async {
+void alarmCallback(int id,
+    Map<String, dynamic> params
+    ) async {
   FlutterBackgroundService service = FlutterBackgroundService();
   bool isRunning = await service.isRunning();
-  if(isRunning){
-    debugPrint("\nAlarm already running. Skipping duplicate execution.\n");
-    return;
-  }
+
   final String title = params["title"];
   final String body = params["body"];
-  final int alarmID = params["alarmId"];
+  final int alarmID = id;
 
   ///Canceling the alarm immediately after it fires
   await AndroidAlarmManager.cancel(alarmID);
@@ -87,7 +88,10 @@ void alarmCallback(Map<String, dynamic> params) async {
     WidgetsFlutterBinding.ensureInitialized();
     debugPrint("\nAlarm triggered!\n");
       debugPrint("\nBackground Service Starting...\n");
+
+    if(!isRunning){
       await service.startService();
+    }
 
 
     service.invoke('play_audio');
@@ -183,18 +187,21 @@ class ReminderScreenProvider with ChangeNotifier{
   String _selectedDay = "Saturday";
 
 
+  ///Set alarm hour
   void setHour(int selectedH){
     _selectedHour = selectedH;
     debugPrint("\nSelected hour : $selectedH\n");
     notifyListeners();
   }
 
+  ///Set alarm minute
   void setMinute(int selectedM){
     _selectedMinute = selectedM;
     debugPrint("\nSelected minute : $selectedM\n");
     notifyListeners();
   }
 
+  ///Set alarm am/pm
   void setAmPm(int selectedAmPm){
     if(selectedAmPm == -1){
       _selectedAmPm = 'AM';
@@ -206,6 +213,19 @@ class ReminderScreenProvider with ChangeNotifier{
     notifyListeners();
   }
 
+
+  void addReminder(DateTime time) async {
+    debugPrint("\nAdding this time to reminder : ${DateFormat('hh:mma').format(time).toLowerCase()}\n");
+    _reminders!.reminderList!.add(
+      ReminderList(
+        amPm: _selectedAmPm,
+        days: "WTF",
+        time: DateFormat('hh:mma').format(time).toLowerCase(),
+        title: "Sleep Reminder"
+      )
+    );
+    notifyListeners();
+  }
 
   ///convert user inputted time to DateTime object
   Future<void> onSave() async {
@@ -219,6 +239,8 @@ class ReminderScreenProvider with ChangeNotifier{
           : (_selectedAmPm == "AM" && _selectedHour == 12)
           ? 0
           : _selectedHour; // Handle midnight (12 AM → 00:00)
+
+
 
       DateTime now = DateTime.now();
 
@@ -256,6 +278,7 @@ class ReminderScreenProvider with ChangeNotifier{
       _selectedTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, _selectedHour, _selectedMinute,);
       debugPrint("\n selected time : $_selectedTime\n");
 
+      addReminder(_selectedTime);
       ///difference between now and alarm time
       Duration difference = (_selectedTime.subtract(Duration(minutes: 5),)).difference(now);
 
@@ -276,7 +299,7 @@ class ReminderScreenProvider with ChangeNotifier{
         NotificationServices.scheduledNotification("Sleep Soundscape", "Alarm is going to ring", difference );
       }
 
-      final int alarmId = DateTime.now().millisecondsSinceEpoch.remainder(100000);
+      final dynamic alarmId = DateTime.now().millisecondsSinceEpoch.remainder(100000);
 
       ///Alarm scheduling
       bool scheduled = await AndroidAlarmManager.oneShotAt(
@@ -360,9 +383,6 @@ class ReminderScreenProvider with ChangeNotifier{
   DateTime _selectedTime = DateTime.now().add(Duration(seconds: 5));
   DateTime get selectedTime => _selectedTime;
 
-  Future<void> addReminder({required DateTime time}) async {
 
-    notifyListeners();
-  }
   
 }
