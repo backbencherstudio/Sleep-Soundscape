@@ -1,5 +1,5 @@
 {
-  "wakeUp": "Wake up",
+  "wakeUp": "Wake up ",
   "@wakeUp": {
     "description": "Label for wake up"
   },

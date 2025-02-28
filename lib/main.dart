@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
-import 'package:sleep_soundscape/l10n/l10n.dart';
+import 'package:sleep_soundscape/l10n.dart';
 import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
 import 'package:sleep_soundscape/model_view/local_Provider.dart';
 import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
@@ -55,7 +55,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
   await Hive.initFlutter();
-
+await Hive.openBox('settings');
   runApp(MyApp());
 }
 
@@ -143,16 +143,16 @@ class _MyAppState extends State<MyApp> {
  ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
         ),
-<<<<<<< HEAD
+
 ChangeNotifierProvider<LocalProvider>(
           create: (_) => LocalProvider(),
         ),
-=======
+
  ChangeNotifierProvider<SoundSettingProvider>(
           create: (_) => SoundSettingProvider(),
         ),
 
->>>>>>> 149ec6f4f60eef89842636e5107d36c073baef5e
+
 
       ],
       child: ScreenUtilInit(

@@ -3,7 +3,7 @@
   "@language": {
     "description": "Huidige taal"
   },
-  "Wake up": "Wakker worden",
+  "wakeUp": "Wakker worden ",
   "time": "Tijd",
   "alarm": "Alarm",
   "sounds": "Geluiden",

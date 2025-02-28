@@ -3,7 +3,7 @@
   "@language": {
     "description": "ਮੌਜੂਦਾ ਭਾਸ਼ਾ"
   },
-  "Wake up": "ਉਠੋ",
+  "wakeUp": "ਉਠੋ ",
   "time": "ਸਮਾਂ",
   "alarm": "ਅਲਾਰਮ",
   "sounds": "ਆਵਾਜ਼ਾਂ",

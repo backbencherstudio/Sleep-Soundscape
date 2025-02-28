@@ -4,7 +4,7 @@
     "description": "वर्तमान भाषा"
   },
  
-  "Wake up": "उठो",
+  "wakeUp": "उठो ",
   "time": "समय",
   "alarm": "अलार्म",
   "sounds": "ध्वनि",

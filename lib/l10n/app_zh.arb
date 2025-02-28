@@ -3,7 +3,7 @@
   "@language": {
     "description": "当前语言"
   },
-  "Wake up": "醒来",
+  "wakeUp": "醒来 ",
   "time": "时间",
   "alarm": "闹钟",
   "sounds": "声音",

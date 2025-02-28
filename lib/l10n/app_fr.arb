@@ -3,7 +3,7 @@
   "@language": {
     "description": "Langue actuelle"
   },
-  "Wake up": "Réveille toi",
+  "wakeUp": "Réveille toi ",
   "time": "Temps",
   "alarm": "Alarme",
   "sounds": "Sons",

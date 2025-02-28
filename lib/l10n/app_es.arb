@@ -3,7 +3,7 @@
   "@language": {
     "description": "Idioma actual"
   },
-  "Wake up": "Despierta",
+  "wakeUp": "Despierta ",
   "time": "Hora",
   "alarm": "Alarma",
   "sounds": "Sonidos",
