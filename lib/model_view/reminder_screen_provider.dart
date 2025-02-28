@@ -25,7 +25,7 @@ Future<void> initializeService() async {
     ),
   );
 
-  service.startService();
+ // service.startService();
 }
 
 /// Runs when the alarm triggers
@@ -43,11 +43,11 @@ void onStart(ServiceInstance service) async {
 
     try {
       await _audioPlayer.play(AssetSource(demoAudioPath), volume: 1);
-         final notificationService = NotificationServices();
-         initializeTimeZones();
-          notificationService.initialize();
-
-         NotificationServices.scheduledNotification("Manual Alarm triggered", "This is alarm body");
+         // final notificationService = NotificationServices();
+         // initializeTimeZones();
+         //  notificationService.initialize();
+         //
+         // NotificationServices.scheduledNotification("Manual Alarm triggered", "This is alarm body");
     } catch (e) {
       print("\nError playing audio: $e/n");
     }
@@ -73,17 +73,32 @@ void onStart(ServiceInstance service) async {
 
 // Example alarm callback function
 @pragma('vm:entry-point') // Required for AOT compilation
-void alarmCallback()  {
-  WidgetsFlutterBinding.ensureInitialized();
-  debugPrint("\nAlarm triggered!\n");
+void alarmCallback() async {
 
-  FlutterBackgroundService service = FlutterBackgroundService();
-  service.invoke('play_audio');
+  try{
 
-  Timer(Duration(seconds: 30),(){
-    service.invoke("stop_audio");
-  });
+    WidgetsFlutterBinding.ensureInitialized();
+    debugPrint("\nAlarm triggered!\n");
 
+    FlutterBackgroundService service = FlutterBackgroundService();
+    bool isRunning = await service.isRunning();
+    if(!isRunning){
+      debugPrint("\nBackground Service Starting...\n");
+      await service.startService();
+
+    }
+
+    service.invoke('play_audio');
+
+
+    Timer(Duration(seconds: 30),(){
+      service.invoke("stop_audio");
+    });
+
+
+  }catch(error){
+    debugPrint("\nError while triggering alarm : $error\n");
+  }
 
   // final AudioPlayer _audioPlayer = AudioPlayer();
   // String demoAudioPath = "musics/waves-02.mp3";
