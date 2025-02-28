@@ -1,0 +1,170 @@
+{
+  "wakeUp": "Wake up",
+  "@wakeUp": {
+    "description": "Label for wake up"
+  },
+  "time": "time",
+  "@time": {
+    "description": "Label for time"
+  },
+  "alarm": "Alarm",
+  "@alarm": {
+    "description": "Label for alarm"
+  },
+  "sounds": "Sounds",
+  "@sounds": {
+    "description": "Label for sounds"
+  },
+  "audio": "Audio",
+  "@audio": {
+    "description": "Label for audio"
+  },
+  "start": "Start",
+  "@start": {
+    "description": "Label for start button"
+  },
+  "joined2DaysAgo": "Joined 2 days ago",
+  "@joined2DaysAgo": {
+    "description": "Text for user join date"
+  },
+  "today": "Today",
+  "@today": {
+    "description": "Label for today's date"
+  },
+  "sleep": "Sleep",
+  "@sleep": {
+    "description": "Label for sleep"
+  },
+  "todaySleep": "Today sleep",
+  "@todaySleep": {
+    "description": "Label for today's sleep tracking"
+  },
+  "sleepQuality": "Sleep quality",
+  "@sleepQuality": {
+    "description": "Label for sleep quality metric"
+  },
+  "sleepPhase": "Sleep Phase",
+  "@sleepPhase": {
+    "description": "Label for sleep phases"
+  },
+  "reminder": "Reminder",
+  "@reminder": {
+    "description": "Label for reminders"
+  },
+  "download": "Download",
+  "@download": {
+    "description": "Label for download button"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Label for app settings"
+  },
+  "changePasswords": "Change Passwords",
+  "@changePasswords": {
+    "description": "Label for changing passwords"
+  },
+  "inviteFriends": "Invite Friends",
+  "@inviteFriends": {
+    "description": "Label for inviting friends"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Label for notifications"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Label for language settings"
+  },
+  "personalization": "Personalization",
+  "@personalization": {
+    "description": "Label for personalization settings"
+  },
+  "faqs": "FAQs",
+  "@faqs": {
+    "description": "Label for frequently asked questions"
+  },
+  "about": "About",
+  "@about": {
+    "description": "Label for about section"
+  },
+  "signOut": "Sign out",
+  "@signOut": {
+    "description": "Label for signing out"
+  },
+  "signUp": "Sign up",
+  "@signUp": {
+    "description": "Label for signing up"
+  },
+  "signIn": "Sign in",
+  "@signIn": {
+    "description": "Label for signing in"
+  },
+  "enterYourEmail": "Enter your Email",
+  "@enterYourEmail": {
+    "description": "Placeholder for email input"
+  },
+  "enterYourPassword": "Enter your password",
+  "@enterYourPassword": {
+    "description": "Placeholder for password input"
+  },
+  "forgotPassword": "Forgot Password",
+  "@forgotPassword": {
+    "description": "Label for forgotten password"
+  },
+  "haveAnAccountSignUp": "Have an account? Sign up",
+  "@haveAnAccountSignUp": {
+    "description": "Text for switching to sign-up"
+  },
+  "chooseYourImage": "Choose Your Image",
+  "@chooseYourImage": {
+    "description": "Label for selecting an image"
+  },
+  "enterYourName": "Enter your name",
+  "@enterYourName": {
+    "description": "Placeholder for name input"
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Label for next button"
+  },
+  "forgotYour": "Forgot your",
+  "@forgotYour": {
+    "description": "Partial label for forgot password"
+  },
+  "password": "password?",
+  "@password": {
+    "description": "Partial label for forgot password"
+  },
+  "resetPasswordInstruction": "Please enter your email address below to reset your password",
+  "@resetPasswordInstruction": {
+    "description": "Instruction for password reset"
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Label for done button"
+  },
+  "recoveryEmail": "Recovery email",
+  "@recoveryEmail": {
+    "description": "Label for recovery email"
+  },
+  "sent": "Sent",
+  "@sent": {
+    "description": "Confirmation message for email sent"
+  },
+  "verifyOtp": "Verify OTP",
+  "@verifyOtp": {
+    "description": "Label for OTP verification"
+  },
+  "recoveryEmailSentMessage": "We have sent you a recovery email, this email will help you to reset your password",
+  "@recoveryEmailSentMessage": {
+    "description": "Message for recovery email confirmation"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Label for confirm button"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Label for search field"
+  }
+}

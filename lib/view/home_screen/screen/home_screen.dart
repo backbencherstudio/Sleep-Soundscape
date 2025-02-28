@@ -8,7 +8,8 @@ import '../../../model_view/reminder_screen_provider.dart';
 import '../../parent_screen/screen/parent_screen.dart';
 import '../../reminder_screen/reminder_widgets/reminder_widgets.dart';
 import '../../settings_screens/widgets/setting_bottom_modal_sheet.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
@@ -93,14 +94,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "Wake up ",
+                          text: AppLocalizations.of(context)?.wakeUp,
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         TextSpan(
-                          text: "time",
+                          text: AppLocalizations.of(context)?.time,
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: const Color(0xffFAD051),
                             fontSize: 24.sp,

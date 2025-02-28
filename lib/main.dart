@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -5,7 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
+import 'package:sleep_soundscape/l10n/l10n.dart';
 import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
+import 'package:sleep_soundscape/model_view/local_Provider.dart';
 import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
 import 'package:sleep_soundscape/model_view/notification_provider.dart';
 import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
@@ -30,6 +34,9 @@ import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
 import 'model_view/sign-up_provider.dart';
 import 'model_view/temp.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -119,17 +126,31 @@ class _MyAppState extends State<MyApp> {
  ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
         ),
-
+ChangeNotifierProvider<LocalProvider>(
+          create: (_) => LocalProvider(),
+        ),
 
       ],
       child: ScreenUtilInit(
         //  designSize: Size(deviceWidth, deviceHeight),
         minTextAdapt: true,
         builder: (context, child) {
+
           final themeProvider = context.watch<ThemeProvider>();
+          final localProvider = context.watch<LocalProvider>();
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Counter App',
+            supportedLocales: L10n.all,
+          locale: localProvider.locale,
+            localizationsDelegates: [
+            AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+
+
+            ],
             theme:  ThemeData(
               scaffoldBackgroundColor: Colors.white,
 

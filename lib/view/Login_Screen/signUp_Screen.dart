@@ -7,7 +7,6 @@ import 'package:sleep_soundscape/view/Login_Screen/signIN_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/BottomSheet.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
-import '../../Utils/route_name.dart';
 import '../../model_view/sign-up_provider.dart';
 
 class SignupScreen extends StatelessWidget {
