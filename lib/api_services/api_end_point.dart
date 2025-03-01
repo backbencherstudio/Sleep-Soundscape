@@ -9,7 +9,7 @@ class AppUrls {
    static String forgotPassword  = '$baseUrl/api/users/forgot-password';
   static String loginUrl = '$baseUrl/api/users/logIn';
   static String signUp = '$baseUrl/api/users/signup';
-
+  static String updateProfile ='$baseUrl/api/users/update-user';
 
 }
 // http://192.168.40.10:1000/api/sounds/filterSounds

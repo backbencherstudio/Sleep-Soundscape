@@ -142,7 +142,6 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
              ForgotbottomSheet(context: context,
              email: email,
              );
-
             },
           );
   },
