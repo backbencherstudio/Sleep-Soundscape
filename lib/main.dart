@@ -1,4 +1,5 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -27,12 +28,16 @@ import 'package:sleep_soundscape/view/settings_screens/personalization_screen.da
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'package:timezone/data/latest.dart';
-import 'model_view/ForgetPass_provider.dart';
+import 'model_view/localizaiton_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
 import 'model_view/sign-up_provider.dart';
 import 'model_view/sound_setting_provider.dart';
 import 'model_view/temp.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,8 +45,6 @@ void main() async {
   await AndroidAlarmManager.initialize();
   initializeTimeZones();
   await initializeService();
-
-
 
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
@@ -58,7 +61,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -67,7 +69,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _askNecessaryPermission() async {
-    PermissionStatus notificationPermission = await Permission.notification.request();
+    PermissionStatus notificationPermission =
+        await Permission.notification.request();
     PermissionStatus others = await Permission.calendarFullAccess.request();
     await Permission.scheduleExactAlarm.request();
     await Permission.reminders.request();
@@ -82,11 +85,12 @@ class _MyAppState extends State<MyApp> {
     } else if (notificationPermission.isDenied) {
       debugPrint("\nNotification permission denied\n");
     } else if (notificationPermission.isPermanentlyDenied) {
-      debugPrint("\nNotification permission permanently denied. Please enable it from settings.\n");
+      debugPrint(
+        "\nNotification permission permanently denied. Please enable it from settings.\n",
+      );
       openAppSettings(); // Open app settings if permission is permanently denied
     }
   }
-
 
   // final double deviceWidth = 1440.0;
   @override
@@ -117,19 +121,14 @@ class _MyAppState extends State<MyApp> {
           create: (_) => OnboardingScreenProvider(),
         ),
 
-        ChangeNotifierProvider<ThemeProvider>(
-          create: (_) => ThemeProvider(),
-        ),
+        ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
         ChangeNotifierProvider<LoginAuthProvider>(
           create: (_) => LoginAuthProvider(),
         ),
         ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
         ),
-        ChangeNotifierProvider<SignUpProvider>(
-          create: (_) => SignUpProvider(),
-        ),
-
+        ChangeNotifierProvider<SignUpProvider>(create: (_) => SignUpProvider()),
 
         ChangeNotifierProvider<ForgetPassProvider>(
           create: (_) => ForgetPassProvider(),
@@ -137,33 +136,53 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<SoundSettingProvider>(
           create: (_) => SoundSettingProvider(),
         ),
-
-
+        ChangeNotifierProvider<LocalizationProvider>(
+          create:
+              (_) => LocalizationProvider(),
+        ),
       ],
       child: ScreenUtilInit(
         //  designSize: Size(deviceWidth, deviceHeight),
         minTextAdapt: true,
         builder: (context, child) {
           final themeProvider = context.watch<ThemeProvider>();
+          final localizationProvider = Provider.of<LocalizationProvider>(
+            context,
+          );
+
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Counter App',
-            theme:  ThemeData(
+            title: 'Sleep Soundscape App',
+            locale: localizationProvider.locale,
+            supportedLocales: const [
+              Locale('en'),
+              Locale('es'),
+            ],
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+
+            theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,
 
               appBarTheme: AppBarTheme(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  actionsIconTheme: IconThemeData(
-                      color: Colors.white.withOpacity(0.6)
-                  )
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                actionsIconTheme: IconThemeData(
+                  color: Colors.white.withOpacity(0.6),
+                ),
               ),
 
               ///light mode bottom sheet theme
               bottomSheetTheme: BottomSheetThemeData(
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.r),),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20.r),
+                  ),
                 ),
               ),
 
@@ -195,27 +214,22 @@ class _MyAppState extends State<MyApp> {
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
                 ),
-                bodySmall:   TextStyle(
+                bodySmall: TextStyle(
                   fontSize: 10.sp,
                   fontWeight: FontWeight.w400,
                   color: Colors.black,
                 ),
               ),
               inputDecorationTheme: InputDecorationTheme(
-
                 ///light-fill color of TextFormField
                 filled: true,
                 fillColor: Colors.black.withOpacity(0.04),
 
                 ///light-mode label style
-                labelStyle:  TextStyle(
-                  color: Colors.black.withOpacity(0.6),
-                ),
+                labelStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
 
                 ///light-mode hint style
-                hintStyle: TextStyle(
-                  color: Colors.black.withOpacity(0.6),
-                ),
+                hintStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
 
                 ///light-enabledBorder color of TextFormField
                 enabledBorder: OutlineInputBorder(
@@ -229,14 +243,10 @@ class _MyAppState extends State<MyApp> {
                   borderSide: BorderSide(color: Colors.black.withOpacity(0.08)),
                 ),
 
-
-
                 ///dark-focusedBorder color of TextFormField
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
-                  borderSide: BorderSide(
-                    color:Color(0xffFAD051),
-                  ),
+                  borderSide: BorderSide(color: Color(0xffFAD051)),
                 ),
 
                 ///dark-errorBorder color of TextFormField
@@ -245,7 +255,7 @@ class _MyAppState extends State<MyApp> {
                   borderSide: BorderSide(color: Colors.red),
                 ),
 
-                prefixIconColor:  Colors.black.withOpacity(0.6),
+                prefixIconColor: Colors.black.withOpacity(0.6),
                 suffixIconColor: Colors.black.withOpacity(0.6),
               ),
 
@@ -264,18 +274,20 @@ class _MyAppState extends State<MyApp> {
               scaffoldBackgroundColor: Colors.black,
 
               appBarTheme: AppBarTheme(
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-                  actionsIconTheme: IconThemeData(
-                      color: Colors.black.withOpacity(0.6)
-                  )
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+                actionsIconTheme: IconThemeData(
+                  color: Colors.black.withOpacity(0.6),
+                ),
               ),
 
               ///dark mode bottom sheet theme
               bottomSheetTheme: BottomSheetThemeData(
                 backgroundColor: Color(0xff0F0F13),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.r),),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20.r),
+                  ),
                 ),
               ),
 
@@ -307,34 +319,27 @@ class _MyAppState extends State<MyApp> {
                   fontWeight: FontWeight.w500,
                   color: Colors.white,
                 ),
-                bodySmall:           TextStyle(
+                bodySmall: TextStyle(
                   fontSize: 10.sp,
                   fontWeight: FontWeight.w400,
                   color: Colors.white,
                 ),
               ),
               inputDecorationTheme: InputDecorationTheme(
-
                 ///dark-fill color of TextFormField
                 filled: true,
                 fillColor: Colors.white.withOpacity(0.04),
 
                 ///light-mode label style
-                labelStyle:  TextStyle(
-                  color: Colors.white.withOpacity(0.6),
-                ),
+                labelStyle: TextStyle(color: Colors.white.withOpacity(0.6)),
 
                 ///light-mode hint style
-                hintStyle: TextStyle(
-                  color: Colors.white.withOpacity(0.6),
-                ),
+                hintStyle: TextStyle(color: Colors.white.withOpacity(0.6)),
 
                 ///dark-enabledBorder color of TextFormField
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
-                  borderSide: BorderSide(
-                    color: Colors.white.withOpacity(0.04),
-                  ),
+                  borderSide: BorderSide(color: Colors.white.withOpacity(0.04)),
                 ),
 
                 ///dark-disabledBorder color of TextFormField
@@ -346,9 +351,7 @@ class _MyAppState extends State<MyApp> {
                 ///dark-focusedBorder color of TextFormField
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14.r),
-                  borderSide: BorderSide(
-                    color: Color(0xffFAD051),
-                  ),
+                  borderSide: BorderSide(color: Color(0xffFAD051)),
                 ),
 
                 ///dark-errorBorder color of TextFormField
@@ -357,7 +360,7 @@ class _MyAppState extends State<MyApp> {
                   borderSide: BorderSide(color: Colors.red),
                 ),
 
-                prefixIconColor:  Colors.white.withOpacity(0.6),
+                prefixIconColor: Colors.white.withOpacity(0.6),
                 suffixIconColor: Colors.white.withOpacity(0.6),
               ),
 
@@ -373,21 +376,21 @@ class _MyAppState extends State<MyApp> {
             ),
             initialRoute: '/',
             routes: {
-
-
               '/': (context) => const SplashScreen(),
-              RouteName.onboardingScreen: (context)=> const OnboardingScreen(),
-              RouteName.completeProfileScreen: (context)=> CompleteprofileScreen(),
+              RouteName.onboardingScreen: (context) => const OnboardingScreen(),
+              RouteName.completeProfileScreen:
+                  (context) => CompleteprofileScreen(),
               RouteName.profileScreen: (context) => ProfileScreen(),
               //  RouteName.aboutScreen: (context) => AboutScreen(),
               RouteName.signUpScreen: (context) => SignupScreen(),
               RouteName.signInScreen: (context) => SignInScreen(),
               RouteName.forgotPassword: (context) => ForgotpasswordScreen(),
               RouteName.homeScreen: (context) => HomeScreen(),
-              RouteName.personalizationScreen: (context) => PersonalizationScreen(),
+              RouteName.personalizationScreen:
+                  (context) => PersonalizationScreen(),
               RouteName.goalScreen: (context) => GoalScreen(),
-              //add prpose
 
+              //add prpose
             },
           );
         },

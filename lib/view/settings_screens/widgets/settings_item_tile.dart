@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/model_view/localizaiton_provider.dart';
 import 'package:sleep_soundscape/model_view/theme_provider.dart';
 
 class SettingsItemTile extends StatelessWidget {
@@ -16,6 +17,8 @@ class SettingsItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final darkTheme = context.watch<ThemeProvider>().isDarkMode;
+    final localizationProvider = Provider.of<LocalizationProvider>(context);
+   
 
 
     return GestureDetector(
