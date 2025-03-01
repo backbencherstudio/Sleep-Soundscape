@@ -12,19 +12,16 @@ class EditProfileProvider extends ChangeNotifier {
   File? get selectedImage => _selectedImage;
   String? get name => _name;
 
-  // Set the selected image and notify listeners
   void setImage(File image) {
     _selectedImage = image;
     notifyListeners();
   }
 
-  // Set the name and notify listeners
   void setName(String newName) {
     _name = newName;
     notifyListeners();
   }
 
-  // Edit profile API call with image upload
   Future<bool> editProfile({
     required String? name,
     required File? image,
@@ -38,11 +35,8 @@ class EditProfileProvider extends ChangeNotifier {
       final headers = {
         "Authorization": token,
       };
-
       final request = http.MultipartRequest("PUT", Uri.parse(AppUrls.editProfile));
       request.headers.addAll(headers);
-
-      // Add name to the form data
       request.fields["name"] = name!;
 
       if (image != null) {
@@ -52,8 +46,6 @@ class EditProfileProvider extends ChangeNotifier {
         );
         request.files.add(imageFile);
       }
-
-      // Send the request and get the response
       var response = await request.send();
       final responseData = await http.Response.fromStream(response);
 
