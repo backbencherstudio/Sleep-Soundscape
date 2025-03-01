@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/model_view/profile_screen_provider.dart';
 import 'package:sleep_soundscape/model_view/theme_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SleepPhaseHeatmap extends StatelessWidget {
   const SleepPhaseHeatmap({super.key});
@@ -47,7 +48,7 @@ class SleepPhaseHeatmap extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Sleep Phase",
+                   AppLocalizations.of(context)!.sleepPhase,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),

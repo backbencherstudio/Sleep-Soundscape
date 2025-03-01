@@ -77,25 +77,42 @@ void settingBottomModalSheet(BuildContext context){
                         SizedBox(height: 24.h,),
                         SettingsItemTile(onTap: (){
                           InviteFriendBottomSheet(context);
-                        },imagePath: "assets/icons/invite-friends.png",title: "Invite Friends"),
+                        },imagePath: "assets/icons/invite-friends.png",
+                        title: AppLocalizations.of(context)!.inviteFriends
+                        
+                        ),
                         SizedBox(height: 18.h,),
                         Divider( color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.1) : Color.fromRGBO(0, 0, 0, 0.1), ),
                         SizedBox(height: 24.h,),
                         SettingsItemTile(onTap: (){
                           NotificationBottomSheet(context);
-                        },imagePath: "assets/icons/notification.png",title: "Notifications"),
+                        },imagePath: "assets/icons/notification.png",
+                        
+                        title: AppLocalizations.of(context)!.notifications,
+                        
+                        
+                        ),
                         SizedBox(height: 18.h,),
                         Divider( color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.1) : Color.fromRGBO(0, 0, 0, 0.1), ),
                         SizedBox(height: 24.h,),
                         SettingsItemTile(onTap: (){
                           LanguageBottomSheet(context);
-                        },imagePath: "assets/icons/language.png",title: "Language"),
+                        },imagePath: "assets/icons/language.png",
+                        
+                        title: AppLocalizations.of(context)!.language,
+                        
+                        
+                        ),
                         SizedBox(height: 18.h,),
                         Divider( color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.1) : Color.fromRGBO(0, 0, 0, 0.1), ),
                         SizedBox(height: 24.h,),
                         SettingsItemTile(onTap: (){
                           Navigator.pushNamed(context, RouteName.personalizationScreen);
-                        },imagePath: "assets/icons/Personalization.png",title: "Personalization"),
+                        },imagePath: "assets/icons/Personalization.png",
+                        title: AppLocalizations.of(context)!.personalization
+                        
+                        
+                        ),
                         SizedBox(height: 18.h,),
                         // Divider( color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.1) : Color.fromRGBO(0, 0, 0, 0.1), ),
                         // SizedBox(height: 24.h,),
@@ -103,16 +120,22 @@ void settingBottomModalSheet(BuildContext context){
                         // SizedBox(height: 18.h,),
                         Divider( color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.1) : Color.fromRGBO(0, 0, 0, 0.1), ),
                         SizedBox(height: 24.h,),
-                        SettingsItemTile(onTap: ()=>faqBottomSheet(context),imagePath: "assets/icons/faq.png",title: "FAQs"),
+                        SettingsItemTile(onTap: ()=>faqBottomSheet(context),imagePath: "assets/icons/faq.png",
+                        title: AppLocalizations.of(context)!.faqs,
+                        
+                        ),
                         SizedBox(height: 18.h,),
                         Divider( color: darkTheme ? Color.fromRGBO(255, 255, 255, 0.1) : Color.fromRGBO(0, 0, 0, 0.1), ),
                         SizedBox(height: 24.h,),
                         SettingsItemTile(onTap: (){
 
                           Navigator.pushNamed(context, RouteName.aboutScreen);
-                        },imagePath: "assets/icons/about.png",title: "About"),
+                        },imagePath: "assets/icons/about.png",
+                        title: AppLocalizations.of(context)!.about,
+                        
+                        ),
                         SizedBox(height: 32.h,),
-                        CustomButton(text: "Sign out", onPressed: ()=>signOutBottomSheet(context)),
+                        CustomButton(text: AppLocalizations.of(context)!.signOut, onPressed: ()=>signOutBottomSheet(context)),
                         SizedBox(height: 40.h,),
 
                       ],

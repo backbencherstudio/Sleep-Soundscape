@@ -9,6 +9,7 @@ import 'package:sleep_soundscape/model_view/sign-up_provider.dart';
 import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/forgotPassword_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -44,7 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               children: [
                 Text(
-                  "Sign In",
+                 AppLocalizations.of(context)!.signIn,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
@@ -70,7 +71,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   decoration: inputDecoration(
                     context: context,
                     prefixIcon: Icon(Icons.person_outline),
-                    hintText: "Enter your Email",
+                    hintText:AppLocalizations.of(context)!.enterYourEmail,
                   ),
                 ),
 
@@ -95,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   decoration: inputDecoration(
                     context: context,
                     prefixIcon: Icon(Icons.lock_outline_rounded),
-                    hintText: "Enter your password",
+                    hintText: AppLocalizations.of(context)!.enterYourPassword,
                     suffixIcon: GestureDetector(
                       onTap: () {
                          loginProvider.togglePasswordVisibility();
@@ -121,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      "Forgot Password?",
+                      AppLocalizations.of(context)!.forgotPassword,
 
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 12.sp,
@@ -137,7 +138,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     return loginAuthProvider.isLoginProgress
                         ? Center(child: CircularProgressIndicator())
                         : Mybutton(
-                          text: "Sign in",
+                          text: AppLocalizations.of(context)!.signIn,
                           color: Color(0xffFAD051),
                           ontap: () async {
                             if (_formKey.currentState!.validate())  {
@@ -233,7 +234,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 24.h),
                 RichText(
                   text: TextSpan(
-                    text: "Have an account? ",
+                    text: AppLocalizations.of(context)!.haveAnAccount,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w300,
@@ -241,7 +242,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                     children: <TextSpan>[
                       TextSpan(
-                        text: "Sign up",
+                        text: AppLocalizations.of(context)!.signUp,
                         style: Theme.of(
                           context,
                         ).textTheme.headlineMedium?.copyWith(

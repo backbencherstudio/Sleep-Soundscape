@@ -8,6 +8,7 @@ import '../../Utils/route_name.dart';
 import '../../model_view/sign-up_provider.dart';
 import '../Login_Screen/signIN_Screen.dart';
 import '../Login_Screen/widget/myButton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
@@ -31,23 +32,23 @@ class SignupScreen extends StatelessWidget {
               SizedBox(height: 40.h),
               RichText(
                 text: TextSpan(
-                  text: "Sign ",
+                  text:AppLocalizations.of(context)!.signUp,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
                   ),
-                  children: [
-                    TextSpan(
-                      text: "up",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.headlineMedium?.copyWith(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFFAD051),
-                      ),
-                    ),
-                  ],
+                  // children: [
+                  //   TextSpan(
+                  //     text: "up",
+                  //     style: Theme.of(
+                  //       context,
+                  //     ).textTheme.headlineMedium?.copyWith(
+                  //       fontSize: 20.sp,
+                  //       fontWeight: FontWeight.w500,
+                  //       color: Color(0xFFFAD051),
+                  //     ),
+                  //   ),
+                  // ],
                 ),
               ),
               SizedBox(height: 24.h),
@@ -80,20 +81,26 @@ class SignupScreen extends StatelessWidget {
               ),
               SizedBox(height: 14.h),
               Text(
-                "Choose Your Image",
+                   AppLocalizations.of(context)!.chooseYourImage,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(height: 32.h),
 
               TextFormField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: "Enter your name"),
+                decoration: InputDecoration(labelText:AppLocalizations.of(context)!.enterYourName,
+
+                
+                ),
               ),
               SizedBox(height: 16.h),
 
               TextFormField(
                 controller: emailController,
-                decoration: InputDecoration(labelText: "Enter your email"),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.enterYourEmail,
+
+                  ),
               ),
               SizedBox(height: 16.h),
 
@@ -101,7 +108,8 @@ class SignupScreen extends StatelessWidget {
                 controller: passController,
                 obscureText: signUpProvider.isObscure,
                 decoration: InputDecoration(
-                  labelText: "Enter your password",
+                  labelText: AppLocalizations.of(context)!.enterYourPassword,
+
                   suffixIcon: IconButton(
                     icon: Icon(
                       signUpProvider.isObscure
@@ -117,7 +125,7 @@ class SignupScreen extends StatelessWidget {
                 controller: confirmController,
                 obscureText: signUpProvider.isObscure,
                 decoration: InputDecoration(
-                  labelText: "Confirm password",
+                  labelText: AppLocalizations.of(context)!.confirm_password,
                   suffixIcon: IconButton(
                     icon: Icon(
                       signUpProvider.isObscure
@@ -130,7 +138,7 @@ class SignupScreen extends StatelessWidget {
               ),
               SizedBox(height: 24.h),
               Mybutton(
-                text: signUpProvider.isLoading ? "Loading..." : "Next",
+                text: signUpProvider.isLoading ? "Loading..." : AppLocalizations.of(context)!.next,
                 color:
                     signUpProvider.isLoading
                         ? Colors.grey
@@ -176,14 +184,14 @@ class SignupScreen extends StatelessWidget {
               SizedBox(height: 20.h),
               RichText(
                 text: TextSpan(
-                  text: "Have an account? ",
+                  text: AppLocalizations.of(context)!.haveAnAccount,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w300,
                   ),
                   children: [
                     TextSpan(
-                      text: "Sign in",
+                      text: AppLocalizations.of(context)!.signIn,
                       style: Theme.of(
                         context,
                       ).textTheme.headlineMedium?.copyWith(

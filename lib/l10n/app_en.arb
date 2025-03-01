@@ -111,8 +111,8 @@
   "@forgotPassword": {
     "description": "Label for forgotten password"
   },
-  "haveAnAccountSignUp": "Have an account? Sign up",
-  "@haveAnAccountSignUp": {
+  "haveAnAccount": "Have an account? ",
+  "@haveAnAccount": {
     "description": "Text for switching to sign-up"
   },
   "chooseYourImage": "Choose Your Image",
@@ -135,10 +135,17 @@
   "@password": {
     "description": "Partial label for forgot password"
   },
-  "resetPasswordInstruction": "Please enter your email address below to reset your password",
+  "resetPasswordInstruction": "Please enter your email address below to ",
   "@resetPasswordInstruction": {
     "description": "Instruction for password reset"
   },
+
+  "resetyourpass": "reset your password",
+    "@resetyourpass":{
+      "description": "Instruction for password re reset"
+    },
+
+
   "done": "Done",
   "@done": {
     "description": "Label for done button"
@@ -166,5 +173,11 @@
   "search": "Search",
   "@search": {
     "description": "Label for search field"
+  },
+"confirm_password": "Confirm Password",
+  "@confirm_password": {
+    "description": "Label for confirm password field"
   }
+
+
 }

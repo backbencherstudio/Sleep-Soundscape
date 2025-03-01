@@ -6,6 +6,7 @@ import 'package:sleep_soundscape/view/Login_Screen/signIN_Screen.dart';
 import 'package:sleep_soundscape/view/Login_Screen/ForgetPass_Screnn/widget/forgotPassBottomSheet.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/inputDecoration.dart';
 import 'package:sleep_soundscape/view/Login_Screen/widget/myButton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotpasswordScreen extends StatefulWidget {
   const ForgotpasswordScreen({super.key});
@@ -55,7 +56,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                 SizedBox(height: 40.h),
                 RichText(
                   text: TextSpan(
-                    text: "Forgot your ",
+                    text: AppLocalizations.of(context)!.forgotYour,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
@@ -64,7 +65,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
 
                     children: <TextSpan>[
                       TextSpan(
-                        text: "Password?",
+                        text:AppLocalizations.of(context)!.password,
                         style: Theme.of(
                           context,
                         ).textTheme.headlineMedium?.copyWith(
@@ -80,7 +81,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: 18, right: 18),
                   child: Text(
-                    "Please enter your e-mail address below to",
+                   AppLocalizations.of(context)!.resetPasswordInstruction,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w300,
@@ -91,7 +92,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: 18, right: 18),
                   child: Text(
-                    "reset your password.",
+                    AppLocalizations.of(context)!.resetyourpass,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w300,
@@ -110,7 +111,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
                 decoration: inputDecoration(
                   context :  context,
                   prefixIcon: Icon(Icons.email_outlined),
-                  hintText:   "Enter your email",
+                  hintText:AppLocalizations.of(context)!.enterYourEmail,
                 ),
               ),
 
@@ -121,7 +122,7 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
             return forgetPassProvider.isLoading
         ? CircularProgressIndicator() 
         : Mybutton(
-            text: "Done",
+            text: AppLocalizations.of(context)!.done,
             color: Color(0xffFAD051),
             ontap: () async {
               String email = emailController.text.trim();

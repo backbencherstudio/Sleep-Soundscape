@@ -13,10 +13,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../reminder_screen/reminder_screen.dart';
 
+// ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
-  Map<DateTime, int> _data = {};
 
   @override
   Widget build(BuildContext context) {
