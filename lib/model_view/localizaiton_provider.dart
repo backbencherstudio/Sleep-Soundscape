@@ -16,33 +16,45 @@ import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+
+import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+
 class LocalizationProvider extends ChangeNotifier {
   Locale _locale = const Locale('en'); // Default language is English
+  late Box _settingsBox;
 
   Locale get locale => _locale;
 
   LocalizationProvider() {
-    _loadSavedLanguage(); // Load language when provider initializes
+    _initialize();
+  }
+
+  Future<void> _initialize() async {
+    _settingsBox = await Hive.openBox('settings');
+    await _loadSavedLanguage();
   }
 
   Future<void> _loadSavedLanguage() async {
-    var box = await Hive.openBox('settings');
-    String? savedLanguageCode = box.get('selected_language');
+    String? savedLanguageCode = _settingsBox.get('selected_language');
 
-    if (savedLanguageCode != null) {
+    if (savedLanguageCode != null && savedLanguageCode != _locale.languageCode) {
       _locale = Locale(savedLanguageCode);
-      notifyListeners();
+      notifyListeners(); // 🔥 Triggers UI rebuild when app starts
     }
   }
 
   Future<void> changeLanguage(Locale newLocale) async {
-    _locale = newLocale;
-    notifyListeners();
+    if (_locale.languageCode != newLocale.languageCode) {
+      _locale = newLocale;
+      notifyListeners(); // 🔥 Updates UI immediately
 
-    // ✅ Save selected language in Hive
-    var box = await Hive.openBox('settings');
-    await box.put('selected_language', newLocale.languageCode);
+      await _settingsBox.put('selected_language', newLocale.languageCode);
+    }
   }
 }
+
 
 

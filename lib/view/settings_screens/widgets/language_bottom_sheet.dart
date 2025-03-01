@@ -86,19 +86,23 @@ void LanguageBottomSheet(BuildContext context) {
                               : Icon(Icons.radio_button_off, color: darkTheme ? Color.fromRGBO(255,255,255,0.6) : Color.fromRGBO(0,0,0,0.6)),
 
                           onTap: () async {
-                          await localizationProvider.changeLanguage(Locale(language["code"]!));
-                            // try {
-                            //   // ✅ Wait for the language change before closing BottomSheet
-                            //   await localizationProvider.changeLanguage(Locale(language["code"]!));
-                            //
-                            //   debugPrint("Language changed to: ${language["code"]}"); // Debug success
-                            //
-                            //   Navigator.pop(context); // Close the BottomSheet
-                            // } catch (e) {
-                            //   debugPrint("Error changing language: $e"); // Debug error if something goes wrong
-                            // }
-                           Navigator.pop(context); // Close the BottomSheet
+                            try {
+                              final currentLocale = localizationProvider.locale.languageCode;
+                              final selectedLocale = language["code"];
+
+                              if (currentLocale != selectedLocale) {
+                                await localizationProvider.changeLanguage(Locale(selectedLocale!));
+                                debugPrint("Language changed to: $selectedLocale");
+                              } else {
+                                debugPrint("Selected language is already active.");
+                              }
+
+                              Navigator.pop(context); // Close BottomSheet after language change
+                            } catch (e) {
+                              debugPrint("Error changing language: $e");
+                            }
                           },
+
 
                         );
                       },

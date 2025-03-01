@@ -10,11 +10,11 @@ class LoginDataModel {
     success = json['success'];
     message = json['message'];
     token = json['token'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null; // Null-safe user assignment
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     data['success'] = this.success;
     data['message'] = this.message;
     data['token'] = this.token;
@@ -41,7 +41,7 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     data['id'] = this.id;
     data['name'] = this.name;
     data['email'] = this.email;

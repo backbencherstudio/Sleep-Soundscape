@@ -7,7 +7,7 @@ import '../../../api_services/local_storage_services.dart';
 void signOutBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.transparent,
+    //backgroundColor: Colors.transparent,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
     ),
@@ -15,7 +15,7 @@ void signOutBottomSheet(BuildContext context) {
       return Container(
         height: MediaQuery.of(context).size.height*0.9,
         decoration: BoxDecoration(
-          color: Color(0xff0F0F13),
+         // color: Color(0xff0F0F13),
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
         ),
         padding: EdgeInsets.all(16.w),
@@ -31,7 +31,7 @@ void signOutBottomSheet(BuildContext context) {
                       TextSpan(
                         text: "Are you sure you want to \n",
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
+                          // color: Colors.white,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
                         ),
@@ -73,7 +73,15 @@ void signOutBottomSheet(BuildContext context) {
                   child: CustomButton(text: "Cancel", onPressed: (){
                     Navigator.pop(context);
 
-                  },backgroundColor:Color(0xff19191C),textColor: Colors.white,)),
+                  },
+
+                    backgroundColor:Theme.of(context).colorScheme.onSecondary,
+                    textColor: Theme.of(context).colorScheme.onSecondary,
+
+                  )
+
+
+              ),
           
             ],
           ),
