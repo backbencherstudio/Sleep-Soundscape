@@ -6,12 +6,15 @@ import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/global_widget/custom_button.dart';
 import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
 import 'package:sleep_soundscape/model_view/theme_provider.dart';
+import '../../../api_services/local_storage_services.dart';
 import '../../../model_view/edit_profile_screen_provider.dart';
 import 'bottom_sheet_header.dart';
 
 void EditProfileBottomSheet(BuildContext context) {
   final editProfileProvider = Provider.of<EditProfileProvider>(context, listen: false);
   final loginData = context.read<LoginAuthProvider>().loginData;
+
+  TextEditingController nameController = TextEditingController(text: loginData?.user?.name);
 
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
@@ -22,7 +25,7 @@ void EditProfileBottomSheet(BuildContext context) {
     ),
     context: context,
     isScrollControlled: true,
-    builder: (contex) {
+    builder: (context) {
       final darkTheme = context.watch<ThemeProvider>().isDarkMode;
 
       return SizedBox(
@@ -60,24 +63,52 @@ void EditProfileBottomSheet(BuildContext context) {
                         editProfileProvider.setImage(File(pickedFile.path));
                       }
                     },
-                    child: CircleAvatar(
-                      radius: 40.r,
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      backgroundImage: editProfileProvider.selectedImage != null
-                          ? FileImage(editProfileProvider.selectedImage!)
-                          : null,
-                      child: editProfileProvider.selectedImage == null
-                          ? Icon(
-                        Icons.person_outline,
-                        size: 32.r,
-                        color: Colors.white,
-                      )
-                          : null,
+                    child: ClipOval(
+                      child: Consumer<EditProfileProvider>(
+                        builder: (context, provider, child) {
+                          if (provider.selectedImage != null) {
+                            return Image.file(
+                              provider.selectedImage!,
+                              height: 60.h,
+                              width: 65.w,
+                              fit: BoxFit.cover,
+                            );
+                          } else {
+                            return FutureBuilder<String?>(
+                              future: AuthStorageService.getImage(),
+                              builder: (context, snapshot) {
+                                String? imageUrl = snapshot.data;
+                                return imageUrl != null && imageUrl.isNotEmpty
+                                    ? Image.network(
+                                  imageUrl,
+                                  height: 60.h,
+                                  width: 65.w,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset(
+                                      "assets/images/default_profile_pic.png",
+                                      height: 60.h,
+                                      width: 65.w,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                                    : Image.asset(
+                                  "assets/images/default_profile_pic.png",
+                                  height: 35.h,
+                                  width: 40.w,
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ),
                   Positioned(
-                    bottom: 5,
-                    right: 5,
+                    bottom: -3,
+                    right: 2,
                     child: Container(
                       width: 24.w,
                       height: 24.h,
@@ -101,18 +132,44 @@ void EditProfileBottomSheet(BuildContext context) {
                   fontFamily: "Lexend",
                 ),
               ),
+
+
               SizedBox(height: 32.h),
               // Name TextField for editing name
-              TextField(
-                controller: TextEditingController(text: loginData?.user?.name),
-                onChanged: (newName) {
-                  editProfileProvider.setName(newName);
+
+              FutureBuilder<String?>(
+                future: AuthStorageService.getName(),
+                builder: (context, snapshot) {
+                  return TextField(
+                    controller: nameController,
+                    onChanged: (newName) {
+                      editProfileProvider.setName(newName);
+                    },
+                    decoration: InputDecoration(
+                      hintText: snapshot.data ?? "N/A",
+                      labelText: snapshot.data ?? "N/A",
+                      //filled: true, // Ensures background change
+                    ),
+                  );
                 },
-                decoration: InputDecoration(
-                  labelText: "Enter your name",
-                  hintText: loginData?.user?.name ?? 'N/A',
-                ),
               ),
+
+              SizedBox(height: 32.h),
+              // Name TextField for editing name
+              FutureBuilder<String?>(
+                future: AuthStorageService.getEmail(),
+                builder: (context, snapshot) {
+                  return TextField(
+                    enabled: false,
+                    decoration: InputDecoration(
+                      labelText: snapshot.data ?? "N/A",
+                      filled: true, // Ensures background change
+                    ),
+                  );
+                },
+              ),
+
+
               SizedBox(height: 32.h),
               CustomButton(
                 text: "Save",
@@ -121,18 +178,19 @@ void EditProfileBottomSheet(BuildContext context) {
                     name: editProfileProvider.name!,
                     image: editProfileProvider.selectedImage!,
                   );
+
                   if (success) {
+                    Provider.of<LoginAuthProvider>(context, listen: false).loginData;
                     Navigator.pop(context); // Close the bottom sheet
                     // Optionally show success message
                   } else {
                     // Show error message
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(editProfileProvider.errorMessage ?? "Error")),
+                      SnackBar(content: Text("Error")),
                     );
                   }
                 },
               )
-
             ],
           ),
         ),

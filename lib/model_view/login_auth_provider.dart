@@ -7,7 +7,6 @@ import 'package:sleep_soundscape/model/login_data_model.dart';
 
 class LoginAuthProvider with ChangeNotifier {
 
-
   bool _isLoginProgress = false;
   bool _isSuccess = false;
 
@@ -23,7 +22,7 @@ class LoginAuthProvider with ChangeNotifier {
   User? get userData => _userData;
 
   /// Method to perform user login
-  Future<void> userLogin(String email, String password) async {
+  Future<void> userLogin(String? email, String? password) async {
     _isLoginProgress = true;
     notifyListeners(); // Notify UI that login is in progress
 
