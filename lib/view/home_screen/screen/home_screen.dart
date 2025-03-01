@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/model_view/theme_provider.dart';
 import '../../../Utils/route_name.dart';
 import '../../../global_widget/custom_button.dart';
+import '../../../model_view/login_auth_provider.dart';
 import '../../../model_view/reminder_screen_provider.dart';
 import '../../parent_screen/screen/parent_screen.dart';
 import '../../reminder_screen/reminder_widgets/reminder_widgets.dart';
@@ -15,13 +16,17 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+
 class _HomeScreenState extends State<HomeScreen> {
   final isSelected = false;
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeProvider>();
+    final loginAuthProvider = Provider.of<LoginAuthProvider>(context);
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // Background image and other UI elements.
       body: Stack(
         fit: StackFit.expand,
@@ -30,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Positioned.fill(
 
             child: Image.asset(
-              "assets/images/home_screen_img.png",
+               "assets/images/home_screen_img.png",
               fit: BoxFit.cover,
             ),
           ),
@@ -48,16 +53,33 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.pushNamed(context, RouteName.profileScreen);
                         },
                         child: ClipOval(
-                          child: Image.asset(
-                            "assets/images/user_1.png",
+                          child: loginAuthProvider.loginData?.user?.image != null &&
+                              loginAuthProvider.loginData!.user!.image!.isNotEmpty
+                              ? Image.network(
+                            loginAuthProvider.loginData!.user!.image!,
                             height: 35.h,
-                            width: 35.w,
+                            width: 40.w,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                "assets/images/default_profile_pic.png",
+                                height: 35.h,
+                                width: 40.w,
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          )
+                              : Image.asset(
+                            "assets/images/default_profile_pic.png",
+                            height: 35.h,
+                            width: 40.w,
                             fit: BoxFit.cover,
                           ),
                         ),
+
                       ),
                       title: Text(
-                        "Hello Robart",
+                        loginAuthProvider.loginData?.user!.name ?? "N/A",
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontSize: 12.sp,
                         ),

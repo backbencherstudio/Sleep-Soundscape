@@ -50,6 +50,8 @@ class LoginAuthProvider with ChangeNotifier {
 
         _isSuccess = true;
         _loginData = LoginDataModel.fromJson(jsonResponse ?? {});
+        debugPrint("\n  User name  : ${_loginData?.user?.name}");
+
       } else {
         _isSuccess = false;
       }
