@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sleep_soundscape/Utils/route_name.dart';
 import 'package:sleep_soundscape/model_view/ForgetPass_provider.dart';
+import 'package:sleep_soundscape/model_view/localizaiton_provider.dart';
 import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
 import 'package:sleep_soundscape/model_view/notification_provider.dart';
 import 'package:sleep_soundscape/model_view/onboarding_screen_provider.dart';
@@ -27,7 +28,9 @@ import 'package:sleep_soundscape/view/settings_screens/personalization_screen.da
 import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'package:timezone/data/latest.dart';
-import 'model_view/ForgetPass_provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'model_view/chnage_password_provider.dart';
 import 'model_view/edit_profile_screen_provider.dart';
 import 'model_view/parent_screen_provider.dart';
@@ -35,6 +38,7 @@ import 'model_view/reminder_screen_provider.dart';
 import 'model_view/sign-up_provider.dart';
 import 'model_view/sound_setting_provider.dart';
 import 'model_view/temp.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +52,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   // String? token = prefs.getString("token");
   await Hive.initFlutter();
+  await Hive.openBox('settings'); // Ensure Hive is ready before running the app
 
   runApp(MyApp());
 }
@@ -145,6 +150,9 @@ class _MyAppState extends State<MyApp> {
  ChangeNotifierProvider<EditProfileProvider>(
           create: (_) => EditProfileProvider(),
         ),
+ ChangeNotifierProvider<LocalizationProvider>(
+          create: (_) => LocalizationProvider(),
+        ),
 
 
       ],
@@ -153,9 +161,23 @@ class _MyAppState extends State<MyApp> {
         minTextAdapt: true,
         builder: (context, child) {
           final themeProvider = context.watch<ThemeProvider>();
+          final localizationProvider = Provider.of<LocalizationProvider>(context,listen: false);
+
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Counter App',
+
+            locale: localizationProvider.locale, // ✅ Uses saved language
+            supportedLocales: const [
+              Locale('en'),
+              Locale('es'),
+            ],
+            localizationsDelegates: const [
+            AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate
+            ],
             theme:  ThemeData(
               scaffoldBackgroundColor: Colors.white,
 
@@ -395,7 +417,6 @@ class _MyAppState extends State<MyApp> {
               RouteName.personalizationScreen: (context) => PersonalizationScreen(),
               RouteName.goalScreen: (context) => GoalScreen(),
               //add prpose
-
             },
           );
         },

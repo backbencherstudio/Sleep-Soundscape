@@ -1,0 +1,15 @@
+{
+  "@@locale": "es",
+  "settings": "Configuraciones",
+  "profile": "Perfil",
+  "change_password": "Cambiar Contraseña",
+  "invite_friends": "Invitar Amigos",
+  "notification": "Notificación",
+  "language": "Idioma",
+  "personalization": "Personalización",
+  "apple_health": "Salud de Apple",
+  "faqs": "Preguntas Frecuentes",
+  "about": "Acerca de",
+  "sign_out": "Cerrar sesión",
+  "select_language": "Seleccione un idioma"
+}
