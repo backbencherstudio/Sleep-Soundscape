@@ -121,7 +121,6 @@ void ChangePasswordBottomSheet(BuildContext context) {
                     );
                     return;
                   }
-
                   changePasswordProvider.changePassword(
                     currentPassController.text,
                     newPassController.text,
