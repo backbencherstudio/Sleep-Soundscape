@@ -26,8 +26,8 @@ class EditProfileProvider extends ChangeNotifier {
 
   // Edit profile API call with image upload
   Future<bool> editProfile({
-    required String name,
-    required File image,
+    required String? name,
+    required File? image,
   }) async {
     try {
       final token = await AuthStorageService.getToken();
@@ -43,7 +43,7 @@ class EditProfileProvider extends ChangeNotifier {
       request.headers.addAll(headers);
 
       // Add name to the form data
-      request.fields["name"] = name;
+      request.fields["name"] = name!;
 
       if (image != null) {
         var imageFile = await http.MultipartFile.fromPath(

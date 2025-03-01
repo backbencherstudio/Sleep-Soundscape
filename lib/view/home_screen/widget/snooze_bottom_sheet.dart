@@ -56,7 +56,9 @@ void snoozeBottomSheet(BuildContext context) {
                         ),),
                         DropdownButton<int>(
                           value: soundSettingProvider.soundSettings.advanced?.snooze ?? 1, // Default to 1 min if null
-                          dropdownColor:Theme.of(context).colorScheme.secondary, // Background color of dropdown menu
+                         // dropdownColor:Theme.of(context).colorScheme.secondary, // Background color of dropdown menu
+                          dropdownColor:Colors.grey.shade600, // Background color of dropdown menu
+
                           underline: SizedBox(), // Remove default underline
                           alignment: AlignmentDirectional.centerEnd, // Align menu options to the right
                           items: List.generate(

@@ -11,10 +11,15 @@ import '../../../model_view/edit_profile_screen_provider.dart';
 import 'bottom_sheet_header.dart';
 
 void EditProfileBottomSheet(BuildContext context) {
-  final editProfileProvider = Provider.of<EditProfileProvider>(context, listen: false);
+  final editProfileProvider = Provider.of<EditProfileProvider>(
+    context,
+    listen: false,
+  );
   final loginData = context.read<LoginAuthProvider>().loginData;
 
-  TextEditingController nameController = TextEditingController(text: loginData?.user?.name);
+  TextEditingController nameController = TextEditingController(
+    text: loginData?.user?.name,
+  );
 
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
@@ -40,9 +45,10 @@ void EditProfileBottomSheet(BuildContext context) {
                 width: 115.w,
                 height: 6.h,
                 decoration: BoxDecoration(
-                  color: darkTheme
-                      ? Color.fromRGBO(255, 255, 255, 0.10)
-                      : Color.fromRGBO(0, 0, 0, 0.10),
+                  color:
+                      darkTheme
+                          ? Color.fromRGBO(255, 255, 255, 0.10)
+                          : Color.fromRGBO(0, 0, 0, 0.10),
                   borderRadius: BorderRadius.circular(100.r),
                 ),
               ),
@@ -80,25 +86,29 @@ void EditProfileBottomSheet(BuildContext context) {
                                 String? imageUrl = snapshot.data;
                                 return imageUrl != null && imageUrl.isNotEmpty
                                     ? Image.network(
-                                  imageUrl,
-                                  height: 60.h,
-                                  width: 65.w,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Image.asset(
-                                      "assets/images/default_profile_pic.png",
+                                      imageUrl,
                                       height: 60.h,
                                       width: 65.w,
                                       fit: BoxFit.cover,
-                                    );
-                                  },
-                                )
+                                      errorBuilder: (
+                                        context,
+                                        error,
+                                        stackTrace,
+                                      ) {
+                                        return Image.asset(
+                                          "assets/images/default_profile_pic.png",
+                                          height: 60.h,
+                                          width: 65.w,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
+                                    )
                                     : Image.asset(
-                                  "assets/images/default_profile_pic.png",
-                                  height: 35.h,
-                                  width: 40.w,
-                                  fit: BoxFit.cover,
-                                );
+                                      "assets/images/default_profile_pic.png",
+                                      height: 35.h,
+                                      width: 40.w,
+                                      fit: BoxFit.cover,
+                                    );
                               },
                             );
                           }
@@ -128,15 +138,14 @@ void EditProfileBottomSheet(BuildContext context) {
               SizedBox(height: 12.h),
               Text(
                 "Choose your image",
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontFamily: "Lexend",
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(fontFamily: "Lexend"),
               ),
 
-
               SizedBox(height: 32.h),
-              // Name TextField for editing name
 
+              // Name TextField for editing name
               FutureBuilder<String?>(
                 future: AuthStorageService.getName(),
                 builder: (context, snapshot) {
@@ -169,28 +178,33 @@ void EditProfileBottomSheet(BuildContext context) {
                 },
               ),
 
-
               SizedBox(height: 32.h),
               CustomButton(
                 text: "Save",
                 onPressed: () async {
                   bool success = await editProfileProvider.editProfile(
-                    name: editProfileProvider.name!,
-                    image: editProfileProvider.selectedImage!,
+                    name:
+                        editProfileProvider.name?.isNotEmpty == true
+                            ? editProfileProvider.name
+                            : null,
+                    image: editProfileProvider.selectedImage,
                   );
 
                   if (success) {
-                    Provider.of<LoginAuthProvider>(context, listen: false).loginData;
+                    Provider.of<LoginAuthProvider>(
+                      context,
+                      listen: false,
+                    ).loginData;
                     Navigator.pop(context); // Close the bottom sheet
                     // Optionally show success message
                   } else {
                     // Show error message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Error")),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("Error")));
                   }
                 },
-              )
+              ),
             ],
           ),
         ),
