@@ -50,16 +50,12 @@ class _SetTimerState extends State<SetTimer> {
       spacing: 5.w,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Consumer<ReminderScreenProvider>(
-          builder: (_, reminderScreenProvider, child) {
-            return ReminderWidgets().buildCupertinoPicker(
-              context,
-              hours,
-              8,
-              widget.onSelectedHour,
-              false,
-            );
-          }
+        ReminderWidgets().buildCupertinoPicker(
+          context,
+          hours,
+          8,
+          widget.onSelectedHour,
+          false,
         ),
         Text(":"),
         ReminderWidgets().buildCupertinoPicker(

@@ -13,3 +13,4 @@ class AppUrls {
   static String loginUrl = '$baseUrl/api/users/logIn';
   static String signUp = '$baseUrl/api/users/signup';
 }
+// http://192.168.40.10:1000/api/sounds/filterSounds

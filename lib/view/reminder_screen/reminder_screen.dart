@@ -108,11 +108,6 @@ class ReminderScreen extends StatelessWidget {
                                             fontSize: 24.sp,
                                             fontWeight: FontWeight.w500,
                                           ),
-                                          children: [
-                                            TextSpan(
-                                                text: reminder.amPm
-                                            )
-                                          ]
                                       ),
                                     ),
                                     Text(reminder.days!,

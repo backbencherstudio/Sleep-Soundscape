@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_soundscape/model_view/reminder_screen_provider.dart';
+import 'package:sleep_soundscape/notification_services/notification_services.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/add_reminder_header.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/dropdown_widget.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
@@ -41,6 +42,7 @@ class AddReminderScreen extends StatelessWidget {
               onSave:  () async {
 
               await context.read<ReminderScreenProvider>().onSave();
+             // await NotificationServices.scheduledNotification("Manual Alarm triggered", "This is alarm body");
               Navigator.pop(context);
 
               },
@@ -68,7 +70,17 @@ class AddReminderScreen extends StatelessWidget {
 
             SizedBox(height: 12.h,),
 
-            ReminderDropDownButton(hintText : "Select repeat",uniqueItemList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],),
+            Consumer<ReminderScreenProvider>(
+              builder: (_, reminderScreenProvider, child) {
+                return ReminderDropDownButton(
+                  hintText : "Select repeat",
+                  uniqueItemList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                  isMultipleChoice: true,
+                  onMultipleChoice: reminderScreenProvider.onSelectRepeat,
+
+                );
+              }
+            ),
 
             SizedBox(height: 50.h,),
           ],
