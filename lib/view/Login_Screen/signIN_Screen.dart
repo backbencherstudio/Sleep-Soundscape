@@ -147,7 +147,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 _passwordController.text,
                               );
 
-                              await AuthStorageService.saveToken(token: loginAuthProvider.loginData!.token!);
+                              await AuthStorageService.saveToken(token: loginAuthProvider.loginData!.token!,name: loginAuthProvider.loginData!.user!.name!,email: loginAuthProvider.loginData!.user!.email!,image:loginAuthProvider.loginData!.user!.image!);
+
                               debugPrint("\n\n user-token = ${loginAuthProvider.loginData!.token}");
 
                               if (loginAuthProvider.isSuccess) {

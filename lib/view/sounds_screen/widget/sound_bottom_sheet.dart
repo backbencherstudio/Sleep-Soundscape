@@ -99,7 +99,7 @@ void soundBottomSheet(BuildContext context) {
                                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(14.r),
-                                  border: Border.all(color: Colors.grey, width: 0.1),
+                                  border: Border.all(color: Colors.transparent, width: 1),
                                   color: isSelected
                                       ? Color(0xffFAD051)
                                       : themeProvider.themeMode == ThemeMode.dark

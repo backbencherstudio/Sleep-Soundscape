@@ -1,23 +1,35 @@
-import 'dart:math';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_soundscape/model_view/login_auth_provider.dart';
 import 'package:sleep_soundscape/model_view/theme_provider.dart';
 import 'package:sleep_soundscape/view/reminder_screen/reminder_widgets/reminder_widgets.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/edit_profile_bottom_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/setting_bottom_modal_sheet.dart';
 import 'package:sleep_soundscape/view/settings_screens/widgets/sleep_phase_heat_map.dart';
+import '../../api_services/local_storage_services.dart';
+import '../reminder_screen/reminder_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../reminder_screen/reminder_screen.dart';
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
 
-// ignore: must_be_immutable
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({super.key});
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
 
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final loginAuthProvider = Provider.of<LoginAuthProvider>(context, listen: false);
+
+      debugPrint("User name: ${loginAuthProvider.loginData?.user?.name}");
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,34 +86,52 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(height: 32.h),
                 Row(
                   children: [
-                    Container(
-                      width: 80.w,
-                      height: 80.h,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/user_1.png"),
-                          fit: BoxFit.cover,
-                          onError: (_, __) {
-                            AssetImage("assets/icons/profile.png");
-                          },
-                        ),
+                    ClipOval(
+                      child: FutureBuilder<String?>(
+                        future: AuthStorageService.getImage(),
+                        builder: (context, snapshot) {
+                          String? imageUrl = snapshot.data;
+
+                          return imageUrl != null && imageUrl.isNotEmpty
+                              ? Image.network(
+                            imageUrl,
+                            height: 45.h,
+                            width: 55.w,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                "assets/images/default_profile_pic.png",
+                                height: 35.h,
+                                width: 40.w,
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          )
+                              : Image.asset(
+                            "assets/images/default_profile_pic.png",
+                            height: 35.h,
+                            width: 40.w,
+                            fit: BoxFit.cover,
+                          );
+                        },
                       ),
                     ),
                     SizedBox(width: 16.w),
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Robert Fox",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.headlineMedium?.copyWith(
-                            fontFamily: "Lexend",
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w500,
+                        FutureBuilder<String?>(
+                          future: AuthStorageService.getName(),
+                          builder: (context, snapshot) => Text(
+                            snapshot.data ?? "N/A",
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 12.sp),
                           ),
                         ),
-                        SizedBox(width: 6.h),
+
+                        SizedBox(width: 8.h),
+
+
                         Text(
                           AppLocalizations.of(context)!.joined2DaysAgo,  // local=====
                           style: Theme.of(

@@ -1,0 +1,70 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import '../api_services/local_storage_services.dart';
+import '../api_services/api_end_point.dart';
+
+class EditProfileProvider extends ChangeNotifier {
+  File? _selectedImage;
+  String? _name;
+  bool _isSuccess = false;
+
+  File? get selectedImage => _selectedImage;
+  String? get name => _name;
+
+  // Set the selected image and notify listeners
+  void setImage(File image) {
+    _selectedImage = image;
+    notifyListeners();
+  }
+
+  // Set the name and notify listeners
+  void setName(String newName) {
+    _name = newName;
+    notifyListeners();
+  }
+
+  // Edit profile API call with image upload
+  Future<bool> editProfile({
+    required String name,
+    required File image,
+  }) async {
+    try {
+      final token = await AuthStorageService.getToken();
+      if (token == null || token.isEmpty) {
+        throw Exception("Token is missing");
+      }
+
+      final headers = {
+        "Authorization": token,
+      };
+
+      final request = http.MultipartRequest("PUT", Uri.parse(AppUrls.editProfile));
+      request.headers.addAll(headers);
+
+      // Add name to the form data
+      request.fields["name"] = name;
+
+      if (image != null) {
+        var imageFile = await http.MultipartFile.fromPath(
+          'image',
+          image.path,
+        );
+        request.files.add(imageFile);
+      }
+
+      // Send the request and get the response
+      var response = await request.send();
+      final responseData = await http.Response.fromStream(response);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        _isSuccess = true;
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+}

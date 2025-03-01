@@ -21,18 +21,13 @@ Future<void> updateProfile({
   notifyListeners();
 try{
   var request = http.MultipartRequest('PUT', Uri.parse(url));
-
-  //etay alada bhabe token and headers and file pass kora lage
-
   request.headers['Authentication'] = token;
 if(name.isNotEmpty){
 request.fields['name'] = name;
 }
-
 if(email.isNotEmpty){
 request.fields['email'] = email;
 }
-
 if(image!= null){
  var file = await http.MultipartFile.fromPath(
   'image',
@@ -41,25 +36,19 @@ if(image!= null){
 request.files.add(file);
 }
  var response = await request.send();
-
-
  if(response.statusCode == 200){
   final responseData = await response.stream.bytesToString();
   final Map<String, dynamic> responseJson = json.decode(responseData);
-
   if(responseJson['success']){
-    print("User uodate succesfully");
-
+    debugPrint("User uodate succesfully");
   }else{
-    print("\n\n Error :$Error ");
+    debugPrint("\n\n Error :$Error ");
   }
  }
-}catch(Error){
-
+}on Error{
   debugPrint("\n\n $Error \n\n");
 }
-}
-
-
-
+_isLoading = false;
+notifyListeners();
+    }
 }

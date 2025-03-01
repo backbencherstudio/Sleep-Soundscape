@@ -32,6 +32,8 @@ import 'package:sleep_soundscape/view/settings_screens/profile_screen.dart';
 import 'package:sleep_soundscape/view/splash_screen/splash_screen.dart';
 import 'package:timezone/data/latest.dart';
 import 'model_view/ForgetPass_provider.dart';
+import 'model_view/chnage_password_provider.dart';
+import 'model_view/edit_profile_screen_provider.dart';
 import 'model_view/parent_screen_provider.dart';
 import 'model_view/reminder_screen_provider.dart';
 import 'model_view/sign-up_provider.dart';
@@ -51,7 +53,7 @@ void main() async {
 
 
   final prefs = await SharedPreferences.getInstance();
-  String? token = prefs.getString("token");
+  // String? token = prefs.getString("token");
   await Hive.initFlutter();
 await Hive.openBox('settings');
   runApp(MyApp());
@@ -148,6 +150,12 @@ ChangeNotifierProvider<LocalProvider>(
 
  ChangeNotifierProvider<SoundSettingProvider>(
           create: (_) => SoundSettingProvider(),
+        ),
+    ChangeNotifierProvider<ChangePasswordProvider>(
+          create: (_) => ChangePasswordProvider(),
+        ),
+ ChangeNotifierProvider<EditProfileProvider>(
+          create: (_) => EditProfileProvider(),
         ),
 
 
